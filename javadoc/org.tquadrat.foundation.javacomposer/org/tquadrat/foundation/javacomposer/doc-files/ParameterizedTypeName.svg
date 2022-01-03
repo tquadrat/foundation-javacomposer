@@ -1,0 +1,368 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:cc="http://creativecommons.org/ns#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:svg="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     version='1.1'
+     baseProfile='full'
+     width='2424.000'
+     height='1009.000'>
+    <defs>
+        <style><![CDATA[
+            line
+            {
+              stroke: black;
+            }
+            line.separator
+            {
+              stroke:       black;
+              stroke-width: 1;
+            }
+            marker
+            {
+              fill: white;
+            }
+            path
+            {
+              fill:   white;
+              stroke: black;
+            }
+            path.implementation
+            {
+              fill:             none;
+              stroke-dasharray: 5,5;
+              stroke-width:     3;
+            }
+            path.inheritance
+            {
+              fill:         none;
+              stroke-width: 3;
+            }
+            rect
+            {
+              fill:         none;
+              stroke:       black;
+              stroke-width: 2;
+            }
+            rect.externalClass
+            {
+              fill:         #D0D0D0;
+              fill-opacity: 0.8;
+            }
+            rect.focusClass
+            {
+              fill:         #FFFFF9;
+              fill-opacity: 0.8;
+            }
+            rect.otherClass
+            {
+              fill:         #F0E68C;
+              fill-opacity: 0.8;
+            }
+            rect.template
+            {
+              fill:             #FFFFFF;
+              fill-opacity:     1.0;
+              stroke-dasharray: 3,3;
+            }
+            text
+            {
+              font-family: monospace;
+              font-size:   10px;
+              font-weight: bold;
+            }
+            text.abstract
+            {
+              font-style: italic;
+            }
+            text.final
+            {
+              text-decoration: underline;
+            }
+            text.static
+            {
+              font-weight: normal;
+            }
+            text.stereotype
+            {
+              font-size:   8px;
+              font-weight: normal;
+            }
+            ]]></style>
+        <marker id='inheritance'
+                viewBox='0,0,40,40'
+                markerUnits='strokeWidth'
+                refX='40'
+                refY='20'
+                markerWidth='6'
+                markerHeight='6'
+                orient='auto'>
+            <path d='M40,20 l-40,-20 v40 Z'
+                  fill='#ffffff'
+                  stroke='#000000'
+                  stroke-width='3'/>
+        </marker>
+        <marker id='implementation'
+                viewBox='0,0,40,40'
+                markerUnits='strokeWidth'
+                refX='40'
+                refY='20'
+                markerWidth='6'
+                markerHeight='6'
+                orient='auto'>
+            <path d='M40,20 l-40,-20 v40 Z'
+                  fill='#ffffff'
+                  stroke='#000000'
+                  stroke-width='3'/>
+        </marker>
+        <clipPath id='ID000001'>
+            <rect class='focusClass'
+                  height='183.000'
+                  width='1102.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='org.tquadrat.foundation.javacomposer.ParameterizedTypeName'>
+            <g>
+                <g class='focusClass'
+                   clip-path='url(#ID000001)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='1102.000'
+                          height='183.000'
+                          class='focusClass'/>
+                    <line x1='0.000'
+                          y1='28.000'
+                          x2='1102.000'
+                          y2='28.000'
+                          class='separator'/>
+                    <text x='524.600'
+                          y='13.000'
+                          class='stereotype'>&#xAB;Interface&#xBB;</text>
+                    <text x='488.000'
+                          y='24.000'
+                          class='abstract'>ParameterizedTypeName</text>
+                    <line x1='0.000'
+                          y1='45.000'
+                          x2='1102.000'
+                          y2='45.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='41.000'/>
+                    <text x='5.000'
+                          y='58.000'
+                          class='abstract'>+ annotated(annotations:java.util.List&lt;org.tquadrat.foundation.javacomposer.AnnotationSpec&gt;):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
+                    <text x='5.000'
+                          y='69.000'
+                          class='abstract static'>+ from(rawType:java.lang.Class&lt;?&gt;,typeArguments:java.lang.reflect.Type&#x2026;):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
+                    <text x='5.000'
+                          y='80.000'
+                          class='abstract static'>+ from(rawType:org.tquadrat.foundation.javacomposer.ClassName,typeArguments:org.tquadrat.foundation.javacomposer.TypeName&#x2026;):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
+                    <text x='5.000'
+                          y='91.000'
+                          class='abstract static'>+ from(type:java.lang.reflect.ParameterizedType):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
+                    <text x='5.000'
+                          y='102.000'
+                          class='abstract static'>+ get(rawType:java.lang.Class&lt;?&gt;,typeArguments:java.lang.reflect.Type&#x2026;):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
+                    <text x='5.000'
+                          y='113.000'
+                          class='abstract static'>+ get(rawType:org.tquadrat.foundation.javacomposer.ClassName,typeArguments:org.tquadrat.foundation.javacomposer.TypeName&#x2026;):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
+                    <text x='5.000'
+                          y='124.000'
+                          class='abstract static'>+ get(type:java.lang.reflect.ParameterizedType):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
+                    <text x='5.000'
+                          y='135.000'
+                          class='abstract'>+ nestedClass(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
+                    <text x='5.000'
+                          y='146.000'
+                          class='abstract'>+ nestedClass(name:java.lang.CharSequence,typeArguments:java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
+                    <text x='5.000'
+                          y='157.000'
+                          class='abstract'>+ rawType():org.tquadrat.foundation.javacomposer.ClassName</text>
+                    <text x='5.000'
+                          y='168.000'
+                          class='abstract'>+ typeArguments():java.util.List&lt;? extends org.tquadrat.foundation.javacomposer.TypeName&gt;</text>
+                    <text x='5.000'
+                          y='179.000'
+                          class='abstract'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.TypeName</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000002'>
+            <rect class='otherClass'
+                  height='238.000'
+                  width='2374.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl'>
+            <g>
+                <g clip-path='url(#ID000002)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='2374.000'
+                          height='238.000'
+                          class='otherClass'/>
+                    <line x1='0.000'
+                          y1='17.000'
+                          x2='2374.000'
+                          y2='17.000'
+                          class='separator'/>
+                    <text x='1112.000'
+                          y='13.000'>ParameterizedTypeNameImpl</text>
+                    <line x1='0.000'
+                          y1='56.000'
+                          x2='2374.000'
+                          y2='56.000'
+                          class='separator'/>
+                    <text y='30.000'
+                          class='final'>- m_EnclosingType:java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl&gt;</text>
+                    <text y='41.000'
+                          class='final'>- m_RawType:org.tquadrat.foundation.javacomposer.internal.ClassNameImpl</text>
+                    <text y='52.000'
+                          class='final'>- m_TypeArguments:java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;</text>
+                    <text x='5.000'
+                          y='69.000'>+ ParameterizedTypeNameImpl(enclosingType:org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl,rawType:org.tquadrat.foundation.javacomposer.internal.ClassNameImpl,typeArguments:java.util.List&lt;? extends org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;)</text>
+                    <text x='5.000'
+                          y='80.000'>- ParameterizedTypeNameImpl(enclosingType:org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl,rawType:org.tquadrat.foundation.javacomposer.internal.ClassNameImpl,typeArguments:java.util.List&lt;? extends org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;,ignored:java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl&gt;)</text>
+                    <text x='5.000'
+                          y='91.000'>- ParameterizedTypeNameImpl(enclosingType:java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl&gt;,rawType:org.tquadrat.foundation.javacomposer.internal.ClassNameImpl,typeArguments:java.util.List&lt;? extends org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;,annotations:java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl&gt;)</text>
+                    <text x='5.000'
+                          y='102.000'>+ annotated(annotations:java.util.List&lt;org.tquadrat.foundation.javacomposer.AnnotationSpec&gt;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                    <text x='5.000'
+                          y='113.000'>+ emit(out:org.tquadrat.foundation.javacomposer.internal.CodeWriter):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='124.000'
+                          class='static'>+ from(rawType:java.lang.Class&lt;?&gt;,typeArguments:java.lang.reflect.Type&#x2026;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                    <text x='5.000'
+                          y='135.000'
+                          class='static'>+ from(rawType:org.tquadrat.foundation.javacomposer.ClassName,typeArguments:org.tquadrat.foundation.javacomposer.TypeName&#x2026;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                    <text x='5.000'
+                          y='146.000'
+                          class='static'>+ from(type:java.lang.reflect.ParameterizedType,typeArguments:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                    <text x='5.000'
+                          y='157.000'
+                          class='static'>+ get(rawType:java.lang.Class&lt;?&gt;,typeArguments:java.lang.reflect.Type&#x2026;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                    <text x='5.000'
+                          y='168.000'
+                          class='static'>+ get(rawType:org.tquadrat.foundation.javacomposer.ClassName,typeArguments:org.tquadrat.foundation.javacomposer.TypeName&#x2026;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                    <text x='5.000'
+                          y='179.000'
+                          class='static'>+ get(type:java.lang.reflect.ParameterizedType,typeArguments:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
+                    <text x='5.000'
+                          y='190.000'>+ nestedClass(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                    <text x='5.000'
+                          y='201.000'>+ nestedClass(name:java.lang.CharSequence,typeArguments:java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                    <text x='5.000'
+                          y='212.000'>+ rawType():org.tquadrat.foundation.javacomposer.internal.ClassNameImpl</text>
+                    <text x='5.000'
+                          y='223.000'>+ typeArguments():java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;</text>
+                    <text x='5.000'
+                          y='234.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000003'>
+            <rect class='otherClass'
+                  height='238.000'
+                  width='838.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='org.tquadrat.foundation.javacomposer.TypeName'>
+            <g>
+                <g clip-path='url(#ID000003)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='838.000'
+                          height='238.000'
+                          class='otherClass'/>
+                    <line x1='0.000'
+                          y1='28.000'
+                          x2='838.000'
+                          y2='28.000'
+                          class='separator'/>
+                    <text x='392.600'
+                          y='13.000'
+                          class='stereotype'>&#xAB;Interface&#xBB;</text>
+                    <text x='395.000'
+                          y='24.000'
+                          class='abstract'>TypeName</text>
+                    <line x1='0.000'
+                          y1='45.000'
+                          x2='838.000'
+                          y2='45.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='41.000'/>
+                    <text x='5.000'
+                          y='58.000'>&#x2A22; annotated(annotations:org.tquadrat.foundation.javacomposer.AnnotationSpec&#x2026;):org.tquadrat.foundation.javacomposer.TypeName</text>
+                    <text x='5.000'
+                          y='69.000'
+                          class='abstract'>+ annotated(annotations:java.util.List&lt;org.tquadrat.foundation.javacomposer.AnnotationSpec&gt;):org.tquadrat.foundation.javacomposer.TypeName</text>
+                    <text x='5.000'
+                          y='80.000'
+                          class='abstract static'>+ arrayComponent(type:org.tquadrat.foundation.javacomposer.TypeName):java.util.Optional&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;</text>
+                    <text x='5.000'
+                          y='91.000'
+                          class='abstract static'>+ asArray(type:org.tquadrat.foundation.javacomposer.TypeName):java.util.Optional&lt;org.tquadrat.foundation.javacomposer.ArrayTypeName&gt;</text>
+                    <text x='5.000'
+                          y='102.000'
+                          class='abstract'>+ box():org.tquadrat.foundation.javacomposer.TypeName</text>
+                    <text x='5.000'
+                          y='113.000'
+                          class='abstract'>+ equals(o:java.lang.Object):boolean</text>
+                    <text x='5.000'
+                          y='124.000'
+                          class='abstract static'>+ from(mirror:javax.lang.model.type.TypeMirror):org.tquadrat.foundation.javacomposer.TypeName</text>
+                    <text x='5.000'
+                          y='135.000'
+                          class='abstract static'>+ from(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.TypeName</text>
+                    <text x='5.000'
+                          y='146.000'
+                          class='abstract static'>+ get(mirror:javax.lang.model.type.TypeMirror):org.tquadrat.foundation.javacomposer.TypeName</text>
+                    <text x='5.000'
+                          y='157.000'
+                          class='abstract static'>+ get(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.TypeName</text>
+                    <text x='5.000'
+                          y='168.000'
+                          class='abstract'>+ hashCode():int</text>
+                    <text x='5.000'
+                          y='179.000'
+                          class='abstract'>+ isAnnotated():boolean</text>
+                    <text x='5.000'
+                          y='190.000'
+                          class='abstract'>+ isBoxedPrimitive():boolean</text>
+                    <text x='5.000'
+                          y='201.000'
+                          class='abstract'>+ isPrimitive():boolean</text>
+                    <text x='5.000'
+                          y='212.000'
+                          class='abstract'>+ toString():java.lang.String</text>
+                    <text x='5.000'
+                          y='223.000'
+                          class='abstract'>+ unbox():org.tquadrat.foundation.javacomposer.TypeName</text>
+                    <text x='5.000'
+                          y='234.000'
+                          class='abstract'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.TypeName</text>
+                </g>
+            </g>
+        </symbol>
+    </defs>
+    <path class='implementation'
+          d='M1212.000,646.000 L1212.000,546.000'
+          marker-end='url(#implementation)'/>
+    <path class='inheritance'
+          d='M1212.000,363.000 L1212.000,263.000'
+          marker-end='url(#inheritance)'/>
+    <use x='793.000'
+         y='25.000'
+         xlink:href='#org.tquadrat.foundation.javacomposer.TypeName'/>
+    <use x='661.000'
+         y='363.000'
+         xlink:href='#org.tquadrat.foundation.javacomposer.ParameterizedTypeName'/>
+    <use x='25.000'
+         y='646.000'
+         xlink:href='#org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl'/>
+</svg>

@@ -1,0 +1,720 @@
+/*
+ * ============================================================================
+ * Copyright © 2015 Square, Inc.
+ * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * ============================================================================
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.tquadrat.foundation.javacomposer.internal;
+
+import static java.util.Collections.unmodifiableMap;
+import static org.apiguardian.api.API.Status.DEPRECATED;
+import static org.apiguardian.api.API.Status.INTERNAL;
+import static org.tquadrat.foundation.javacomposer.internal.Util.characterLiteralWithoutSingleQuotes;
+import static org.tquadrat.foundation.javacomposer.internal.Util.createDebugOutput;
+import static org.tquadrat.foundation.lang.CommonConstants.EMPTY_STRING;
+import static org.tquadrat.foundation.lang.Objects.hash;
+import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
+import static org.tquadrat.foundation.lang.Objects.requireValidArgument;
+import static org.tquadrat.foundation.util.StringUtils.format;
+
+import javax.lang.model.element.AnnotationMirror;
+import java.io.UncheckedIOException;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apiguardian.api.API;
+import org.tquadrat.foundation.annotation.ClassVersion;
+import org.tquadrat.foundation.exception.UnexpectedExceptionError;
+import org.tquadrat.foundation.javacomposer.AnnotationSpec;
+import org.tquadrat.foundation.javacomposer.ClassName;
+import org.tquadrat.foundation.javacomposer.CodeBlock;
+import org.tquadrat.foundation.javacomposer.JavaComposer;
+import org.tquadrat.foundation.javacomposer.TypeName;
+import org.tquadrat.foundation.lang.Lazy;
+import org.tquadrat.foundation.util.JavaUtils;
+
+/**
+ *  The implementation of
+ *  {@link AnnotationSpec}
+ *  for a generated annotation on a declaration.
+ *
+ *  @author Square,Inc.
+ *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
+ *  @version $Id: AnnotationSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @since 0.0.5
+ *
+ *  @UMLGraph.link
+ */
+@ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@API( status = INTERNAL, since = "0.0.5" )
+public final class AnnotationSpecImpl implements AnnotationSpec
+{
+        /*---------------*\
+    ====** Inner Classes **====================================================
+        \*---------------*/
+    /**
+     *  The implementation of
+     *  {@link org.tquadrat.foundation.javacomposer.AnnotationSpec.Builder}
+     *  for a builder of an
+     *  {@link AnnotationSpecImpl}
+     *  instance.
+     *
+     *  @author Square,Inc.
+     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
+     *  @version $Id: AnnotationSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @since 0.0.5
+     *
+     *  @UMLGraph.link
+     */
+    @ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @API( status = INTERNAL, since = "0.0.5" )
+    public static final class BuilderImpl implements AnnotationSpec.Builder
+    {
+            /*------------*\
+        ====** Attributes **===================================================
+            \*------------*/
+        /**
+         *  The building blocks.
+         */
+        private final Map<String,List<CodeBlockImpl>> m_CodeBlocks = new LinkedHashMap<>();
+
+        /**
+         *  The reference to the factory.
+         */
+        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        private final JavaComposer m_Composer;
+
+        /**
+         *  A flag that indicates whether the inline representation is forced
+         *  for this annotation.
+         *
+         *  @see org.tquadrat.foundation.javacomposer.AnnotationSpec.Builder#forceInline(boolean)
+         */
+        private boolean m_ForceInline = false;
+
+        /**
+         *  The name of the annotation type to build.
+         */
+        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        private final TypeNameImpl m_Type;
+
+            /*--------------*\
+        ====** Constructors **=================================================
+            \*--------------*/
+        /**
+         *  Creates a new {@code BuilderImpl} instance.
+         *
+         *  @param  composer    The reference to the factory that created this
+         *      builder instance.
+         *  @param  type    The name of the annotation type to build.
+         */
+        @SuppressWarnings( "CastToConcreteClass" )
+        public BuilderImpl( final JavaComposer composer, final TypeName type )
+        {
+            m_Composer = requireNonNullArgument( composer, "composer" );
+            m_Type = (TypeNameImpl) requireNonNullArgument( type, "type" );
+        }   //  BuilderImpl()
+
+            /*---------*\
+        ====** Methods **======================================================
+            \*---------*/
+        /**
+         *  {@inheritDoc}
+         */
+        @SuppressWarnings( "UseOfConcreteClass" )
+        @Override
+        public final BuilderImpl addMember( final CharSequence name, final String format, final Object... args )
+        {
+            final var codeBlock = ((CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder())
+                .addWithoutDebugInfo( format, args )
+                .build();
+            final var retValue = addMember( name, codeBlock );
+
+            //---* Done *------------------------------------------------------
+            return retValue;
+        }   //  addMember()
+
+        /**
+         *  {@inheritDoc}
+         *
+         *  @deprecated Got obsolete with the introduction of
+         *      {@link JavaComposer}.
+         */
+        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @Deprecated( since = "0.2.0", forRemoval = true )
+        @API( status = DEPRECATED, since = "0.0.6" )
+        @Override
+        public final BuilderImpl addMember( final CharSequence name, final boolean addDebugOutput, final String format, final Object... args )
+        {
+            final var retValue = addMember( name, CodeBlockImpl.of( createDebugOutput( addDebugOutput, true ), format, args ) );
+
+            //---* Done *------------------------------------------------------
+            return retValue;
+        }   //  addMember()
+
+        /**
+         *  {@inheritDoc}
+         */
+        @SuppressWarnings( "CastToConcreteClass" )
+        @Override
+        public final BuilderImpl addMember( final CharSequence name, final CodeBlock codeBlock )
+        {
+            final var n = requireValidArgument( name, "name", JavaUtils::isValidName, $ -> format( "not a valid name: %s", name ) )
+                .toString()
+                .intern();
+            requireNonNullArgument( codeBlock, "codeBlock" );
+            final var values = m_CodeBlocks.computeIfAbsent( n, k -> new ArrayList<>() );
+            values.add( createDebugOutput( m_Composer.addDebugOutput() )
+                .map( output -> ((CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder())
+                    .addWithoutDebugInfo( output.asComment() )
+                    .addWithoutDebugInfo( codeBlock )
+                    .build() )
+                .orElse( (CodeBlockImpl) codeBlock ) );
+
+            //---* Done *------------------------------------------------------
+            return this;
+        }   //  addMember()
+
+        /**
+         *  Delegates to
+         *  {@link #addMember(CharSequence,String,Object...)},
+         *  with parameter {@code format} depending on the given {@code value}
+         *  object. Falls back to {@code "$L"} literal format if the class of
+         *  the given {@code value} object is not supported.
+         *
+         *  @param  name    The name for the new member.
+         *  @param  value   The value for the new member.
+         *  @return This {@code Builder} instance.
+         */
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UnusedReturnValue", "IfStatementWithTooManyBranches", "ChainOfInstanceofChecks", "UseOfConcreteClass"} )
+        public final BuilderImpl addMemberForValue( final String name, final Object value )
+        {
+            requireValidArgument( name, "name", JavaUtils::isValidName, $ -> format( "not a valid name: %s", name ) );
+            if( requireNonNullArgument( value, "value" ) instanceof Class<?> )
+            {
+                addMember( name, "$T.class", value );
+            }
+            else if( value instanceof Enum<?> enumValue )
+            {
+                addMember( name, "$T.$L", value.getClass(), enumValue.name() );
+            }
+            else if( value instanceof String )
+            {
+                addMember( name, "$S", value );
+            }
+            else if( value instanceof Float )
+            {
+                addMember( name, "$Lf", value );
+            }
+            else if( value instanceof Character charValue )
+            {
+                addMember( name, "'$L'", characterLiteralWithoutSingleQuotes( charValue.charValue() ) );
+            }
+            else
+            {
+                addMember( name, "$L", value );
+            }
+
+            //---* Done *------------------------------------------------------
+            return this;
+        }   //  addMemberForValue()
+
+        /**
+         *  Creates the {@code AnnotationSpec} instance from the added members.
+         *
+         *  @return The built instance.
+         */
+        @SuppressWarnings( "UseOfConcreteClass" )
+        @Override
+        public final AnnotationSpecImpl build() { return new AnnotationSpecImpl( this ); }
+
+        /**
+         *  {@inheritDoc}
+         */
+        @SuppressWarnings( "UseOfConcreteClass" )
+        @Override
+        public final BuilderImpl forceInline( final boolean flag )
+        {
+            m_ForceInline = flag;
+
+            //---* Done *------------------------------------------------------
+            return this;
+        }   //  forceInline()
+
+        /**
+         *  Returns the flag that indicates whether this annotation is
+         *  presented inline or multiline.
+         *
+         *  @return {@code true} for the inline presentation, {@code false} for
+         *      multi-line.
+         */
+        @SuppressWarnings( "PublicMethodNotExposedInInterface" )
+        public final boolean forceInline() { return m_ForceInline; }
+
+        /**
+         *  Returns the
+         *  {@link JavaComposer}
+         *  factory.
+         *
+         *  @return The reference to the factory.
+         */
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+        public final JavaComposer getFactory() { return m_Composer; }
+
+        /**
+         *  Returns the members.
+         *
+         *  @return The members.
+         */
+        @SuppressWarnings( "PublicMethodNotExposedInInterface" )
+        public final Map<String,List<CodeBlockImpl>> members()
+        {
+            final Map<String,List<CodeBlockImpl>> members = new LinkedHashMap<>();
+            m_CodeBlocks.forEach( (k,v) -> members.put( k, List.copyOf( v ) ) );
+            final var retValue = unmodifiableMap( members );
+
+            //---* Done *------------------------------------------------------
+            return retValue;
+        }   //  members()
+
+        /**
+         *  Returns the type of the annotation.
+         *
+         *  @return The type.
+         */
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+        public final TypeNameImpl type() { return m_Type; }
+    }
+    //  class BuilderImpl
+
+        /*------------*\
+    ====** Attributes **=======================================================
+        \*------------*/
+    /**
+     *  Lazily initialised return value of
+     *  {@link #toString()}
+     *  for this annotation.
+     */
+    private final Lazy<String> m_CachedString;
+
+    /**
+     *  The reference to the factory.
+     */
+    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    private final JavaComposer m_Composer;
+
+    /**
+     *  A flag that indicates whether the inline representation is forced for
+     *  this annotation.
+     *
+     *  @see org.tquadrat.foundation.javacomposer.AnnotationSpec.Builder#forceInline(boolean)
+     */
+    private final boolean m_ForceInline;
+
+    /**
+     *  The code blocks that define this annotation.
+     */
+    private final Map<String,List<CodeBlockImpl>> m_Members;
+
+    /**
+     *  The name of this annotation.
+     */
+    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    private final TypeNameImpl m_Type;
+
+        /*--------------*\
+    ====** Constructors **=====================================================
+        \*--------------*/
+    /**
+     *  Creates a new {@code AnnotationSpecImpl} instance.
+     *
+     *  @param  builder The builder for this instance.
+     */
+    @SuppressWarnings( "UseOfConcreteClass" )
+    public AnnotationSpecImpl( final BuilderImpl builder )
+    {
+        m_Composer = builder.getFactory();
+        m_Type = builder.type();
+        m_Members = builder.members();
+        m_ForceInline = builder.forceInline();
+
+        m_CachedString = Lazy.use( this::initializeCachedString );
+    }   //  AnnotationSpecImpl()
+
+        /*---------*\
+    ====** Methods **==========================================================
+        \*---------*/
+    /**
+     *  Creates a builder for an instance of {@code AnnotationSpecImpl} from
+     *  the given
+     *  {@link ClassName}
+     *  instance.
+     *
+     *  @param  type    The class name.
+     *  @return The new builder.
+     *
+     *  @deprecated Got obsolete with the introduction of
+     *      {@link JavaComposer}.
+     */
+    @SuppressWarnings( "UseOfConcreteClass" )
+    @Deprecated( since = "0.2.0", forRemoval = true )
+    public static final BuilderImpl builder( final ClassName type )
+    {
+        return new BuilderImpl( new JavaComposer(), requireNonNullArgument( type, "type" ) );
+    }   //  builder()
+
+    /**
+     *  Creates a builder for an instance of {@code AnnotationSpecImpl} from the
+     *  given
+     *  {@link Class}
+     *  instance.
+     *
+     *  @param  type    The class.
+     *  @return The new builder.
+     *
+     *  @deprecated Got obsolete with the introduction of
+     *      {@link JavaComposer}.
+     */
+    @SuppressWarnings( "UseOfConcreteClass" )
+    @Deprecated( since = "0.2.0", forRemoval = true )
+    public static final BuilderImpl builder( final Class<?> type )
+    {
+        return builder( ClassName.from( type ) );
+    }   //  builder()
+
+    /**
+     *  Emits this annotation to the given code writer.
+     *
+     *  @param  codeWriter  The code writer.
+     *  @param  inline  {@code true} if the annotation should be placed on the
+     *      same line as the annotated element, {@code false} otherwise.
+     *  @throws UncheckedIOException A problem occurred when writing to the
+     *      output target.
+     */
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+    public final void emit( final CodeWriter codeWriter, final boolean inline ) throws UncheckedIOException
+    {
+        final var layout = requireNonNullArgument( codeWriter, "codeWriter" ).layout();
+        //noinspection EnumSwitchStatementWhichMissesCases
+        switch( layout )
+        {
+            case LAYOUT_FOUNDATION -> emit4Foundation( codeWriter, inline );
+            case LAYOUT_JAVAPOET -> emit4JavaPoet( codeWriter, inline );
+            //case LAYOUT_DEFAULT ->
+            default -> emit4JavaPoet( codeWriter, inline );
+        }
+    }   //  emit()
+
+    /**
+     *  Emits this annotation to the given code writer.
+     *
+     *  @param  codeWriter  The code writer.
+     *  @param  inline  {@code true} if the annotation should be placed on the
+     *      same line as the annotated element, {@code false} otherwise.
+     *  @throws UncheckedIOException A problem occurred when writing to the
+     *      output target.
+     */
+    @SuppressWarnings( "UseOfConcreteClass" )
+    private final void emit4Foundation( final CodeWriter codeWriter, final boolean inline ) throws UncheckedIOException
+    {
+        requireNonNullArgument( codeWriter, "codeWriter" );
+
+        final var whitespace = inline || m_ForceInline ? " " : "\n";
+        final var memberSeparator = inline || m_ForceInline ? ", " : ",\n";
+
+        if( m_Members.isEmpty() )
+        {
+            //---* @Singleton *------------------------------------------------
+            codeWriter.emit( "@$T", m_Type );
+        }
+        else if( m_Members.size() == 1 && m_Members.containsKey( "value" ) )
+        {
+            //---* @Named("foo") *---------------------------------------------
+            codeWriter.emit( "@$T( ", m_Type );
+            emitAnnotationValues( codeWriter, whitespace, memberSeparator, m_Members.get( "value" ) );
+            codeWriter.emit( " )" );
+        }
+        else
+        {
+            /*
+             * Inline:
+             * @Column( name = "updated_at", nullable = false )
+             *
+             * Not inline:
+             * @Column(
+             *     name = "updated_at",
+             *     nullable = false
+             * )
+             */
+            codeWriter.emit( "@$T(" + whitespace, m_Type );
+            codeWriter.indent( 1 );
+            //noinspection ForLoopWithMissingComponent
+            for( final var i = m_Members.entrySet().iterator(); i.hasNext(); )
+            {
+                final var entry = i.next();
+                codeWriter.emit( "$L = ", entry.getKey() );
+                emitAnnotationValues( codeWriter, whitespace, memberSeparator, entry.getValue() );
+                if( i.hasNext() ) codeWriter.emit( memberSeparator );
+            }
+            codeWriter.unindent( 1 );
+            codeWriter.emit( whitespace + ")" );
+        }
+    }   //  emit4Foundation()
+
+    /**
+     *  Emits this annotation to the given code writer using the original
+     *  JavaPoet layout.
+     *
+     *  @param  codeWriter  The code writer.
+     *  @param  inline  {@code true} if the annotation should be placed on the
+     *      same line as the annotated element, {@code false} otherwise.
+     *  @throws UncheckedIOException A problem occurred when writing to the
+     *      output target.
+     */
+    @SuppressWarnings( "UseOfConcreteClass" )
+    private final void emit4JavaPoet( final CodeWriter codeWriter, final boolean inline ) throws UncheckedIOException
+    {
+        requireNonNullArgument( codeWriter, "codeWriter" );
+
+        final var whitespace = inline || m_ForceInline ? EMPTY_STRING : "\n";
+        final var memberSeparator = inline || m_ForceInline ? ", " : ",\n";
+
+        if( m_Members.isEmpty() )
+        {
+            //---* @Singleton *------------------------------------------------
+            codeWriter.emit( "@$T", m_Type );
+        }
+        else if( m_Members.size() == 1 && m_Members.containsKey( "value" ) )
+        {
+            //---* @Named("foo") *---------------------------------------------
+            codeWriter.emit( "@$T(", m_Type );
+            emitAnnotationValues( codeWriter, whitespace, memberSeparator, m_Members.get( "value" ) );
+            codeWriter.emit( ")" );
+        }
+        else
+        {
+            /*
+             * Inline:
+             * @Column(name = "updated_at", nullable = false)
+             *
+             * Not inline:
+             * @Column(
+             *     name = "updated_at",
+             *     nullable = false
+             * )
+             */
+            codeWriter.emit( "@$T(" + whitespace, m_Type );
+            codeWriter.indent( 2 );
+            //noinspection ForLoopWithMissingComponent
+            for( final var i = m_Members.entrySet().iterator(); i.hasNext(); )
+            {
+                final var entry = i.next();
+                codeWriter.emit( "$L = ", entry.getKey() );
+                emitAnnotationValues( codeWriter, whitespace, memberSeparator, entry.getValue() );
+                if( i.hasNext() ) codeWriter.emit( memberSeparator );
+            }
+            codeWriter.unindent( 2 );
+            codeWriter.emit( whitespace + ")" );
+        }
+    }   //  emit4JavaPoet()
+
+    /**
+     *  Emits the values of this annotation to the given code writer.
+     *
+     *  @param  codeWriter  The code writer.
+     *  @param  whitespace  The whitespace to emit.
+     *  @param  memberSeparator The separator for the members.
+     *  @param  values  The members to emit.
+     *  @throws UncheckedIOException A problem occurred when writing to the
+     *      output target.
+     */
+    @SuppressWarnings( "UseOfConcreteClass" )
+    private static final void emitAnnotationValues( final CodeWriter codeWriter, final String whitespace, final String memberSeparator, final List<CodeBlockImpl> values ) throws UncheckedIOException
+    {
+        if( values.size() == 1 )
+        {
+            codeWriter.indent( 2 );
+            codeWriter.emit( values.get( 0 ) );
+            codeWriter.unindent( 2 );
+        }
+        else
+        {
+            codeWriter.emit( "{" + whitespace );
+            codeWriter.indent( 2 );
+            var first = true;
+            for( final var codeBlock : values )
+            {
+                if( !first ) codeWriter.emit( memberSeparator );
+                codeWriter.emit( codeBlock );
+                first = false;
+            }
+            codeWriter.unindent( 2 );
+            codeWriter.emit( whitespace + "}" );
+        }
+    }   //  emitAnnotationValues()
+
+    /**
+     *  {@inheritDoc}
+     */
+    @Override
+    public final boolean equals( final Object o )
+    {
+        var retValue = this == o;
+        if( !retValue && (o instanceof AnnotationSpecImpl other) )
+        {
+            retValue = m_Composer.equals( other.m_Composer ) && toString().equals( o.toString() );
+        }
+
+        //---* Done *----------------------------------------------------------
+        return retValue;
+    }   //  equals()
+
+    /**
+     *  Creates an instance of {@code AnnotationSpec} from the given
+     *  {@link Annotation}
+     *  instance.
+     *
+     *  @param  annotation  The annotation.
+     *  @return The new instance of {@code AnnotationSpec}.
+     *
+     *  @deprecated Got obsolete with the introduction of
+     *      {@link JavaComposer}.
+     */
+    @SuppressWarnings( "UseOfConcreteClass" )
+    @Deprecated( since = "0.2.0", forRemoval = true )
+    public static final AnnotationSpecImpl get( final Annotation annotation ) { return get( annotation, false ); }
+
+    /**
+     *  Creates an instance of {@code AnnotationSpec} from the given
+     *  {@link Annotation}
+     *  instance.
+     *
+     *  @param  annotation  The annotation.
+     *  @param  includeDefaultValues    {@code true} to include the
+     *      annotation's default values, {@code false} to ignore them.
+     *  @return The new instance of {@code AnnotationSpec}.
+     *
+     *  @deprecated Got obsolete with the introduction of
+     *      {@link JavaComposer}.
+     */
+    @SuppressWarnings( "CastToConcreteClass" )
+    @Deprecated( since = "0.2.0", forRemoval = true )
+    public static final AnnotationSpecImpl get( final Annotation annotation, final boolean includeDefaultValues )
+    {
+        final var composer = new JavaComposer();
+        final var retValue = (AnnotationSpecImpl) composer.createAnnotation( annotation, includeDefaultValues );
+
+        //---* Done *----------------------------------------------------------
+        return retValue;
+    }   //  get()
+
+    /**
+     *  Creates an instance of {@code AnnotationSpec} from the given
+     *  {@link AnnotationMirror}
+     *  instance.
+     *
+     *  @param  annotation  The annotation mirror.
+     *  @return The new instance of {@code AnnotationSpec}.
+     *
+     *  @deprecated Got obsolete with the introduction of
+     *      {@link JavaComposer}.
+     */
+    @SuppressWarnings( "CastToConcreteClass" )
+    @Deprecated( since = "0.2.0", forRemoval = true )
+    public static final AnnotationSpecImpl get( final AnnotationMirror annotation )
+    {
+        final var composer = new JavaComposer();
+        final var retValue = (AnnotationSpecImpl) composer.createAnnotation( annotation  );
+
+        //---* Done *----------------------------------------------------------
+        return retValue;
+    }   //  get()
+
+    /**
+     *  Returns the
+     *  {@link JavaComposer}
+     *  factory.
+     *
+     *  @return The reference to the factory.
+     */
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+    public final JavaComposer getFactory() { return m_Composer; }
+
+    /**
+     *  {@inheritDoc}
+     */
+    @Override
+    public final int hashCode() { return hash( m_Composer, toString() ); }
+
+    /**
+     *  The initializer for
+     *  {@link #m_CachedString}.
+     *
+     *  @return The return value for
+     *      {@link #toString()}.
+     */
+    private final String initializeCachedString()
+    {
+        final var resultBuilder = new StringBuilder();
+        final var codeWriter = new CodeWriter( m_Composer, resultBuilder );
+        try
+        {
+            codeWriter.emit( "$L", this );
+        }
+        catch( final UncheckedIOException e )
+        {
+            throw new UnexpectedExceptionError( e.getCause() );
+        }
+        final var retValue = resultBuilder.toString();
+
+        //---* Done *----------------------------------------------------------
+        return retValue;
+    }   //  initializeCachedString()
+
+    /**
+     *  Creates a new builder that is initialised with the components of this
+     *  annotation.
+     *
+     *  @return The new builder.
+     */
+    @SuppressWarnings( "AccessingNonPublicFieldOfAnotherObject" )
+    @Override
+    public final Builder toBuilder()
+    {
+        final var retValue = new BuilderImpl( m_Composer, m_Type );
+        for( final var entry : m_Members.entrySet() )
+        {
+            retValue.m_CodeBlocks.put( entry.getKey(), new ArrayList<>( entry.getValue() ) );
+        }
+
+        //---* Done *----------------------------------------------------------
+        return retValue;
+    }   //  toBuilder()
+
+    /**
+     *  {@inheritDoc}
+     */
+    @Override
+    public final String toString() { return m_CachedString.get(); }
+}
+//  class AnnotationSpecImpl
+
+/*
+ *  End of File
+ */

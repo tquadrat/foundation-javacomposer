@@ -1,0 +1,719 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:cc="http://creativecommons.org/ns#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:svg="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     version='1.1'
+     baseProfile='full'
+     width='1176.000'
+     height='1798.000'>
+    <defs>
+        <style><![CDATA[
+            line
+            {
+              stroke: black;
+            }
+            line.separator
+            {
+              stroke:       black;
+              stroke-width: 1;
+            }
+            marker
+            {
+              fill: white;
+            }
+            path
+            {
+              fill:   white;
+              stroke: black;
+            }
+            path.implementation
+            {
+              fill:             none;
+              stroke-dasharray: 5,5;
+              stroke-width:     3;
+            }
+            path.inheritance
+            {
+              fill:         none;
+              stroke-width: 3;
+            }
+            rect
+            {
+              fill:         none;
+              stroke:       black;
+              stroke-width: 2;
+            }
+            rect.externalClass
+            {
+              fill:         #D0D0D0;
+              fill-opacity: 0.8;
+            }
+            rect.focusClass
+            {
+              fill:         #FFFFF9;
+              fill-opacity: 0.8;
+            }
+            rect.otherClass
+            {
+              fill:         #F0E68C;
+              fill-opacity: 0.8;
+            }
+            rect.template
+            {
+              fill:             #FFFFFF;
+              fill-opacity:     1.0;
+              stroke-dasharray: 3,3;
+            }
+            text
+            {
+              font-family: monospace;
+              font-size:   10px;
+              font-weight: bold;
+            }
+            text.abstract
+            {
+              font-style: italic;
+            }
+            text.final
+            {
+              text-decoration: underline;
+            }
+            text.static
+            {
+              font-weight: normal;
+            }
+            text.stereotype
+            {
+              font-size:   8px;
+              font-weight: normal;
+            }
+            ]]></style>
+        <marker id='inheritance'
+                viewBox='0,0,40,40'
+                markerUnits='strokeWidth'
+                refX='40'
+                refY='20'
+                markerWidth='6'
+                markerHeight='6'
+                orient='auto'>
+            <path d='M40,20 l-40,-20 v40 Z'
+                  fill='#ffffff'
+                  stroke='#000000'
+                  stroke-width='3'/>
+        </marker>
+        <marker id='implementation'
+                viewBox='0,0,40,40'
+                markerUnits='strokeWidth'
+                refX='40'
+                refY='20'
+                markerWidth='6'
+                markerHeight='6'
+                orient='auto'>
+            <path d='M40,20 l-40,-20 v40 Z'
+                  fill='#ffffff'
+                  stroke='#000000'
+                  stroke-width='3'/>
+        </marker>
+        <clipPath id='ID000001'>
+            <rect class='focusClass'
+                  height='106.000'
+                  width='1126.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='org.tquadrat.foundation.javacomposer.internal.AnnotationValueVisitor'>
+            <g>
+                <g class='focusClass'
+                   clip-path='url(#ID000001)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='1126.000'
+                          height='106.000'
+                          class='focusClass'/>
+                    <line x1='0.000'
+                          y1='17.000'
+                          x2='1126.000'
+                          y2='17.000'
+                          class='separator'/>
+                    <text x='497.000'
+                          y='13.000'>AnnotationValueVisitor</text>
+                    <line x1='0.000'
+                          y1='34.000'
+                          x2='1126.000'
+                          y2='34.000'
+                          class='separator'/>
+                    <text y='30.000'
+                          class='final'>- m_Builder:org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='47.000'>+ AnnotationValueVisitor(builder:org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderImpl)</text>
+                    <text x='5.000'
+                          y='58.000'># defaultAction(o:java.lang.Object,name:java.lang.String):org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='69.000'>+ visitAnnotation(a:javax.lang.model.element.AnnotationMirror,name:java.lang.String):org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='80.000'>+ visitEnumConstant(c:javax.lang.model.element.VariableElement,name:java.lang.String):org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='91.000'>+ visitType(t:javax.lang.model.type.TypeMirror,name:java.lang.String):org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='102.000'>+ visitArray(values:java.util.List&lt;? extends javax.lang.model.element.AnnotationValue&gt;,name:java.lang.String):org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderImpl</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000002'>
+            <rect class='externalClass'
+                  height='62.000'
+                  width='250.000'
+                  x='0.000'
+                  y='8.000'/>
+        </clipPath>
+        <symbol id='javax.lang.model.util.SimpleAnnotationValueVisitor14'>
+            <g>
+                <g clip-path='url(#ID000002)'>
+                    <rect x='0.000'
+                          y='8.000'
+                          width='250.000'
+                          height='62.000'
+                          class='externalClass'/>
+                    <line x1='0.000'
+                          y1='25.000'
+                          x2='250.000'
+                          y2='25.000'
+                          class='separator'/>
+                    <text x='35.000'
+                          y='21.000'>SimpleAnnotationValueVisitor14</text>
+                    <line x1='0.000'
+                          y1='42.000'
+                          x2='250.000'
+                          y2='42.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='38.000'/>
+                    <text x='5.000'
+                          y='55.000'># SimpleAnnotationValueVisitor14()</text>
+                    <text x='5.000'
+                          y='66.000'># SimpleAnnotationValueVisitor14(arg0:R)</text>
+                </g>
+                <g transform='translate(225.000 0.000)'>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='template'/>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='externalClass'
+                          stroke='none'
+                          stroke-opacity='0.0'/>
+                    <text x='5.000'
+                          y='14.000'>R,P</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000003'>
+            <rect class='externalClass'
+                  height='62.000'
+                  width='244.000'
+                  x='0.000'
+                  y='8.000'/>
+        </clipPath>
+        <symbol id='javax.lang.model.util.SimpleAnnotationValueVisitor9'>
+            <g>
+                <g clip-path='url(#ID000003)'>
+                    <rect x='0.000'
+                          y='8.000'
+                          width='244.000'
+                          height='62.000'
+                          class='externalClass'/>
+                    <line x1='0.000'
+                          y1='25.000'
+                          x2='244.000'
+                          y2='25.000'
+                          class='separator'/>
+                    <text x='35.000'
+                          y='21.000'>SimpleAnnotationValueVisitor9</text>
+                    <line x1='0.000'
+                          y1='42.000'
+                          x2='244.000'
+                          y2='42.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='38.000'/>
+                    <text x='5.000'
+                          y='55.000'># SimpleAnnotationValueVisitor9()</text>
+                    <text x='5.000'
+                          y='66.000'># SimpleAnnotationValueVisitor9(arg0:R)</text>
+                </g>
+                <g transform='translate(219.000 0.000)'>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='template'/>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='externalClass'
+                          stroke='none'
+                          stroke-opacity='0.0'/>
+                    <text x='5.000'
+                          y='14.000'>R,P</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000004'>
+            <rect class='externalClass'
+                  height='62.000'
+                  width='244.000'
+                  x='0.000'
+                  y='8.000'/>
+        </clipPath>
+        <symbol id='javax.lang.model.util.SimpleAnnotationValueVisitor8'>
+            <g>
+                <g clip-path='url(#ID000004)'>
+                    <rect x='0.000'
+                          y='8.000'
+                          width='244.000'
+                          height='62.000'
+                          class='externalClass'/>
+                    <line x1='0.000'
+                          y1='25.000'
+                          x2='244.000'
+                          y2='25.000'
+                          class='separator'/>
+                    <text x='35.000'
+                          y='21.000'>SimpleAnnotationValueVisitor8</text>
+                    <line x1='0.000'
+                          y1='42.000'
+                          x2='244.000'
+                          y2='42.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='38.000'/>
+                    <text x='5.000'
+                          y='55.000'># SimpleAnnotationValueVisitor8()</text>
+                    <text x='5.000'
+                          y='66.000'># SimpleAnnotationValueVisitor8(arg0:R)</text>
+                </g>
+                <g transform='translate(219.000 0.000)'>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='template'/>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='externalClass'
+                          stroke='none'
+                          stroke-opacity='0.0'/>
+                    <text x='5.000'
+                          y='14.000'>R,P</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000005'>
+            <rect class='externalClass'
+                  height='62.000'
+                  width='244.000'
+                  x='0.000'
+                  y='8.000'/>
+        </clipPath>
+        <symbol id='javax.lang.model.util.SimpleAnnotationValueVisitor7'>
+            <g>
+                <g clip-path='url(#ID000005)'>
+                    <rect x='0.000'
+                          y='8.000'
+                          width='244.000'
+                          height='62.000'
+                          class='externalClass'/>
+                    <line x1='0.000'
+                          y1='25.000'
+                          x2='244.000'
+                          y2='25.000'
+                          class='separator'/>
+                    <text x='35.000'
+                          y='21.000'>SimpleAnnotationValueVisitor7</text>
+                    <line x1='0.000'
+                          y1='42.000'
+                          x2='244.000'
+                          y2='42.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='38.000'/>
+                    <text x='5.000'
+                          y='55.000'># SimpleAnnotationValueVisitor7()</text>
+                    <text x='5.000'
+                          y='66.000'># SimpleAnnotationValueVisitor7(arg0:R)</text>
+                </g>
+                <g transform='translate(219.000 0.000)'>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='template'/>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='externalClass'
+                          stroke='none'
+                          stroke-opacity='0.0'/>
+                    <text x='5.000'
+                          y='14.000'>R,P</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000006'>
+            <rect class='externalClass'
+                  height='216.000'
+                  width='574.000'
+                  x='0.000'
+                  y='8.000'/>
+        </clipPath>
+        <symbol id='javax.lang.model.util.SimpleAnnotationValueVisitor6'>
+            <g>
+                <g clip-path='url(#ID000006)'>
+                    <rect x='0.000'
+                          y='8.000'
+                          width='574.000'
+                          height='216.000'
+                          class='externalClass'/>
+                    <line x1='0.000'
+                          y1='25.000'
+                          x2='574.000'
+                          y2='25.000'
+                          class='separator'/>
+                    <text x='200.000'
+                          y='21.000'>SimpleAnnotationValueVisitor6</text>
+                    <line x1='0.000'
+                          y1='42.000'
+                          x2='574.000'
+                          y2='42.000'
+                          class='separator'/>
+                    <text y='38.000'
+                          class='final'># DEFAULT_VALUE:R</text>
+                    <text x='5.000'
+                          y='55.000'># SimpleAnnotationValueVisitor6()</text>
+                    <text x='5.000'
+                          y='66.000'># SimpleAnnotationValueVisitor6(arg0:R)</text>
+                    <text x='5.000'
+                          y='77.000'># defaultAction(arg0:java.lang.Object,arg1:P):R</text>
+                    <text x='5.000'
+                          y='88.000'>+ visitBoolean(arg0:boolean,arg1:P):R</text>
+                    <text x='5.000'
+                          y='99.000'>+ visitByte(arg0:byte,arg1:P):R</text>
+                    <text x='5.000'
+                          y='110.000'>+ visitChar(arg0:char,arg1:P):R</text>
+                    <text x='5.000'
+                          y='121.000'>+ visitDouble(arg0:double,arg1:P):R</text>
+                    <text x='5.000'
+                          y='132.000'>+ visitFloat(arg0:float,arg1:P):R</text>
+                    <text x='5.000'
+                          y='143.000'>+ visitInt(arg0:int,arg1:P):R</text>
+                    <text x='5.000'
+                          y='154.000'>+ visitLong(arg0:long,arg1:P):R</text>
+                    <text x='5.000'
+                          y='165.000'>+ visitShort(arg0:short,arg1:P):R</text>
+                    <text x='5.000'
+                          y='176.000'>+ visitString(arg0:java.lang.String,arg1:P):R</text>
+                    <text x='5.000'
+                          y='187.000'>+ visitType(arg0:javax.lang.model.type.TypeMirror,arg1:P):R</text>
+                    <text x='5.000'
+                          y='198.000'>+ visitEnumConstant(arg0:javax.lang.model.element.VariableElement,arg1:P):R</text>
+                    <text x='5.000'
+                          y='209.000'>+ visitAnnotation(arg0:javax.lang.model.element.AnnotationMirror,arg1:P):R</text>
+                    <text x='5.000'
+                          y='220.000'>+ visitArray(arg0:java.util.List&lt;? extends javax.lang.model.element.AnnotationValue&gt;,arg1:P):R</text>
+                </g>
+                <g transform='translate(549.000 0.000)'>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='template'/>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='externalClass'
+                          stroke='none'
+                          stroke-opacity='0.0'/>
+                    <text x='5.000'
+                          y='14.000'>R,P</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000007'>
+            <rect class='externalClass'
+                  height='95.000'
+                  width='430.000'
+                  x='0.000'
+                  y='8.000'/>
+        </clipPath>
+        <symbol id='javax.lang.model.util.AbstractAnnotationValueVisitor6'>
+            <g>
+                <g clip-path='url(#ID000007)'>
+                    <rect x='0.000'
+                          y='8.000'
+                          width='430.000'
+                          height='95.000'
+                          class='externalClass'/>
+                    <line x1='0.000'
+                          y1='36.000'
+                          x2='430.000'
+                          y2='36.000'
+                          class='separator'/>
+                    <text x='200.600'
+                          y='21.000'
+                          class='stereotype'>&#xAB;Type&#xBB;</text>
+                    <text x='122.000'
+                          y='32.000'
+                          class='abstract'>AbstractAnnotationValueVisitor6</text>
+                    <line x1='0.000'
+                          y1='53.000'
+                          x2='430.000'
+                          y2='53.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='49.000'/>
+                    <text x='5.000'
+                          y='66.000'># AbstractAnnotationValueVisitor6()</text>
+                    <text x='5.000'
+                          y='77.000'>+ visit(arg0:javax.lang.model.element.AnnotationValue,arg1:P):R</text>
+                    <text x='5.000'
+                          y='88.000'>+ visit(arg0:javax.lang.model.element.AnnotationValue):R</text>
+                    <text x='5.000'
+                          y='99.000'>+ visitUnknown(arg0:javax.lang.model.element.AnnotationValue,arg1:P):R</text>
+                </g>
+                <g transform='translate(405.000 0.000)'>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='template'/>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='externalClass'
+                          stroke='none'
+                          stroke-opacity='0.0'/>
+                    <text x='5.000'
+                          y='14.000'>R,P</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000008'>
+            <rect class='externalClass'
+                  height='172.000'
+                  width='244.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='java.lang.Object'>
+            <g>
+                <g clip-path='url(#ID000008)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='244.000'
+                          height='172.000'
+                          class='externalClass'/>
+                    <line x1='0.000'
+                          y1='17.000'
+                          x2='244.000'
+                          y2='17.000'
+                          class='separator'/>
+                    <text x='104.000'
+                          y='13.000'>Object</text>
+                    <line x1='0.000'
+                          y1='34.000'
+                          x2='244.000'
+                          y2='34.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='30.000'/>
+                    <text x='5.000'
+                          y='47.000'>+ Object()</text>
+                    <text x='5.000'
+                          y='58.000'>+ getClass():java.lang.Class&lt;?&gt;</text>
+                    <text x='5.000'
+                          y='69.000'>+ hashCode():int</text>
+                    <text x='5.000'
+                          y='80.000'>+ equals(arg0:java.lang.Object):boolean</text>
+                    <text x='5.000'
+                          y='91.000'># clone():java.lang.Object</text>
+                    <text x='5.000'
+                          y='102.000'>+ toString():java.lang.String</text>
+                    <text x='5.000'
+                          y='113.000'>+ notify():void</text>
+                    <text x='5.000'
+                          y='124.000'>+ notifyAll():void</text>
+                    <text x='5.000'
+                          y='135.000'>+ wait():void</text>
+                    <text x='5.000'
+                          y='146.000'>+ wait(arg0:long):void</text>
+                    <text x='5.000'
+                          y='157.000'>+ wait(arg0:long,arg1:int):void</text>
+                    <text x='5.000'
+                          y='168.000'># finalize():void</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000009'>
+            <rect class='externalClass'
+                  height='227.000'
+                  width='574.000'
+                  x='0.000'
+                  y='8.000'/>
+        </clipPath>
+        <symbol id='javax.lang.model.element.AnnotationValueVisitor'>
+            <g>
+                <g clip-path='url(#ID000009)'>
+                    <rect x='0.000'
+                          y='8.000'
+                          width='574.000'
+                          height='227.000'
+                          class='externalClass'/>
+                    <line x1='0.000'
+                          y1='36.000'
+                          x2='574.000'
+                          y2='36.000'
+                          class='separator'/>
+                    <text x='260.600'
+                          y='21.000'
+                          class='stereotype'>&#xAB;Interface&#xBB;</text>
+                    <text x='221.000'
+                          y='32.000'
+                          class='abstract'>AnnotationValueVisitor</text>
+                    <line x1='0.000'
+                          y1='53.000'
+                          x2='574.000'
+                          y2='53.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='49.000'/>
+                    <text x='5.000'
+                          y='66.000'
+                          class='abstract'>+ visit(arg0:javax.lang.model.element.AnnotationValue,arg1:P):R</text>
+                    <text x='5.000'
+                          y='77.000'>&#x2A22; visit(arg0:javax.lang.model.element.AnnotationValue):R</text>
+                    <text x='5.000'
+                          y='88.000'
+                          class='abstract'>+ visitBoolean(arg0:boolean,arg1:P):R</text>
+                    <text x='5.000'
+                          y='99.000'
+                          class='abstract'>+ visitByte(arg0:byte,arg1:P):R</text>
+                    <text x='5.000'
+                          y='110.000'
+                          class='abstract'>+ visitChar(arg0:char,arg1:P):R</text>
+                    <text x='5.000'
+                          y='121.000'
+                          class='abstract'>+ visitDouble(arg0:double,arg1:P):R</text>
+                    <text x='5.000'
+                          y='132.000'
+                          class='abstract'>+ visitFloat(arg0:float,arg1:P):R</text>
+                    <text x='5.000'
+                          y='143.000'
+                          class='abstract'>+ visitInt(arg0:int,arg1:P):R</text>
+                    <text x='5.000'
+                          y='154.000'
+                          class='abstract'>+ visitLong(arg0:long,arg1:P):R</text>
+                    <text x='5.000'
+                          y='165.000'
+                          class='abstract'>+ visitShort(arg0:short,arg1:P):R</text>
+                    <text x='5.000'
+                          y='176.000'
+                          class='abstract'>+ visitString(arg0:java.lang.String,arg1:P):R</text>
+                    <text x='5.000'
+                          y='187.000'
+                          class='abstract'>+ visitType(arg0:javax.lang.model.type.TypeMirror,arg1:P):R</text>
+                    <text x='5.000'
+                          y='198.000'
+                          class='abstract'>+ visitEnumConstant(arg0:javax.lang.model.element.VariableElement,arg1:P):R</text>
+                    <text x='5.000'
+                          y='209.000'
+                          class='abstract'>+ visitAnnotation(arg0:javax.lang.model.element.AnnotationMirror,arg1:P):R</text>
+                    <text x='5.000'
+                          y='220.000'
+                          class='abstract'>+ visitArray(arg0:java.util.List&lt;? extends javax.lang.model.element.AnnotationValue&gt;,arg1:P):R</text>
+                    <text x='5.000'
+                          y='231.000'
+                          class='abstract'>+ visitUnknown(arg0:javax.lang.model.element.AnnotationValue,arg1:P):R</text>
+                </g>
+                <g transform='translate(549.000 0.000)'>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='template'/>
+                    <rect x='0.000'
+                          y='1.000'
+                          width='50.000'
+                          height='17.000'
+                          class='externalClass'
+                          stroke='none'
+                          stroke-opacity='0.0'/>
+                    <text x='5.000'
+                          y='14.000'>R,P</text>
+                </g>
+            </g>
+        </symbol>
+    </defs>
+    <path class='inheritance'
+          d='M588.000,1567.000 c0.000,-85.000,-12.500,0.000,-12.500,-85.000 v-15'
+          marker-end='url(#inheritance)'/>
+    <path class='inheritance'
+          d='M575.500,1405.000 L575.500,1297.000'
+          marker-end='url(#inheritance)'/>
+    <path class='inheritance'
+          d='M575.500,1235.000 L575.500,1127.000'
+          marker-end='url(#inheritance)'/>
+    <path class='inheritance'
+          d='M575.500,1065.000 L575.500,957.000'
+          marker-end='url(#inheritance)'/>
+    <path class='inheritance'
+          d='M575.500,895.000 L575.500,787.000'
+          marker-end='url(#inheritance)'/>
+    <path class='inheritance'
+          d='M575.500,571.000 L575.500,463.000'
+          marker-end='url(#inheritance)'/>
+    <path class='inheritance'
+          d='M550.500,368.000 c0.000,-156.000,-403.500,0.000,-403.500,-156.000 v-15'
+          marker-end='url(#inheritance)'/>
+    <path class='implementation'
+          d='M600.500,368.000 c0.000,-93.000,5.500,0.000,5.500,-93.000 v-15'
+          marker-end='url(#implementation)'/>
+    <use x='25.000'
+         y='25.000'
+         xlink:href='#java.lang.Object'/>
+    <use x='319.000'
+         y='25.000'
+         xlink:href='#javax.lang.model.element.AnnotationValueVisitor'/>
+    <use x='360.500'
+         y='360.000'
+         xlink:href='#javax.lang.model.util.AbstractAnnotationValueVisitor6'/>
+    <use x='288.500'
+         y='563.000'
+         xlink:href='#javax.lang.model.util.SimpleAnnotationValueVisitor6'/>
+    <use x='453.500'
+         y='887.000'
+         xlink:href='#javax.lang.model.util.SimpleAnnotationValueVisitor7'/>
+    <use x='453.500'
+         y='1057.000'
+         xlink:href='#javax.lang.model.util.SimpleAnnotationValueVisitor8'/>
+    <use x='453.500'
+         y='1227.000'
+         xlink:href='#javax.lang.model.util.SimpleAnnotationValueVisitor9'/>
+    <use x='450.500'
+         y='1397.000'
+         xlink:href='#javax.lang.model.util.SimpleAnnotationValueVisitor14'/>
+    <use x='25.000'
+         y='1567.000'
+         xlink:href='#org.tquadrat.foundation.javacomposer.internal.AnnotationValueVisitor'/>
+</svg>

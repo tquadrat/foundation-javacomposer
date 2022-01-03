@@ -1,0 +1,358 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:cc="http://creativecommons.org/ns#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:svg="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     version='1.1'
+     baseProfile='full'
+     width='1476.000'
+     height='1078.000'>
+    <defs>
+        <style><![CDATA[
+            line
+            {
+              stroke: black;
+            }
+            line.separator
+            {
+              stroke:       black;
+              stroke-width: 1;
+            }
+            marker
+            {
+              fill: white;
+            }
+            path
+            {
+              fill:   white;
+              stroke: black;
+            }
+            path.implementation
+            {
+              fill:             none;
+              stroke-dasharray: 5,5;
+              stroke-width:     3;
+            }
+            path.inheritance
+            {
+              fill:         none;
+              stroke-width: 3;
+            }
+            rect
+            {
+              fill:         none;
+              stroke:       black;
+              stroke-width: 2;
+            }
+            rect.externalClass
+            {
+              fill:         #D0D0D0;
+              fill-opacity: 0.8;
+            }
+            rect.focusClass
+            {
+              fill:         #FFFFF9;
+              fill-opacity: 0.8;
+            }
+            rect.otherClass
+            {
+              fill:         #F0E68C;
+              fill-opacity: 0.8;
+            }
+            rect.template
+            {
+              fill:             #FFFFFF;
+              fill-opacity:     1.0;
+              stroke-dasharray: 3,3;
+            }
+            text
+            {
+              font-family: monospace;
+              font-size:   10px;
+              font-weight: bold;
+            }
+            text.abstract
+            {
+              font-style: italic;
+            }
+            text.final
+            {
+              text-decoration: underline;
+            }
+            text.static
+            {
+              font-weight: normal;
+            }
+            text.stereotype
+            {
+              font-size:   8px;
+              font-weight: normal;
+            }
+            ]]></style>
+        <marker id='inheritance'
+                viewBox='0,0,40,40'
+                markerUnits='strokeWidth'
+                refX='40'
+                refY='20'
+                markerWidth='6'
+                markerHeight='6'
+                orient='auto'>
+            <path d='M40,20 l-40,-20 v40 Z'
+                  fill='#ffffff'
+                  stroke='#000000'
+                  stroke-width='3'/>
+        </marker>
+        <marker id='implementation'
+                viewBox='0,0,40,40'
+                markerUnits='strokeWidth'
+                refX='40'
+                refY='20'
+                markerWidth='6'
+                markerHeight='6'
+                orient='auto'>
+            <path d='M40,20 l-40,-20 v40 Z'
+                  fill='#ffffff'
+                  stroke='#000000'
+                  stroke-width='3'/>
+        </marker>
+        <clipPath id='ID000001'>
+            <rect class='focusClass'
+                  height='293.000'
+                  width='934.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='org.tquadrat.foundation.javacomposer.CodeBlock.Builder'>
+            <g>
+                <g class='focusClass'
+                   clip-path='url(#ID000001)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='934.000'
+                          height='293.000'
+                          class='focusClass'/>
+                    <line x1='0.000'
+                          y1='28.000'
+                          x2='934.000'
+                          y2='28.000'
+                          class='separator'/>
+                    <text x='440.600'
+                          y='13.000'
+                          class='stereotype'>&#xAB;Interface&#xBB;</text>
+                    <text x='446.000'
+                          y='24.000'
+                          class='abstract'>Builder</text>
+                    <line x1='0.000'
+                          y1='45.000'
+                          x2='934.000'
+                          y2='45.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='41.000'/>
+                    <text x='5.000'
+                          y='58.000'
+                          class='abstract'>+ add(codeBlock:org.tquadrat.foundation.javacomposer.CodeBlock):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='69.000'
+                          class='abstract'>+ add(format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='80.000'
+                          class='abstract'>+ add(addDebugOutput:boolean,format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='91.000'
+                          class='abstract'>+ addNamed(format:java.lang.String,args:java.util.Map&lt;java.lang.String,?&gt;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='102.000'
+                          class='abstract'>+ addNamed(addDebugOutput:boolean,format:java.lang.String,args:java.util.Map&lt;java.lang.String,?&gt;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='113.000'
+                          class='abstract'>+ addStatement(codeBlock:org.tquadrat.foundation.javacomposer.CodeBlock):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='124.000'>&#x2A22; addStatement(format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='135.000'
+                          class='abstract'>+ addStatement(addDebugOutput:boolean,format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='146.000'
+                          class='abstract'>+ addStaticImport(clazz:java.lang.Class&lt;?&gt;,names:java.lang.String&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='157.000'
+                          class='abstract'>+ addStaticImport(className:org.tquadrat.foundation.javacomposer.ClassName,names:java.lang.String&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='168.000'
+                          class='abstract'>+ addStaticImport(constant:java.lang.Enum&lt;?&gt;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='179.000'
+                          class='abstract'>+ beginControlFlow(controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='190.000'
+                          class='abstract'>+ beginControlFlow(addDebugOutput:boolean,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='201.000'
+                          class='abstract'>+ build():org.tquadrat.foundation.javacomposer.CodeBlock</text>
+                    <text x='5.000'
+                          y='212.000'
+                          class='abstract'>+ endControlFlow():org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='223.000'
+                          class='abstract'>+ endControlFlow(controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='234.000'
+                          class='abstract'>+ endControlFlow(addDebugOutput:boolean,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='245.000'
+                          class='abstract'>+ indent():org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='256.000'
+                          class='abstract'>+ isEmpty():boolean</text>
+                    <text x='5.000'
+                          y='267.000'
+                          class='abstract'>+ nextControlFlow(controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='278.000'
+                          class='abstract'>+ nextControlFlow(addDebugOutput:boolean,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                    <text x='5.000'
+                          y='289.000'
+                          class='abstract'>+ unindent():org.tquadrat.foundation.javacomposer.CodeBlock.Builder</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000002'>
+            <rect class='otherClass'
+                  height='535.000'
+                  width='1426.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl'>
+            <g>
+                <g clip-path='url(#ID000002)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='1426.000'
+                          height='535.000'
+                          class='otherClass'/>
+                    <line x1='0.000'
+                          y1='17.000'
+                          x2='1426.000'
+                          y2='17.000'
+                          class='separator'/>
+                    <text x='680.000'
+                          y='13.000'>BuilderImpl</text>
+                    <line x1='0.000'
+                          y1='67.000'
+                          x2='1426.000'
+                          y2='67.000'
+                          class='separator'/>
+                    <text y='30.000'
+                          class='final'>- m_Args:java.util.Collection&lt;java.lang.Object&gt;</text>
+                    <text y='41.000'
+                          class='final'>- m_Composer:org.tquadrat.foundation.javacomposer.JavaComposer</text>
+                    <text y='52.000'
+                          class='final'>- m_FormatParts:java.util.List&lt;java.lang.String&gt;</text>
+                    <text y='63.000'
+                          class='final'>- m_StaticImports:java.util.Collection&lt;java.lang.String&gt;</text>
+                    <text x='5.000'
+                          y='80.000'>+ BuilderImpl(composer:org.tquadrat.foundation.javacomposer.JavaComposer)</text>
+                    <text x='5.000'
+                          y='91.000'>+ BuilderImpl(composer:org.tquadrat.foundation.javacomposer.JavaComposer,formatParts:java.util.List&lt;java.lang.String&gt;,args:java.util.List&lt;java.lang.Object&gt;)</text>
+                    <text x='5.000'
+                          y='102.000'>+ add(codeBlock:org.tquadrat.foundation.javacomposer.CodeBlock):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='113.000'>+ add(debugOutput:java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.DebugOutput&gt;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='124.000'>+ add(addDebugOutput:boolean,format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='135.000'>+ add(debugOutput:java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.DebugOutput&gt;,format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='146.000'>+ add(format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='157.000'>- addArgument(format:java.lang.String,placeholder:char,arg:java.lang.Object):void</text>
+                    <text x='5.000'
+                          y='168.000'>- addDebug():void</text>
+                    <text x='5.000'
+                          y='179.000'>+ addNamed(addDebugOutput:boolean,format:java.lang.String,args:java.util.Map&lt;java.lang.String,?&gt;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='190.000'>+ addNamed(debugOutput:java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.DebugOutput&gt;,format:java.lang.String,args:java.util.Map&lt;java.lang.String,?&gt;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='201.000'>+ addNamed(format:java.lang.String,args:java.util.Map&lt;java.lang.String,?&gt;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='212.000'>+ addStatement(codeBlock:org.tquadrat.foundation.javacomposer.CodeBlock):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='223.000'>+ addStatement(addDebugOutput:boolean,format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='234.000'>+ addStatement(debugOutput:java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.DebugOutput&gt;,format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='245.000'>+ addStatement(format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='256.000'>+ addStaticImport(clazz:java.lang.Class&lt;?&gt;,names:java.lang.String&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='267.000'>+ addStaticImport(className:org.tquadrat.foundation.javacomposer.ClassName,names:java.lang.String&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='278.000'>+ addStaticImport(constant:java.lang.Enum&lt;?&gt;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='289.000'>+ addWithoutDebugInfo(codeBlock:org.tquadrat.foundation.javacomposer.CodeBlock):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='300.000'>+ addWithoutDebugInfo(format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='311.000'>+ args():java.util.List&lt;java.lang.Object&gt;</text>
+                    <text x='5.000'
+                          y='322.000'
+                          class='static'>- argToLiteral(o:java.lang.Object):java.lang.Object</text>
+                    <text x='5.000'
+                          y='333.000'
+                          class='static'>- argToName(o:java.lang.Object):java.lang.Object</text>
+                    <text x='5.000'
+                          y='344.000'
+                          class='static'>- argToString(o:java.lang.Object):java.lang.Object</text>
+                    <text x='5.000'
+                          y='355.000'
+                          class='static'>- argToType(o:java.lang.Object):org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
+                    <text x='5.000'
+                          y='366.000'>+ beginControlFlow(addDebugOutput:boolean,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='377.000'>+ beginControlFlow(debugOutput:java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.DebugOutput&gt;,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='388.000'>+ beginControlFlow(controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='399.000'>+ build():org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl</text>
+                    <text x='5.000'
+                          y='410.000'>+ endControlFlow():org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='421.000'>+ endControlFlow(addDebugOutput:boolean,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='432.000'>+ endControlFlow(debugOutput:java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.DebugOutput&gt;,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='443.000'>+ endControlFlow(controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='454.000'>+ formatParts():java.util.List&lt;java.lang.String&gt;</text>
+                    <text x='5.000'
+                          y='465.000'>+ indent():org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='476.000'>+ isEmpty():boolean</text>
+                    <text x='5.000'
+                          y='487.000'
+                          class='static'>- isNoArgPlaceholder(placeholder:char):boolean</text>
+                    <text x='5.000'
+                          y='498.000'>+ nextControlFlow(addDebugOutput:boolean,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='509.000'>+ nextControlFlow(debugOutput:java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.DebugOutput&gt;,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='520.000'>+ nextControlFlow(controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='531.000'>+ unindent():org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl</text>
+                </g>
+            </g>
+        </symbol>
+    </defs>
+    <path class='implementation'
+          d='M738.000,418.000 L738.000,318.000'
+          marker-end='url(#implementation)'/>
+    <use x='271.000'
+         y='25.000'
+         xlink:href='#org.tquadrat.foundation.javacomposer.CodeBlock.Builder'/>
+    <use x='25.000'
+         y='418.000'
+         xlink:href='#org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl.BuilderImpl'/>
+</svg>

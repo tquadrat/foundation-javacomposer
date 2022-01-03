@@ -1,0 +1,322 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:cc="http://creativecommons.org/ns#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:svg="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     version='1.1'
+     baseProfile='full'
+     width='1650.000'
+     height='1056.000'>
+    <defs>
+        <style><![CDATA[
+            line
+            {
+              stroke: black;
+            }
+            line.separator
+            {
+              stroke:       black;
+              stroke-width: 1;
+            }
+            marker
+            {
+              fill: white;
+            }
+            path
+            {
+              fill:   white;
+              stroke: black;
+            }
+            path.implementation
+            {
+              fill:             none;
+              stroke-dasharray: 5,5;
+              stroke-width:     3;
+            }
+            path.inheritance
+            {
+              fill:         none;
+              stroke-width: 3;
+            }
+            rect
+            {
+              fill:         none;
+              stroke:       black;
+              stroke-width: 2;
+            }
+            rect.externalClass
+            {
+              fill:         #D0D0D0;
+              fill-opacity: 0.8;
+            }
+            rect.focusClass
+            {
+              fill:         #FFFFF9;
+              fill-opacity: 0.8;
+            }
+            rect.otherClass
+            {
+              fill:         #F0E68C;
+              fill-opacity: 0.8;
+            }
+            rect.template
+            {
+              fill:             #FFFFFF;
+              fill-opacity:     1.0;
+              stroke-dasharray: 3,3;
+            }
+            text
+            {
+              font-family: monospace;
+              font-size:   10px;
+              font-weight: bold;
+            }
+            text.abstract
+            {
+              font-style: italic;
+            }
+            text.final
+            {
+              text-decoration: underline;
+            }
+            text.static
+            {
+              font-weight: normal;
+            }
+            text.stereotype
+            {
+              font-size:   8px;
+              font-weight: normal;
+            }
+            ]]></style>
+        <marker id='inheritance'
+                viewBox='0,0,40,40'
+                markerUnits='strokeWidth'
+                refX='40'
+                refY='20'
+                markerWidth='6'
+                markerHeight='6'
+                orient='auto'>
+            <path d='M40,20 l-40,-20 v40 Z'
+                  fill='#ffffff'
+                  stroke='#000000'
+                  stroke-width='3'/>
+        </marker>
+        <marker id='implementation'
+                viewBox='0,0,40,40'
+                markerUnits='strokeWidth'
+                refX='40'
+                refY='20'
+                markerWidth='6'
+                markerHeight='6'
+                orient='auto'>
+            <path d='M40,20 l-40,-20 v40 Z'
+                  fill='#ffffff'
+                  stroke='#000000'
+                  stroke-width='3'/>
+        </marker>
+        <clipPath id='ID000001'>
+            <rect class='focusClass'
+                  height='634.000'
+                  width='1600.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='org.tquadrat.foundation.javacomposer.internal.CodeWriter'>
+            <g>
+                <g class='focusClass'
+                   clip-path='url(#ID000001)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='1600.000'
+                          height='634.000'
+                          class='focusClass'/>
+                    <line x1='0.000'
+                          y1='17.000'
+                          x2='1600.000'
+                          y2='17.000'
+                          class='separator'/>
+                    <text x='770.000'
+                          y='13.000'>CodeWriter</text>
+                    <line x1='0.000'
+                          y1='199.000'
+                          x2='1600.000'
+                          y2='199.000'
+                          class='separator'/>
+                    <text y='30.000'
+                          class='static final'>- NO_PACKAGE:java.lang.String</text>
+                    <text y='41.000'
+                          class='final'>- m_Composer:org.tquadrat.foundation.javacomposer.JavaComposer</text>
+                    <text y='52.000'>- m_CurrentlyEmittingComment:org.tquadrat.foundation.javacomposer.internal.CodeWriter.CommentType</text>
+                    <text y='63.000'
+                          class='final'>- m_ImportableTypes:java.util.Map&lt;java.lang.String,org.tquadrat.foundation.javacomposer.internal.ClassNameImpl&gt;</text>
+                    <text y='74.000'
+                          class='final'>- m_ImportedTypes:java.util.Map&lt;java.lang.String,org.tquadrat.foundation.javacomposer.internal.ClassNameImpl&gt;</text>
+                    <text y='85.000'
+                          class='final'>- m_Indent:java.lang.String</text>
+                    <text y='96.000'>- m_IndentLevel:int</text>
+                    <text y='107.000'
+                          class='final'>- m_Layout:org.tquadrat.foundation.javacomposer.Layout</text>
+                    <text y='118.000'
+                          class='final'>- m_LineWrapper:org.tquadrat.foundation.javacomposer.internal.LineWrapper</text>
+                    <text y='129.000'>- m_PackageName:java.lang.String</text>
+                    <text y='140.000'
+                          class='final'>- m_ReferencedNames:java.util.Collection&lt;java.lang.String&gt;</text>
+                    <text y='151.000'>- m_StatementLine:int</text>
+                    <text y='162.000'
+                          class='final'>- m_StaticImportClassNames:java.util.Set&lt;java.lang.String&gt;</text>
+                    <text y='173.000'
+                          class='final'>- m_StaticImports:java.util.Set&lt;java.lang.String&gt;</text>
+                    <text y='184.000'>- m_TrailingNewline:boolean</text>
+                    <text y='195.000'
+                          class='final'>- m_TypeSpecStack:java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl&gt;</text>
+                    <text x='5.000'
+                          y='212.000'>+ CodeWriter(out:java.lang.Appendable)</text>
+                    <text x='5.000'
+                          y='223.000'>+ CodeWriter(out:java.lang.Appendable,layout:org.tquadrat.foundation.javacomposer.Layout,staticImports:java.util.Set&lt;java.lang.String&gt;)</text>
+                    <text x='5.000'
+                          y='234.000'>+ CodeWriter(out:java.lang.Appendable,layout:org.tquadrat.foundation.javacomposer.Layout,indent:java.lang.String,importedTypes:java.util.Map&lt;java.lang.String,org.tquadrat.foundation.javacomposer.internal.ClassNameImpl&gt;,staticImports:java.util.Set&lt;java.lang.String&gt;)</text>
+                    <text x='5.000'
+                          y='245.000'>+ CodeWriter(composer:org.tquadrat.foundation.javacomposer.JavaComposer,out:java.lang.Appendable)</text>
+                    <text x='5.000'
+                          y='256.000'>+ CodeWriter(composer:org.tquadrat.foundation.javacomposer.JavaComposer,out:java.lang.Appendable,staticImports:java.util.Set&lt;java.lang.String&gt;)</text>
+                    <text x='5.000'
+                          y='267.000'>+ CodeWriter(composer:org.tquadrat.foundation.javacomposer.JavaComposer,out:java.lang.Appendable,importedTypes:java.util.Map&lt;java.lang.String,org.tquadrat.foundation.javacomposer.internal.ClassNameImpl&gt;,staticImports:java.util.Set&lt;java.lang.String&gt;)</text>
+                    <text x='5.000'
+                          y='278.000'>+ emit(s:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='289.000'>+ emit(format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='300.000'>+ emit(codeBlock:org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='311.000'>+ emitAndIndent(s:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='322.000'>+ emitAnnotations(annotations:java.lang.Iterable&lt;org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl&gt;,inline:boolean):void</text>
+                    <text x='5.000'
+                          y='333.000'>+ emitBlockComment(codeBlock:org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl):void</text>
+                    <text x='5.000'
+                          y='344.000'>- emitIndentation():void</text>
+                    <text x='5.000'
+                          y='355.000'>+ emitJavadoc(codeBlock:org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl):void</text>
+                    <text x='5.000'
+                          y='366.000'>+ emitLineComment(codeBlock:org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl):void</text>
+                    <text x='5.000'
+                          y='377.000'>- emitLiteral(o:java.lang.Object):void</text>
+                    <text x='5.000'
+                          y='388.000'>+ emitModifiers(modifiers:java.util.Collection&lt;javax.lang.model.element.Modifier&gt;,implicitModifiers:java.util.Collection&lt;javax.lang.model.element.Modifier&gt;):void</text>
+                    <text x='5.000'
+                          y='399.000'>+ emitModifiers(modifiers:java.util.Collection&lt;javax.lang.model.element.Modifier&gt;):void</text>
+                    <text x='5.000'
+                          y='410.000'>- emitStaticImportMember(canonical:java.lang.String,part:java.lang.String):boolean</text>
+                    <text x='5.000'
+                          y='421.000'>+ emitTypeVariables(typeVariables:java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl&gt;):void</text>
+                    <text x='5.000'
+                          y='432.000'>+ emitWrappingSpace():org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='443.000'
+                          class='static'>- extractMemberName(part:java.lang.String):java.lang.String</text>
+                    <text x='5.000'
+                          y='454.000'>- importableType(className:org.tquadrat.foundation.javacomposer.internal.ClassNameImpl):void</text>
+                    <text x='5.000'
+                          y='465.000'>+ importedTypes():java.util.Map&lt;java.lang.String,org.tquadrat.foundation.javacomposer.internal.ClassNameImpl&gt;</text>
+                    <text x='5.000'
+                          y='476.000'>+ indent():org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='487.000'>+ indent(levels:int):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='498.000'>+ layout():org.tquadrat.foundation.javacomposer.Layout</text>
+                    <text x='5.000'
+                          y='509.000'>+ lookupName(className:org.tquadrat.foundation.javacomposer.internal.ClassNameImpl):java.lang.String</text>
+                    <text x='5.000'
+                          y='520.000'>+ popPackage():org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='531.000'>+ popType():org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='542.000'>+ pushPackage(packageName:java.lang.String):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='553.000'>+ pushType(type:org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='564.000'>- resolve(simpleName:java.lang.String):java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.ClassNameImpl&gt;</text>
+                    <text x='5.000'
+                          y='575.000'>- stackClassName(stackDepth:int,simpleName:java.lang.String):org.tquadrat.foundation.javacomposer.internal.ClassNameImpl</text>
+                    <text x='5.000'
+                          y='586.000'>+ statementLine():int</text>
+                    <text x='5.000'
+                          y='597.000'>+ statementLine(statementLine:int):void</text>
+                    <text x='5.000'
+                          y='608.000'>+ suggestedImports():java.util.Map&lt;java.lang.String,org.tquadrat.foundation.javacomposer.internal.ClassNameImpl&gt;</text>
+                    <text x='5.000'
+                          y='619.000'>+ unindent():org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                    <text x='5.000'
+                          y='630.000'>+ unindent(levels:int):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000002'>
+            <rect class='externalClass'
+                  height='172.000'
+                  width='244.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='java.lang.Object'>
+            <g>
+                <g clip-path='url(#ID000002)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='244.000'
+                          height='172.000'
+                          class='externalClass'/>
+                    <line x1='0.000'
+                          y1='17.000'
+                          x2='244.000'
+                          y2='17.000'
+                          class='separator'/>
+                    <text x='104.000'
+                          y='13.000'>Object</text>
+                    <line x1='0.000'
+                          y1='34.000'
+                          x2='244.000'
+                          y2='34.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='30.000'/>
+                    <text x='5.000'
+                          y='47.000'>+ Object()</text>
+                    <text x='5.000'
+                          y='58.000'>+ getClass():java.lang.Class&lt;?&gt;</text>
+                    <text x='5.000'
+                          y='69.000'>+ hashCode():int</text>
+                    <text x='5.000'
+                          y='80.000'>+ equals(arg0:java.lang.Object):boolean</text>
+                    <text x='5.000'
+                          y='91.000'># clone():java.lang.Object</text>
+                    <text x='5.000'
+                          y='102.000'>+ toString():java.lang.String</text>
+                    <text x='5.000'
+                          y='113.000'>+ notify():void</text>
+                    <text x='5.000'
+                          y='124.000'>+ notifyAll():void</text>
+                    <text x='5.000'
+                          y='135.000'>+ wait():void</text>
+                    <text x='5.000'
+                          y='146.000'>+ wait(arg0:long):void</text>
+                    <text x='5.000'
+                          y='157.000'>+ wait(arg0:long,arg1:int):void</text>
+                    <text x='5.000'
+                          y='168.000'># finalize():void</text>
+                </g>
+            </g>
+        </symbol>
+    </defs>
+    <path class='inheritance'
+          d='M825.000,297.000 L825.000,197.000'
+          marker-end='url(#inheritance)'/>
+    <use x='703.000'
+         y='25.000'
+         xlink:href='#java.lang.Object'/>
+    <use x='25.000'
+         y='297.000'
+         xlink:href='#org.tquadrat.foundation.javacomposer.internal.CodeWriter'/>
+</svg>

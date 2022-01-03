@@ -1,0 +1,509 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:cc="http://creativecommons.org/ns#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:svg="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     version='1.1'
+     baseProfile='full'
+     width='1188.000'
+     height='1438.000'>
+    <defs>
+        <style><![CDATA[
+            line
+            {
+              stroke: black;
+            }
+            line.separator
+            {
+              stroke:       black;
+              stroke-width: 1;
+            }
+            marker
+            {
+              fill: white;
+            }
+            path
+            {
+              fill:   white;
+              stroke: black;
+            }
+            path.implementation
+            {
+              fill:             none;
+              stroke-dasharray: 5,5;
+              stroke-width:     3;
+            }
+            path.inheritance
+            {
+              fill:         none;
+              stroke-width: 3;
+            }
+            rect
+            {
+              fill:         none;
+              stroke:       black;
+              stroke-width: 2;
+            }
+            rect.externalClass
+            {
+              fill:         #D0D0D0;
+              fill-opacity: 0.8;
+            }
+            rect.focusClass
+            {
+              fill:         #FFFFF9;
+              fill-opacity: 0.8;
+            }
+            rect.otherClass
+            {
+              fill:         #F0E68C;
+              fill-opacity: 0.8;
+            }
+            rect.template
+            {
+              fill:             #FFFFFF;
+              fill-opacity:     1.0;
+              stroke-dasharray: 3,3;
+            }
+            text
+            {
+              font-family: monospace;
+              font-size:   10px;
+              font-weight: bold;
+            }
+            text.abstract
+            {
+              font-style: italic;
+            }
+            text.final
+            {
+              text-decoration: underline;
+            }
+            text.static
+            {
+              font-weight: normal;
+            }
+            text.stereotype
+            {
+              font-size:   8px;
+              font-weight: normal;
+            }
+            ]]></style>
+        <marker id='inheritance'
+                viewBox='0,0,40,40'
+                markerUnits='strokeWidth'
+                refX='40'
+                refY='20'
+                markerWidth='6'
+                markerHeight='6'
+                orient='auto'>
+            <path d='M40,20 l-40,-20 v40 Z'
+                  fill='#ffffff'
+                  stroke='#000000'
+                  stroke-width='3'/>
+        </marker>
+        <marker id='implementation'
+                viewBox='0,0,40,40'
+                markerUnits='strokeWidth'
+                refX='40'
+                refY='20'
+                markerWidth='6'
+                markerHeight='6'
+                orient='auto'>
+            <path d='M40,20 l-40,-20 v40 Z'
+                  fill='#ffffff'
+                  stroke='#000000'
+                  stroke-width='3'/>
+        </marker>
+        <clipPath id='ID000001'>
+            <rect class='focusClass'
+                  height='128.000'
+                  width='1114.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='org.tquadrat.foundation.javacomposer.internal.RecordSpecImpl'>
+            <g>
+                <g class='focusClass'
+                   clip-path='url(#ID000001)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='1114.000'
+                          height='128.000'
+                          class='focusClass'/>
+                    <line x1='0.000'
+                          y1='17.000'
+                          x2='1114.000'
+                          y2='17.000'
+                          class='separator'/>
+                    <text x='515.000'
+                          y='13.000'>RecordSpecImpl</text>
+                    <line x1='0.000'
+                          y1='34.000'
+                          x2='1114.000'
+                          y2='34.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='30.000'/>
+                    <text x='5.000'
+                          y='47.000'>+ RecordSpecImpl(builder:org.tquadrat.foundation.javacomposer.internal.RecordSpecImpl.BuilderImpl)</text>
+                    <text x='5.000'
+                          y='58.000'>- RecordSpecImpl(type:org.tquadrat.foundation.javacomposer.internal.RecordSpecImpl)</text>
+                    <text x='5.000'
+                          y='69.000'># createCopy():org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl</text>
+                    <text x='5.000'
+                          y='80.000'># emit4Foundation(codeWriter:org.tquadrat.foundation.javacomposer.internal.CodeWriter,enumName:java.lang.String,implicitModifiers:java.util.Set&lt;javax.lang.model.element.Modifier&gt;):void</text>
+                    <text x='5.000'
+                          y='91.000'># emit4JavaPoet(codeWriter:org.tquadrat.foundation.javacomposer.internal.CodeWriter,enumName:java.lang.String,implicitModifiers:java.util.Set&lt;javax.lang.model.element.Modifier&gt;):void</text>
+                    <text x='5.000'
+                          y='102.000'>+ equals(o:java.lang.Object):boolean</text>
+                    <text x='5.000'
+                          y='113.000'>+ hashCode():int</text>
+                    <text x='5.000'
+                          y='124.000'>+ toBuilder():org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000002'>
+            <rect class='otherClass'
+                  height='711.000'
+                  width='1114.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl'>
+            <g>
+                <g clip-path='url(#ID000002)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='1114.000'
+                          height='711.000'
+                          class='otherClass'/>
+                    <line x1='0.000'
+                          y1='28.000'
+                          x2='1114.000'
+                          y2='28.000'
+                          class='separator'/>
+                    <text x='542.600'
+                          y='13.000'
+                          class='stereotype'>&#xAB;Type&#xBB;</text>
+                    <text x='521.000'
+                          y='24.000'
+                          class='abstract'>TypeSpecImpl</text>
+                    <line x1='0.000'
+                          y1='243.000'
+                          x2='1114.000'
+                          y2='243.000'
+                          class='separator'/>
+                    <text y='41.000'
+                          class='static final'>+ NAME_ANONYMOUS_TYPE:java.lang.String</text>
+                    <text y='52.000'
+                          class='final'>- m_Annotations:java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl&gt;</text>
+                    <text y='63.000'
+                          class='final'>- m_CachedString:org.tquadrat.foundation.lang.Lazy&lt;java.lang.String&gt;</text>
+                    <text y='74.000'
+                          class='final'>- m_Composer:org.tquadrat.foundation.javacomposer.JavaComposer</text>
+                    <text y='85.000'
+                          class='final'>- m_FieldSpecs:java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.FieldSpecImpl&gt;</text>
+                    <text y='96.000'
+                          class='final'>- m_InitializerBlock:org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl</text>
+                    <text y='107.000'
+                          class='final'>- m_Javadoc:org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl</text>
+                    <text y='118.000'
+                          class='final'>- m_Kind:org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.Kind</text>
+                    <text y='129.000'
+                          class='final'>- m_MethodSpecs:java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl&gt;</text>
+                    <text y='140.000'
+                          class='final'>- m_Modifiers:java.util.Set&lt;javax.lang.model.element.Modifier&gt;</text>
+                    <text y='151.000'
+                          class='final'>- m_Name:java.util.Optional&lt;java.lang.String&gt;</text>
+                    <text y='162.000'
+                          class='final'>- m_OriginatingElements:java.util.List&lt;javax.lang.model.element.Element&gt;</text>
+                    <text y='173.000'
+                          class='final'>- m_StaticBlock:org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl</text>
+                    <text y='184.000'
+                          class='final'>- m_StaticImports:java.util.Set&lt;java.lang.String&gt;</text>
+                    <text y='195.000'
+                          class='final'>- m_SuperClass:org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
+                    <text y='206.000'
+                          class='final'>- m_SuperInterfaces:java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;</text>
+                    <text y='217.000'
+                          class='final'>- m_SuppressableWarnings:java.util.Set&lt;org.tquadrat.foundation.javacomposer.SuppressableWarnings&gt;</text>
+                    <text y='228.000'
+                          class='final'>- m_TypeSpecs:java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl&gt;</text>
+                    <text y='239.000'
+                          class='final'>- m_TypeVariables:java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl&gt;</text>
+                    <text x='5.000'
+                          y='256.000'># TypeSpecImpl(builder:org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl)</text>
+                    <text x='5.000'
+                          y='267.000'># TypeSpecImpl(type:org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl)</text>
+                    <text x='5.000'
+                          y='278.000'
+                          class='static'>+ annotationBuilder(className:org.tquadrat.foundation.javacomposer.ClassName):org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='289.000'
+                          class='static'>+ annotationBuilder(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='300.000'
+                          class='static'>+ anonymousClassBuilder(typeArguments:org.tquadrat.foundation.javacomposer.CodeBlock):org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='311.000'
+                          class='static'>+ anonymousClassBuilder(format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='322.000'>+ anonymousTypeArguments():java.util.Optional&lt;org.tquadrat.foundation.javacomposer.CodeBlock&gt;</text>
+                    <text x='5.000'
+                          y='333.000'
+                          class='static'>+ classBuilder(className:org.tquadrat.foundation.javacomposer.ClassName):org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='344.000'
+                          class='static'>+ classBuilder(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='355.000'
+                          class='static'># compareMethodSpecs(m1:org.tquadrat.foundation.javacomposer.MethodSpec,m2:org.tquadrat.foundation.javacomposer.MethodSpec):int</text>
+                    <text x='5.000'
+                          y='366.000'
+                          class='abstract'># createCopy():org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl</text>
+                    <text x='5.000'
+                          y='377.000'>+ emit(codeWriter:org.tquadrat.foundation.javacomposer.internal.CodeWriter,enumName:java.lang.String,implicitModifiers:java.util.Set&lt;javax.lang.model.element.Modifier&gt;):void</text>
+                    <text x='5.000'
+                          y='388.000'
+                          class='abstract'># emit4Foundation(codeWriter:org.tquadrat.foundation.javacomposer.internal.CodeWriter,enumName:java.lang.String,implicitModifiers:java.util.Set&lt;javax.lang.model.element.Modifier&gt;):void</text>
+                    <text x='5.000'
+                          y='399.000'
+                          class='abstract'># emit4JavaPoet(codeWriter:org.tquadrat.foundation.javacomposer.internal.CodeWriter,enumName:java.lang.String,implicitModifiers:java.util.Set&lt;javax.lang.model.element.Modifier&gt;):void</text>
+                    <text x='5.000'
+                          y='410.000'
+                          class='static'>+ enumBuilder(className:org.tquadrat.foundation.javacomposer.ClassName):org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='421.000'
+                          class='static'>+ enumBuilder(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='432.000'
+                          class='abstract'>+ equals(o:java.lang.Object):boolean</text>
+                    <text x='5.000'
+                          y='443.000'># getAnnotations():java.util.Collection&lt;org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl&gt;</text>
+                    <text x='5.000'
+                          y='454.000'># getEnumConstants():java.util.Map&lt;java.lang.String,org.tquadrat.foundation.javacomposer.internal.ClassSpecImpl&gt;</text>
+                    <text x='5.000'
+                          y='465.000'>+ getFactory():org.tquadrat.foundation.javacomposer.JavaComposer</text>
+                    <text x='5.000'
+                          y='476.000'># getFieldSpecs():java.util.Collection&lt;org.tquadrat.foundation.javacomposer.internal.FieldSpecImpl&gt;</text>
+                    <text x='5.000'
+                          y='487.000'># getInitializerBlock():org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl</text>
+                    <text x='5.000'
+                          y='498.000'># getJavadoc():org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl</text>
+                    <text x='5.000'
+                          y='509.000'># getMethodSpecs():java.util.Collection&lt;org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl&gt;</text>
+                    <text x='5.000'
+                          y='520.000'># getStaticBlock():org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl</text>
+                    <text x='5.000'
+                          y='531.000'>+ getStaticImports():java.util.Set&lt;java.lang.String&gt;</text>
+                    <text x='5.000'
+                          y='542.000'># getSuperClass():org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
+                    <text x='5.000'
+                          y='553.000'># getSuperInterfaces():java.util.List&lt;? extends org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;</text>
+                    <text x='5.000'
+                          y='564.000'>+ getSuppressableWarnings():java.util.Collection&lt;org.tquadrat.foundation.javacomposer.SuppressableWarnings&gt;</text>
+                    <text x='5.000'
+                          y='575.000'>+ getTypeVariables():java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl&gt;</text>
+                    <text x='5.000'
+                          y='586.000'
+                          class='abstract'>+ hashCode():int</text>
+                    <text x='5.000'
+                          y='597.000'>+ hasModifier(modifier:javax.lang.model.element.Modifier):boolean</text>
+                    <text x='5.000'
+                          y='608.000'>- initializeCachedString():java.lang.String</text>
+                    <text x='5.000'
+                          y='619.000'>+ innerClasses():java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeSpec&gt;</text>
+                    <text x='5.000'
+                          y='630.000'
+                          class='static'>+ interfaceBuilder(className:org.tquadrat.foundation.javacomposer.ClassName):org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='641.000'
+                          class='static'>+ interfaceBuilder(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='652.000'>+ modifiers():java.util.Set&lt;javax.lang.model.element.Modifier&gt;</text>
+                    <text x='5.000'
+                          y='663.000'>+ name():java.util.Optional&lt;java.lang.String&gt;</text>
+                    <text x='5.000'
+                          y='674.000'>+ originatingElements():java.util.List&lt;javax.lang.model.element.Element&gt;</text>
+                    <text x='5.000'
+                          y='685.000'
+                          class='abstract'>+ toBuilder():org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl.BuilderImpl</text>
+                    <text x='5.000'
+                          y='696.000'>+ toString():java.lang.String</text>
+                    <text x='5.000'
+                          y='707.000'>+ typeSpecs():java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl&gt;</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000003'>
+            <rect class='externalClass'
+                  height='172.000'
+                  width='244.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='java.lang.Object'>
+            <g>
+                <g clip-path='url(#ID000003)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='244.000'
+                          height='172.000'
+                          class='externalClass'/>
+                    <line x1='0.000'
+                          y1='17.000'
+                          x2='244.000'
+                          y2='17.000'
+                          class='separator'/>
+                    <text x='104.000'
+                          y='13.000'>Object</text>
+                    <line x1='0.000'
+                          y1='34.000'
+                          x2='244.000'
+                          y2='34.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='30.000'/>
+                    <text x='5.000'
+                          y='47.000'>+ Object()</text>
+                    <text x='5.000'
+                          y='58.000'>+ getClass():java.lang.Class&lt;?&gt;</text>
+                    <text x='5.000'
+                          y='69.000'>+ hashCode():int</text>
+                    <text x='5.000'
+                          y='80.000'>+ equals(arg0:java.lang.Object):boolean</text>
+                    <text x='5.000'
+                          y='91.000'># clone():java.lang.Object</text>
+                    <text x='5.000'
+                          y='102.000'>+ toString():java.lang.String</text>
+                    <text x='5.000'
+                          y='113.000'>+ notify():void</text>
+                    <text x='5.000'
+                          y='124.000'>+ notifyAll():void</text>
+                    <text x='5.000'
+                          y='135.000'>+ wait():void</text>
+                    <text x='5.000'
+                          y='146.000'>+ wait(arg0:long):void</text>
+                    <text x='5.000'
+                          y='157.000'>+ wait(arg0:long,arg1:int):void</text>
+                    <text x='5.000'
+                          y='168.000'># finalize():void</text>
+                </g>
+            </g>
+        </symbol>
+        <clipPath id='ID000004'>
+            <rect class='otherClass'
+                  height='249.000'
+                  width='844.000'
+                  x='0.000'
+                  y='0.000'/>
+        </clipPath>
+        <symbol id='org.tquadrat.foundation.javacomposer.TypeSpec'>
+            <g>
+                <g clip-path='url(#ID000004)'>
+                    <rect x='0.000'
+                          y='0.000'
+                          width='844.000'
+                          height='249.000'
+                          class='otherClass'/>
+                    <line x1='0.000'
+                          y1='28.000'
+                          x2='844.000'
+                          y2='28.000'
+                          class='separator'/>
+                    <text x='395.600'
+                          y='13.000'
+                          class='stereotype'>&#xAB;Interface&#xBB;</text>
+                    <text x='398.000'
+                          y='24.000'
+                          class='abstract'>TypeSpec</text>
+                    <line x1='0.000'
+                          y1='45.000'
+                          x2='844.000'
+                          y2='45.000'
+                          class='separator'/>
+                    <text x='5.000'
+                          y='41.000'/>
+                    <text x='5.000'
+                          y='58.000'
+                          class='abstract static'>+ annotationBuilder(className:org.tquadrat.foundation.javacomposer.ClassName):org.tquadrat.foundation.javacomposer.TypeSpec.Builder</text>
+                    <text x='5.000'
+                          y='69.000'
+                          class='abstract static'>+ annotationBuilder(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.TypeSpec.Builder</text>
+                    <text x='5.000'
+                          y='80.000'
+                          class='abstract static'>+ anonymousClassBuilder(typeArguments:org.tquadrat.foundation.javacomposer.CodeBlock):org.tquadrat.foundation.javacomposer.TypeSpec.Builder</text>
+                    <text x='5.000'
+                          y='91.000'
+                          class='abstract static'>+ anonymousClassBuilder(format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.TypeSpec.Builder</text>
+                    <text x='5.000'
+                          y='102.000'
+                          class='abstract static'>+ classBuilder(className:org.tquadrat.foundation.javacomposer.ClassName):org.tquadrat.foundation.javacomposer.TypeSpec.Builder</text>
+                    <text x='5.000'
+                          y='113.000'
+                          class='abstract static'>+ classBuilder(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.TypeSpec.Builder</text>
+                    <text x='5.000'
+                          y='124.000'
+                          class='abstract static'>+ enumBuilder(className:org.tquadrat.foundation.javacomposer.ClassName):org.tquadrat.foundation.javacomposer.TypeSpec.Builder</text>
+                    <text x='5.000'
+                          y='135.000'
+                          class='abstract static'>+ enumBuilder(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.TypeSpec.Builder</text>
+                    <text x='5.000'
+                          y='146.000'
+                          class='abstract'>+ equals(o:java.lang.Object):boolean</text>
+                    <text x='5.000'
+                          y='157.000'
+                          class='abstract'>+ hashCode():int</text>
+                    <text x='5.000'
+                          y='168.000'
+                          class='abstract'>+ hasModifier(modifier:javax.lang.model.element.Modifier):boolean</text>
+                    <text x='5.000'
+                          y='179.000'
+                          class='abstract'>+ innerClasses():java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeSpec&gt;</text>
+                    <text x='5.000'
+                          y='190.000'
+                          class='abstract static'>+ interfaceBuilder(className:org.tquadrat.foundation.javacomposer.ClassName):org.tquadrat.foundation.javacomposer.TypeSpec.Builder</text>
+                    <text x='5.000'
+                          y='201.000'
+                          class='abstract static'>+ interfaceBuilder(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.TypeSpec.Builder</text>
+                    <text x='5.000'
+                          y='212.000'
+                          class='abstract'>+ name():java.util.Optional&lt;java.lang.String&gt;</text>
+                    <text x='5.000'
+                          y='223.000'
+                          class='abstract'>+ originatingElements():java.util.List&lt;javax.lang.model.element.Element&gt;</text>
+                    <text x='5.000'
+                          y='234.000'
+                          class='abstract'>+ toBuilder():org.tquadrat.foundation.javacomposer.TypeSpec.Builder</text>
+                    <text x='5.000'
+                          y='245.000'
+                          class='abstract'>+ toString():java.lang.String</text>
+                </g>
+            </g>
+        </symbol>
+    </defs>
+    <path class='inheritance'
+          d='M594.000,1185.000 L594.000,1085.000'
+          marker-end='url(#inheritance)'/>
+    <path class='inheritance'
+          d='M569.000,374.000 c0.000,-162.000,-422.000,0.000,-422.000,-162.000 v-15'
+          marker-end='url(#inheritance)'/>
+    <path class='implementation'
+          d='M619.000,374.000 c0.000,-85.000,122.000,0.000,122.000,-85.000 v-15'
+          marker-end='url(#implementation)'/>
+    <use x='25.000'
+         y='25.000'
+         xlink:href='#java.lang.Object'/>
+    <use x='319.000'
+         y='25.000'
+         xlink:href='#org.tquadrat.foundation.javacomposer.TypeSpec'/>
+    <use x='37.000'
+         y='374.000'
+         xlink:href='#org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl'/>
+    <use x='37.000'
+         y='1185.000'
+         xlink:href='#org.tquadrat.foundation.javacomposer.internal.RecordSpecImpl'/>
+</svg>
