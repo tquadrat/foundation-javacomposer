@@ -1,5 +1,5 @@
-# tquadrat *Foundation Library*
-## `foundation-javacomposer`
+This library allows the generation of Java source code.
+
 ### Documentation
 
-- [Javadoc Reference](https://htmlpreview.github.io/?https://github.com/tquadrat/foundation-javacomposer/blob/master/javadoc/index.html)
+- [Javadoc Reference](https://tquadrat.github.io/foundation-javacomposer/javadoc/index.html)
