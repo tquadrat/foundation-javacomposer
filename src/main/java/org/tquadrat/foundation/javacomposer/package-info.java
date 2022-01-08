@@ -17,7 +17,7 @@
  *  <p><i>JavaComposer</i> is a Java toolkit for the generation of Java source
  *  code. Basically, this is a fork of version&nbsp;1.11.1 of <i>JavaPoet</i>
  *  that was originally developed by Square, Inc. (see
- *  {@href #section_License below}.
+ *  {@href #section_License below}).
  *  Refer to
  *  {@href https://github.com/square/javapoet}
  *  for the original software.</p>
@@ -102,12 +102,13 @@
  *  expression class, no statement class or syntax tree nodes. Instead,
  *  JavaComposer uses strings for code blocks:</p>
  *  <div class="source-container"><pre>  MethodSpec main = MethodSpec.methodBuilder( "main" )
- *      .addCode( """
- *                int total = 0;
- *                for (int i = 0; i &lt; 10; i++) {
- *                    total += i;
- *                }
- *                """ )
+ *      .addCode(
+ *          """
+ *          int total = 0;
+ *          for (int i = 0; i &lt; 10; i++) {
+ *              total += i;
+ *          }
+ *          """ )
  *      .build();</pre></div>
  *  <p>Which generates this:</p>
  *  <div class="source-container"><pre>  void main() {
@@ -123,7 +124,8 @@
  *  {@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder#beginControlFlow(String,Object[]) beginControlFlow()}
  *  and
  *  {@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder#endControlFlow() endControlFlow()}
- *  which are used together for braces, newlines, and indentation:</p>
+ *  which are used together for braces, newlines, and indentation. The output
+ *  from the code below is the same as above:</p>
  *  <div class="source-container"><pre>  MethodSpec main = MethodSpec.methodBuilder( "main" )
  *      .addStatement( "int total = 0" )
  *      .beginControlFlow( "for (int i = 0; i &lt; 10; i++)" )

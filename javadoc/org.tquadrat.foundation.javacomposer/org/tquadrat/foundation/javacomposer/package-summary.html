@@ -72,7 +72,7 @@ loadScripts(document, 'script');</script>
 <div class="block"><p><i>JavaComposer</i> is a Java toolkit for the generation of Java source
   code. Basically, this is a fork of version&nbsp;1.11.1 of <i>JavaPoet</i>
   that was originally developed by Square, Inc. (see
-  <a href="#section_License">below</a>.
+  <a href="#section_License">below</a>).
   Refer to
   <a href="https://github.com/square/javapoet"><code>https://github.com/square/javapoet</code></a>
   for the original software.</p>
@@ -157,12 +157,13 @@ loadScripts(document, 'script');</script>
   expression class, no statement class or syntax tree nodes. Instead,
   JavaComposer uses strings for code blocks:</p>
   <div class="source-container"><pre>  MethodSpec main = MethodSpec.methodBuilder( "main" )
-      .addCode( """
-                int total = 0;
-                for (int i = 0; i &lt; 10; i++) {
-                    total += i;
-                }
-                """ )
+      .addCode(
+          """
+          int total = 0;
+          for (int i = 0; i &lt; 10; i++) {
+              total += i;
+          }
+          """ )
       .build();</pre></div>
   <p>Which generates this:</p>
   <div class="source-container"><pre>  void main() {
@@ -178,7 +179,8 @@ loadScripts(document, 'script');</script>
   <a href="MethodSpec.Builder.html#beginControlFlow(java.lang.String,java.lang.Object...)"><code>beginControlFlow()</code></a>
   and
   <a href="MethodSpec.Builder.html#endControlFlow()"><code>endControlFlow()</code></a>
-  which are used together for braces, newlines, and indentation:</p>
+  which are used together for braces, newlines, and indentation. The output
+  from the code below is the same as above:</p>
   <div class="source-container"><pre>  MethodSpec main = MethodSpec.methodBuilder( "main" )
       .addStatement( "int total = 0" )
       .beginControlFlow( "for (int i = 0; i &lt; 10; i++)" )
