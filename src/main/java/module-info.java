@@ -30,7 +30,6 @@ module org.tquadrat.foundation.javacomposer
     requires transitive java.compiler;
 
     //---* The foundation modules *--------------------------------------------
-    requires transitive org.tquadrat.foundation.base;
     requires transitive org.tquadrat.foundation.util;
 
     //---* The exports *-------------------------------------------------------
