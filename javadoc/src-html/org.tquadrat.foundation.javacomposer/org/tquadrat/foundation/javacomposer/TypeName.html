@@ -98,12 +98,12 @@
 <span class="source-line-no">085</span><span id="line-85"> *</span>
 <span class="source-line-no">086</span><span id="line-86"> *  @author Square,Inc.</span>
 <span class="source-line-no">087</span><span id="line-87"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">088</span><span id="line-88"> *  @version $Id: TypeName.java 943 2021-12-21 01:34:32Z tquadrat $</span>
+<span class="source-line-no">088</span><span id="line-88"> *  @version $Id: TypeName.java 997 2022-01-26 14:55:05Z tquadrat $</span>
 <span class="source-line-no">089</span><span id="line-89"> *  @since 0.0.5</span>
 <span class="source-line-no">090</span><span id="line-90"> *</span>
 <span class="source-line-no">091</span><span id="line-91"> *  @UMLGraph.link</span>
 <span class="source-line-no">092</span><span id="line-92"> */</span>
-<span class="source-line-no">093</span><span id="line-93">@ClassVersion( sourceVersion = "$Id: TypeName.java 943 2021-12-21 01:34:32Z tquadrat $" )</span>
+<span class="source-line-no">093</span><span id="line-93">@ClassVersion( sourceVersion = "$Id: TypeName.java 997 2022-01-26 14:55:05Z tquadrat $" )</span>
 <span class="source-line-no">094</span><span id="line-94">@API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">095</span><span id="line-95">public sealed interface TypeName</span>
 <span class="source-line-no">096</span><span id="line-96">    permits ArrayTypeName, ClassName, ParameterizedTypeName, TypeVariableName, WildcardTypeName, TypeNameImpl</span>
@@ -199,7 +199,7 @@
 <span class="source-line-no">186</span><span id="line-186"></span>
 <span class="source-line-no">187</span><span id="line-187">        //---* Done *----------------------------------------------------------</span>
 <span class="source-line-no">188</span><span id="line-188">        return retValue;</span>
-<span class="source-line-no">189</span><span id="line-189">    }   //  get()</span>
+<span class="source-line-no">189</span><span id="line-189">    }   //  from()</span>
 <span class="source-line-no">190</span><span id="line-190"></span>
 <span class="source-line-no">191</span><span id="line-191">    /**</span>
 <span class="source-line-no">192</span><span id="line-192">     *  Returns a type name equivalent to that of the given</span>
@@ -225,89 +225,88 @@
 <span class="source-line-no">212</span><span id="line-212">     *      instead.</span>
 <span class="source-line-no">213</span><span id="line-213">     */</span>
 <span class="source-line-no">214</span><span id="line-214">    @Deprecated( since = "0.2.0", forRemoval = true )</span>
-<span class="source-line-no">215</span><span id="line-215">    @SuppressWarnings( "ClassReferencesSubclass" )</span>
-<span class="source-line-no">216</span><span id="line-216">    @API( status = DEPRECATED, since = "0.0.5" )</span>
-<span class="source-line-no">217</span><span id="line-217">    public static TypeName get( final TypeMirror mirror ) { return from( mirror ); }</span>
-<span class="source-line-no">218</span><span id="line-218"></span>
-<span class="source-line-no">219</span><span id="line-219">    /**</span>
-<span class="source-line-no">220</span><span id="line-220">     *  Returns a type name equivalent to that of the given</span>
-<span class="source-line-no">221</span><span id="line-221">     *  {@link Type}</span>
-<span class="source-line-no">222</span><span id="line-222">     *  instance.</span>
-<span class="source-line-no">223</span><span id="line-223">     *</span>
-<span class="source-line-no">224</span><span id="line-224">     *  @param  type    The type.</span>
-<span class="source-line-no">225</span><span id="line-225">     *  @return The respective type name for the given {@code Type} instance.</span>
-<span class="source-line-no">226</span><span id="line-226">     *</span>
-<span class="source-line-no">227</span><span id="line-227">     *  @deprecated Use</span>
-<span class="source-line-no">228</span><span id="line-228">     *      {@link #from(Type)}</span>
-<span class="source-line-no">229</span><span id="line-229">     *      instead.</span>
-<span class="source-line-no">230</span><span id="line-230">     */</span>
-<span class="source-line-no">231</span><span id="line-231">    @Deprecated( since = "0.2.0", forRemoval = true )</span>
-<span class="source-line-no">232</span><span id="line-232">    @API( status = DEPRECATED, since = "0.0.5" )</span>
-<span class="source-line-no">233</span><span id="line-233">    public static TypeName get( final Type type ) { return from( type ); }</span>
-<span class="source-line-no">234</span><span id="line-234"></span>
-<span class="source-line-no">235</span><span id="line-235">    /**</span>
-<span class="source-line-no">236</span><span id="line-236">     *  {@inheritDoc}</span>
-<span class="source-line-no">237</span><span id="line-237">     */</span>
-<span class="source-line-no">238</span><span id="line-238">    @Override</span>
-<span class="source-line-no">239</span><span id="line-239">    public int hashCode();</span>
-<span class="source-line-no">240</span><span id="line-240"></span>
-<span class="source-line-no">241</span><span id="line-241">    /**</span>
-<span class="source-line-no">242</span><span id="line-242">     *  Checks whether this type name is annotated.</span>
-<span class="source-line-no">243</span><span id="line-243">     *</span>
-<span class="source-line-no">244</span><span id="line-244">     *  @return {@code true} if it is annotated, {@code false} otherwise.</span>
-<span class="source-line-no">245</span><span id="line-245">     */</span>
-<span class="source-line-no">246</span><span id="line-246">    public boolean isAnnotated();</span>
-<span class="source-line-no">247</span><span id="line-247"></span>
-<span class="source-line-no">248</span><span id="line-248">    /**</span>
-<span class="source-line-no">249</span><span id="line-249">     *  Checks whether this type name represents a box primitive type.</span>
-<span class="source-line-no">250</span><span id="line-250">     *</span>
-<span class="source-line-no">251</span><span id="line-251">     *  @return {@code true} if this is a boxed primitive type like</span>
-<span class="source-line-no">252</span><span id="line-252">     *      {@link Integer}.</span>
-<span class="source-line-no">253</span><span id="line-253">     *      {@code false} for all other types including unboxed primitives and</span>
-<span class="source-line-no">254</span><span id="line-254">     *      {@link java.lang.Void}.</span>
-<span class="source-line-no">255</span><span id="line-255">     */</span>
-<span class="source-line-no">256</span><span id="line-256">    public boolean isBoxedPrimitive();</span>
-<span class="source-line-no">257</span><span id="line-257"></span>
-<span class="source-line-no">258</span><span id="line-258">    /**</span>
-<span class="source-line-no">259</span><span id="line-259">     *  Checks whether this type name represents a primitive type.</span>
-<span class="source-line-no">260</span><span id="line-260">     *</span>
-<span class="source-line-no">261</span><span id="line-261">     *  @return {@code true} if this is a primitive type like {@code int}.</span>
-<span class="source-line-no">262</span><span id="line-262">     *      {@code false} for all other types including boxed primitives and</span>
-<span class="source-line-no">263</span><span id="line-263">     *      {@code void}.</span>
-<span class="source-line-no">264</span><span id="line-264">     */</span>
-<span class="source-line-no">265</span><span id="line-265">    public boolean isPrimitive();</span>
-<span class="source-line-no">266</span><span id="line-266"></span>
-<span class="source-line-no">267</span><span id="line-267">    /**</span>
-<span class="source-line-no">268</span><span id="line-268">     *  {@inheritDoc}</span>
-<span class="source-line-no">269</span><span id="line-269">     */</span>
-<span class="source-line-no">270</span><span id="line-270">    @Override</span>
-<span class="source-line-no">271</span><span id="line-271">    public String toString();</span>
-<span class="source-line-no">272</span><span id="line-272"></span>
-<span class="source-line-no">273</span><span id="line-273">    /**</span>
-<span class="source-line-no">274</span><span id="line-274">     *  Returns an unboxed type if this is a boxed primitive type (like</span>
-<span class="source-line-no">275</span><span id="line-275">     *  {@code int} for</span>
-<span class="source-line-no">276</span><span id="line-276">     *  {@link Integer})</span>
-<span class="source-line-no">277</span><span id="line-277">     *  or {@code Void}. Returns this type if it is already unboxed.</span>
-<span class="source-line-no">278</span><span id="line-278">     *</span>
-<span class="source-line-no">279</span><span id="line-279">     *  @return The unboxed type if applicable, or this.</span>
-<span class="source-line-no">280</span><span id="line-280">     *  @throws UnsupportedOperationException   This type isn't eligible for</span>
-<span class="source-line-no">281</span><span id="line-281">     *      unboxing.</span>
-<span class="source-line-no">282</span><span id="line-282">     */</span>
-<span class="source-line-no">283</span><span id="line-283">    public TypeName unbox();</span>
-<span class="source-line-no">284</span><span id="line-284"></span>
-<span class="source-line-no">285</span><span id="line-285">    /**</span>
-<span class="source-line-no">286</span><span id="line-286">     *  Creates a new instance for an implementation of {@code TypeName} as a</span>
-<span class="source-line-no">287</span><span id="line-287">     *  copy of this one, but without any annotations.</span>
-<span class="source-line-no">288</span><span id="line-288">     *</span>
-<span class="source-line-no">289</span><span id="line-289">     *  @return The new instance.</span>
-<span class="source-line-no">290</span><span id="line-290">     */</span>
-<span class="source-line-no">291</span><span id="line-291">    public TypeName withoutAnnotations();</span>
-<span class="source-line-no">292</span><span id="line-292">}</span>
-<span class="source-line-no">293</span><span id="line-293">//  interface TypeName</span>
-<span class="source-line-no">294</span><span id="line-294"></span>
-<span class="source-line-no">295</span><span id="line-295">/*</span>
-<span class="source-line-no">296</span><span id="line-296"> *  End of File</span>
-<span class="source-line-no">297</span><span id="line-297"> */</span>
+<span class="source-line-no">215</span><span id="line-215">    @API( status = DEPRECATED, since = "0.0.5" )</span>
+<span class="source-line-no">216</span><span id="line-216">    public static TypeName get( final TypeMirror mirror ) { return from( mirror ); }</span>
+<span class="source-line-no">217</span><span id="line-217"></span>
+<span class="source-line-no">218</span><span id="line-218">    /**</span>
+<span class="source-line-no">219</span><span id="line-219">     *  Returns a type name equivalent to that of the given</span>
+<span class="source-line-no">220</span><span id="line-220">     *  {@link Type}</span>
+<span class="source-line-no">221</span><span id="line-221">     *  instance.</span>
+<span class="source-line-no">222</span><span id="line-222">     *</span>
+<span class="source-line-no">223</span><span id="line-223">     *  @param  type    The type.</span>
+<span class="source-line-no">224</span><span id="line-224">     *  @return The respective type name for the given {@code Type} instance.</span>
+<span class="source-line-no">225</span><span id="line-225">     *</span>
+<span class="source-line-no">226</span><span id="line-226">     *  @deprecated Use</span>
+<span class="source-line-no">227</span><span id="line-227">     *      {@link #from(Type)}</span>
+<span class="source-line-no">228</span><span id="line-228">     *      instead.</span>
+<span class="source-line-no">229</span><span id="line-229">     */</span>
+<span class="source-line-no">230</span><span id="line-230">    @Deprecated( since = "0.2.0", forRemoval = true )</span>
+<span class="source-line-no">231</span><span id="line-231">    @API( status = DEPRECATED, since = "0.0.5" )</span>
+<span class="source-line-no">232</span><span id="line-232">    public static TypeName get( final Type type ) { return from( type ); }</span>
+<span class="source-line-no">233</span><span id="line-233"></span>
+<span class="source-line-no">234</span><span id="line-234">    /**</span>
+<span class="source-line-no">235</span><span id="line-235">     *  {@inheritDoc}</span>
+<span class="source-line-no">236</span><span id="line-236">     */</span>
+<span class="source-line-no">237</span><span id="line-237">    @Override</span>
+<span class="source-line-no">238</span><span id="line-238">    public int hashCode();</span>
+<span class="source-line-no">239</span><span id="line-239"></span>
+<span class="source-line-no">240</span><span id="line-240">    /**</span>
+<span class="source-line-no">241</span><span id="line-241">     *  Checks whether this type name is annotated.</span>
+<span class="source-line-no">242</span><span id="line-242">     *</span>
+<span class="source-line-no">243</span><span id="line-243">     *  @return {@code true} if it is annotated, {@code false} otherwise.</span>
+<span class="source-line-no">244</span><span id="line-244">     */</span>
+<span class="source-line-no">245</span><span id="line-245">    public boolean isAnnotated();</span>
+<span class="source-line-no">246</span><span id="line-246"></span>
+<span class="source-line-no">247</span><span id="line-247">    /**</span>
+<span class="source-line-no">248</span><span id="line-248">     *  Checks whether this type name represents a box primitive type.</span>
+<span class="source-line-no">249</span><span id="line-249">     *</span>
+<span class="source-line-no">250</span><span id="line-250">     *  @return {@code true} if this is a boxed primitive type like</span>
+<span class="source-line-no">251</span><span id="line-251">     *      {@link Integer}.</span>
+<span class="source-line-no">252</span><span id="line-252">     *      {@code false} for all other types including unboxed primitives and</span>
+<span class="source-line-no">253</span><span id="line-253">     *      {@link java.lang.Void}.</span>
+<span class="source-line-no">254</span><span id="line-254">     */</span>
+<span class="source-line-no">255</span><span id="line-255">    public boolean isBoxedPrimitive();</span>
+<span class="source-line-no">256</span><span id="line-256"></span>
+<span class="source-line-no">257</span><span id="line-257">    /**</span>
+<span class="source-line-no">258</span><span id="line-258">     *  Checks whether this type name represents a primitive type.</span>
+<span class="source-line-no">259</span><span id="line-259">     *</span>
+<span class="source-line-no">260</span><span id="line-260">     *  @return {@code true} if this is a primitive type like {@code int}.</span>
+<span class="source-line-no">261</span><span id="line-261">     *      {@code false} for all other types including boxed primitives and</span>
+<span class="source-line-no">262</span><span id="line-262">     *      {@code void}.</span>
+<span class="source-line-no">263</span><span id="line-263">     */</span>
+<span class="source-line-no">264</span><span id="line-264">    public boolean isPrimitive();</span>
+<span class="source-line-no">265</span><span id="line-265"></span>
+<span class="source-line-no">266</span><span id="line-266">    /**</span>
+<span class="source-line-no">267</span><span id="line-267">     *  {@inheritDoc}</span>
+<span class="source-line-no">268</span><span id="line-268">     */</span>
+<span class="source-line-no">269</span><span id="line-269">    @Override</span>
+<span class="source-line-no">270</span><span id="line-270">    public String toString();</span>
+<span class="source-line-no">271</span><span id="line-271"></span>
+<span class="source-line-no">272</span><span id="line-272">    /**</span>
+<span class="source-line-no">273</span><span id="line-273">     *  Returns an unboxed type if this is a boxed primitive type (like</span>
+<span class="source-line-no">274</span><span id="line-274">     *  {@code int} for</span>
+<span class="source-line-no">275</span><span id="line-275">     *  {@link Integer})</span>
+<span class="source-line-no">276</span><span id="line-276">     *  or {@code Void}. Returns this type if it is already unboxed.</span>
+<span class="source-line-no">277</span><span id="line-277">     *</span>
+<span class="source-line-no">278</span><span id="line-278">     *  @return The unboxed type if applicable, or this.</span>
+<span class="source-line-no">279</span><span id="line-279">     *  @throws UnsupportedOperationException   This type isn't eligible for</span>
+<span class="source-line-no">280</span><span id="line-280">     *      unboxing.</span>
+<span class="source-line-no">281</span><span id="line-281">     */</span>
+<span class="source-line-no">282</span><span id="line-282">    public TypeName unbox();</span>
+<span class="source-line-no">283</span><span id="line-283"></span>
+<span class="source-line-no">284</span><span id="line-284">    /**</span>
+<span class="source-line-no">285</span><span id="line-285">     *  Creates a new instance for an implementation of {@code TypeName} as a</span>
+<span class="source-line-no">286</span><span id="line-286">     *  copy of this one, but without any annotations.</span>
+<span class="source-line-no">287</span><span id="line-287">     *</span>
+<span class="source-line-no">288</span><span id="line-288">     *  @return The new instance.</span>
+<span class="source-line-no">289</span><span id="line-289">     */</span>
+<span class="source-line-no">290</span><span id="line-290">    public TypeName withoutAnnotations();</span>
+<span class="source-line-no">291</span><span id="line-291">}</span>
+<span class="source-line-no">292</span><span id="line-292">//  interface TypeName</span>
+<span class="source-line-no">293</span><span id="line-293"></span>
+<span class="source-line-no">294</span><span id="line-294">/*</span>
+<span class="source-line-no">295</span><span id="line-295"> *  End of File</span>
+<span class="source-line-no">296</span><span id="line-296"> */</span>
 
 
 

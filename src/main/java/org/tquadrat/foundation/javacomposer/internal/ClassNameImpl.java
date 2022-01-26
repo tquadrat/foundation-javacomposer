@@ -55,13 +55,13 @@ import org.tquadrat.foundation.javacomposer.ClassName;
  *  for a fully-qualified class name for top-level and member classes.
  *
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ClassNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: ClassNameImpl.java 997 2022-01-26 14:55:05Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@SuppressWarnings( {"ClassWithTooManyFields", "ClassWithTooManyMethods", "ComparableImplementedButEqualsNotOverridden"} )
-@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@SuppressWarnings( {"ClassWithTooManyFields", "ComparableImplementedButEqualsNotOverridden"} )
+@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 997 2022-01-26 14:55:05Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ClassNameImpl extends TypeNameImpl implements ClassName
 {
@@ -215,7 +215,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
         m_PackageName = requireNonNullArgument( packageName, "packageName" ).toString().intern();
         m_EnclosingClassName = requireNonNullArgument( enclosingClassName, "enclosingClassName" );
         m_SimpleName = requireNotEmptyArgument( simpleName, "simpleName" ).toString().intern();
-        //noinspection AccessingNonPublicFieldOfAnotherObject
         m_CanonicalName = enclosingClassName.map( className -> (className.m_CanonicalName + '.' + m_SimpleName) )
             .orElseGet( () ->
                 m_PackageName.isEmpty()
@@ -316,7 +315,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
             {
                 //---* An enclosing class was already emitted *----------------
                 retValue.emit( "." );
-                //noinspection AccessingNonPublicFieldOfAnotherObject
                 simpleName = className.m_SimpleName;
 
             }
@@ -369,7 +367,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *
      *  @return The enclosing classes.
      */
-    @SuppressWarnings( "AccessingNonPublicFieldOfAnotherObject" )
     private final List<ClassNameImpl> enclosingClasses()
     {
         final List<ClassNameImpl> retValue = new ArrayList<>();

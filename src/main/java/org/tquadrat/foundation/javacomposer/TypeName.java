@@ -85,12 +85,12 @@ import org.tquadrat.foundation.javacomposer.internal.TypeNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeName.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: TypeName.java 997 2022-01-26 14:55:05Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: TypeName.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeName.java 997 2022-01-26 14:55:05Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface TypeName
     permits ArrayTypeName, ClassName, ParameterizedTypeName, TypeVariableName, WildcardTypeName, TypeNameImpl
@@ -186,7 +186,7 @@ public sealed interface TypeName
 
         //---* Done *----------------------------------------------------------
         return retValue;
-    }   //  get()
+    }   //  from()
 
     /**
      *  Returns a type name equivalent to that of the given
@@ -212,7 +212,6 @@ public sealed interface TypeName
      *      instead.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "ClassReferencesSubclass" )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static TypeName get( final TypeMirror mirror ) { return from( mirror ); }
 

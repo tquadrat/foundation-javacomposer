@@ -47,7 +47,7 @@ import javax.lang.model.type.NoType;
 import javax.lang.model.type.PrimitiveType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
-import javax.lang.model.util.SimpleTypeVisitor9;
+import javax.lang.model.util.SimpleTypeVisitor14;
 import java.io.UncheckedIOException;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
@@ -78,13 +78,13 @@ import org.tquadrat.foundation.lang.Lazy;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: TypeNameImpl.java 997 2022-01-26 14:55:05Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@SuppressWarnings( {"ClassWithTooManyFields", "ClassWithTooManyMethods"} )
-@ClassVersion( sourceVersion = "$Id: TypeNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@SuppressWarnings( "ClassWithTooManyFields" )
+@ClassVersion( sourceVersion = "$Id: TypeNameImpl.java 997 2022-01-26 14:55:05Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public sealed class TypeNameImpl implements TypeName
     permits ArrayTypeNameImpl, ClassNameImpl, ParameterizedTypeNameImpl, TypeVariableNameImpl, WildcardTypeNameImpl
@@ -225,7 +225,7 @@ public sealed class TypeNameImpl implements TypeName
      *      {@link Optional}
      *      that holds the array type name.
      */
-    @SuppressWarnings( {"InstanceofConcreteClass", "ClassReferencesSubclass", "CastToConcreteClass"} )
+    @SuppressWarnings( "ClassReferencesSubclass" )
     public static final Optional<ArrayTypeNameImpl> asArray( final TypeName type )
     {
         final Optional<ArrayTypeNameImpl> retValue = type instanceof ArrayTypeNameImpl arrayType ? Optional.of( arrayType ) : Optional.empty();
@@ -262,7 +262,6 @@ public sealed class TypeNameImpl implements TypeName
      *  @param  annotations The annotations to add.
      *  @return The combined list of annotations.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     protected final List<AnnotationSpecImpl> concatAnnotations( final Collection<AnnotationSpec> annotations )
     {
         final List<AnnotationSpecImpl> list = new ArrayList<>( m_Annotations );
@@ -389,7 +388,7 @@ public sealed class TypeNameImpl implements TypeName
     public static final TypeNameImpl from( final TypeMirror mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
     {
         @SuppressWarnings( {"AnonymousInnerClassWithTooManyMethods", "OverlyComplexAnonymousInnerClass"} )
-        final var retValue = mirror.accept( new SimpleTypeVisitor9<TypeNameImpl,Void>()
+        final var retValue = mirror.accept( new SimpleTypeVisitor14<TypeNameImpl,Void>()
         {
             /**
              *  {@inheritDoc}
@@ -415,7 +414,7 @@ public sealed class TypeNameImpl implements TypeName
             /**
              *  {@inheritDoc}
              */
-            @SuppressWarnings( {"CastToConcreteClass", "CastConflictsWithInstanceof"} )
+            @SuppressWarnings( "CastConflictsWithInstanceof" )
             @Override
             public final TypeNameImpl visitDeclared( final DeclaredType t, final Void p )
             {
@@ -600,7 +599,7 @@ public sealed class TypeNameImpl implements TypeName
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( {"IfStatementWithTooManyBranches", "ChainOfInstanceofChecks", "UseOfConcreteClass"} )
+    @SuppressWarnings( "UseOfConcreteClass" )
     public static final TypeNameImpl get( final Type type, final Map<Type,TypeVariableName> typeVariables )
     {
         final var retValue = from( type, typeVariables );
