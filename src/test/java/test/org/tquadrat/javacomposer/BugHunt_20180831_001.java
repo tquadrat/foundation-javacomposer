@@ -40,7 +40,6 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
  *  @version $Id: BugHunt_20180831_001.java 943 2021-12-21 01:34:32Z tquadrat $
  */
-@SuppressWarnings( "MisorderedAssertEqualsArguments" )
 @ClassVersion( sourceVersion = "$Id: BugHunt_20180831_001.java 943 2021-12-21 01:34:32Z tquadrat $" )
 @DisplayName( "test.org.tquadrat.javacomposer.BugHunt_20180831_001" )
 public class BugHunt_20180831_001 extends TestBaseClass
@@ -78,7 +77,7 @@ public class BugHunt_20180831_001 extends TestBaseClass
 
         final var overrideAnnotation = ClassName.from( Override.class );
         final var throwException = composer.codeBlockBuilder()
-            .add( "throw new $T()", UnsupportedOperationException.class )
+            .addStatement( "throw new $T()", UnsupportedOperationException.class )
             .build();
         final TypeName argType = ParameterizedTypeName.from( ClassName.from( Map.class ), WildcardTypeName.subtypeOf( String.class ), WildcardTypeName.subtypeOf( Object.class ) );
         final var arg0 = composer.parameterBuilder( argType, "m", FINAL )
@@ -88,7 +87,7 @@ public class BugHunt_20180831_001 extends TestBaseClass
             .addAnnotation( overrideAnnotation )
             .addParameter( arg0 )
             .addJavadoc( composer.createInheritDocComment() )
-            .addStatement( throwException )
+            .addCode( throwException )
             .build();
         final var expected =
             """
