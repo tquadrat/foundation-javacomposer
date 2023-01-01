@@ -34,7 +34,7 @@ import static org.tquadrat.foundation.lang.Objects.checkState;
 import static org.tquadrat.foundation.lang.Objects.isNull;
 import static org.tquadrat.foundation.lang.Objects.nonNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
-import static org.tquadrat.foundation.lang.Objects.requireValidArgument;
+import static org.tquadrat.foundation.lang.Objects.requireValidIntegerArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;
 import static org.tquadrat.foundation.util.StringUtils.format;
 import static org.tquadrat.foundation.util.StringUtils.isEmpty;
@@ -91,7 +91,6 @@ public final class CodeWriter
      *
      *  @UMLGraph.link
      */
-    @SuppressWarnings( {"ClassWithTooManyFields", "ClassWithTooManyMethods", "OverlyComplexClass"} )
     @ClassVersion( sourceVersion = "$Id: CodeWriter.java 943 2021-12-21 01:34:32Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     private static enum CommentType
@@ -137,7 +136,7 @@ public final class CodeWriter
     /**
      *  The reference to the factory.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final JavaComposer m_Composer;
 
     /**
@@ -173,7 +172,7 @@ public final class CodeWriter
     /**
      *  The output target.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final LineWrapper m_LineWrapper;
 
     /**
@@ -326,7 +325,6 @@ public final class CodeWriter
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final CodeWriter emit( final CharSequence s ) throws UncheckedIOException { return emitAndIndent( s ); }
 
     /**
@@ -343,7 +341,6 @@ public final class CodeWriter
      *
      *  @see CodeBlockImpl#of(String, Object...)
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final CodeWriter emit( final String format, final Object... args ) throws UncheckedIOException
     {
         final var builder = new CodeBlockImpl.BuilderImpl( m_Composer );
@@ -364,10 +361,10 @@ public final class CodeWriter
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"CastToConcreteClass", "InstanceofConcreteClass", "AssignmentToNull"} )
+    @SuppressWarnings( {"AssignmentToNull", "OverlyNestedMethod", "OverlyComplexMethod", "UseOfConcreteClass"} )
     public final CodeWriter emit( final CodeBlockImpl codeBlock ) throws UncheckedIOException
     {
-        var a = 0;
+        var argIndex = 0;
         ClassNameImpl deferredTypeName = null; // used by "import static" logic
         final var partIterator = requireNonNullArgument( codeBlock, "codeBlock" ).formatParts().listIterator();
         while( partIterator.hasNext() )
@@ -376,11 +373,12 @@ public final class CodeWriter
             //noinspection SwitchStatementWithTooManyBranches
             switch( part )
             {
-                case "$L" -> emitLiteral( codeBlock.args().get( a++ ) );
-                case "$N" -> emitAndIndent( (CharSequence) codeBlock.args().get( a++ ) );
+                case "$L" -> emitLiteral( codeBlock.args().get( argIndex++ ) );
+                case "$N" -> emitAndIndent( (CharSequence) codeBlock.args().get( argIndex++ ) );
                 case "$S" ->
                 {
-                    final var string = codeBlock.args().get( a++ );
+                    @SuppressWarnings( "QuestionableName" )
+                    final var string = codeBlock.args().get( argIndex++ );
 
                     //---* Emit null as a literal null: no quotes *------------
                     emitAndIndent( string == NULL_REFERENCE ? "null" : stringLiteralWithDoubleQuotes( (String) string, m_Indent ) );
@@ -388,7 +386,7 @@ public final class CodeWriter
 
                 case "$T" ->
                 {
-                    final var typeName = (TypeNameImpl) codeBlock.args().get( a++ );
+                    final var typeName = (TypeNameImpl) codeBlock.args().get( argIndex++ );
 
                     /*
                      * Defer "typeName.emit(this)" if next format part will be
@@ -494,7 +492,7 @@ public final class CodeWriter
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
+    @SuppressWarnings( "OverlyComplexMethod" )
     public final CodeWriter emitAndIndent( final CharSequence s ) throws UncheckedIOException
     {
         if( isNotEmpty( s ) )
@@ -613,7 +611,7 @@ public final class CodeWriter
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
+    @SuppressWarnings( {"UseOfConcreteClass", "ThrowFromFinallyBlock"} )
     public final void emitBlockComment( final CodeBlockImpl codeBlock ) throws UncheckedIOException
     {
         emit( "/*\n" );
@@ -658,7 +656,7 @@ public final class CodeWriter
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     public final void emitJavadoc( final CodeBlockImpl codeBlock ) throws UncheckedIOException
     {
         if( codeBlock.isEmpty() )
@@ -726,7 +724,7 @@ public final class CodeWriter
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"IfStatementWithTooManyBranches", "InstanceofConcreteClass", "ChainOfInstanceofChecks"} )
+    @SuppressWarnings( {"IfStatementWithTooManyBranches", "ChainOfInstanceofChecks"} )
     private final void emitLiteral( final Object o ) throws UncheckedIOException
     {
         if( o instanceof TypeSpecImpl typeSpec )
@@ -796,6 +794,7 @@ public final class CodeWriter
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
+    @SuppressWarnings( "BooleanMethodNameMustStartWithQuestion" )
     private final boolean emitStaticImportMember( final String canonical, final String part ) throws UncheckedIOException
     {
         final var partWithoutLeadingDot = requireNonNullArgument( part, "part" ).substring( 1 );
@@ -804,10 +803,12 @@ public final class CodeWriter
         if( retValue )
         {
             final var first = partWithoutLeadingDot.charAt( 0 );
+            //noinspection NestedAssignment
             if( (retValue = Character.isJavaIdentifierStart( first )) == true )
             {
                 final var explicit = canonical + "." + extractMemberName( partWithoutLeadingDot );
                 final var wildcard = canonical + ".*";
+                //noinspection NestedAssignment
                 if( (retValue = m_StaticImports.contains( explicit ) || m_StaticImports.contains( wildcard )) == true )
                 {
                     emitAndIndent( partWithoutLeadingDot );
@@ -857,7 +858,6 @@ public final class CodeWriter
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final CodeWriter emitWrappingSpace() throws UncheckedIOException
     {
         try
@@ -927,7 +927,6 @@ public final class CodeWriter
      *
      *  @return This {@code CodeWriter} instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final CodeWriter indent() { return indent( 1 ); }
 
     /**
@@ -936,7 +935,6 @@ public final class CodeWriter
      *  @param  levels  The increase value.
      *  @return This {@code CodeWriter} instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final CodeWriter indent( final int levels )
     {
         m_IndentLevel += levels;
@@ -1022,7 +1020,7 @@ public final class CodeWriter
      *
      *  @return This {@code CodeWriter} instance.
      */
-    @SuppressWarnings( {"UnusedReturnValue", "StringEquality", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"UnusedReturnValue", "StringEquality"} )
     public final CodeWriter popPackage()
     {
         checkState( m_PackageName != NO_PACKAGE, () -> new IllegalStateException( format( "package not set" ) ) );
@@ -1037,7 +1035,7 @@ public final class CodeWriter
      *
      *  @return This {@code CodeWriter} instance.
      */
-    @SuppressWarnings( {"UnusedReturnValue", "UseOfConcreteClass"} )
+    @SuppressWarnings( "UnusedReturnValue" )
     public final CodeWriter popType()
     {
         m_TypeSpecStack.remove( m_TypeSpecStack.size() - 1 );
@@ -1052,7 +1050,7 @@ public final class CodeWriter
      *  @param  packageName The name of the package.
      *  @return This {@code CodeWriter} instance.
      */
-    @SuppressWarnings( {"UnusedReturnValue", "StringEquality", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"UnusedReturnValue", "StringEquality"} )
     public final CodeWriter pushPackage( final String packageName )
     {
         checkState( m_PackageName == NO_PACKAGE, () -> new IllegalStateException( format( "package already set: %s", m_PackageName ) ) );
@@ -1068,7 +1066,7 @@ public final class CodeWriter
      *  @param  type    The type.
      *  @return This {@code CodeWriter} instance.
      */
-    @SuppressWarnings( {"UnusedReturnValue", "UseOfConcreteClass"} )
+    @SuppressWarnings( "UnusedReturnValue" )
     public final CodeWriter pushType( final TypeSpecImpl type )
     {
         m_TypeSpecStack.add( type );
@@ -1132,7 +1130,7 @@ public final class CodeWriter
      *  @param  stackDepth  The search depth.
      *  @return The found class.
      */
-    @SuppressWarnings( {"OptionalGetWithoutIsPresent", "UseOfConcreteClass"} )
+    @SuppressWarnings( "OptionalGetWithoutIsPresent" )
     private final ClassNameImpl stackClassName( final int stackDepth, final String simpleName )
     {
         /*
@@ -1193,7 +1191,6 @@ public final class CodeWriter
      *
      *  @return This {@code CodeWriter} instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final CodeWriter unindent() { return unindent( 1 ); }
 
     /**
@@ -1202,10 +1199,9 @@ public final class CodeWriter
      *  @param  levels  The decrease value.
      *  @return This {@code CodeWriter} instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final CodeWriter unindent( final int levels )
     {
-        m_IndentLevel -= requireValidArgument( levels, "levels", v -> m_IndentLevel - levels >= 0, $ -> format( "cannot unindent %d from %d", levels, m_IndentLevel ) );
+        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", v -> m_IndentLevel - levels >= 0, $ -> format( "cannot unindent %d from %d", levels, m_IndentLevel ) );
 
         //---* Done *----------------------------------------------------------
         return this;
