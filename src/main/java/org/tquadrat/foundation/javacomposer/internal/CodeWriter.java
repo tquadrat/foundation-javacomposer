@@ -69,13 +69,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CodeWriter.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: CodeWriter.java 1043 2023-01-01 11:27:56Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "ClassWithTooManyMethods", "OverlyComplexClass"} )
-@ClassVersion( sourceVersion = "$Id: CodeWriter.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: CodeWriter.java 1043 2023-01-01 11:27:56Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class CodeWriter
 {
@@ -86,12 +86,12 @@ public final class CodeWriter
      *  The comment types.
      *
      *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeWriter.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @version $Id: CodeWriter.java 1043 2023-01-01 11:27:56Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: CodeWriter.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeWriter.java 1043 2023-01-01 11:27:56Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     private static enum CommentType
     {
