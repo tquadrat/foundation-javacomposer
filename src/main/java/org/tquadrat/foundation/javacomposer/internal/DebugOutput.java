@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2021 by Thomas Thrien.
+ * Copyright © 2002-2023 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  *
@@ -18,9 +18,9 @@
 
 package org.tquadrat.foundation.javacomposer.internal;
 
+import static java.lang.String.format;
 import static org.apiguardian.api.API.Status.INTERNAL;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import java.util.Optional;
 
@@ -33,12 +33,12 @@ import org.tquadrat.foundation.annotation.ClassVersion;
  *  for the generation of the respective element.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: DebugOutput.java 922 2021-05-23 18:32:17Z tquadrat $
+ *  @version $Id: DebugOutput.java 1063 2023-09-26 15:14:16Z tquadrat $
  *  @since 0.0.6
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: DebugOutput.java 922 2021-05-23 18:32:17Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: DebugOutput.java 1063 2023-09-26 15:14:16Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.6" )
 public final class DebugOutput
 {

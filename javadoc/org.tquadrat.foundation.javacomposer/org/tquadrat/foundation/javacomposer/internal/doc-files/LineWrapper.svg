@@ -159,7 +159,7 @@
                     <text x='5.000'
                           y='124.000'>+ LineWrapper(out:java.lang.Appendable,indent:java.lang.String,columnLimit:int)</text>
                     <text x='5.000'
-                          y='135.000'>+ append(s:java.lang.CharSequence):void</text>
+                          y='135.000'>+ append(input:java.lang.CharSequence):void</text>
                     <text x='5.000'
                           y='146.000'>+ close():void</text>
                     <text x='5.000'

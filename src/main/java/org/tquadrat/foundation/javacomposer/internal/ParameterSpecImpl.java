@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,6 @@ import static org.tquadrat.foundation.lang.Objects.hash;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
@@ -61,12 +60,12 @@ import org.tquadrat.foundation.util.JavaUtils;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: ParameterSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ParameterSpecImpl implements ParameterSpec
 {
@@ -79,12 +78,12 @@ public final class ParameterSpecImpl implements ParameterSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: ParameterSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @version $Id: ParameterSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements ParameterSpec.Builder
     {
@@ -99,13 +98,13 @@ public final class ParameterSpecImpl implements ParameterSpec
         /**
          *  The reference to the factory.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final JavaComposer m_Composer;
 
         /**
          *  The Javadoc comment for the parameter.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final CodeBlockImpl.BuilderImpl m_Javadoc;
 
         /**
@@ -121,7 +120,7 @@ public final class ParameterSpecImpl implements ParameterSpec
         /**
          *  The type for the parameter.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final TypeNameImpl m_Type;
 
             /*--------------*\
@@ -135,8 +134,7 @@ public final class ParameterSpecImpl implements ParameterSpec
          *  @param  type    The type for the new parameter.
          *  @param  name    The name for the new parameter.
          */
-        @SuppressWarnings( "CastToConcreteClass" )
-        public BuilderImpl( final JavaComposer composer, final TypeName type, final CharSequence name )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final TypeName type, final CharSequence name )
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
             m_Type = (TypeNameImpl) requireNonNullArgument( type, "type" );
@@ -151,7 +149,6 @@ public final class ParameterSpecImpl implements ParameterSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addAnnotation( final AnnotationSpec annotationSpec )
         {
@@ -164,7 +161,6 @@ public final class ParameterSpecImpl implements ParameterSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addAnnotation( final Class<?> annotation )
         {
@@ -174,7 +170,6 @@ public final class ParameterSpecImpl implements ParameterSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addAnnotation( final ClassName annotationClassName )
         {
@@ -189,7 +184,6 @@ public final class ParameterSpecImpl implements ParameterSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addAnnotations( final Iterable<AnnotationSpec> annotationSpecs )
         {
@@ -205,7 +199,6 @@ public final class ParameterSpecImpl implements ParameterSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addJavadoc( final CodeBlock block )
         {
@@ -218,7 +211,6 @@ public final class ParameterSpecImpl implements ParameterSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addJavadoc( final String format, final Object... args )
         {
@@ -231,7 +223,7 @@ public final class ParameterSpecImpl implements ParameterSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( {"BoundedWildcard", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"BoundedWildcard"} )
         @Override
         public final BuilderImpl addModifiers( final Iterable<Modifier> modifiers )
         {
@@ -247,7 +239,6 @@ public final class ParameterSpecImpl implements ParameterSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addModifiers( final Modifier... modifiers )
         {
@@ -260,7 +251,6 @@ public final class ParameterSpecImpl implements ParameterSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final ParameterSpecImpl build() { return new ParameterSpecImpl( this ); }
     }
@@ -284,13 +274,13 @@ public final class ParameterSpecImpl implements ParameterSpec
     /**
      *  The reference to the factory.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final JavaComposer m_Composer;
 
     /**
      *  The Javadoc comment for this type.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_Javadoc;
 
     /**
@@ -306,7 +296,7 @@ public final class ParameterSpecImpl implements ParameterSpec
     /**
      *  The type of this parameter.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final TypeNameImpl m_Type;
 
         /*--------------*\
@@ -317,8 +307,8 @@ public final class ParameterSpecImpl implements ParameterSpec
      *
      *  @param  builder The builder.
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
-    public ParameterSpecImpl( final BuilderImpl builder )
+    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject"} )
+    public ParameterSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )
     {
         m_Composer = builder.m_Composer;
         m_Name = builder.m_Name;
@@ -346,7 +336,6 @@ public final class ParameterSpecImpl implements ParameterSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final BuilderImpl builder( final Type type, final CharSequence name, final Modifier... modifiers )
@@ -368,11 +357,10 @@ public final class ParameterSpecImpl implements ParameterSpec
      *      {@link JavaComposer}.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "CastToConcreteClass" )
     public static final BuilderImpl builder( final TypeName type, final CharSequence name, final Modifier... modifiers )
     {
         final var composer = new JavaComposer();
-        final var retValue = new BuilderImpl( composer, type, requireValidArgument( name, "name", JavaUtils::isValidName, $ -> format( "not a valid name: %s", name ) ) )
+        final var retValue = new BuilderImpl( composer, type, requireValidArgument( name, "name", JavaUtils::isValidName, "not a valid name: %s"::formatted ) )
             .addModifiers( modifiers );
 
         //---* Done *----------------------------------------------------------
@@ -388,8 +376,8 @@ public final class ParameterSpecImpl implements ParameterSpec
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
-    public final void emit( final CodeWriter codeWriter, final boolean varargs ) throws UncheckedIOException
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
+    public final void emit( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final boolean varargs ) throws UncheckedIOException
     {
         codeWriter.emitAnnotations( m_Annotations, true );
         codeWriter.emitModifiers( m_Modifiers );
@@ -412,12 +400,11 @@ public final class ParameterSpecImpl implements ParameterSpec
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "AccessingNonPublicFieldOfAnotherObject" )
     @Override
     public final boolean equals( final Object o )
     {
         var retValue = this == o;
-        if( !retValue && (o instanceof ParameterSpecImpl other) )
+        if( !retValue && (o instanceof final ParameterSpecImpl other) )
         {
             retValue = m_Composer.equals( other.m_Composer )
                 && toString().equals( other.toString() )
@@ -439,7 +426,6 @@ public final class ParameterSpecImpl implements ParameterSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final ParameterSpecImpl get( final VariableElement element )
     {
@@ -461,7 +447,6 @@ public final class ParameterSpecImpl implements ParameterSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final ParameterSpecImpl get( final Parameter parameter )
     {
@@ -479,7 +464,7 @@ public final class ParameterSpecImpl implements ParameterSpec
      *
      *  @return The reference to the factory.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final JavaComposer getFactory() { return m_Composer; }
 
     /**
@@ -561,7 +546,6 @@ public final class ParameterSpecImpl implements ParameterSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final ParameterSpecImpl of( final Type type, final CharSequence name, final Modifier... modifiers )
@@ -582,7 +566,6 @@ public final class ParameterSpecImpl implements ParameterSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final ParameterSpecImpl of( final TypeName type, final CharSequence name, final Modifier... modifiers )
@@ -642,7 +625,6 @@ public final class ParameterSpecImpl implements ParameterSpec
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final BuilderImpl toBuilder()
     {
@@ -655,7 +637,7 @@ public final class ParameterSpecImpl implements ParameterSpec
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( {"CastToConcreteClass", "AccessingNonPublicFieldOfAnotherObject"} )
+    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject"} )
     @Override
     public final BuilderImpl toBuilder( final TypeName type, final CharSequence name, final boolean keepJavadoc )
     {
@@ -677,7 +659,6 @@ public final class ParameterSpecImpl implements ParameterSpec
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final TypeNameImpl type() { return m_Type; }
 }

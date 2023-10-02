@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2021 by Thomas Thrien.
+ * Copyright © 2002-2023 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  *
@@ -18,12 +18,12 @@
 
 package org.tquadrat.foundation.javacomposer;
 
+import static java.lang.String.format;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 import static org.apiguardian.api.API.Status.STABLE;
 import static org.tquadrat.foundation.lang.CommonConstants.EMPTY_STRING;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import java.util.Optional;
 import java.util.StringJoiner;
@@ -45,12 +45,12 @@ import org.tquadrat.foundation.annotation.ClassVersion;
  *  @see <a href="http://help.eclipse.org/photon/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Ftasks%2Ftask-suppress_warnings.htm&cp=1_4_8_4">Eclipse documentation</a>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: SuppressableWarnings.java 947 2021-12-23 21:44:25Z tquadrat $
+ *  @version $Id: SuppressableWarnings.java 1068 2023-09-28 21:42:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: SuppressableWarnings.java 947 2021-12-23 21:44:25Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: SuppressableWarnings.java 1068 2023-09-28 21:42:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public enum SuppressableWarnings
 {
@@ -475,9 +475,9 @@ public enum SuppressableWarnings
         requireNonNullArgument( factory, "factory" );
 
         final var joiner = new StringJoiner( " ", "//noinspection ", EMPTY_STRING ).setEmptyValue( EMPTY_STRING );
-        for( final var s : requireNonNullArgument( suppress, "suppress" ) )
+        for( final var warning : requireNonNullArgument( suppress, "suppress" ) )
         {
-            joiner.add( s.toString() );
+            joiner.add( warning.toString() );
         }
         final var retValue = joiner.length() > 0 ? factory.codeBlockOf( joiner.toString() ) : factory.emptyCodeBlock();
 

@@ -402,7 +402,7 @@
                     <text x='5.000'
                           y='520.000'>+ beginControlFlow(controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl.BuilderImpl</text>
                     <text x='5.000'
-                          y='531.000'>+ beginControlFlow(addDebugOutput:boolean,format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl.BuilderImpl</text>
+                          y='531.000'>+ beginControlFlow(addDebugOutput:boolean,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl.BuilderImpl</text>
                     <text x='5.000'
                           y='542.000'>+ build():org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl</text>
                     <text x='5.000'
@@ -414,13 +414,13 @@
                     <text x='5.000'
                           y='586.000'>+ endControlFlow(controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl.BuilderImpl</text>
                     <text x='5.000'
-                          y='597.000'>+ endControlFlow(addDebugOutput:boolean,format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl.BuilderImpl</text>
+                          y='597.000'>+ endControlFlow(addDebugOutput:boolean,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl.BuilderImpl</text>
                     <text x='5.000'
                           y='608.000'>+ exceptions():java.util.Collection&lt;org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;</text>
                     <text x='5.000'
                           y='619.000'>+ nextControlFlow(controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl.BuilderImpl</text>
                     <text x='5.000'
-                          y='630.000'>+ nextControlFlow(addDebugOutput:boolean,format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl.BuilderImpl</text>
+                          y='630.000'>+ nextControlFlow(addDebugOutput:boolean,controlFlow:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl.BuilderImpl</text>
                     <text x='5.000'
                           y='641.000'>+ parameters():java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.ParameterSpecImpl&gt;</text>
                     <text x='5.000'

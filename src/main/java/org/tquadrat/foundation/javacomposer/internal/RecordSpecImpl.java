@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,6 @@ import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;
 import static org.tquadrat.foundation.util.StringUtils.capitalize;
 import static org.tquadrat.foundation.util.StringUtils.decapitalize;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.Modifier;
 import java.io.UncheckedIOException;
@@ -71,12 +70,12 @@ import org.tquadrat.foundation.javacomposer.TypeSpec;
  *
  *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org
  *  @thanks Square,Inc.
- *  @version $Id: RecordSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $
+ *  @version $Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
 @API( status = INTERNAL, since = "0.2.0" )
 public final class RecordSpecImpl extends TypeSpecImpl
 {
@@ -90,14 +89,14 @@ public final class RecordSpecImpl extends TypeSpecImpl
      *
      *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org
      *  @thanks Square,Inc.
-     *  @version $Id: RecordSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $
+     *  @version $Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: RecordSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $
+     *  @version $Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
     @API( status = INTERNAL, since = "0.2.0" )
     public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl
     {
@@ -111,8 +110,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
          *      builder instance.
          *  @param  name    The name of the type to build.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
-        public BuilderImpl( final JavaComposer composer, final CharSequence name )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final CharSequence name )
         {
             super( composer, RECORD, Optional.of( requireNotEmptyArgument( name, "name" ).toString() ) );
         }   //  BuilderImpl()
@@ -123,12 +121,11 @@ public final class RecordSpecImpl extends TypeSpecImpl
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), $ -> format( "Field %s needs to be private", fieldSpec.name() ) );
+            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), $ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();
@@ -165,18 +162,17 @@ public final class RecordSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public TypeSpecImpl.BuilderImpl addField( final FieldSpec fieldSpec )
         {
-            final var validation = (Predicate<FieldSpec>) f ->
+            final var validation = (Predicate<FieldSpec>) spec ->
             {
-                if( f.hasModifier( STATIC ) )
+                if( spec.hasModifier( STATIC ) )
                 {
-                    return !f.hasModifier( PROTECTED );
+                    return !spec.hasModifier( PROTECTED );
                 }
                 else
                 {
-                    return f.hasModifier( PRIVATE ) && !f.hasModifier( FINAL );
+                    return spec.hasModifier( PRIVATE ) && !spec.hasModifier( FINAL );
                 }
             };
             super.addField( requireValidNonNullArgument( fieldSpec, "fieldSpec", validation, $ -> "Invalid modifiers for record field" ) );
@@ -189,12 +185,11 @@ public final class RecordSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addMethod( final MethodSpec methodSpec )
         {
             final var methodSpecImpl = (MethodSpecImpl) requireNonNullArgument( methodSpec, "methodSpec" );
-            checkState( methodSpecImpl.defaultValue().isEmpty(), () -> new IllegalStateException( format( "%s %s.%s cannot have a default value", RECORD, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );
-            checkState( !methodSpecImpl.hasModifier( DEFAULT ), () -> new IllegalStateException( format( "%s %s.%s cannot be default", RECORD, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );
+            checkState( methodSpecImpl.defaultValue().isEmpty(), () -> new IllegalStateException( "%s %s.%s cannot have a default value".formatted( RECORD, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );
+            checkState( !methodSpecImpl.hasModifier( DEFAULT ), () -> new IllegalStateException( "%s %s.%s cannot be default".formatted( RECORD, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );
 
             final var methodSpecs = getMethodSpecs();
             if( composer().addDebugOutput() )
@@ -222,10 +217,9 @@ public final class RecordSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), $ -> format( "Field %s needs to be private", fieldSpec.name() ) );
+            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), $ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();
@@ -262,7 +256,6 @@ public final class RecordSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "UseOfConcreteClass" )
         public final RecordSpecImpl build()
         {
             checkState( getFieldSpecs().stream().anyMatch( fs -> !fs.hasModifier( STATIC ) ), () -> new IllegalStateException( "records without fields are not allowed" ) );
@@ -277,10 +270,9 @@ public final class RecordSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl superclass( final TypeName superclass )
         {
-            throw new IllegalStateException( format( "only classes have super classes, not " + RECORD ) );
+            throw new IllegalStateException( "only classes have super classes, not " + RECORD );
         }   //  superclass()
     }
     //  class BuilderImpl
@@ -293,8 +285,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
      *
      *  @param  builder The builder for this instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
-    public RecordSpecImpl( final BuilderImpl builder )
+    public RecordSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )
     {
         super( builder );
     }   //  RecordSpecImpl()
@@ -305,8 +296,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
      *
      *  @param  type    The source type.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
-    private RecordSpecImpl( final RecordSpecImpl type )
+    private RecordSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final RecordSpecImpl type )
     {
         super( type );
     }   //  RecordSpecImpl()
@@ -330,8 +320,9 @@ public final class RecordSpecImpl extends TypeSpecImpl
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "CastToConcreteClass"} )
-    protected final void emit4Foundation( final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
+    @Override
+    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "OverlyLongMethod", "OverlyComplexMethod"} )
+    protected final void emit4Foundation( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         /*
          * Push an empty type (specifically without nested types) for
@@ -363,7 +354,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
             }
         }
 
-        needSuppressWarningJavadoc &= !javadoc.isEmpty() ;
+        needSuppressWarningJavadoc = needSuppressWarningJavadoc && !javadoc.isEmpty();
         codeWriter.emitJavadoc( javadoc );
 
         final Set<SuppressableWarnings> suppressableWarnings = EnumSet.copyOf( getSuppressableWarnings() );
@@ -452,8 +443,8 @@ public final class RecordSpecImpl extends TypeSpecImpl
 
                 //---* Emit the constants *----------------------------------------
                 final var constants = staticFields.stream()
-                    .filter( f -> f.hasModifier( PUBLIC ) )
-                    .filter( f -> f.hasModifier( FINAL ) )
+                    .filter( constantSpec -> constantSpec.hasModifier( PUBLIC ) )
+                    .filter( constantSpec -> constantSpec.hasModifier( FINAL ) )
                     .filter( FieldSpecImpl::hasInitializer )
                     .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )
                     .toList();
@@ -466,18 +457,18 @@ public final class RecordSpecImpl extends TypeSpecImpl
                             /*-----------*\\
                         ====** Constants **========================================================
                             \\*-----------*/""" );
-                    constants.forEach( c ->
+                    constants.forEach( constantSpec ->
                     {
                         codeWriter.emit( "\n" );
-                        c.emit( codeWriter, RECORD.implicitFieldModifiers() );
-                        alreadyHandled.add( c );
+                        constantSpec.emit( codeWriter, RECORD.implicitFieldModifiers() );
+                        alreadyHandled.add( constantSpec );
                     } );
                     firstMember = false;
                 }
 
                 //---* Static fields *-----------------------------------------
                 final var statics = getFieldSpecs().stream()
-                    .filter( f -> !alreadyHandled.contains( f ) )
+                    .filter( staticSpec -> !alreadyHandled.contains( staticSpec ) )
                     .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )
                     .toList();
                 if( !statics.isEmpty() || !getStaticBlock().isEmpty() )
@@ -489,11 +480,11 @@ public final class RecordSpecImpl extends TypeSpecImpl
                         ====** Static Initialisations **===========================================
                             \\*------------------------*/""" );
 
-                    statics.forEach( s ->
+                    statics.forEach( staticSpec ->
                     {
                         codeWriter.emit( "\n" );
-                        s.emit( codeWriter, RECORD.implicitFieldModifiers() );
-                        alreadyHandled.add( s );
+                        staticSpec.emit( codeWriter, RECORD.implicitFieldModifiers() );
+                        alreadyHandled.add( staticSpec );
                     } );
 
                     //---* Static Block *--------------------------------------
@@ -528,17 +519,17 @@ public final class RecordSpecImpl extends TypeSpecImpl
                 }
 
                 //---* Emit the constructors *---------------------------------
-                constructors.forEach( c ->
+                constructors.forEach( constructorSpec ->
                 {
                     codeWriter.emit( "\n" );
-                    c.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );
+                    constructorSpec.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );
                 } );
                 firstMember = false;
             }
 
             //---* Methods (static and non-static) *---------------------------
             final var methods = getMethodSpecs().stream()
-                .filter( m -> !m.isConstructor() )
+                .filter( methodSpec -> !methodSpec.isConstructor() )
                 .sorted( TypeSpecImpl::compareMethodSpecs )
                 .toList();
             if( !methods.isEmpty() )
@@ -550,10 +541,10 @@ public final class RecordSpecImpl extends TypeSpecImpl
                     ====** Methods **==========================================================
                         \\*---------*/""" );
 
-                methods.forEach( m ->
+                methods.forEach( methodSpec ->
                 {
                     codeWriter.emit( "\n" );
-                    m.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );
+                    methodSpec.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );
                 } );
             }
 
@@ -578,8 +569,9 @@ public final class RecordSpecImpl extends TypeSpecImpl
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "CastToConcreteClass"} )
-    protected final void emit4JavaPoet( final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
+    @Override
+    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "OverlyLongMethod", "OverlyComplexMethod"} )
+    protected final void emit4JavaPoet( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         /*
          * Push an empty type (specifically without nested types) for
@@ -723,7 +715,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
     public final boolean equals( final Object o )
     {
         var retValue = this == o;
-        if( !retValue && (o instanceof RecordSpecImpl other) )
+        if( !retValue && (o instanceof final RecordSpecImpl other) )
         {
             retValue = getFactory().equals( other.getFactory() ) && toString().equals( o.toString() );
         }
@@ -741,7 +733,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( {"CastToConcreteClass", "OptionalGetWithoutIsPresent"} )
+    @SuppressWarnings( {"OptionalGetWithoutIsPresent"} )
     @Override
     public final TypeSpecImpl.BuilderImpl toBuilder()
     {

@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2021 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2023 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -60,12 +60,12 @@
 <span class="source-line-no">047</span><span id="line-47"> *</span>
 <span class="source-line-no">048</span><span id="line-48"> *  @author Square,Inc.</span>
 <span class="source-line-no">049</span><span id="line-49"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">050</span><span id="line-50"> *  @version $Id: ArrayTypeNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $</span>
+<span class="source-line-no">050</span><span id="line-50"> *  @version $Id: ArrayTypeNameImpl.java 1062 2023-09-25 23:11:41Z tquadrat $</span>
 <span class="source-line-no">051</span><span id="line-51"> *  @since 0.0.5</span>
 <span class="source-line-no">052</span><span id="line-52"> *</span>
 <span class="source-line-no">053</span><span id="line-53"> *  @UMLGraph.link</span>
 <span class="source-line-no">054</span><span id="line-54"> */</span>
-<span class="source-line-no">055</span><span id="line-55">@ClassVersion( sourceVersion = "$Id: ArrayTypeNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )</span>
+<span class="source-line-no">055</span><span id="line-55">@ClassVersion( sourceVersion = "$Id: ArrayTypeNameImpl.java 1062 2023-09-25 23:11:41Z tquadrat $" )</span>
 <span class="source-line-no">056</span><span id="line-56">@API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">057</span><span id="line-57">public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeName</span>
 <span class="source-line-no">058</span><span id="line-58">{</span>
@@ -75,7 +75,7 @@
 <span class="source-line-no">062</span><span id="line-62">    /**</span>
 <span class="source-line-no">063</span><span id="line-63">     *  The array component type.</span>
 <span class="source-line-no">064</span><span id="line-64">     */</span>
-<span class="source-line-no">065</span><span id="line-65">    @SuppressWarnings( "InstanceVariableOfConcreteClass" )</span>
+<span class="source-line-no">065</span><span id="line-65">    @SuppressWarnings( "UseOfConcreteClass" )</span>
 <span class="source-line-no">066</span><span id="line-66">    private final TypeNameImpl m_ComponentType;</span>
 <span class="source-line-no">067</span><span id="line-67"></span>
 <span class="source-line-no">068</span><span id="line-68">        /*--------------*\</span>
@@ -108,234 +108,226 @@
 <span class="source-line-no">095</span><span id="line-95">    /**</span>
 <span class="source-line-no">096</span><span id="line-96">     *  {@inheritDoc}</span>
 <span class="source-line-no">097</span><span id="line-97">     */</span>
-<span class="source-line-no">098</span><span id="line-98">    @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">099</span><span id="line-99">    @Override</span>
-<span class="source-line-no">100</span><span id="line-100">    public final ArrayTypeNameImpl annotated( final List&lt;AnnotationSpec&gt; annotations )</span>
-<span class="source-line-no">101</span><span id="line-101">    {</span>
-<span class="source-line-no">102</span><span id="line-102">        return new ArrayTypeNameImpl( getComponentType(), concatAnnotations( annotations ) );</span>
-<span class="source-line-no">103</span><span id="line-103">    }   //  annotated()</span>
-<span class="source-line-no">104</span><span id="line-104"></span>
-<span class="source-line-no">105</span><span id="line-105">    /**</span>
-<span class="source-line-no">106</span><span id="line-106">     *  {@inheritDoc}</span>
-<span class="source-line-no">107</span><span id="line-107">     */</span>
-<span class="source-line-no">108</span><span id="line-108">    @Override</span>
-<span class="source-line-no">109</span><span id="line-109">    public final TypeName componentType() { return getComponentType(); }</span>
-<span class="source-line-no">110</span><span id="line-110"></span>
-<span class="source-line-no">111</span><span id="line-111">    /**</span>
-<span class="source-line-no">112</span><span id="line-112">     *  {@inheritDoc}</span>
-<span class="source-line-no">113</span><span id="line-113">     */</span>
-<span class="source-line-no">114</span><span id="line-114">    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )</span>
-<span class="source-line-no">115</span><span id="line-115">    @Override</span>
-<span class="source-line-no">116</span><span id="line-116">    public final CodeWriter emit( final CodeWriter out ) throws UncheckedIOException { return emit( out, false ); }</span>
-<span class="source-line-no">117</span><span id="line-117"></span>
-<span class="source-line-no">118</span><span id="line-118">    /**</span>
-<span class="source-line-no">119</span><span id="line-119">     *  Emits this type name instance to the given</span>
-<span class="source-line-no">120</span><span id="line-120">     *  {@link CodeWriter}.</span>
-<span class="source-line-no">121</span><span id="line-121">     *</span>
-<span class="source-line-no">122</span><span id="line-122">     *  @param  out The code writer.</span>
-<span class="source-line-no">123</span><span id="line-123">     *  @param  varargs {@code true} if the array should be emitted as varargs</span>
-<span class="source-line-no">124</span><span id="line-124">     *      (obviously this affects only arrays used in method signatures),</span>
-<span class="source-line-no">125</span><span id="line-125">     *      {@code false} for the usual representation.</span>
-<span class="source-line-no">126</span><span id="line-126">     *  @return The code writer.</span>
-<span class="source-line-no">127</span><span id="line-127">     *  @throws UncheckedIOException Something went wrong when writing to the</span>
-<span class="source-line-no">128</span><span id="line-128">     *      output target.</span>
-<span class="source-line-no">129</span><span id="line-129">     */</span>
-<span class="source-line-no">130</span><span id="line-130">    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )</span>
-<span class="source-line-no">131</span><span id="line-131">    public final CodeWriter emit( final CodeWriter out, final boolean varargs ) throws UncheckedIOException</span>
-<span class="source-line-no">132</span><span id="line-132">    {</span>
-<span class="source-line-no">133</span><span id="line-133">        final var retValue = requireNonNullArgument( out, "out" );</span>
-<span class="source-line-no">134</span><span id="line-134">        emitLeafType( retValue );</span>
-<span class="source-line-no">135</span><span id="line-135">        emitBrackets( retValue, varargs );</span>
-<span class="source-line-no">136</span><span id="line-136"></span>
-<span class="source-line-no">137</span><span id="line-137">        //---* Done *----------------------------------------------------------</span>
-<span class="source-line-no">138</span><span id="line-138">        return retValue;</span>
-<span class="source-line-no">139</span><span id="line-139">    }   //  emit()</span>
-<span class="source-line-no">140</span><span id="line-140"></span>
-<span class="source-line-no">141</span><span id="line-141">    /**</span>
-<span class="source-line-no">142</span><span id="line-142">     *  Emits the annotations and the brackets for the array.</span>
-<span class="source-line-no">143</span><span id="line-143">     *</span>
-<span class="source-line-no">144</span><span id="line-144">     *  @param  out The code writer.</span>
-<span class="source-line-no">145</span><span id="line-145">     *  @param  varargs {@code true} if the array should be emitted as varargs</span>
-<span class="source-line-no">146</span><span id="line-146">     *      (obviously this affects only arrays used in method signatures),</span>
-<span class="source-line-no">147</span><span id="line-147">     *      {@code false} for the usual representation.</span>
-<span class="source-line-no">148</span><span id="line-148">     *  @return The code writer.</span>
-<span class="source-line-no">149</span><span id="line-149">     *  @throws UncheckedIOException Something went wrong when writing to the</span>
-<span class="source-line-no">150</span><span id="line-150">     *      output target.</span>
-<span class="source-line-no">151</span><span id="line-151">     */</span>
-<span class="source-line-no">152</span><span id="line-152">    @SuppressWarnings( {"UnusedReturnValue", "UseOfConcreteClass"} )</span>
-<span class="source-line-no">153</span><span id="line-153">    private final CodeWriter emitBrackets( final CodeWriter out, final boolean varargs ) throws UncheckedIOException</span>
-<span class="source-line-no">154</span><span id="line-154">    {</span>
-<span class="source-line-no">155</span><span id="line-155">        final var retValue = requireNonNullArgument( out, "out" );</span>
-<span class="source-line-no">156</span><span id="line-156">        if( isAnnotated() )</span>
-<span class="source-line-no">157</span><span id="line-157">        {</span>
-<span class="source-line-no">158</span><span id="line-158">            retValue.emit( " " );</span>
-<span class="source-line-no">159</span><span id="line-159">            emitAnnotations( retValue );</span>
-<span class="source-line-no">160</span><span id="line-160">        }</span>
-<span class="source-line-no">161</span><span id="line-161"></span>
-<span class="source-line-no">162</span><span id="line-162">        final var arrayInArray = asArray( getComponentType() );</span>
-<span class="source-line-no">163</span><span id="line-163">        if( arrayInArray.isPresent() )</span>
-<span class="source-line-no">164</span><span id="line-164">        {</span>
-<span class="source-line-no">165</span><span id="line-165">            retValue.emit( "[]" );</span>
-<span class="source-line-no">166</span><span id="line-166">            arrayInArray.get().emitBrackets( retValue, varargs );</span>
-<span class="source-line-no">167</span><span id="line-167">        }</span>
-<span class="source-line-no">168</span><span id="line-168">        else</span>
-<span class="source-line-no">169</span><span id="line-169">        {</span>
-<span class="source-line-no">170</span><span id="line-170">            //---* Last bracket *----------------------------------------------</span>
-<span class="source-line-no">171</span><span id="line-171">            retValue.emit( varargs ? "..." : "[]" );</span>
-<span class="source-line-no">172</span><span id="line-172">        }</span>
-<span class="source-line-no">173</span><span id="line-173"></span>
-<span class="source-line-no">174</span><span id="line-174">        //---* Done *----------------------------------------------------------</span>
-<span class="source-line-no">175</span><span id="line-175">        return retValue;</span>
-<span class="source-line-no">176</span><span id="line-176">    }   //  emitBrackets()</span>
-<span class="source-line-no">177</span><span id="line-177"></span>
-<span class="source-line-no">178</span><span id="line-178">    /**</span>
-<span class="source-line-no">179</span><span id="line-179">     *  Emits the array's component type.</span>
-<span class="source-line-no">180</span><span id="line-180">     *</span>
-<span class="source-line-no">181</span><span id="line-181">     *  @param  out The code writer.</span>
-<span class="source-line-no">182</span><span id="line-182">     *  @return The code writer.</span>
-<span class="source-line-no">183</span><span id="line-183">     *  @throws UncheckedIOException Something went wrong when writing to the</span>
-<span class="source-line-no">184</span><span id="line-184">     *      output target.</span>
-<span class="source-line-no">185</span><span id="line-185">     */</span>
-<span class="source-line-no">186</span><span id="line-186">    @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">187</span><span id="line-187">    private final CodeWriter emitLeafType( final CodeWriter out ) throws UncheckedIOException</span>
-<span class="source-line-no">188</span><span id="line-188">    {</span>
-<span class="source-line-no">189</span><span id="line-189">        final var arrayInArray = asArray( getComponentType() );</span>
-<span class="source-line-no">190</span><span id="line-190">        final var retValue = arrayInArray.isPresent()</span>
-<span class="source-line-no">191</span><span id="line-191">            ? arrayInArray.get().emitLeafType( out )</span>
-<span class="source-line-no">192</span><span id="line-192">            : getComponentType().emit( out );</span>
-<span class="source-line-no">193</span><span id="line-193"></span>
-<span class="source-line-no">194</span><span id="line-194">        //---* Done *----------------------------------------------------------</span>
-<span class="source-line-no">195</span><span id="line-195">        return retValue;</span>
-<span class="source-line-no">196</span><span id="line-196">    }   //  emitLeafType()</span>
-<span class="source-line-no">197</span><span id="line-197"></span>
-<span class="source-line-no">198</span><span id="line-198">    /**</span>
-<span class="source-line-no">199</span><span id="line-199">     *  Returns an instance of {@code ArrayTypeNameImpl} for an array type</span>
-<span class="source-line-no">200</span><span id="line-200">     *  that is equivalent to {@code mirror}.</span>
-<span class="source-line-no">201</span><span id="line-201">     *</span>
-<span class="source-line-no">202</span><span id="line-202">     *  @param  mirror  The mirror for the array.</span>
-<span class="source-line-no">203</span><span id="line-203">     *  @param  typeVariables   The type variables.</span>
-<span class="source-line-no">204</span><span id="line-204">     *  @return The new instance of {@code ArrayTypeName}.</span>
-<span class="source-line-no">205</span><span id="line-205">     */</span>
-<span class="source-line-no">206</span><span id="line-206">    @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">207</span><span id="line-207">    @API( status = STABLE, since = "0.2.0" )</span>
-<span class="source-line-no">208</span><span id="line-208">    public static final ArrayTypeNameImpl from( final ArrayType mirror, final Map&lt;TypeParameterElement,TypeVariableNameImpl&gt; typeVariables )</span>
-<span class="source-line-no">209</span><span id="line-209">    {</span>
-<span class="source-line-no">210</span><span id="line-210">        final var retValue = new ArrayTypeNameImpl( TypeNameImpl.from( requireNonNullArgument( mirror, "mirror" ).getComponentType(), typeVariables ) );</span>
-<span class="source-line-no">211</span><span id="line-211"></span>
-<span class="source-line-no">212</span><span id="line-212">        //---* Done *----------------------------------------------------------</span>
-<span class="source-line-no">213</span><span id="line-213">        return retValue;</span>
-<span class="source-line-no">214</span><span id="line-214">    }   //  from()</span>
-<span class="source-line-no">215</span><span id="line-215"></span>
-<span class="source-line-no">216</span><span id="line-216">    /**</span>
-<span class="source-line-no">217</span><span id="line-217">     *  Returns an instance of {@code ArrayTypeNameImpl} for an array type that</span>
-<span class="source-line-no">218</span><span id="line-218">     *  is equivalent to {@code type}.</span>
-<span class="source-line-no">219</span><span id="line-219">     *</span>
-<span class="source-line-no">220</span><span id="line-220">     *  @param  type    The array type.</span>
-<span class="source-line-no">221</span><span id="line-221">     *  @param  typeVariables   The type variables.</span>
-<span class="source-line-no">222</span><span id="line-222">     *  @return The new instance of {@code ArrayTypeName}.</span>
-<span class="source-line-no">223</span><span id="line-223">     */</span>
-<span class="source-line-no">224</span><span id="line-224">    @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">225</span><span id="line-225">    @API( status = STABLE, since = "0.2.0" )</span>
-<span class="source-line-no">226</span><span id="line-226">    public static final ArrayTypeNameImpl from( final GenericArrayType type, final Map&lt;Type,TypeVariableName&gt; typeVariables )</span>
-<span class="source-line-no">227</span><span id="line-227">    {</span>
-<span class="source-line-no">228</span><span id="line-228">        final var retValue = of( TypeNameImpl.from( requireNonNullArgument( type, "type" ).getGenericComponentType(), typeVariables ) );</span>
-<span class="source-line-no">229</span><span id="line-229"></span>
-<span class="source-line-no">230</span><span id="line-230">        //---* Done *----------------------------------------------------------</span>
-<span class="source-line-no">231</span><span id="line-231">        return retValue;</span>
-<span class="source-line-no">232</span><span id="line-232">    }   //  from()</span>
-<span class="source-line-no">233</span><span id="line-233"></span>
-<span class="source-line-no">234</span><span id="line-234">    /**</span>
-<span class="source-line-no">235</span><span id="line-235">     *  Returns an instance of {@code ArrayTypeNameImpl} for an array type</span>
-<span class="source-line-no">236</span><span id="line-236">     *  that is equivalent to {@code mirror}.</span>
-<span class="source-line-no">237</span><span id="line-237">     *</span>
-<span class="source-line-no">238</span><span id="line-238">     *  @param  mirror  The mirror for the array.</span>
-<span class="source-line-no">239</span><span id="line-239">     *  @param  typeVariables   The type variables.</span>
-<span class="source-line-no">240</span><span id="line-240">     *  @return The new instance of {@code ArrayTypeName}.</span>
-<span class="source-line-no">241</span><span id="line-241">     *</span>
-<span class="source-line-no">242</span><span id="line-242">     *  @deprecated Use</span>
-<span class="source-line-no">243</span><span id="line-243">     *      {@link #from(ArrayType,Map)}</span>
-<span class="source-line-no">244</span><span id="line-244">     *      instead.</span>
-<span class="source-line-no">245</span><span id="line-245">     */</span>
-<span class="source-line-no">246</span><span id="line-246">    @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">247</span><span id="line-247">    @Deprecated( since = "0.2.0", forRemoval = true )</span>
-<span class="source-line-no">248</span><span id="line-248">    @API( status = DEPRECATED, since = "0.0.5" )</span>
-<span class="source-line-no">249</span><span id="line-249">    public static final ArrayTypeNameImpl get( final ArrayType mirror, final Map&lt;TypeParameterElement,TypeVariableNameImpl&gt; typeVariables )</span>
-<span class="source-line-no">250</span><span id="line-250">    {</span>
-<span class="source-line-no">251</span><span id="line-251">        final var retValue = from( mirror, typeVariables);</span>
+<span class="source-line-no">098</span><span id="line-98">    @Override</span>
+<span class="source-line-no">099</span><span id="line-99">    public final ArrayTypeNameImpl annotated( final List&lt;AnnotationSpec&gt; annotations )</span>
+<span class="source-line-no">100</span><span id="line-100">    {</span>
+<span class="source-line-no">101</span><span id="line-101">        return new ArrayTypeNameImpl( getComponentType(), concatAnnotations( annotations ) );</span>
+<span class="source-line-no">102</span><span id="line-102">    }   //  annotated()</span>
+<span class="source-line-no">103</span><span id="line-103"></span>
+<span class="source-line-no">104</span><span id="line-104">    /**</span>
+<span class="source-line-no">105</span><span id="line-105">     *  {@inheritDoc}</span>
+<span class="source-line-no">106</span><span id="line-106">     */</span>
+<span class="source-line-no">107</span><span id="line-107">    @Override</span>
+<span class="source-line-no">108</span><span id="line-108">    public final TypeName componentType() { return getComponentType(); }</span>
+<span class="source-line-no">109</span><span id="line-109"></span>
+<span class="source-line-no">110</span><span id="line-110">    /**</span>
+<span class="source-line-no">111</span><span id="line-111">     *  {@inheritDoc}</span>
+<span class="source-line-no">112</span><span id="line-112">     */</span>
+<span class="source-line-no">113</span><span id="line-113">    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )</span>
+<span class="source-line-no">114</span><span id="line-114">    @Override</span>
+<span class="source-line-no">115</span><span id="line-115">    public final CodeWriter emit( final CodeWriter out ) throws UncheckedIOException { return emit( out, false ); }</span>
+<span class="source-line-no">116</span><span id="line-116"></span>
+<span class="source-line-no">117</span><span id="line-117">    /**</span>
+<span class="source-line-no">118</span><span id="line-118">     *  Emits this type name instance to the given</span>
+<span class="source-line-no">119</span><span id="line-119">     *  {@link CodeWriter}.</span>
+<span class="source-line-no">120</span><span id="line-120">     *</span>
+<span class="source-line-no">121</span><span id="line-121">     *  @param  out The code writer.</span>
+<span class="source-line-no">122</span><span id="line-122">     *  @param  varargs {@code true} if the array should be emitted as varargs</span>
+<span class="source-line-no">123</span><span id="line-123">     *      (obviously this affects only arrays used in method signatures),</span>
+<span class="source-line-no">124</span><span id="line-124">     *      {@code false} for the usual representation.</span>
+<span class="source-line-no">125</span><span id="line-125">     *  @return The code writer.</span>
+<span class="source-line-no">126</span><span id="line-126">     *  @throws UncheckedIOException Something went wrong when writing to the</span>
+<span class="source-line-no">127</span><span id="line-127">     *      output target.</span>
+<span class="source-line-no">128</span><span id="line-128">     */</span>
+<span class="source-line-no">129</span><span id="line-129">    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )</span>
+<span class="source-line-no">130</span><span id="line-130">    public final CodeWriter emit( final CodeWriter out, final boolean varargs ) throws UncheckedIOException</span>
+<span class="source-line-no">131</span><span id="line-131">    {</span>
+<span class="source-line-no">132</span><span id="line-132">        final var retValue = requireNonNullArgument( out, "out" );</span>
+<span class="source-line-no">133</span><span id="line-133">        emitLeafType( retValue );</span>
+<span class="source-line-no">134</span><span id="line-134">        emitBrackets( retValue, varargs );</span>
+<span class="source-line-no">135</span><span id="line-135"></span>
+<span class="source-line-no">136</span><span id="line-136">        //---* Done *----------------------------------------------------------</span>
+<span class="source-line-no">137</span><span id="line-137">        return retValue;</span>
+<span class="source-line-no">138</span><span id="line-138">    }   //  emit()</span>
+<span class="source-line-no">139</span><span id="line-139"></span>
+<span class="source-line-no">140</span><span id="line-140">    /**</span>
+<span class="source-line-no">141</span><span id="line-141">     *  Emits the annotations and the brackets for the array.</span>
+<span class="source-line-no">142</span><span id="line-142">     *</span>
+<span class="source-line-no">143</span><span id="line-143">     *  @param  out The code writer.</span>
+<span class="source-line-no">144</span><span id="line-144">     *  @param  varargs {@code true} if the array should be emitted as varargs</span>
+<span class="source-line-no">145</span><span id="line-145">     *      (obviously this affects only arrays used in method signatures),</span>
+<span class="source-line-no">146</span><span id="line-146">     *      {@code false} for the usual representation.</span>
+<span class="source-line-no">147</span><span id="line-147">     *  @return The code writer.</span>
+<span class="source-line-no">148</span><span id="line-148">     *  @throws UncheckedIOException Something went wrong when writing to the</span>
+<span class="source-line-no">149</span><span id="line-149">     *      output target.</span>
+<span class="source-line-no">150</span><span id="line-150">     */</span>
+<span class="source-line-no">151</span><span id="line-151">    @SuppressWarnings( {"UnusedReturnValue", "UseOfConcreteClass"} )</span>
+<span class="source-line-no">152</span><span id="line-152">    private final CodeWriter emitBrackets( final CodeWriter out, final boolean varargs ) throws UncheckedIOException</span>
+<span class="source-line-no">153</span><span id="line-153">    {</span>
+<span class="source-line-no">154</span><span id="line-154">        final var retValue = requireNonNullArgument( out, "out" );</span>
+<span class="source-line-no">155</span><span id="line-155">        if( isAnnotated() )</span>
+<span class="source-line-no">156</span><span id="line-156">        {</span>
+<span class="source-line-no">157</span><span id="line-157">            retValue.emit( " " );</span>
+<span class="source-line-no">158</span><span id="line-158">            emitAnnotations( retValue );</span>
+<span class="source-line-no">159</span><span id="line-159">        }</span>
+<span class="source-line-no">160</span><span id="line-160"></span>
+<span class="source-line-no">161</span><span id="line-161">        final var arrayInArray = asArray( getComponentType() );</span>
+<span class="source-line-no">162</span><span id="line-162">        if( arrayInArray.isPresent() )</span>
+<span class="source-line-no">163</span><span id="line-163">        {</span>
+<span class="source-line-no">164</span><span id="line-164">            retValue.emit( "[]" );</span>
+<span class="source-line-no">165</span><span id="line-165">            arrayInArray.get().emitBrackets( retValue, varargs );</span>
+<span class="source-line-no">166</span><span id="line-166">        }</span>
+<span class="source-line-no">167</span><span id="line-167">        else</span>
+<span class="source-line-no">168</span><span id="line-168">        {</span>
+<span class="source-line-no">169</span><span id="line-169">            //---* Last bracket *----------------------------------------------</span>
+<span class="source-line-no">170</span><span id="line-170">            retValue.emit( varargs ? "..." : "[]" );</span>
+<span class="source-line-no">171</span><span id="line-171">        }</span>
+<span class="source-line-no">172</span><span id="line-172"></span>
+<span class="source-line-no">173</span><span id="line-173">        //---* Done *----------------------------------------------------------</span>
+<span class="source-line-no">174</span><span id="line-174">        return retValue;</span>
+<span class="source-line-no">175</span><span id="line-175">    }   //  emitBrackets()</span>
+<span class="source-line-no">176</span><span id="line-176"></span>
+<span class="source-line-no">177</span><span id="line-177">    /**</span>
+<span class="source-line-no">178</span><span id="line-178">     *  Emits the array's component type.</span>
+<span class="source-line-no">179</span><span id="line-179">     *</span>
+<span class="source-line-no">180</span><span id="line-180">     *  @param  out The code writer.</span>
+<span class="source-line-no">181</span><span id="line-181">     *  @return The code writer.</span>
+<span class="source-line-no">182</span><span id="line-182">     *  @throws UncheckedIOException Something went wrong when writing to the</span>
+<span class="source-line-no">183</span><span id="line-183">     *      output target.</span>
+<span class="source-line-no">184</span><span id="line-184">     */</span>
+<span class="source-line-no">185</span><span id="line-185">    @SuppressWarnings( "UseOfConcreteClass" )</span>
+<span class="source-line-no">186</span><span id="line-186">    private final CodeWriter emitLeafType( final CodeWriter out ) throws UncheckedIOException</span>
+<span class="source-line-no">187</span><span id="line-187">    {</span>
+<span class="source-line-no">188</span><span id="line-188">        final var arrayInArray = asArray( getComponentType() );</span>
+<span class="source-line-no">189</span><span id="line-189">        final var retValue = arrayInArray.isPresent()</span>
+<span class="source-line-no">190</span><span id="line-190">            ? arrayInArray.get().emitLeafType( out )</span>
+<span class="source-line-no">191</span><span id="line-191">            : getComponentType().emit( out );</span>
+<span class="source-line-no">192</span><span id="line-192"></span>
+<span class="source-line-no">193</span><span id="line-193">        //---* Done *----------------------------------------------------------</span>
+<span class="source-line-no">194</span><span id="line-194">        return retValue;</span>
+<span class="source-line-no">195</span><span id="line-195">    }   //  emitLeafType()</span>
+<span class="source-line-no">196</span><span id="line-196"></span>
+<span class="source-line-no">197</span><span id="line-197">    /**</span>
+<span class="source-line-no">198</span><span id="line-198">     *  Returns an instance of {@code ArrayTypeNameImpl} for an array type</span>
+<span class="source-line-no">199</span><span id="line-199">     *  that is equivalent to {@code mirror}.</span>
+<span class="source-line-no">200</span><span id="line-200">     *</span>
+<span class="source-line-no">201</span><span id="line-201">     *  @param  mirror  The mirror for the array.</span>
+<span class="source-line-no">202</span><span id="line-202">     *  @param  typeVariables   The type variables.</span>
+<span class="source-line-no">203</span><span id="line-203">     *  @return The new instance of {@code ArrayTypeName}.</span>
+<span class="source-line-no">204</span><span id="line-204">     */</span>
+<span class="source-line-no">205</span><span id="line-205">    @API( status = STABLE, since = "0.2.0" )</span>
+<span class="source-line-no">206</span><span id="line-206">    public static final ArrayTypeNameImpl from( final ArrayType mirror, final Map&lt;TypeParameterElement,TypeVariableNameImpl&gt; typeVariables )</span>
+<span class="source-line-no">207</span><span id="line-207">    {</span>
+<span class="source-line-no">208</span><span id="line-208">        final var retValue = new ArrayTypeNameImpl( TypeNameImpl.from( requireNonNullArgument( mirror, "mirror" ).getComponentType(), typeVariables ) );</span>
+<span class="source-line-no">209</span><span id="line-209"></span>
+<span class="source-line-no">210</span><span id="line-210">        //---* Done *----------------------------------------------------------</span>
+<span class="source-line-no">211</span><span id="line-211">        return retValue;</span>
+<span class="source-line-no">212</span><span id="line-212">    }   //  from()</span>
+<span class="source-line-no">213</span><span id="line-213"></span>
+<span class="source-line-no">214</span><span id="line-214">    /**</span>
+<span class="source-line-no">215</span><span id="line-215">     *  Returns an instance of {@code ArrayTypeNameImpl} for an array type that</span>
+<span class="source-line-no">216</span><span id="line-216">     *  is equivalent to {@code type}.</span>
+<span class="source-line-no">217</span><span id="line-217">     *</span>
+<span class="source-line-no">218</span><span id="line-218">     *  @param  type    The array type.</span>
+<span class="source-line-no">219</span><span id="line-219">     *  @param  typeVariables   The type variables.</span>
+<span class="source-line-no">220</span><span id="line-220">     *  @return The new instance of {@code ArrayTypeName}.</span>
+<span class="source-line-no">221</span><span id="line-221">     */</span>
+<span class="source-line-no">222</span><span id="line-222">    @API( status = STABLE, since = "0.2.0" )</span>
+<span class="source-line-no">223</span><span id="line-223">    public static final ArrayTypeNameImpl from( final GenericArrayType type, final Map&lt;Type,TypeVariableName&gt; typeVariables )</span>
+<span class="source-line-no">224</span><span id="line-224">    {</span>
+<span class="source-line-no">225</span><span id="line-225">        final var retValue = of( TypeNameImpl.from( requireNonNullArgument( type, "type" ).getGenericComponentType(), typeVariables ) );</span>
+<span class="source-line-no">226</span><span id="line-226"></span>
+<span class="source-line-no">227</span><span id="line-227">        //---* Done *----------------------------------------------------------</span>
+<span class="source-line-no">228</span><span id="line-228">        return retValue;</span>
+<span class="source-line-no">229</span><span id="line-229">    }   //  from()</span>
+<span class="source-line-no">230</span><span id="line-230"></span>
+<span class="source-line-no">231</span><span id="line-231">    /**</span>
+<span class="source-line-no">232</span><span id="line-232">     *  Returns an instance of {@code ArrayTypeNameImpl} for an array type</span>
+<span class="source-line-no">233</span><span id="line-233">     *  that is equivalent to {@code mirror}.</span>
+<span class="source-line-no">234</span><span id="line-234">     *</span>
+<span class="source-line-no">235</span><span id="line-235">     *  @param  mirror  The mirror for the array.</span>
+<span class="source-line-no">236</span><span id="line-236">     *  @param  typeVariables   The type variables.</span>
+<span class="source-line-no">237</span><span id="line-237">     *  @return The new instance of {@code ArrayTypeName}.</span>
+<span class="source-line-no">238</span><span id="line-238">     *</span>
+<span class="source-line-no">239</span><span id="line-239">     *  @deprecated Use</span>
+<span class="source-line-no">240</span><span id="line-240">     *      {@link #from(ArrayType,Map)}</span>
+<span class="source-line-no">241</span><span id="line-241">     *      instead.</span>
+<span class="source-line-no">242</span><span id="line-242">     */</span>
+<span class="source-line-no">243</span><span id="line-243">    @Deprecated( since = "0.2.0", forRemoval = true )</span>
+<span class="source-line-no">244</span><span id="line-244">    @API( status = DEPRECATED, since = "0.0.5" )</span>
+<span class="source-line-no">245</span><span id="line-245">    public static final ArrayTypeNameImpl get( final ArrayType mirror, final Map&lt;TypeParameterElement,TypeVariableNameImpl&gt; typeVariables )</span>
+<span class="source-line-no">246</span><span id="line-246">    {</span>
+<span class="source-line-no">247</span><span id="line-247">        final var retValue = from( mirror, typeVariables);</span>
+<span class="source-line-no">248</span><span id="line-248"></span>
+<span class="source-line-no">249</span><span id="line-249">        //---* Done *----------------------------------------------------------</span>
+<span class="source-line-no">250</span><span id="line-250">        return retValue;</span>
+<span class="source-line-no">251</span><span id="line-251">    }   //  get()</span>
 <span class="source-line-no">252</span><span id="line-252"></span>
-<span class="source-line-no">253</span><span id="line-253">        //---* Done *----------------------------------------------------------</span>
-<span class="source-line-no">254</span><span id="line-254">        return retValue;</span>
-<span class="source-line-no">255</span><span id="line-255">    }   //  get()</span>
-<span class="source-line-no">256</span><span id="line-256"></span>
-<span class="source-line-no">257</span><span id="line-257">    /**</span>
-<span class="source-line-no">258</span><span id="line-258">     *  Returns an instance of {@code ArrayTypeNameImpl} for an array type that</span>
-<span class="source-line-no">259</span><span id="line-259">     *  is equivalent to {@code type}.</span>
+<span class="source-line-no">253</span><span id="line-253">    /**</span>
+<span class="source-line-no">254</span><span id="line-254">     *  Returns an instance of {@code ArrayTypeNameImpl} for an array type that</span>
+<span class="source-line-no">255</span><span id="line-255">     *  is equivalent to {@code type}.</span>
+<span class="source-line-no">256</span><span id="line-256">     *</span>
+<span class="source-line-no">257</span><span id="line-257">     *  @param  type    The array type.</span>
+<span class="source-line-no">258</span><span id="line-258">     *  @param  typeVariables   The type variables.</span>
+<span class="source-line-no">259</span><span id="line-259">     *  @return The new instance of {@code ArrayTypeName}.</span>
 <span class="source-line-no">260</span><span id="line-260">     *</span>
-<span class="source-line-no">261</span><span id="line-261">     *  @param  type    The array type.</span>
-<span class="source-line-no">262</span><span id="line-262">     *  @param  typeVariables   The type variables.</span>
-<span class="source-line-no">263</span><span id="line-263">     *  @return The new instance of {@code ArrayTypeName}.</span>
-<span class="source-line-no">264</span><span id="line-264">     *</span>
-<span class="source-line-no">265</span><span id="line-265">     *  @deprecated Use</span>
-<span class="source-line-no">266</span><span id="line-266">     *      {@link #from(GenericArrayType,Map)}</span>
-<span class="source-line-no">267</span><span id="line-267">     *      instead.</span>
-<span class="source-line-no">268</span><span id="line-268">     */</span>
-<span class="source-line-no">269</span><span id="line-269">    @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">270</span><span id="line-270">    @Deprecated( since = "0.2.0", forRemoval = true )</span>
-<span class="source-line-no">271</span><span id="line-271">    @API( status = DEPRECATED, since = "0.0.5" )</span>
-<span class="source-line-no">272</span><span id="line-272">    public static final ArrayTypeNameImpl get( final GenericArrayType type, final Map&lt;Type,TypeVariableName&gt; typeVariables )</span>
-<span class="source-line-no">273</span><span id="line-273">    {</span>
-<span class="source-line-no">274</span><span id="line-274">        final var retValue = from( type, typeVariables );</span>
-<span class="source-line-no">275</span><span id="line-275"></span>
-<span class="source-line-no">276</span><span id="line-276">        //---* Done *----------------------------------------------------------</span>
-<span class="source-line-no">277</span><span id="line-277">        return retValue;</span>
-<span class="source-line-no">278</span><span id="line-278">    }   //  get()</span>
-<span class="source-line-no">279</span><span id="line-279"></span>
-<span class="source-line-no">280</span><span id="line-280">    /**</span>
-<span class="source-line-no">281</span><span id="line-281">     *  Returns the array component type.</span>
-<span class="source-line-no">282</span><span id="line-282">     *</span>
-<span class="source-line-no">283</span><span id="line-283">     * @return The array component type.</span>
-<span class="source-line-no">284</span><span id="line-284">     */</span>
-<span class="source-line-no">285</span><span id="line-285">    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )</span>
-<span class="source-line-no">286</span><span id="line-286">    public final TypeNameImpl getComponentType() { return m_ComponentType; }</span>
-<span class="source-line-no">287</span><span id="line-287"></span>
-<span class="source-line-no">288</span><span id="line-288">    /**</span>
-<span class="source-line-no">289</span><span id="line-289">     *  Returns an array type whose elements are all instances of the given</span>
-<span class="source-line-no">290</span><span id="line-290">     *  component type.</span>
-<span class="source-line-no">291</span><span id="line-291">     *</span>
-<span class="source-line-no">292</span><span id="line-292">     *  @param  componentType   The component type.</span>
-<span class="source-line-no">293</span><span id="line-293">     *  @return The new instance of {@code ArrayTypeName}.</span>
-<span class="source-line-no">294</span><span id="line-294">     */</span>
-<span class="source-line-no">295</span><span id="line-295">    @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">296</span><span id="line-296">    public static ArrayTypeNameImpl of( final Type componentType )</span>
-<span class="source-line-no">297</span><span id="line-297">    {</span>
-<span class="source-line-no">298</span><span id="line-298">        return of( TypeNameImpl.from( requireNonNullArgument( componentType, "componentType" ) ) );</span>
-<span class="source-line-no">299</span><span id="line-299">    }   //  of()</span>
-<span class="source-line-no">300</span><span id="line-300"></span>
-<span class="source-line-no">301</span><span id="line-301">    /**</span>
-<span class="source-line-no">302</span><span id="line-302">     *  Returns an array type whose elements are all instances of the given</span>
-<span class="source-line-no">303</span><span id="line-303">     *  component type.</span>
-<span class="source-line-no">304</span><span id="line-304">     *</span>
-<span class="source-line-no">305</span><span id="line-305">     *  @param  componentType   The component type.</span>
-<span class="source-line-no">306</span><span id="line-306">     *  @return The new instance of {@code ArrayTypeName}.</span>
-<span class="source-line-no">307</span><span id="line-307">     */</span>
-<span class="source-line-no">308</span><span id="line-308">    @SuppressWarnings( "CastToConcreteClass" )</span>
-<span class="source-line-no">309</span><span id="line-309">    public static final ArrayTypeNameImpl of( final TypeName componentType )</span>
-<span class="source-line-no">310</span><span id="line-310">    {</span>
-<span class="source-line-no">311</span><span id="line-311">        return new ArrayTypeNameImpl( (TypeNameImpl) componentType );</span>
-<span class="source-line-no">312</span><span id="line-312">    }   //  of()</span>
-<span class="source-line-no">313</span><span id="line-313"></span>
-<span class="source-line-no">314</span><span id="line-314">    /**</span>
-<span class="source-line-no">315</span><span id="line-315">     *  {@inheritDoc}</span>
-<span class="source-line-no">316</span><span id="line-316">     */</span>
-<span class="source-line-no">317</span><span id="line-317">    @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">318</span><span id="line-318">    @Override</span>
-<span class="source-line-no">319</span><span id="line-319">    public final ArrayTypeNameImpl withoutAnnotations() { return new ArrayTypeNameImpl( getComponentType() ); }</span>
-<span class="source-line-no">320</span><span id="line-320">}</span>
-<span class="source-line-no">321</span><span id="line-321">//  class ArrayTypeNameImpl</span>
-<span class="source-line-no">322</span><span id="line-322"></span>
-<span class="source-line-no">323</span><span id="line-323">/*</span>
-<span class="source-line-no">324</span><span id="line-324"> *  End of File</span>
-<span class="source-line-no">325</span><span id="line-325"> */</span>
+<span class="source-line-no">261</span><span id="line-261">     *  @deprecated Use</span>
+<span class="source-line-no">262</span><span id="line-262">     *      {@link #from(GenericArrayType,Map)}</span>
+<span class="source-line-no">263</span><span id="line-263">     *      instead.</span>
+<span class="source-line-no">264</span><span id="line-264">     */</span>
+<span class="source-line-no">265</span><span id="line-265">    @Deprecated( since = "0.2.0", forRemoval = true )</span>
+<span class="source-line-no">266</span><span id="line-266">    @API( status = DEPRECATED, since = "0.0.5" )</span>
+<span class="source-line-no">267</span><span id="line-267">    public static final ArrayTypeNameImpl get( final GenericArrayType type, final Map&lt;Type,TypeVariableName&gt; typeVariables )</span>
+<span class="source-line-no">268</span><span id="line-268">    {</span>
+<span class="source-line-no">269</span><span id="line-269">        final var retValue = from( type, typeVariables );</span>
+<span class="source-line-no">270</span><span id="line-270"></span>
+<span class="source-line-no">271</span><span id="line-271">        //---* Done *----------------------------------------------------------</span>
+<span class="source-line-no">272</span><span id="line-272">        return retValue;</span>
+<span class="source-line-no">273</span><span id="line-273">    }   //  get()</span>
+<span class="source-line-no">274</span><span id="line-274"></span>
+<span class="source-line-no">275</span><span id="line-275">    /**</span>
+<span class="source-line-no">276</span><span id="line-276">     *  Returns the array component type.</span>
+<span class="source-line-no">277</span><span id="line-277">     *</span>
+<span class="source-line-no">278</span><span id="line-278">     * @return The array component type.</span>
+<span class="source-line-no">279</span><span id="line-279">     */</span>
+<span class="source-line-no">280</span><span id="line-280">    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )</span>
+<span class="source-line-no">281</span><span id="line-281">    public final TypeNameImpl getComponentType() { return m_ComponentType; }</span>
+<span class="source-line-no">282</span><span id="line-282"></span>
+<span class="source-line-no">283</span><span id="line-283">    /**</span>
+<span class="source-line-no">284</span><span id="line-284">     *  Returns an array type whose elements are all instances of the given</span>
+<span class="source-line-no">285</span><span id="line-285">     *  component type.</span>
+<span class="source-line-no">286</span><span id="line-286">     *</span>
+<span class="source-line-no">287</span><span id="line-287">     *  @param  componentType   The component type.</span>
+<span class="source-line-no">288</span><span id="line-288">     *  @return The new instance of {@code ArrayTypeName}.</span>
+<span class="source-line-no">289</span><span id="line-289">     */</span>
+<span class="source-line-no">290</span><span id="line-290">    public static ArrayTypeNameImpl of( final Type componentType )</span>
+<span class="source-line-no">291</span><span id="line-291">    {</span>
+<span class="source-line-no">292</span><span id="line-292">        return of( TypeNameImpl.from( requireNonNullArgument( componentType, "componentType" ) ) );</span>
+<span class="source-line-no">293</span><span id="line-293">    }   //  of()</span>
+<span class="source-line-no">294</span><span id="line-294"></span>
+<span class="source-line-no">295</span><span id="line-295">    /**</span>
+<span class="source-line-no">296</span><span id="line-296">     *  Returns an array type whose elements are all instances of the given</span>
+<span class="source-line-no">297</span><span id="line-297">     *  component type.</span>
+<span class="source-line-no">298</span><span id="line-298">     *</span>
+<span class="source-line-no">299</span><span id="line-299">     *  @param  componentType   The component type.</span>
+<span class="source-line-no">300</span><span id="line-300">     *  @return The new instance of {@code ArrayTypeName}.</span>
+<span class="source-line-no">301</span><span id="line-301">     */</span>
+<span class="source-line-no">302</span><span id="line-302">    public static final ArrayTypeNameImpl of( final TypeName componentType )</span>
+<span class="source-line-no">303</span><span id="line-303">    {</span>
+<span class="source-line-no">304</span><span id="line-304">        return new ArrayTypeNameImpl( (TypeNameImpl) componentType );</span>
+<span class="source-line-no">305</span><span id="line-305">    }   //  of()</span>
+<span class="source-line-no">306</span><span id="line-306"></span>
+<span class="source-line-no">307</span><span id="line-307">    /**</span>
+<span class="source-line-no">308</span><span id="line-308">     *  {@inheritDoc}</span>
+<span class="source-line-no">309</span><span id="line-309">     */</span>
+<span class="source-line-no">310</span><span id="line-310">    @Override</span>
+<span class="source-line-no">311</span><span id="line-311">    public final ArrayTypeNameImpl withoutAnnotations() { return new ArrayTypeNameImpl( getComponentType() ); }</span>
+<span class="source-line-no">312</span><span id="line-312">}</span>
+<span class="source-line-no">313</span><span id="line-313">//  class ArrayTypeNameImpl</span>
+<span class="source-line-no">314</span><span id="line-314"></span>
+<span class="source-line-no">315</span><span id="line-315">/*</span>
+<span class="source-line-no">316</span><span id="line-316"> *  End of File</span>
+<span class="source-line-no">317</span><span id="line-317"> */</span>
 
 
 

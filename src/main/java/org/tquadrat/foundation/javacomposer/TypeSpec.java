@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,12 +39,12 @@ import org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeSpec.java 930 2021-06-20 18:08:47Z tquadrat $
+ *  @version $Id: TypeSpec.java 1068 2023-09-28 21:42:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: TypeSpec.java 930 2021-06-20 18:08:47Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeSpec.java 1068 2023-09-28 21:42:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface TypeSpec
     permits TypeSpecImpl
@@ -59,13 +59,13 @@ public sealed interface TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpec.java 930 2021-06-20 18:08:47Z tquadrat $
+     *  @version $Id: TypeSpec.java 1068 2023-09-28 21:42:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( {"ClassWithTooManyMethods", "InnerClassOfInterface"} )
-    @ClassVersion( sourceVersion = "$Id: TypeSpec.java 930 2021-06-20 18:08:47Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpec.java 1068 2023-09-28 21:42:28Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static interface Builder
     {
@@ -288,7 +288,6 @@ public sealed interface TypeSpec
          *  @param  methodSpecs The methods.
          *  @return This {@code Builder} instance.
          */
-        @SuppressWarnings( "BoundedWildcard" )
         public Builder addMethods( final Iterable<MethodSpec> methodSpecs );
 
         /**

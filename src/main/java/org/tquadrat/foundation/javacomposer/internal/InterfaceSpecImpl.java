@@ -40,7 +40,6 @@ import static org.tquadrat.foundation.lang.Objects.hash;
 import static org.tquadrat.foundation.lang.Objects.isNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.Modifier;
 import java.io.UncheckedIOException;
@@ -69,12 +68,12 @@ import org.tquadrat.foundation.javacomposer.TypeSpec;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: InterfaceSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $
+ *  @version $Id: InterfaceSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: InterfaceSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: InterfaceSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $" )
 @API( status = INTERNAL, since = "0.2.0" )
 public final class InterfaceSpecImpl extends TypeSpecImpl
 {
@@ -88,12 +87,12 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: InterfaceSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $
+     *  @version $Id: InterfaceSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: InterfaceSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: InterfaceSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $" )
     @API( status = INTERNAL, since = "0.2.0" )
     public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl
     {
@@ -107,8 +106,7 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
          *      builder instance.
          *  @param  name    The name of the type to build.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
-        public BuilderImpl( final JavaComposer composer, final CharSequence name )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final CharSequence name )
         {
             this( composer, Optional.of( requireNotEmptyArgument( name, "name" ).toString() ) );
         }   //  BuilderImpl()
@@ -120,8 +118,8 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
          *      builder instance.
          *  @param  name    The name of the type to build.
          */
-        @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
-        public BuilderImpl( final JavaComposer composer, final Optional<String> name )
+        @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType"} )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final Optional<String> name )
         {
             super( composer, INTERFACE, name );
         }   //  BuilderImpl()
@@ -132,26 +130,24 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            throw new ValidationException( format( "Attributes are not allowed for interface %s", getName() .orElse( NAME_ANONYMOUS_TYPE ) ) );
+            throw new ValidationException( "Attributes are not allowed for interface %s".formatted( getName() .orElse( NAME_ANONYMOUS_TYPE ) ) );
         }   //  addAttribute()
 
         /**
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addField( final FieldSpec fieldSpec )
         {
             final var fieldSpecImpl = (FieldSpecImpl) requireNonNullArgument( fieldSpec, "fieldSpec" );
             final var modifiers = fieldSpecImpl.modifiers();
             requireExactlyOneOf( modifiers, PUBLIC, PRIVATE );
             final Set<Modifier> check = EnumSet.of( STATIC, FINAL );
-            checkState( modifiers.containsAll( check ), () -> new ValidationException( format( "%s %s.%s requires modifiers %s", INTERFACE, getName().orElse( NAME_ANONYMOUS_TYPE ), fieldSpec.name(), check ) ) );
+            checkState( modifiers.containsAll( check ), () -> new ValidationException( "%s %s.%s requires modifiers %s".formatted( INTERFACE, getName().orElse( NAME_ANONYMOUS_TYPE ), fieldSpec.name(), check ) ) );
             super.addField( fieldSpecImpl );
 
             //---* Done *------------------------------------------------------
@@ -162,7 +158,6 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "UseOfConcreteClass" )
         public final BuilderImpl addInitializerBlock( final CodeBlock block )
         {
             throw new UnsupportedOperationException( INTERFACE + " can't have initializer blocks" );
@@ -172,14 +167,13 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addMethod( final MethodSpec methodSpec )
         {
             final var methodSpecImpl = (MethodSpecImpl) requireNonNullArgument( methodSpec, "methodSpec" );
             final var modifiers = methodSpecImpl.modifiers();
             requireExactlyOneOf( modifiers, ABSTRACT, STATIC, DEFAULT );
             requireExactlyOneOf( modifiers, PUBLIC, PRIVATE);
-            checkState( methodSpecImpl.defaultValue().isEmpty(), () -> new IllegalStateException( format( "%s %s.%s cannot have a default value", INTERFACE, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );
+            checkState( methodSpecImpl.defaultValue().isEmpty(), () -> new IllegalStateException( "%s %s.%s cannot have a default value".formatted( INTERFACE, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );
             final var methodSpecs = getMethodSpecs();
             if( composer().addDebugOutput() )
             {
@@ -206,16 +200,14 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            throw new ValidationException( format( "Properties are not allowed for interface %s", getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
+            throw new ValidationException( "Properties are not allowed for interface %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
         }   //  addProperty()
 
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final InterfaceSpecImpl build()
         {
@@ -229,10 +221,9 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl superclass( final TypeName superclass )
         {
-            throw new IllegalStateException( format( "only classes have super classes, not " + INTERFACE ) );
+            throw new IllegalStateException( "only classes have super classes, not " + INTERFACE );
         }   //  superclass()
     }
     //  class BuilderImpl
@@ -245,8 +236,7 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
      *
      *  @param  builder The builder for this instance.
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
-    public InterfaceSpecImpl( final BuilderImpl builder )
+    public InterfaceSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )
     {
         super( builder );
     }   //  InterfaceSpecImpl()
@@ -257,8 +247,7 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
      *
      *  @param  type    The source type.
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
-    private InterfaceSpecImpl( final InterfaceSpecImpl type )
+    private InterfaceSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final InterfaceSpecImpl type )
     {
         super( type );
     }   //  InterfaceSpecImpl()
@@ -282,8 +271,9 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "CastToConcreteClass"} )
-    protected final void emit4Foundation( final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
+    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "OverlyLongMethod", "OverlyComplexMethod"} )
+    @Override
+    protected final void emit4Foundation( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         assert isNull( enumName ) : "enumName has to be null";
 
@@ -353,9 +343,9 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
 
             //---* Emit the constants *----------------------------------------
             final var constants = getFieldSpecs().stream()
-                .filter( f -> f.hasModifier( PUBLIC ) )
-                .filter( f -> f.hasModifier( STATIC ) )
-                .filter( f -> f.hasModifier( FINAL ) )
+                .filter( constantSpec -> constantSpec.hasModifier( PUBLIC ) )
+                .filter( constantSpec -> constantSpec.hasModifier( STATIC ) )
+                .filter( constantSpec -> constantSpec.hasModifier( FINAL ) )
                 .filter( FieldSpecImpl::hasInitializer )
                 .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )
                 .toList();
@@ -368,19 +358,19 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
                         /*-----------*\\
                     ====** Constants **========================================================
                         \\*-----------*/""" );
-                constants.forEach( c ->
+                constants.forEach( constantSpec ->
                 {
                     codeWriter.emit( "\n" );
-                    c.emit( codeWriter, INTERFACE.implicitFieldModifiers() );
-                    alreadyHandled.add( c );
+                    constantSpec.emit( codeWriter, INTERFACE.implicitFieldModifiers() );
+                    alreadyHandled.add( constantSpec );
                 } );
                 firstMember = false;
             }
 
             //---* Emit the attributes *---------------------------------------
             final var attributes = getFieldSpecs().stream()
-                .filter( f -> !alreadyHandled.contains( f ) )
-                .filter( f -> !(f.hasModifier( STATIC ) && f.hasModifier( FINAL )) )
+                .filter( fieldSpec -> !alreadyHandled.contains( fieldSpec ) )
+                .filter( fieldSpec -> !(fieldSpec.hasModifier( STATIC ) && fieldSpec.hasModifier( FINAL )) )
                 .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )
                 .toList();
 
@@ -404,7 +394,7 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
 
             //---* Static fields *---------------------------------------------
             final var statics = getFieldSpecs().stream()
-                .filter( f -> !alreadyHandled.contains( f ) )
+                .filter( staticSpec -> !alreadyHandled.contains( staticSpec ) )
                 .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )
                 .toList();
             if( !statics.isEmpty() || !getStaticBlock().isEmpty() )
@@ -416,11 +406,11 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
                     ====** Static Initialisations **===========================================
                         \\*------------------------*/""" );
 
-                statics.forEach( s ->
+                statics.forEach( staticSpec ->
                 {
                     codeWriter.emit( "\n" );
-                    s.emit( codeWriter, INTERFACE.implicitFieldModifiers() );
-                    alreadyHandled.add( s );
+                    staticSpec.emit( codeWriter, INTERFACE.implicitFieldModifiers() );
+                    alreadyHandled.add( staticSpec );
                 } );
 
                 //---* Static Block *------------------------------------------
@@ -446,10 +436,10 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
                 ====** Methods **==========================================================
                     \\*---------*/""" );
 
-            methods.forEach( m ->
+            methods.forEach( methodSpec ->
             {
                 codeWriter.emit( "\n" );
-                m.emit( codeWriter, name(), INTERFACE.implicitMethodModifiers() );
+                methodSpec.emit( codeWriter, name(), INTERFACE.implicitMethodModifiers() );
             } );
         }
 
@@ -473,8 +463,9 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "CastToConcreteClass"} )
-    protected final void emit4JavaPoet( final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
+    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "OverlyComplexMethod"} )
+    @Override
+    protected final void emit4JavaPoet( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         assert isNull( enumName ) : "enumName has to be null";
 
@@ -564,7 +555,7 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
     public final boolean equals( final Object o )
     {
         var retValue = this == o;
-        if( !retValue && (o instanceof InterfaceSpecImpl other) )
+        if( !retValue && (o instanceof final InterfaceSpecImpl other) )
         {
             retValue = getFactory().equals( other.getFactory() ) && toString().equals( o.toString() );
         }
@@ -582,7 +573,6 @@ public final class InterfaceSpecImpl extends TypeSpecImpl
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
     @Override
     public final BuilderImpl toBuilder()
     {

@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2021 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2023 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -49,12 +49,12 @@
 <span class="source-line-no">036</span><span id="line-36"> *  Annotation value visitor adding members to the given builder instance.</span>
 <span class="source-line-no">037</span><span id="line-37"> *</span>
 <span class="source-line-no">038</span><span id="line-38"> *  @author Square, Inc.</span>
-<span class="source-line-no">039</span><span id="line-39"> *  @version $Id: AnnotationValueVisitor.java 920 2021-05-23 14:27:24Z tquadrat $</span>
+<span class="source-line-no">039</span><span id="line-39"> *  @version $Id: AnnotationValueVisitor.java 1062 2023-09-25 23:11:41Z tquadrat $</span>
 <span class="source-line-no">040</span><span id="line-40"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
 <span class="source-line-no">041</span><span id="line-41"> *  @UMLGraph.link</span>
 <span class="source-line-no">042</span><span id="line-42"> *  @since 0.0.5</span>
 <span class="source-line-no">043</span><span id="line-43"> */</span>
-<span class="source-line-no">044</span><span id="line-44">@ClassVersion( sourceVersion = "$Id: AnnotationValueVisitor.java 920 2021-05-23 14:27:24Z tquadrat $" )</span>
+<span class="source-line-no">044</span><span id="line-44">@ClassVersion( sourceVersion = "$Id: AnnotationValueVisitor.java 1062 2023-09-25 23:11:41Z tquadrat $" )</span>
 <span class="source-line-no">045</span><span id="line-45">@API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">046</span><span id="line-46">public class AnnotationValueVisitor extends SimpleAnnotationValueVisitor14&lt;BuilderImpl, String&gt;</span>
 <span class="source-line-no">047</span><span id="line-47">{</span>
@@ -64,7 +64,7 @@
 <span class="source-line-no">051</span><span id="line-51">    /**</span>
 <span class="source-line-no">052</span><span id="line-52">     * The builder.</span>
 <span class="source-line-no">053</span><span id="line-53">     */</span>
-<span class="source-line-no">054</span><span id="line-54">    @SuppressWarnings( "InstanceVariableOfConcreteClass" )</span>
+<span class="source-line-no">054</span><span id="line-54">    @SuppressWarnings( "UseOfConcreteClass" )</span>
 <span class="source-line-no">055</span><span id="line-55">    private final BuilderImpl m_Builder;</span>
 <span class="source-line-no">056</span><span id="line-56"></span>
 <span class="source-line-no">057</span><span id="line-57">        /*--------------*\</span>
@@ -75,7 +75,7 @@
 <span class="source-line-no">062</span><span id="line-62">     *</span>
 <span class="source-line-no">063</span><span id="line-63">     * @param builder The builder that takes the new members.</span>
 <span class="source-line-no">064</span><span id="line-64">     */</span>
-<span class="source-line-no">065</span><span id="line-65">    public AnnotationValueVisitor( final BuilderImpl builder )</span>
+<span class="source-line-no">065</span><span id="line-65">    public AnnotationValueVisitor( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )</span>
 <span class="source-line-no">066</span><span id="line-66">    {</span>
 <span class="source-line-no">067</span><span id="line-67">        super( builder );</span>
 <span class="source-line-no">068</span><span id="line-68">        m_Builder = builder;</span>

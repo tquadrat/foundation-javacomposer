@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2ß21 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -85,12 +85,12 @@ import org.tquadrat.foundation.javacomposer.internal.TypeNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeName.java 997 2022-01-26 14:55:05Z tquadrat $
+ *  @version $Id: TypeName.java 1068 2023-09-28 21:42:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: TypeName.java 997 2022-01-26 14:55:05Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeName.java 1068 2023-09-28 21:42:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface TypeName
     permits ArrayTypeName, ClassName, ParameterizedTypeName, TypeVariableName, WildcardTypeName, TypeNameImpl
@@ -132,7 +132,7 @@ public sealed interface TypeName
     @API( status = STABLE, since = "0.0.5" )
     public static Optional<TypeName> arrayComponent( final TypeName type )
     {
-        return type instanceof ArrayTypeName arrayType ? Optional.of( arrayType.componentType() ) : Optional.empty();
+        return type instanceof final ArrayTypeName arrayType ? Optional.of( arrayType.componentType() ) : Optional.empty();
     }   //  arrayComponent()
 
     /**

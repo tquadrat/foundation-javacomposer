@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -78,12 +78,12 @@ import org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CodeBlock.java 938 2021-12-15 14:42:53Z tquadrat $
+ *  @version $Id: CodeBlock.java 1067 2023-09-28 21:09:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: CodeBlock.java 938 2021-12-15 14:42:53Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: CodeBlock.java 1067 2023-09-28 21:09:15Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface CodeBlock
     permits CodeBlockImpl
@@ -97,13 +97,13 @@ public sealed interface CodeBlock
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeBlock.java 938 2021-12-15 14:42:53Z tquadrat $
+     *  @version $Id: CodeBlock.java 1067 2023-09-28 21:09:15Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( {"InnerClassOfInterface", "ClassWithTooManyMethods"} )
-    @ClassVersion( sourceVersion = "$Id: CodeBlock.java 938 2021-12-15 14:42:53Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeBlock.java 1067 2023-09-28 21:09:15Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static interface Builder
     {
@@ -346,7 +346,7 @@ public sealed interface CodeBlock
          *
          *  @since 0.0.6
          *
-         *  @deprecated Got obsolete with the the introduction of
+         *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
         @Deprecated( since = "0.2.0", forRemoval = true )
@@ -405,7 +405,7 @@ public sealed interface CodeBlock
          *
          *  @since 0.0.6
          *
-         *  @deprecated Got obsolete with the the introduction of
+         *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
         @Deprecated( since = "0.2.0", forRemoval = true )
@@ -451,7 +451,7 @@ public sealed interface CodeBlock
          *
          *  @since 0.0.6
          *
-         *  @deprecated Got obsolete with the the introduction of
+         *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
         @Deprecated( since = "0.2.0", forRemoval = true )
@@ -651,7 +651,7 @@ public sealed interface CodeBlock
     }   //  of()
 
     /**
-     *  Creates an new builder that is initialised with the components of this
+     *  Creates a new builder that is initialised with the components of this
      *  code block.
      *
      *  @return The new builder.

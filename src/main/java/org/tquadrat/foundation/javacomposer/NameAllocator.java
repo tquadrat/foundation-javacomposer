@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,6 @@ import static org.tquadrat.foundation.lang.Objects.isNull;
 import static org.tquadrat.foundation.lang.Objects.nonNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 import static org.tquadrat.foundation.util.UniqueIdUtils.randomUUID;
 
 import javax.lang.model.SourceVersion;
@@ -91,12 +90,12 @@ import org.tquadrat.foundation.exception.ValidationException;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: NameAllocator.java 840 2021-01-10 21:37:03Z tquadrat $
+ *  @version $Id: NameAllocator.java 1067 2023-09-28 21:09:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: NameAllocator.java 840 2021-01-10 21:37:03Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: NameAllocator.java 1067 2023-09-28 21:09:15Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public final class NameAllocator implements Cloneable
 {
@@ -180,8 +179,6 @@ public final class NameAllocator implements Cloneable
      *  code blocks.
      *
      *  @return A deep copy of this NameAllocator.
-     *
-     *  @see Object#clone()
      */
     @SuppressWarnings( "MethodDoesntCallSuperMethod" )
     @Override
@@ -247,7 +244,7 @@ public final class NameAllocator implements Cloneable
         if( nonNull( replaced ) )
         {
             m_TagToName.put( tag, replaced ); // Put things back as they were!
-            throw new ValidationException( format( "tag '%s' cannot be used for both '%s' and '%s'", tag, replaced, suggestion ) );
+            throw new ValidationException( "tag '%s' cannot be used for both '%s' and '%s'".formatted( tag, replaced, suggestion ) );
         }
 
         //---* Done *----------------------------------------------------------

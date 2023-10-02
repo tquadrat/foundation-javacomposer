@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,12 +47,12 @@ import org.tquadrat.foundation.javacomposer.TypeVariableName;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ArrayTypeNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: ArrayTypeNameImpl.java 1062 2023-09-25 23:11:41Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ArrayTypeNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ArrayTypeNameImpl.java 1062 2023-09-25 23:11:41Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeName
 {
@@ -62,7 +62,7 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
     /**
      *  The array component type.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final TypeNameImpl m_ComponentType;
 
         /*--------------*\
@@ -95,7 +95,6 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final ArrayTypeNameImpl annotated( final List<AnnotationSpec> annotations )
     {
@@ -203,7 +202,6 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
      *  @param  typeVariables   The type variables.
      *  @return The new instance of {@code ArrayTypeName}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final ArrayTypeNameImpl from( final ArrayType mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
     {
@@ -221,7 +219,6 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
      *  @param  typeVariables   The type variables.
      *  @return The new instance of {@code ArrayTypeName}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final ArrayTypeNameImpl from( final GenericArrayType type, final Map<Type,TypeVariableName> typeVariables )
     {
@@ -243,7 +240,6 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
      *      {@link #from(ArrayType,Map)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final ArrayTypeNameImpl get( final ArrayType mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
@@ -266,7 +262,6 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
      *      {@link #from(GenericArrayType,Map)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final ArrayTypeNameImpl get( final GenericArrayType type, final Map<Type,TypeVariableName> typeVariables )
@@ -282,7 +277,7 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
      *
      * @return The array component type.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final TypeNameImpl getComponentType() { return m_ComponentType; }
 
     /**
@@ -292,7 +287,6 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
      *  @param  componentType   The component type.
      *  @return The new instance of {@code ArrayTypeName}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static ArrayTypeNameImpl of( final Type componentType )
     {
         return of( TypeNameImpl.from( requireNonNullArgument( componentType, "componentType" ) ) );
@@ -305,7 +299,6 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
      *  @param  componentType   The component type.
      *  @return The new instance of {@code ArrayTypeName}.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public static final ArrayTypeNameImpl of( final TypeName componentType )
     {
         return new ArrayTypeNameImpl( (TypeNameImpl) componentType );
@@ -314,7 +307,6 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final ArrayTypeNameImpl withoutAnnotations() { return new ArrayTypeNameImpl( getComponentType() ); }
 }

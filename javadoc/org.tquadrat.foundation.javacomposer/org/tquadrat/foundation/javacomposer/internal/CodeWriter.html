@@ -123,10 +123,10 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://tquadrat.github.io/foundation-base/javadoc/org.tquadrat.foundation.base/org/tquadrat/foundation/annotation/ClassVersion.html" title="class or interface in org.tquadrat.foundation.annotation" class="external-link">@ClassVersion</a>(<a href="https://tquadrat.github.io/foundation-base/javadoc/org.tquadrat.foundation.base/org/tquadrat/foundation/annotation/ClassVersion.html#sourceVersion()" title="class or interface in org.tquadrat.foundation.annotation" class="external-link">sourceVersion</a>="$Id: CodeWriter.java 1043 2023-01-01 11:27:56Z tquadrat $")
+<div class="type-signature"><span class="annotations"><a href="https://tquadrat.github.io/foundation-base/javadoc/org.tquadrat.foundation.base/org/tquadrat/foundation/annotation/ClassVersion.html" title="class or interface in org.tquadrat.foundation.annotation" class="external-link">@ClassVersion</a>(<a href="https://tquadrat.github.io/foundation-base/javadoc/org.tquadrat.foundation.base/org/tquadrat/foundation/annotation/ClassVersion.html#sourceVersion()" title="class or interface in org.tquadrat.foundation.annotation" class="external-link">sourceVersion</a>="$Id: CodeWriter.java 1063 2023-09-26 15:14:16Z tquadrat $")
 <a href="https://apiguardian-team.github.io/apiguardian/docs/current/api/org/apiguardian/api/API.html" title="class or interface in org.apiguardian.api" class="external-link">@API</a>(<a href="https://apiguardian-team.github.io/apiguardian/docs/current/api/org/apiguardian/api/API.html#status()" title="class or interface in org.apiguardian.api" class="external-link">status</a>=<a href="https://apiguardian-team.github.io/apiguardian/docs/current/api/org/apiguardian/api/API.Status.html#INTERNAL" title="class or interface in org.apiguardian.api" class="external-link">INTERNAL</a>,
      <a href="https://apiguardian-team.github.io/apiguardian/docs/current/api/org/apiguardian/api/API.html#since()" title="class or interface in org.apiguardian.api" class="external-link">since</a>="0.0.5")
-</span><span class="modifiers">public final class </span><span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-77">CodeWriter</a></span>
+</span><span class="modifiers">public final class </span><span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-76">CodeWriter</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Converts a
   <a href="../JavaFile.html" title="interface in org.tquadrat.foundation.javacomposer"><code>JavaFile</code></a>
@@ -139,7 +139,7 @@ loadScripts(document, 'script');</script>
 <dt><span class="simpleTagLabel">Modified by:</span></dt>
   <dd>Thomas Thrien (<a href="mailto:thomas.thrien@tquadrat.org">thomas.thrien@tquadrat.org</a>)</dd>
 <dt>Version:</dt>
-<dd>$Id: CodeWriter.java 1043 2023-01-01 11:27:56Z tquadrat $</dd>
+<dd>$Id: CodeWriter.java 1063 2023-09-26 15:14:16Z tquadrat $</dd>
 <dt>Since:</dt>
 <dd>0.0.5</dd>
 
@@ -346,7 +346,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emit(java.lang.CharSequence)" class="member-name-link">emit</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>&nbsp;s)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emit(java.lang.CharSequence)" class="member-name-link">emit</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>&nbsp;input)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Emits the given String to the output target.</div>
 </div>
@@ -367,7 +367,7 @@ loadScripts(document, 'script');</script>
   instance to the output target.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emitAndIndent(java.lang.CharSequence)" class="member-name-link">emitAndIndent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>&nbsp;s)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emitAndIndent(java.lang.CharSequence)" class="member-name-link">emitAndIndent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>&nbsp;input)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Emits the given String to the output target with indentation as
   required.</div>
@@ -550,7 +550,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="NO_PACKAGE">
 <h3>NO_PACKAGE</h3>
-<div class="member-signature"><span class="modifiers">private static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-130">NO_PACKAGE</a></span></div>
+<div class="member-signature"><span class="modifiers">private static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-129">NO_PACKAGE</a></span></div>
 <div class="block">Sentinel value that indicates that no user-provided package has been
   set.</div>
 </section>
@@ -558,77 +558,77 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="m_Composer">
 <h3>m_Composer</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-139">m_Composer</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-138">m_Composer</a></span></div>
 <div class="block">The reference to the factory.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_CurrentlyEmittingComment">
 <h3>m_CurrentlyEmittingComment</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="CodeWriter.CommentType.html" title="enum class in org.tquadrat.foundation.javacomposer.internal">CodeWriter.CommentType</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-145">m_CurrentlyEmittingComment</a></span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="CodeWriter.CommentType.html" title="enum class in org.tquadrat.foundation.javacomposer.internal">CodeWriter.CommentType</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-144">m_CurrentlyEmittingComment</a></span></div>
 <div class="block">Flag that indicates that we are currently writing a normal comment.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_ImportableTypes">
 <h3>m_ImportableTypes</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-150">m_ImportableTypes</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-149">m_ImportableTypes</a></span></div>
 <div class="block">The types that can be imported.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_ImportedTypes">
 <h3>m_ImportedTypes</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-155">m_ImportedTypes</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-154">m_ImportedTypes</a></span></div>
 <div class="block">The imported types.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_Indent">
 <h3>m_Indent</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-160">m_Indent</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-159">m_Indent</a></span></div>
 <div class="block">The indentation.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_IndentLevel">
 <h3>m_IndentLevel</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-165">m_IndentLevel</a></span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-164">m_IndentLevel</a></span></div>
 <div class="block">The indentation level.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_Layout">
 <h3>m_Layout</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../Layout.html" title="enum class in org.tquadrat.foundation.javacomposer">Layout</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-170">m_Layout</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../Layout.html" title="enum class in org.tquadrat.foundation.javacomposer">Layout</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-169">m_Layout</a></span></div>
 <div class="block">The layout for the output.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_LineWrapper">
 <h3>m_LineWrapper</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="LineWrapper.html" title="class in org.tquadrat.foundation.javacomposer.internal">LineWrapper</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-175">m_LineWrapper</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="LineWrapper.html" title="class in org.tquadrat.foundation.javacomposer.internal">LineWrapper</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-174">m_LineWrapper</a></span></div>
 <div class="block">The output target.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_PackageName">
 <h3>m_PackageName</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-181">m_PackageName</a></span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-180">m_PackageName</a></span></div>
 <div class="block">The current package name.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_ReferencedNames">
 <h3>m_ReferencedNames</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-186">m_ReferencedNames</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-185">m_ReferencedNames</a></span></div>
 <div class="block">The referenced names.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_StatementLine">
 <h3>m_StatementLine</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-194">m_StatementLine</a></span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-193">m_StatementLine</a></span></div>
 <div class="block">When a statement will be emitted, this is the line of the statement
   currently being written. The first line of a statement is indented
   normally and subsequent wrapped lines are double-indented. This is -1
@@ -638,28 +638,28 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="m_StaticImportClassNames">
 <h3>m_StaticImportClassNames</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-199">m_StaticImportClassNames</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-198">m_StaticImportClassNames</a></span></div>
 <div class="block">The names of statically imported classes.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_StaticImports">
 <h3>m_StaticImports</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-204">m_StaticImports</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-203">m_StaticImports</a></span></div>
 <div class="block">The static imports.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_TrailingNewline">
 <h3>m_TrailingNewline</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-209">m_TrailingNewline</a></span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-208">m_TrailingNewline</a></span></div>
 <div class="block">A flag that controls the trailing new line.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_TypeSpecStack">
 <h3>m_TypeSpecStack</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="TypeSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">TypeSpecImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-214">m_TypeSpecStack</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="TypeSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">TypeSpecImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-213">m_TypeSpecStack</a></span></div>
 <div class="block">The types.</div>
 </section>
 </li>
@@ -676,7 +676,7 @@ loadScripts(document, 'script');</script>
 <h3>CodeWriter</h3>
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="0.2.0",
             <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
-</span><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-228">CodeWriter</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Appendable.html" title="class or interface in java.lang" class="external-link">Appendable</a>&nbsp;out)</span></div>
+</span><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-227">CodeWriter</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Appendable.html" title="class or interface in java.lang" class="external-link">Appendable</a>&nbsp;out)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">Use
       <a href="#%3Cinit%3E(org.tquadrat.foundation.javacomposer.JavaComposer,java.lang.Appendable)"><code>CodeWriter(JavaComposer, Appendable)</code></a>
@@ -694,7 +694,7 @@ loadScripts(document, 'script');</script>
 <h3>CodeWriter</h3>
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="0.2.0",
             <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
-</span><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-242">CodeWriter</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Appendable.html" title="class or interface in java.lang" class="external-link">Appendable</a>&nbsp;out,
+</span><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-241">CodeWriter</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Appendable.html" title="class or interface in java.lang" class="external-link">Appendable</a>&nbsp;out,
  <a href="../Layout.html" title="enum class in org.tquadrat.foundation.javacomposer">Layout</a>&nbsp;layout,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;staticImports)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
@@ -716,7 +716,7 @@ loadScripts(document, 'script');</script>
 <h3>CodeWriter</h3>
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="0.2.0",
             <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
-</span><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-261">CodeWriter</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Appendable.html" title="class or interface in java.lang" class="external-link">Appendable</a>&nbsp;out,
+</span><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-260">CodeWriter</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Appendable.html" title="class or interface in java.lang" class="external-link">Appendable</a>&nbsp;out,
  <a href="../Layout.html" title="enum class in org.tquadrat.foundation.javacomposer">Layout</a>&nbsp;layout,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;indent,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;&nbsp;importedTypes,
@@ -740,7 +740,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(org.tquadrat.foundation.javacomposer.JavaComposer,java.lang.Appendable)">
 <h3>CodeWriter</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-275">CodeWriter</a></span><wbr><span class="parameters">(<a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a>&nbsp;composer,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-274">CodeWriter</a></span><wbr><span class="parameters">(<a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a>&nbsp;composer,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Appendable.html" title="class or interface in java.lang" class="external-link">Appendable</a>&nbsp;out)</span></div>
 <div class="block">Creates a new <code>CodeWriter</code> instance.</div>
 <dl class="notes">
@@ -754,7 +754,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(org.tquadrat.foundation.javacomposer.JavaComposer,java.lang.Appendable,java.util.Set)">
 <h3>CodeWriter</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-286">CodeWriter</a></span><wbr><span class="parameters">(<a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a>&nbsp;composer,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-285">CodeWriter</a></span><wbr><span class="parameters">(<a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a>&nbsp;composer,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Appendable.html" title="class or interface in java.lang" class="external-link">Appendable</a>&nbsp;out,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;staticImports)</span></div>
 <div class="block">Creates a new <code>CodeWriter</code> instance.</div>
@@ -770,7 +770,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(org.tquadrat.foundation.javacomposer.JavaComposer,java.lang.Appendable,java.util.Map,java.util.Set)">
 <h3>CodeWriter</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-301">CodeWriter</a></span><wbr><span class="parameters">(<a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a>&nbsp;composer,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-300">CodeWriter</a></span><wbr><span class="parameters">(<a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a>&nbsp;composer,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Appendable.html" title="class or interface in java.lang" class="external-link">Appendable</a>&nbsp;out,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;&nbsp;importedTypes,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;staticImports)</span></div>
@@ -796,14 +796,14 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emit(java.lang.CharSequence)">
 <h3>emit</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-328">emit</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>&nbsp;s)</span>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-327">emit</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>&nbsp;input)</span>
                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block"><p>Emits the given String to the output target.</p>
   <p>Delegates to
   <a href="#emitAndIndent(java.lang.CharSequence)"><code>emitAndIndent(CharSequence)</code></a>.</p></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>s</code> - The String.</dd>
+<dd><code>input</code> - The String.</dd>
 <dt>Returns:</dt>
 <dd>This <code>CodeWriter</code> instance.</dd>
 <dt>Throws:</dt>
@@ -815,7 +815,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emit(java.lang.String,java.lang.Object...)">
 <h3>emit</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-344">emit</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;format,
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-343">emit</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;format,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;args)</span>
                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits a
@@ -843,7 +843,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emit(org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl)">
 <h3>emit</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-364">emit</a></span><wbr><span class="parameters">(<a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeBlockImpl</a>&nbsp;codeBlock)</span>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-363">emit</a></span><wbr><span class="parameters">(<a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeBlockImpl</a>&nbsp;codeBlock)</span>
                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits the given
   <a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal"><code>CodeBlockImpl</code></a>
@@ -862,7 +862,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitAndIndent(java.lang.CharSequence)">
 <h3>emitAndIndent</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-495">emitAndIndent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>&nbsp;s)</span>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-493">emitAndIndent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>&nbsp;input)</span>
                                throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits the given String to the output target with indentation as
   required. It's important that all code that writes to
@@ -871,7 +871,7 @@ loadScripts(document, 'script');</script>
   avoid unnecessary trailing whitespace.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>s</code> - The String.</dd>
+<dd><code>input</code> - The String.</dd>
 <dt>Returns:</dt>
 <dd>This <code>CodeWriter</code> instance.</dd>
 <dt>Throws:</dt>
@@ -883,7 +883,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitAnnotations(java.lang.Iterable,boolean)">
 <h3>emitAnnotations</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-596">emitAnnotations</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;<a href="AnnotationSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl</a>&gt;&nbsp;annotations,
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-594">emitAnnotations</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;<a href="AnnotationSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl</a>&gt;&nbsp;annotations,
  boolean&nbsp;inline)</span>
                            throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits the given annotations to the output target.</div>
@@ -901,7 +901,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitBlockComment(org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl)">
 <h3>emitBlockComment</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-614">emitBlockComment</a></span><wbr><span class="parameters">(<a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeBlockImpl</a>&nbsp;codeBlock)</span>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-612">emitBlockComment</a></span><wbr><span class="parameters">(<a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeBlockImpl</a>&nbsp;codeBlock)</span>
                             throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits the given
   <a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal"><code>CodeBlockImpl</code></a>
@@ -918,7 +918,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitIndentation()">
 <h3>emitIndentation</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-638">emitIndentation</a></span>()
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-636">emitIndentation</a></span>()
                             throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Writes the indentation to the output target.</div>
 <dl class="notes">
@@ -931,7 +931,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitJavadoc(org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl)">
 <h3>emitJavadoc</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-659">emitJavadoc</a></span><wbr><span class="parameters">(<a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeBlockImpl</a>&nbsp;codeBlock)</span>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-657">emitJavadoc</a></span><wbr><span class="parameters">(<a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeBlockImpl</a>&nbsp;codeBlock)</span>
                        throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits the given
   <a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal"><code>CodeBlockImpl</code></a>
@@ -948,7 +948,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitLineComment(org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl)">
 <h3>emitLineComment</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-704">emitLineComment</a></span><wbr><span class="parameters">(<a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeBlockImpl</a>&nbsp;codeBlock)</span>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-702">emitLineComment</a></span><wbr><span class="parameters">(<a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeBlockImpl</a>&nbsp;codeBlock)</span>
                            throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits the given
   <a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal"><code>CodeBlockImpl</code></a>
@@ -965,7 +965,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitLiteral(java.lang.Object)">
 <h3>emitLiteral</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-727">emitLiteral</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-725">emitLiteral</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span>
                         throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits the given argument literally to the output target.</div>
 <dl class="notes">
@@ -980,7 +980,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitModifiers(java.util.Collection,java.util.Collection)">
 <h3>emitModifiers</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-761">emitModifiers</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.compiler/javax/lang/model/element/Modifier.html" title="class or interface in javax.lang.model.element" class="external-link">Modifier</a>&gt;&nbsp;modifiers,
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-759">emitModifiers</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.compiler/javax/lang/model/element/Modifier.html" title="class or interface in javax.lang.model.element" class="external-link">Modifier</a>&gt;&nbsp;modifiers,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.compiler/javax/lang/model/element/Modifier.html" title="class or interface in javax.lang.model.element" class="external-link">Modifier</a>&gt;&nbsp;implicitModifiers)</span>
                          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits <code>modifiers</code> to the output target in the standard order.
@@ -998,7 +998,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitModifiers(java.util.Collection)">
 <h3>emitModifiers</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-783">emitModifiers</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.compiler/javax/lang/model/element/Modifier.html" title="class or interface in javax.lang.model.element" class="external-link">Modifier</a>&gt;&nbsp;modifiers)</span>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-781">emitModifiers</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.compiler/javax/lang/model/element/Modifier.html" title="class or interface in javax.lang.model.element" class="external-link">Modifier</a>&gt;&nbsp;modifiers)</span>
                          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits <code>modifiers</code> to the output target in the standard order.</div>
 <dl class="notes">
@@ -1013,7 +1013,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitStaticImportMember(java.lang.String,java.lang.String)">
 <h3>emitStaticImportMember</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-797">emitStaticImportMember</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;canonical,
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-795">emitStaticImportMember</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;canonical,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;part)</span>
                                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits a static import entry to the output target.</div>
@@ -1032,7 +1032,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitTypeVariables(java.util.List)">
 <h3>emitTypeVariables</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-831">emitTypeVariables</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="TypeVariableNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">TypeVariableNameImpl</a>&gt;&nbsp;typeVariables)</span>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-829">emitTypeVariables</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="TypeVariableNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">TypeVariableNameImpl</a>&gt;&nbsp;typeVariables)</span>
                              throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits type variables with their bounds. This should only be used when
   declaring type variables; everywhere else bounds are omitted.</div>
@@ -1048,7 +1048,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="emitWrappingSpace()">
 <h3>emitWrappingSpace</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-861">emitWrappingSpace</a></span>()
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-859">emitWrappingSpace</a></span>()
                                    throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits wrapping space to the output target.</div>
 <dl class="notes">
@@ -1063,7 +1063,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="extractMemberName(java.lang.String)">
 <h3>extractMemberName</h3>
-<div class="member-signature"><span class="modifiers">private static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-882">extractMemberName</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;part)</span></div>
+<div class="member-signature"><span class="modifiers">private static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-880">extractMemberName</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;part)</span></div>
 <div class="block">Extracts a member name from the given part.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -1076,7 +1076,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="importableType(org.tquadrat.foundation.javacomposer.internal.ClassNameImpl)">
 <h3>importableType</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-903">importableType</a></span><wbr><span class="parameters">(<a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&nbsp;className)</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-901">importableType</a></span><wbr><span class="parameters">(<a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&nbsp;className)</span></div>
 <div class="block">Marks the given type as importable.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -1087,7 +1087,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="importedTypes()">
 <h3>importedTypes</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-923">importedTypes</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-921">importedTypes</a></span>()</div>
 <div class="block">Returns the imported types.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -1098,7 +1098,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="indent()">
 <h3>indent</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-930">indent</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-928">indent</a></span>()</div>
 <div class="block">Increments the indentation level.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -1109,7 +1109,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="indent(int)">
 <h3>indent</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-938">indent</a></span><wbr><span class="parameters">(int&nbsp;levels)</span></div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-936">indent</a></span><wbr><span class="parameters">(int&nbsp;levels)</span></div>
 <div class="block">Increases the indentation level by the given value.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -1122,7 +1122,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="layout()">
 <h3>layout</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="../Layout.html" title="enum class in org.tquadrat.foundation.javacomposer">Layout</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-951">layout</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="../Layout.html" title="enum class in org.tquadrat.foundation.javacomposer">Layout</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-949">layout</a></span>()</div>
 <div class="block">Returns the layout for the output.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -1133,7 +1133,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="lookupName(org.tquadrat.foundation.javacomposer.internal.ClassNameImpl)">
 <h3>lookupName</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-962">lookupName</a></span><wbr><span class="parameters">(<a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&nbsp;className)</span></div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-960">lookupName</a></span><wbr><span class="parameters">(<a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&nbsp;className)</span></div>
 <div class="block">Returns the best name to identify <code>className</code> within the current
   context. This uses the available imports and the current scope to find
   the shortest name available. It does not honour names that are visible
@@ -1149,7 +1149,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="popPackage()">
 <h3>popPackage</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1023">popPackage</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1021">popPackage</a></span>()</div>
 <div class="block">Pops the package name.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -1160,7 +1160,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="popType()">
 <h3>popType</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1038">popType</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1036">popType</a></span>()</div>
 <div class="block">Pops the top most type.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -1171,7 +1171,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="pushPackage(java.lang.String)">
 <h3>pushPackage</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1053">pushPackage</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;packageName)</span></div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1051">pushPackage</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;packageName)</span></div>
 <div class="block">Pushes the given package name.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -1184,7 +1184,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="pushType(org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl)">
 <h3>pushType</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1069">pushType</a></span><wbr><span class="parameters">(<a href="TypeSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">TypeSpecImpl</a>&nbsp;type)</span></div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1067">pushType</a></span><wbr><span class="parameters">(<a href="TypeSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">TypeSpecImpl</a>&nbsp;type)</span></div>
 <div class="block">Pushes the give type.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -1197,7 +1197,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="resolve(java.lang.String)">
 <h3>resolve</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1088">resolve</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;simpleName)</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1086">resolve</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;simpleName)</span></div>
 <div class="block">Returns the class referenced by <code>simpleName</code>, using the current
   nesting context and imports.</div>
 <dl class="notes">
@@ -1213,7 +1213,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="stackClassName(int,java.lang.String)">
 <h3>stackClassName</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1133">stackClassName</a></span><wbr><span class="parameters">(int&nbsp;stackDepth,
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1131">stackClassName</a></span><wbr><span class="parameters">(int&nbsp;stackDepth,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;simpleName)</span></div>
 <div class="block">Returns the class named <code>simpleName</code> when nested in the class at
   <code>stackDepth</code>.</div>
@@ -1229,7 +1229,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="statementLine()">
 <h3>statementLine</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1162">statementLine</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1160">statementLine</a></span>()</div>
 <div class="block"><p>Returns the current statement line.</p>
   <p>When a statement will be emitted, this method returns the line of
   the statement currently being written. The first line of a statement is
@@ -1245,7 +1245,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="statementLine(int)">
 <h3>statementLine</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1171">statementLine</a></span><wbr><span class="parameters">(int&nbsp;statementLine)</span></div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1169">statementLine</a></span><wbr><span class="parameters">(int&nbsp;statementLine)</span></div>
 <div class="block">Sets the current statement line.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -1262,7 +1262,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="suggestedImports()">
 <h3>suggestedImports</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1180">suggestedImports</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="ClassNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">ClassNameImpl</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1178">suggestedImports</a></span>()</div>
 <div class="block">Returns the types that should have been imported for this code. If
   there were any simple name collisions, that type's first use is
   imported.</div>
@@ -1275,7 +1275,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="unindent()">
 <h3>unindent</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1194">unindent</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1192">unindent</a></span>()</div>
 <div class="block">Decrements the indentation level.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -1286,7 +1286,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="unindent(int)">
 <h3>unindent</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1202">unindent</a></span><wbr><span class="parameters">(int&nbsp;levels)</span></div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/CodeWriter.html#line-1200">unindent</a></span><wbr><span class="parameters">(int&nbsp;levels)</span></div>
 <div class="block">Decreases the indentation level by the given value.</div>
 <dl class="notes">
 <dt>Parameters:</dt>

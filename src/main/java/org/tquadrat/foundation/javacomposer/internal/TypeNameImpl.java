@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -78,13 +78,13 @@ import org.tquadrat.foundation.lang.Lazy;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeNameImpl.java 997 2022-01-26 14:55:05Z tquadrat $
+ *  @version $Id: TypeNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( "ClassWithTooManyFields" )
-@ClassVersion( sourceVersion = "$Id: TypeNameImpl.java 997 2022-01-26 14:55:05Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public sealed class TypeNameImpl implements TypeName
     permits ArrayTypeNameImpl, ClassNameImpl, ParameterizedTypeNameImpl, TypeVariableNameImpl, WildcardTypeNameImpl
@@ -197,7 +197,6 @@ public sealed class TypeNameImpl implements TypeName
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public TypeNameImpl annotated( final List<AnnotationSpec> annotations )
     {
@@ -228,7 +227,9 @@ public sealed class TypeNameImpl implements TypeName
     @SuppressWarnings( "ClassReferencesSubclass" )
     public static final Optional<ArrayTypeNameImpl> asArray( final TypeName type )
     {
-        final Optional<ArrayTypeNameImpl> retValue = type instanceof ArrayTypeNameImpl arrayType ? Optional.of( arrayType ) : Optional.empty();
+        final Optional<ArrayTypeNameImpl> retValue = type instanceof final ArrayTypeNameImpl arrayType
+            ? Optional.of( arrayType )
+            : Optional.empty();
 
         //---* Done *----------------------------------------------------------
         return retValue;
@@ -237,7 +238,7 @@ public sealed class TypeNameImpl implements TypeName
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
+    @SuppressWarnings( {"MethodWithMultipleReturnPoints", "OverlyComplexMethod"} )
     @Override
     public final TypeNameImpl box()
     {
@@ -345,7 +346,6 @@ public sealed class TypeNameImpl implements TypeName
      *  @param  mirror  The given type mirror instance.
      *  @return The respective type name.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final TypeNameImpl from( final TypeMirror mirror )
     {
@@ -363,7 +363,6 @@ public sealed class TypeNameImpl implements TypeName
      *  @param  type    The type.
      *  @return The respective type name for the given {@code Type} instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final TypeNameImpl from( final Type type )
     {
@@ -383,11 +382,10 @@ public sealed class TypeNameImpl implements TypeName
      *
      *  @return The respective type name.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = MAINTAINED, since = "0.2.0" )
     public static final TypeNameImpl from( final TypeMirror mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
     {
-        @SuppressWarnings( {"AnonymousInnerClassWithTooManyMethods", "OverlyComplexAnonymousInnerClass"} )
+        @SuppressWarnings( {"AnonymousInnerClassWithTooManyMethods", "OverlyComplexAnonymousInnerClass", "AnonymousInnerClass"} )
         final var retValue = mirror.accept( new SimpleTypeVisitor14<TypeNameImpl,Void>()
         {
             /**
@@ -414,65 +412,77 @@ public sealed class TypeNameImpl implements TypeName
             /**
              *  {@inheritDoc}
              */
-            @SuppressWarnings( "CastConflictsWithInstanceof" )
             @Override
             public final TypeNameImpl visitDeclared( final DeclaredType t, final Void p )
             {
                 final var rawType = ClassNameImpl.from( (TypeElement) t.asElement() );
                 final var enclosingType = t.getEnclosingType();
                 final var enclosing = (enclosingType.getKind() != TypeKind.NONE) && !t.asElement().getModifiers().contains( Modifier.STATIC ) ? enclosingType.accept( this, null ) : null;
-                if( t.getTypeArguments().isEmpty() && ! (enclosing instanceof ParameterizedTypeName) ){ return rawType; }
+                @SuppressWarnings( "AnonymousClassVariableHidesContainingMethodVariable" )
+                final TypeNameImpl retValue;
+                if( t.getTypeArguments().isEmpty() && ! (enclosing instanceof ParameterizedTypeName) )
+                {
+                    retValue = rawType;
+                }
+                else
+                {
+                    final var typeArgumentNames = t.getTypeArguments()
+                        .stream()
+                        .map( typeMirror -> get( typeMirror, typeVariables ) )
+                        .collect( toList() );
+                    //noinspection CastConflictsWithInstanceof
+                    retValue = enclosing instanceof ParameterizedTypeName
+                        ? ((ParameterizedTypeNameImpl) enclosing)
+                            .nestedClass( rawType.simpleName(), typeArgumentNames.stream().map( typeName -> (TypeName) typeName ).collect( toList() ) )
+                        : new ParameterizedTypeNameImpl( null, rawType, typeArgumentNames );
+                }
 
-                final var typeArgumentNames = t.getTypeArguments().stream().map( m -> get( m, typeVariables ) ).collect( toList() );
-                return enclosing instanceof ParameterizedTypeName
-                    ? ((ParameterizedTypeNameImpl) enclosing)
-                           .nestedClass( rawType.simpleName(), typeArgumentNames.stream().map( n -> (TypeName) n ).collect( toList() ) )
-                    : new ParameterizedTypeNameImpl( null, rawType, typeArgumentNames );
+                //---* Done *----------------------------------------------------------
+                return retValue;
             }   //  visitDeclared()
 
             /**
              *  {@inheritDoc}
              */
-            @SuppressWarnings( "UseOfConcreteClass" )
             @Override
             public final TypeNameImpl visitError( final ErrorType t, final Void p ) { return visitDeclared( t, p ); }
 
             /**
              *  {@inheritDoc}
              */
-            @SuppressWarnings( "UseOfConcreteClass" )
             @Override
             public final ArrayTypeNameImpl visitArray( final ArrayType t, final Void p ) { return ArrayTypeNameImpl.from( t, typeVariables ); }
 
             /**
              *  {@inheritDoc}
              */
-            @SuppressWarnings( "UseOfConcreteClass" )
             @Override
             public final TypeNameImpl visitTypeVariable( final javax.lang.model.type.TypeVariable t, final Void p ) { return TypeVariableNameImpl.from( t, typeVariables ); }
 
             /**
              *  {@inheritDoc}
              */
-            @SuppressWarnings( "UseOfConcreteClass" )
             @Override
             public final TypeNameImpl visitWildcard( final javax.lang.model.type.WildcardType t, final Void p ) { return WildcardTypeNameImpl.from( t, typeVariables ); }
 
             /**
              *  {@inheritDoc}
              */
-            @SuppressWarnings( "UseOfConcreteClass" )
             @Override
             public final TypeNameImpl visitNoType( final NoType t, final Void p )
             {
-                if( t.getKind() == TypeKind.VOID ) return VOID_PRIMITIVE;
-                return visitUnknown( t, p );
+                @SuppressWarnings( "AnonymousClassVariableHidesContainingMethodVariable" )
+                final var retValue = t.getKind() == TypeKind.VOID
+                    ? VOID_PRIMITIVE
+                    : visitUnknown( t, p );
+
+                //---* Done *----------------------------------------------------------
+                return retValue;
             }   //  visitNoType()
 
             /**
              *  {@inheritDoc}
              */
-            @SuppressWarnings( "UseOfConcreteClass" )
             @Override
             protected final TypeNameImpl defaultAction( final TypeMirror e, final Void p )
             {
@@ -493,30 +503,30 @@ public sealed class TypeNameImpl implements TypeName
      *  @param  typeVariables   The type variables.
      *  @return The respective type name for the given {@code Type} instance.
      */
-    @SuppressWarnings( {"IfStatementWithTooManyBranches", "ChainOfInstanceofChecks", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"IfStatementWithTooManyBranches", "ChainOfInstanceofChecks", "OverlyComplexMethod"} )
     @API( status = MAINTAINED, since = "0.2.0" )
     public static final TypeNameImpl from( final Type type, final Map<Type,TypeVariableName> typeVariables )
     {
         final var retValue = switch( type )
         {
-            case Class<?> c -> {
-                if( c == void.class ) yield VOID_PRIMITIVE;
-                else if( c == boolean.class ) yield BOOLEAN_PRIMITIVE;
-                else if( c == byte.class ) yield BYTE_PRIMITIVE;
-                else if( c == short.class ) yield SHORT_PRIMITIVE;
-                else if( c == int.class ) yield INT_PRIMITIVE;
-                else if( c == long.class ) yield LONG_PRIMITIVE;
-                else if( c == char.class ) yield CHAR_PRIMITIVE;
-                else if( c == float.class ) yield FLOAT_PRIMITIVE;
-                else if( c == double.class ) yield DOUBLE_PRIMITIVE;
-                else if( c == Object.class ) yield OBJECT;
-                else if( c.isArray() ) yield ArrayTypeNameImpl.of( from( c.getComponentType(), typeVariables ) );
-                else yield ClassNameImpl.from( c );
+            case final Class<?> aClass -> {
+                if( aClass == void.class ) yield VOID_PRIMITIVE;
+                else if( aClass == boolean.class ) yield BOOLEAN_PRIMITIVE;
+                else if( aClass == byte.class ) yield BYTE_PRIMITIVE;
+                else if( aClass == short.class ) yield SHORT_PRIMITIVE;
+                else if( aClass == int.class ) yield INT_PRIMITIVE;
+                else if( aClass == long.class ) yield LONG_PRIMITIVE;
+                else if( aClass == char.class ) yield CHAR_PRIMITIVE;
+                else if( aClass == float.class ) yield FLOAT_PRIMITIVE;
+                else if( aClass == double.class ) yield DOUBLE_PRIMITIVE;
+                else if( aClass == Object.class ) yield OBJECT;
+                else if( aClass.isArray() ) yield ArrayTypeNameImpl.of( from( aClass.getComponentType(), typeVariables ) );
+                else yield ClassNameImpl.from( aClass );
             }
-            case ParameterizedType parameterizedType -> ParameterizedTypeNameImpl.from( parameterizedType, typeVariables );
-            case WildcardType wildcardType -> WildcardTypeNameImpl.from( wildcardType, typeVariables );
-            case TypeVariable<?> typeVariable -> TypeVariableNameImpl.from( typeVariable, typeVariables );
-            case GenericArrayType genericArrayType -> ArrayTypeNameImpl.from( genericArrayType, typeVariables );
+            case final ParameterizedType parameterizedType -> ParameterizedTypeNameImpl.from( parameterizedType, typeVariables );
+            case final WildcardType wildcardType -> WildcardTypeNameImpl.from( wildcardType, typeVariables );
+            case final TypeVariable<?> typeVariable -> TypeVariableNameImpl.from( typeVariable, typeVariables );
+            case final GenericArrayType genericArrayType -> ArrayTypeNameImpl.from( genericArrayType, typeVariables );
             case null -> throw new IllegalArgumentException( "type is null" );
             default -> throw new IllegalArgumentException( "unexpected type: " + type );
         };
@@ -539,7 +549,6 @@ public sealed class TypeNameImpl implements TypeName
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final TypeNameImpl get( final TypeMirror mirror ) { return from( mirror ); }
 
     /**
@@ -556,7 +565,6 @@ public sealed class TypeNameImpl implements TypeName
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final TypeNameImpl get( final Type type ) { return from( type ); }
 
     /**
@@ -575,7 +583,6 @@ public sealed class TypeNameImpl implements TypeName
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final TypeNameImpl get( final TypeMirror mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
     {
         final var retValue = from( mirror, typeVariables );
@@ -599,7 +606,6 @@ public sealed class TypeNameImpl implements TypeName
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final TypeNameImpl get( final Type type, final Map<Type,TypeVariableName> typeVariables )
     {
         final var retValue = from( type, typeVariables );
@@ -706,8 +712,8 @@ public sealed class TypeNameImpl implements TypeName
     /**
      *  {@inheritDoc}
      */
+    @SuppressWarnings( {"MethodWithMultipleReturnPoints", "OverlyComplexMethod"} )
     @Override
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final TypeNameImpl unbox()
     {
         if( m_Keyword.isPresent() ) return this; // Already unboxed.
@@ -727,7 +733,6 @@ public sealed class TypeNameImpl implements TypeName
      *  {@inheritDoc}
      */
     @Override
-    @SuppressWarnings( "UseOfConcreteClass" )
     public TypeNameImpl withoutAnnotations() { return new TypeNameImpl( m_Keyword.orElse( null ) ); }
 }
 //  class TypeNameImpl

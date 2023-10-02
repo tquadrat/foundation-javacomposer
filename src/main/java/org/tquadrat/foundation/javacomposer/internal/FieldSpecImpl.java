@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,6 @@ import static org.tquadrat.foundation.lang.Objects.isNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.Modifier;
 import java.io.UncheckedIOException;
@@ -62,12 +61,12 @@ import org.tquadrat.foundation.util.JavaUtils;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: FieldSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: FieldSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class FieldSpecImpl implements FieldSpec
 {
@@ -80,12 +79,12 @@ public final class FieldSpecImpl implements FieldSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: FieldSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @version $Id: FieldSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements FieldSpec.Builder
     {
@@ -100,19 +99,19 @@ public final class FieldSpecImpl implements FieldSpec
         /**
          *  The reference to the factory.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final JavaComposer m_Composer;
 
         /**
          *  The initializer for the field.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private CodeBlockImpl m_Initializer = null;
 
         /**
          *  The Javadoc comment for the field.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final CodeBlockImpl.BuilderImpl m_Javadoc;
 
         /**
@@ -128,7 +127,7 @@ public final class FieldSpecImpl implements FieldSpec
         /**
          *  The type for the field.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final TypeNameImpl m_Type;
 
             /*--------------*\
@@ -142,8 +141,7 @@ public final class FieldSpecImpl implements FieldSpec
          *  @param  type    The type for the new field.
          *  @param  name    The name for the new field.
          */
-        @SuppressWarnings( "CastToConcreteClass" )
-        public BuilderImpl( final JavaComposer composer, final TypeNameImpl type, final CharSequence name )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, @SuppressWarnings( "UseOfConcreteClass" ) final TypeNameImpl type, final CharSequence name )
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
             m_Type = requireNonNullArgument( type, "type" );
@@ -158,7 +156,6 @@ public final class FieldSpecImpl implements FieldSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addAnnotation( final AnnotationSpec annotationSpec )
         {
@@ -171,7 +168,6 @@ public final class FieldSpecImpl implements FieldSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addAnnotation( final Class<?> annotation )
         {
@@ -181,7 +177,6 @@ public final class FieldSpecImpl implements FieldSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addAnnotation( final ClassName annotation )
         {
@@ -195,7 +190,6 @@ public final class FieldSpecImpl implements FieldSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addAnnotations( final Iterable<AnnotationSpec> annotationSpecs )
         {
@@ -211,7 +205,6 @@ public final class FieldSpecImpl implements FieldSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addJavadoc( final CodeBlock block )
         {
@@ -224,7 +217,6 @@ public final class FieldSpecImpl implements FieldSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addJavadoc( final String format, final Object... args )
         {
@@ -237,7 +229,6 @@ public final class FieldSpecImpl implements FieldSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addModifiers( final Modifier... modifiers )
         {
@@ -250,7 +241,6 @@ public final class FieldSpecImpl implements FieldSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final FieldSpecImpl build() { return new FieldSpecImpl( this ); }
 
@@ -260,7 +250,6 @@ public final class FieldSpecImpl implements FieldSpec
          *  @param  codeBlock   The code that initialises the field.
          *  @return This {@code Builder} instance.
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl initializer( final CodeBlock codeBlock )
         {
@@ -287,7 +276,6 @@ public final class FieldSpecImpl implements FieldSpec
          *  @param  args    The arguments.
          *  @return This {@code Builder} instance.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl initializer( final String format, final Object... args )
         {
@@ -307,7 +295,7 @@ public final class FieldSpecImpl implements FieldSpec
     /**
      *  The reference to the factory.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final JavaComposer m_Composer;
 
     /**
@@ -320,13 +308,13 @@ public final class FieldSpecImpl implements FieldSpec
     /**
      *  The initializer for the field.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_Initializer;
 
     /**
      *  The Javadoc comment for the field.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_Javadoc;
 
     /**
@@ -347,7 +335,7 @@ public final class FieldSpecImpl implements FieldSpec
     /**
      *  The type of the field.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final TypeNameImpl m_Type;
 
         /*--------------*\
@@ -358,8 +346,8 @@ public final class FieldSpecImpl implements FieldSpec
      *
      *  @param  builder The builder.
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "CastToConcreteClass"} )
-    public FieldSpecImpl( final BuilderImpl builder )
+    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject"} )
+    public FieldSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )
     {
         m_Composer = builder.m_Composer;
         m_Type = builder.m_Type;
@@ -393,7 +381,6 @@ public final class FieldSpecImpl implements FieldSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final BuilderImpl builder( final Type type, final CharSequence name, final Modifier... modifiers )
@@ -417,13 +404,12 @@ public final class FieldSpecImpl implements FieldSpec
      *      {@link JavaComposer}.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "CastToConcreteClass" )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final BuilderImpl builder( final TypeName type, final CharSequence name, final Modifier... modifiers )
     {
         final var composer = new JavaComposer();
 
-        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, $ -> format( "not a valid name: %s", name ) ) )
+        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, $ -> "not a valid name: %s".formatted( name ) ) )
             .addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );
 
         //---* Done *----------------------------------------------------------
@@ -442,7 +428,6 @@ public final class FieldSpecImpl implements FieldSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static BuilderImpl builder( final TypeSpec type, final CharSequence name, final Modifier... modifiers )
@@ -500,7 +485,7 @@ public final class FieldSpecImpl implements FieldSpec
      *
      *  @return The reference to the factory.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final JavaComposer getFactory() { return m_Composer; }
 
     /**
@@ -511,7 +496,7 @@ public final class FieldSpecImpl implements FieldSpec
      *  @since 0.2.0
      */
     @API( status = INTERNAL, since = "0.2.0" )
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final CodeBlockImpl getJavadoc() { return m_Javadoc; }
 
     /**
@@ -584,7 +569,7 @@ public final class FieldSpecImpl implements FieldSpec
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject"} )
     @Override
     public final BuilderImpl toBuilder()
     {
@@ -611,7 +596,6 @@ public final class FieldSpecImpl implements FieldSpec
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final TypeNameImpl type() { return m_Type; }
 }

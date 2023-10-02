@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +19,7 @@
 
 package org.tquadrat.foundation.javacomposer.internal;
 
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static javax.lang.model.element.Modifier.ABSTRACT;
@@ -40,7 +41,6 @@ import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;
 import static org.tquadrat.foundation.util.JavaUtils.isValidName;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -83,13 +83,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@SuppressWarnings( {"ClassWithTooManyFields", "ClassWithTooManyMethods", "OverlyComplexClass", "OverlyCoupledClass"} )
-@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@SuppressWarnings( {"ClassWithTooManyFields", "ClassWithTooManyMethods", "OverlyCoupledClass"} )
+@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public abstract sealed class TypeSpecImpl implements TypeSpec
     permits AnnotationTypeSpecImpl, ClassSpecImpl, EnumSpecImpl, InterfaceSpecImpl, RecordSpecImpl
@@ -103,13 +103,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @version $Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "OverlyCoupledClass" )
-    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public abstract static sealed class BuilderImpl implements TypeSpec.Builder
         permits AnnotationTypeSpecImpl.BuilderImpl, ClassSpecImpl.BuilderImpl, EnumSpecImpl.BuilderImpl, InterfaceSpecImpl.BuilderImpl, RecordSpecImpl.BuilderImpl
@@ -125,7 +125,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         /**
          *  The reference to the factory.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final JavaComposer m_Composer;
 
         /**
@@ -136,13 +136,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         /**
          *  The initializer block.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final CodeBlockImpl.BuilderImpl m_InitializerBlock;
 
         /**
          *  The Javadoc comment for the type.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final CodeBlockImpl.BuilderImpl m_Javadoc;
 
         /**
@@ -176,7 +176,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         /**
          *  The builder for the static block of the type.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final CodeBlockImpl.BuilderImpl m_StaticBlock;
 
         /**
@@ -187,7 +187,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         /**
          *  The superclass for the type.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private TypeNameImpl m_Superclass = OBJECT;
 
         /**
@@ -221,8 +221,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  @param  kind    The kind of the type to build.
          *  @param  name    The name of the type to build.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
-        protected BuilderImpl( final JavaComposer composer, final Kind kind, final CharSequence name )
+        protected BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final Kind kind, final CharSequence name )
         {
             this( composer, kind, Optional.of( requireNotEmptyArgument( name, "name" ).toString() ) );
         }   //  BuilderImpl()
@@ -234,8 +233,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *      builder instance.
          *  @param  kind    The kind of the type to build.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
-        protected BuilderImpl( final JavaComposer composer, final Kind kind )
+        protected BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final Kind kind )
         {
             this( composer, kind, Optional.empty() );
         }   //  BuilderImpl()
@@ -248,12 +246,12 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  @param  kind    The kind of the type to build.
          *  @param  name    The name of the type to build.
          */
-        @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType", "CastToConcreteClass", "OptionalGetWithoutIsPresent"} )
-        protected BuilderImpl( final JavaComposer composer, final Kind kind, final Optional<String> name )
+        @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType", "OptionalGetWithoutIsPresent"} )
+        protected BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final Kind kind, final Optional<String> name )
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
             m_Kind = requireNonNullArgument( kind, "kind" );
-            m_Name = requireValidNonNullArgument( name, "name", v -> v.isEmpty() || isValidName( v.get() ), $ -> format( "not a valid name: %s", name.get() ) );
+            m_Name = requireValidNonNullArgument( name, "name", v -> v.isEmpty() || isValidName( v.get() ), $ -> "not a valid name: %s".formatted( name.get() ) );
 
             m_InitializerBlock = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
             m_Javadoc = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
@@ -266,7 +264,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addAnnotation( final AnnotationSpec annotationSpec )
         {
@@ -299,7 +296,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addAnnotations( final Iterable<AnnotationSpec> annotationSpecs )
         {
             for( final var annotationSpec : requireNonNullArgument( annotationSpecs, "annotationSpecs" ) )
@@ -361,17 +357,15 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public BuilderImpl addEnumConstant( final CharSequence name, final TypeSpec typeSpec )
         {
-            throw new IllegalStateException( format( "%s is not enum", m_Name.orElse( NAME_ANONYMOUS_TYPE ) ) );
+            throw new IllegalStateException( "%s is not enum".formatted( m_Name.orElse( NAME_ANONYMOUS_TYPE ) ) );
         }   //  addEnumConstant()
 
         /**
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public BuilderImpl addField( final FieldSpec fieldSpec )
         {
             final var fieldSpecImpl = (FieldSpecImpl) requireNonNullArgument( fieldSpec, "fieldSpec" );
@@ -475,7 +469,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public abstract BuilderImpl addMethod( final MethodSpec methodSpec );
 
         /**
@@ -526,7 +519,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "AbstractMethodOverridesAbstractMethod" )
         @Override
         public abstract Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly );
 
@@ -562,7 +554,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         public final BuilderImpl addStaticImport( final ClassName className, final String... names )
         {
             final var canonicalName = requireNonNullArgument( className, "className" ).canonicalName();
-            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, n -> format( "%s array is empty", n ) ) )
+            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, "%s array is empty"::formatted ) )
             {
                 m_StaticImports.add(
                     format(
@@ -572,7 +564,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
                             name,
                             "name",
                             Objects::nonNull,
-                            $ -> format( "null entry in names array: %s", Arrays.toString( names ) )
+                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -598,7 +590,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addSuperinterface( final Class<?> superinterface )
         {
-            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, $ -> format( "'%s' is not an interface", superinterface.getName() ) ) ) );
+            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, $ -> "'%s' is not an interface".formatted( superinterface.getName() ) ) ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -619,7 +611,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addSuperinterface( final TypeElement superinterface )
         {
-            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -> v.getKind() == ElementKind.INTERFACE, $ -> format( "'%s' is not an interface", superinterface.getQualifiedName() ) ).asType() ) );
+            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -> v.getKind() == ElementKind.INTERFACE, $ -> "'%s' is not an interface".formatted( superinterface.getQualifiedName() ) ).asType() ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -629,10 +621,9 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addSuperinterface( final TypeName superinterface )
         {
-            checkState( m_Kind != ANNOTATION, () -> new IllegalStateException( format( "Annotations do not implement interfaces: %s", getName() ) ) );
+            checkState( m_Kind != ANNOTATION, () -> new IllegalStateException( "Annotations do not implement interfaces: %s".formatted( getName() ) ) );
             m_Superinterfaces.add( (TypeNameImpl) requireNonNullArgument( superinterface, "superinterface" ) );
 
             //---* Done *------------------------------------------------------
@@ -673,11 +664,10 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addType( final TypeSpec typeSpec )
         {
             final var typeSpecImpl = (TypeSpecImpl) requireNonNullArgument( typeSpec, "typeSpec" );
-            checkState( typeSpecImpl.modifiers().containsAll( m_Kind.implicitTypeModifiers() ), () -> new ValidationException( format( "%s %s.%s requires modifiers %s", m_Kind, m_Name.orElse( NAME_ANONYMOUS_TYPE ), typeSpecImpl.name().orElse( NAME_ANONYMOUS_TYPE ), m_Kind.implicitTypeModifiers() ) ) );
+            checkState( typeSpecImpl.modifiers().containsAll( m_Kind.implicitTypeModifiers() ), () -> new ValidationException( "%s %s.%s requires modifiers %s".formatted( m_Kind, m_Name.orElse( NAME_ANONYMOUS_TYPE ), typeSpecImpl.name().orElse( NAME_ANONYMOUS_TYPE ), m_Kind.implicitTypeModifiers() ) ) );
             if( composer().addDebugOutput() )
             {
                 final var builder = typeSpecImpl.toBuilder();
@@ -712,7 +702,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addTypeVariable( final TypeVariableName typeVariable )
         {
             checkState( !isAnonymousClass(), () -> new IllegalStateException( "forbidden on anonymous types." ) );
@@ -727,7 +716,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          */
         @API( status = STABLE, since = "0.2.0" )
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addTypeVariable( final TypeVariableName typeVariable, final CharSequence javadoc )
         {
             final var retValue = addTypeVariable( typeVariable );
@@ -746,7 +734,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addTypeVariables( final Iterable<TypeVariableName> typeVariables )
         {
             requireNonNullArgument( typeVariables, "typeVariables" );
@@ -771,7 +758,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *
          *  @return The factory reference.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         protected final JavaComposer composer() { return m_Composer; }
 
         /**
@@ -796,7 +782,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *
          *  @return The {@code enum} constants.
          */
-        @SuppressWarnings( "AssignmentOrReturnOfFieldWithMutableType" )
         protected Map<String,ClassSpecImpl> getEnumConstants() { return Map.of(); }
 
         /**
@@ -804,7 +789,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *
          *  @return The factory.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         protected final JavaComposer getFactory() { return m_Composer; }
 
         /**
@@ -822,7 +806,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *
          *  @return The builder reference.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         protected final CodeBlockImpl.BuilderImpl getInitializerBlock() { return m_InitializerBlock; }
 
         /**
@@ -832,7 +815,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *
          *  @return The builder reference.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         protected final CodeBlockImpl.BuilderImpl getJavadoc() { return m_Javadoc; }
 
         /**
@@ -867,7 +849,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *
          *  @return The builder reference.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         protected final CodeBlockImpl.BuilderImpl getStaticBlock() { return m_StaticBlock; }
 
         /**
@@ -883,7 +864,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *
          *  @return The superclass.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         protected final TypeNameImpl getSuperclass() { return m_Superclass; }
 
         /**
@@ -933,10 +913,9 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public BuilderImpl superclass( final TypeName superclass )
         {
-            checkState( m_Superclass == OBJECT, () -> new IllegalStateException( format( "superclass already set to %s", m_Superclass.toString() ) ));
+            checkState( m_Superclass == OBJECT, () -> new IllegalStateException( "superclass already set to %s".formatted( m_Superclass.toString() ) ));
             m_Superclass = (TypeNameImpl) requireValidNonNullArgument( superclass, "superclass", v -> !v.isPrimitive(), $ -> "superclass may not be a primitive" );
 
             //---* Done *------------------------------------------------------
@@ -952,12 +931,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @version $Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @SuppressWarnings( "NewClassNamingConvention" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public enum Kind
     {
@@ -1107,7 +1087,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     /**
      *  The reference to the factory.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final JavaComposer m_Composer;
 
     /**
@@ -1118,13 +1098,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     /**
      *  The initializer block for this type.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_InitializerBlock;
 
     /**
      *  The Javadoc comment for this type.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_Javadoc;
 
     /**
@@ -1156,7 +1136,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     /**
      *  The static initializer block for this type.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_StaticBlock;
 
     /**
@@ -1167,7 +1147,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     /**
      *  The superclass for this type.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final TypeNameImpl m_SuperClass;
 
     /**
@@ -1243,7 +1223,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @param  type    The source type.
      */
-    @SuppressWarnings( "AccessingNonPublicFieldOfAnotherObject" )
     protected TypeSpecImpl( final TypeSpecImpl type )
     {
         m_Composer = type.m_Composer;
@@ -1279,7 +1258,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final BuilderImpl annotationBuilder( final ClassName className )
     {
@@ -1299,7 +1277,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final BuilderImpl annotationBuilder( final CharSequence name )
     {
@@ -1319,7 +1296,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *      {@link JavaComposer}.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( {"CastToConcreteClass", "DeprecatedIsStillUsed"} )
     public static final BuilderImpl anonymousClassBuilder( final CodeBlock typeArguments )
     {
         final var retValue = new ClassSpecImpl.BuilderImpl( new JavaComposer(), (CodeBlockImpl) requireNonNullArgument( typeArguments, "typeArguments" ) );
@@ -1371,7 +1347,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final BuilderImpl classBuilder( final ClassName className )
     {
@@ -1391,7 +1366,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final BuilderImpl classBuilder( final CharSequence name )
     {
@@ -1462,8 +1436,8 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
-    public final void emit( final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
+    public final void emit( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         /*
          * Nested classes interrupt wrapped line indentation. Stash the current
@@ -1501,8 +1475,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"BoundedWildcard", "UseOfConcreteClass"} )
-    protected abstract void emit4Foundation( final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException;
+    protected abstract void emit4Foundation( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException;
 
     /**
      *  Emits the type to the given code writer, using the layout as defined
@@ -1514,8 +1487,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"BoundedWildcard", "UseOfConcreteClass"} )
-    protected abstract void emit4JavaPoet( final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException;
+    protected abstract void emit4JavaPoet( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException;
 
     /**
      *  Creates a builder for an {@code enum} type (a type with the kind
@@ -1527,7 +1499,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final BuilderImpl enumBuilder( final ClassName className )
     {
@@ -1547,7 +1518,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final BuilderImpl enumBuilder( final CharSequence name )
     {
@@ -1585,7 +1555,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The reference to the factory.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final JavaComposer getFactory() { return m_Composer; }
 
     /**
@@ -1600,7 +1570,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The initializer block.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     protected final CodeBlockImpl getInitializerBlock() { return m_InitializerBlock; }
 
     /**
@@ -1608,7 +1577,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The Javadoc.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     protected final CodeBlockImpl getJavadoc() { return m_Javadoc; }
 
     /**
@@ -1623,7 +1591,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The static block.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     protected final CodeBlockImpl getStaticBlock() { return m_StaticBlock; }
 
     /**
@@ -1640,7 +1607,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The superclass.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     protected final TypeNameImpl getSuperClass() { return m_SuperClass; }
 
     /**
@@ -1727,7 +1693,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final BuilderImpl interfaceBuilder( final ClassName className )
     {
@@ -1747,7 +1712,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static BuilderImpl interfaceBuilder( final CharSequence name )
     {

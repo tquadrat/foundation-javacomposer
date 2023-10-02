@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,6 @@ import static org.tquadrat.foundation.lang.Objects.nonNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidIntegerArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 import static org.tquadrat.foundation.util.StringUtils.isEmpty;
 import static org.tquadrat.foundation.util.StringUtils.isNotEmpty;
 
@@ -69,13 +68,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CodeWriter.java 1043 2023-01-01 11:27:56Z tquadrat $
+ *  @version $Id: CodeWriter.java 1063 2023-09-26 15:14:16Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "ClassWithTooManyMethods", "OverlyComplexClass"} )
-@ClassVersion( sourceVersion = "$Id: CodeWriter.java 1043 2023-01-01 11:27:56Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: CodeWriter.java 1063 2023-09-26 15:14:16Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class CodeWriter
 {
@@ -86,12 +85,12 @@ public final class CodeWriter
      *  The comment types.
      *
      *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeWriter.java 1043 2023-01-01 11:27:56Z tquadrat $
+     *  @version $Id: CodeWriter.java 1063 2023-09-26 15:14:16Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: CodeWriter.java 1043 2023-01-01 11:27:56Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeWriter.java 1063 2023-09-26 15:14:16Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     private static enum CommentType
     {
@@ -320,12 +319,12 @@ public final class CodeWriter
      *  <p>Delegates to
      *  {@link #emitAndIndent(CharSequence)}.</p>
      *
-     *  @param  s   The String.
+     *  @param  input   The String.
      *  @return This {@code CodeWriter} instance.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    public final CodeWriter emit( final CharSequence s ) throws UncheckedIOException { return emitAndIndent( s ); }
+    public final CodeWriter emit( final CharSequence input ) throws UncheckedIOException { return emitAndIndent( input ); }
 
     /**
      *  Emits a
@@ -377,7 +376,6 @@ public final class CodeWriter
                 case "$N" -> emitAndIndent( (CharSequence) codeBlock.args().get( argIndex++ ) );
                 case "$S" ->
                 {
-                    @SuppressWarnings( "QuestionableName" )
                     final var string = codeBlock.args().get( argIndex++ );
 
                     //---* Emit null as a literal null: no quotes *------------
@@ -393,13 +391,13 @@ public final class CodeWriter
                      * handled by the default case.
                      */
                     deferredTypeName = null;
-                    if( typeName instanceof ClassNameImpl candidate && partIterator.hasNext() )
+                    if( typeName instanceof final ClassNameImpl candidate && partIterator.hasNext() )
                     {
                         if( !codeBlock.formatParts().get( partIterator.nextIndex() ).startsWith( "$" ) )
                         {
                             if( m_StaticImportClassNames.contains( candidate.canonicalName() ) )
                             {
-                                checkState( isNull( deferredTypeName ), () -> new IllegalStateException( format( "pending type for static import?!" ) ) );
+                                checkState( isNull( deferredTypeName ), () -> new IllegalStateException( "pending type for static import?!" ) );
                                 deferredTypeName = candidate;
                             }
                         }
@@ -412,13 +410,13 @@ public final class CodeWriter
                 case "$<" -> unindent();
                 case "$[" ->
                 {
-                    checkState( m_StatementLine == -1, () -> new IllegalStateException( format( "statement enter $[ followed by statement enter $[" ) ) );
+                    checkState( m_StatementLine == -1, () -> new IllegalStateException( "statement enter $[ followed by statement enter $[" ) );
                     m_StatementLine = 0;
                 }
 
                 case "$]" ->
                 {
-                    checkState( m_StatementLine != -1, () -> new IllegalStateException( format( "statement exit $] has no matching statement enter $[" ) ) );
+                    checkState( m_StatementLine != -1, () -> new IllegalStateException( "statement exit $] has no matching statement enter $[" ) );
                     if( m_StatementLine > 0 )
                     {
                         unindent( 2 ); // End a multi-line statement. Decrease
@@ -487,18 +485,18 @@ public final class CodeWriter
      *  does it through here, since we emit indentation lazily in order to
      *  avoid unnecessary trailing whitespace.
      *
-     *  @param  s   The String.
+     *  @param  input   The String.
      *  @return This {@code CodeWriter} instance.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
     @SuppressWarnings( "OverlyComplexMethod" )
-    public final CodeWriter emitAndIndent( final CharSequence s ) throws UncheckedIOException
+    public final CodeWriter emitAndIndent( final CharSequence input ) throws UncheckedIOException
     {
-        if( isNotEmpty( s ) )
+        if( isNotEmpty( input ) )
         {
             var first = true;
-            LineLoop: for( final var line : s.toString().split( "\n", -1 ) )
+            LineLoop: for( final var line : input.toString().split( "\n", -1 ) )
             {
                 /*
                  * Emit a newline character. Make sure blank lines in Javadoc
@@ -727,15 +725,15 @@ public final class CodeWriter
     @SuppressWarnings( {"IfStatementWithTooManyBranches", "ChainOfInstanceofChecks"} )
     private final void emitLiteral( final Object o ) throws UncheckedIOException
     {
-        if( o instanceof TypeSpecImpl typeSpec )
+        if( o instanceof final TypeSpecImpl typeSpec )
         {
             typeSpec.emit( this, null, Set.of() );
         }
-        else if( o instanceof AnnotationSpecImpl annotationSpec )
+        else if( o instanceof final AnnotationSpecImpl annotationSpec )
         {
             annotationSpec.emit( this, true );
         }
-        else if( o instanceof CodeBlockImpl codeBlock )
+        else if( o instanceof final CodeBlockImpl codeBlock )
         {
             emit( codeBlock );
         }
@@ -881,7 +879,7 @@ public final class CodeWriter
      */
     private static final String extractMemberName( final String part )
     {
-        var retValue = requireValidNonNullArgument( part, "part", v -> Character.isJavaIdentifierStart( v.charAt( 0 ) ), $ -> format( "not an identifier: %s", part ) );
+        var retValue = requireValidNonNullArgument( part, "part", v -> Character.isJavaIdentifierStart( v.charAt( 0 ) ), $ -> "not an identifier: %s".formatted( part ) );
         CheckLoop: for( var i = 1; i <= part.length(); ++i )
         {
             if( !SourceVersion.isIdentifier( part.substring( 0, i ) ) )
@@ -969,14 +967,14 @@ public final class CodeWriter
          * 'Map.Entry'). Also uses imports.
          */
         var nameResolved = false;
-        for( var c = className; nonNull( c ) && isEmpty( retValue ); c = c.enclosingClassName().orElse( null ) )
+        for( var currentClassName = className; nonNull( currentClassName ) && isEmpty( retValue ); currentClassName = currentClassName.enclosingClassName().orElse( null ) )
         {
-            final var resolved = resolve( c.simpleName() );
+            final var resolved = resolve( currentClassName.simpleName() );
             nameResolved = resolved.isPresent();
 
-            if( nameResolved && Objects.equals( resolved.get().canonicalName(), c.canonicalName() ) )
+            if( nameResolved && Objects.equals( resolved.get().canonicalName(), currentClassName.canonicalName() ) )
             {
-                final var suffixOffset = c.simpleNames().size() - 1;
+                final var suffixOffset = currentClassName.simpleNames().size() - 1;
                 retValue = join( ".", className.simpleNames().subList( suffixOffset, className.simpleNames().size() ) );
             }
         }
@@ -1023,7 +1021,7 @@ public final class CodeWriter
     @SuppressWarnings( {"UnusedReturnValue", "StringEquality"} )
     public final CodeWriter popPackage()
     {
-        checkState( m_PackageName != NO_PACKAGE, () -> new IllegalStateException( format( "package not set" ) ) );
+        checkState( m_PackageName != NO_PACKAGE, () -> new IllegalStateException( "package not set" ) );
         m_PackageName = NO_PACKAGE;
 
         //---* Done *----------------------------------------------------------
@@ -1053,7 +1051,7 @@ public final class CodeWriter
     @SuppressWarnings( {"UnusedReturnValue", "StringEquality"} )
     public final CodeWriter pushPackage( final String packageName )
     {
-        checkState( m_PackageName == NO_PACKAGE, () -> new IllegalStateException( format( "package already set: %s", m_PackageName ) ) );
+        checkState( m_PackageName == NO_PACKAGE, () -> new IllegalStateException( "package already set: %s".formatted( m_PackageName ) ) );
         m_PackageName = requireNonNullArgument( packageName, "packageName" );
 
         //---* Done *----------------------------------------------------------
@@ -1201,7 +1199,7 @@ public final class CodeWriter
      */
     public final CodeWriter unindent( final int levels )
     {
-        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", v -> m_IndentLevel - levels >= 0, $ -> format( "cannot unindent %d from %d", levels, m_IndentLevel ) );
+        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", v -> m_IndentLevel - levels >= 0, $ -> "cannot unindent %d from %d".formatted( levels, m_IndentLevel ) );
 
         //---* Done *----------------------------------------------------------
         return this;

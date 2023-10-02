@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2021 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2023 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -54,12 +54,12 @@
 <span class="source-line-no">041</span><span id="line-41"> *</span>
 <span class="source-line-no">042</span><span id="line-42"> *  @author Square,Inc.</span>
 <span class="source-line-no">043</span><span id="line-43"> *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">044</span><span id="line-44"> *  @version $Id: MethodSpec.java 938 2021-12-15 14:42:53Z tquadrat $</span>
+<span class="source-line-no">044</span><span id="line-44"> *  @version $Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $</span>
 <span class="source-line-no">045</span><span id="line-45"> *  @since 0.0.5</span>
 <span class="source-line-no">046</span><span id="line-46"> *</span>
 <span class="source-line-no">047</span><span id="line-47"> *  @UMLGraph.link</span>
 <span class="source-line-no">048</span><span id="line-48"> */</span>
-<span class="source-line-no">049</span><span id="line-49">@ClassVersion( sourceVersion = "$Id: MethodSpec.java 938 2021-12-15 14:42:53Z tquadrat $" )</span>
+<span class="source-line-no">049</span><span id="line-49">@ClassVersion( sourceVersion = "$Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $" )</span>
 <span class="source-line-no">050</span><span id="line-50">@API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">051</span><span id="line-51">public sealed interface MethodSpec</span>
 <span class="source-line-no">052</span><span id="line-52">    permits MethodSpecImpl</span>
@@ -73,13 +73,13 @@
 <span class="source-line-no">060</span><span id="line-60">     *</span>
 <span class="source-line-no">061</span><span id="line-61">     *  @author Square,Inc.</span>
 <span class="source-line-no">062</span><span id="line-62">     *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">063</span><span id="line-63">     *  @version $Id: MethodSpec.java 938 2021-12-15 14:42:53Z tquadrat $</span>
+<span class="source-line-no">063</span><span id="line-63">     *  @version $Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $</span>
 <span class="source-line-no">064</span><span id="line-64">     *  @since 0.0.5</span>
 <span class="source-line-no">065</span><span id="line-65">     *</span>
 <span class="source-line-no">066</span><span id="line-66">     *  @UMLGraph.link</span>
 <span class="source-line-no">067</span><span id="line-67">     */</span>
 <span class="source-line-no">068</span><span id="line-68">    @SuppressWarnings( {"ClassWithTooManyMethods", "InnerClassOfInterface"} )</span>
-<span class="source-line-no">069</span><span id="line-69">    @ClassVersion( sourceVersion = "$Id: MethodSpec.java 938 2021-12-15 14:42:53Z tquadrat $" )</span>
+<span class="source-line-no">069</span><span id="line-69">    @ClassVersion( sourceVersion = "$Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $" )</span>
 <span class="source-line-no">070</span><span id="line-70">    @API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">071</span><span id="line-71">    public static sealed interface Builder</span>
 <span class="source-line-no">072</span><span id="line-72">        permits MethodSpecImpl.BuilderImpl</span>
@@ -434,7 +434,7 @@
 <span class="source-line-no">421</span><span id="line-421">        public Builder addTypeVariables( final Iterable&lt;TypeVariableName&gt; typeVariables );</span>
 <span class="source-line-no">422</span><span id="line-422"></span>
 <span class="source-line-no">423</span><span id="line-423">        /**</span>
-<span class="source-line-no">424</span><span id="line-424">         *  Adds the begin of a control flow for the method.</span>
+<span class="source-line-no">424</span><span id="line-424">         *  Adds the beginning of a control flow for the method.</span>
 <span class="source-line-no">425</span><span id="line-425">         *</span>
 <span class="source-line-no">426</span><span id="line-426">         *  @param  controlFlow The control flow construct and its code, such</span>
 <span class="source-line-no">427</span><span id="line-427">         *      as &amp;quot;{@code if (foo == 5)}&amp;quot;; it should not contain</span>
@@ -449,7 +449,7 @@
 <span class="source-line-no">436</span><span id="line-436">        public Builder beginControlFlow( final String controlFlow, final Object... args );</span>
 <span class="source-line-no">437</span><span id="line-437"></span>
 <span class="source-line-no">438</span><span id="line-438">        /**</span>
-<span class="source-line-no">439</span><span id="line-439">         *  Adds the begin of a control flow for the method.</span>
+<span class="source-line-no">439</span><span id="line-439">         *  Adds the beginning of a control flow for the method.</span>
 <span class="source-line-no">440</span><span id="line-440">         *</span>
 <span class="source-line-no">441</span><span id="line-441">         *  @param  addDebugOutput  {@code true} if debug output should be</span>
 <span class="source-line-no">442</span><span id="line-442">         *      added to the generated code, {@code false} if not.</span>
@@ -467,7 +467,7 @@
 <span class="source-line-no">454</span><span id="line-454">         *</span>
 <span class="source-line-no">455</span><span id="line-455">         *  @since 0.0.6</span>
 <span class="source-line-no">456</span><span id="line-456">         *</span>
-<span class="source-line-no">457</span><span id="line-457">         *  @deprecated Got obsolete with the the introduction of</span>
+<span class="source-line-no">457</span><span id="line-457">         *  @deprecated Got obsolete with the introduction of</span>
 <span class="source-line-no">458</span><span id="line-458">         *      {@link JavaComposer}.</span>
 <span class="source-line-no">459</span><span id="line-459">         */</span>
 <span class="source-line-no">460</span><span id="line-460">        @Deprecated( since = "0.2.0", forRemoval = true )</span>
@@ -544,7 +544,7 @@
 <span class="source-line-no">531</span><span id="line-531">         *</span>
 <span class="source-line-no">532</span><span id="line-532">         *  @since 0.0.6</span>
 <span class="source-line-no">533</span><span id="line-533">         *</span>
-<span class="source-line-no">534</span><span id="line-534">         *  @deprecated Got obsolete with the the introduction of</span>
+<span class="source-line-no">534</span><span id="line-534">         *  @deprecated Got obsolete with the introduction of</span>
 <span class="source-line-no">535</span><span id="line-535">         *      {@link JavaComposer}.</span>
 <span class="source-line-no">536</span><span id="line-536">         */</span>
 <span class="source-line-no">537</span><span id="line-537">        @Deprecated( since = "0.2.0", forRemoval = true )</span>
@@ -582,7 +582,7 @@
 <span class="source-line-no">569</span><span id="line-569">         *</span>
 <span class="source-line-no">570</span><span id="line-570">         *  @since 0.0.6</span>
 <span class="source-line-no">571</span><span id="line-571">         *</span>
-<span class="source-line-no">572</span><span id="line-572">         *  @deprecated Got obsolete with the the introduction of</span>
+<span class="source-line-no">572</span><span id="line-572">         *  @deprecated Got obsolete with the introduction of</span>
 <span class="source-line-no">573</span><span id="line-573">         *      {@link JavaComposer}.</span>
 <span class="source-line-no">574</span><span id="line-574">         */</span>
 <span class="source-line-no">575</span><span id="line-575">        @Deprecated( since = "0.2.0", forRemoval = true )</span>
@@ -826,7 +826,7 @@
 <span class="source-line-no">813</span><span id="line-813">    }   //  overriding()</span>
 <span class="source-line-no">814</span><span id="line-814"></span>
 <span class="source-line-no">815</span><span id="line-815">    /**</span>
-<span class="source-line-no">816</span><span id="line-816">     *  Returns the parameters for the this method.</span>
+<span class="source-line-no">816</span><span id="line-816">     *  Returns the parameters for this method.</span>
 <span class="source-line-no">817</span><span id="line-817">     *</span>
 <span class="source-line-no">818</span><span id="line-818">     *  @return The parameters.</span>
 <span class="source-line-no">819</span><span id="line-819">     */</span>

@@ -188,7 +188,7 @@
                           class='static'>+ requireExactlyOneOf(modifiers:java.util.Set&lt;javax.lang.model.element.Modifier&gt;,mutuallyExclusive:javax.lang.model.element.Modifier&#x2026;):void</text>
                     <text x='5.000'
                           y='201.000'
-                          class='static'>+ union(a:java.util.Set&lt;? extends T&gt;,b:java.util.Set&lt;? extends T&gt;):java.util.Set&lt;T&gt;</text>
+                          class='static'>+ union(firstSet:java.util.Set&lt;? extends T&gt;,secondSet:java.util.Set&lt;? extends T&gt;):java.util.Set&lt;T&gt;</text>
                 </g>
             </g>
         </symbol>

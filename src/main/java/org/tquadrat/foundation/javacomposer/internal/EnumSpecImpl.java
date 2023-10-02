@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,7 +42,6 @@ import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
 import static org.tquadrat.foundation.util.JavaUtils.isValidName;
 import static org.tquadrat.foundation.util.StringUtils.capitalize;
 import static org.tquadrat.foundation.util.StringUtils.decapitalize;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.Modifier;
 import java.io.UncheckedIOException;
@@ -74,12 +73,12 @@ import org.tquadrat.foundation.javacomposer.TypeSpec;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: EnumSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $
+ *  @version $Id: EnumSpecImpl.java 1063 2023-09-26 15:14:16Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: EnumSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: EnumSpecImpl.java 1063 2023-09-26 15:14:16Z tquadrat $" )
 @API( status = INTERNAL, since = "0.2.0" )
 public final class EnumSpecImpl extends TypeSpecImpl
 {
@@ -93,12 +92,12 @@ public final class EnumSpecImpl extends TypeSpecImpl
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: EnumSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $
+     *  @version $Id: EnumSpecImpl.java 1063 2023-09-26 15:14:16Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: EnumSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: EnumSpecImpl.java 1063 2023-09-26 15:14:16Z tquadrat $" )
     @API( status = INTERNAL, since = "0.2.0" )
     public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl
     {
@@ -120,8 +119,7 @@ public final class EnumSpecImpl extends TypeSpecImpl
          *      builder instance.
          *  @param  name    The name of the type to build.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
-        public BuilderImpl( final JavaComposer composer, final CharSequence name )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final CharSequence name )
         {
             this( composer, Optional.of( requireNotEmptyArgument( name, "name" ).toString() ) );
         }   //  BuilderImpl()
@@ -133,8 +131,8 @@ public final class EnumSpecImpl extends TypeSpecImpl
          *      builder instance.
          *  @param  name    The name of the type to build.
          */
-        @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
-        public BuilderImpl( final JavaComposer composer, final Optional<String> name )
+        @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType"} )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final Optional<String> name )
         {
             super( composer, ENUM, name );
         }   //  BuilderImpl()
@@ -145,13 +143,12 @@ public final class EnumSpecImpl extends TypeSpecImpl
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )
         {
             final var fieldSpecImpl = (FieldSpecImpl) requireNonNullArgument( fieldSpec, "fieldSpec" );
-            checkState( fieldSpecImpl.hasModifier( PRIVATE ), () -> new ValidationException( format( "Property %s needs to be private", fieldSpecImpl.name() ) ) );
+            checkState( fieldSpecImpl.hasModifier( PRIVATE ), () -> new ValidationException( "Property %s needs to be private".formatted( fieldSpecImpl.name() ) ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();
@@ -188,12 +185,11 @@ public final class EnumSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addEnumConstant( final CharSequence name, final TypeSpec typeSpec )
         {
             final var typeSpecImpl = (ClassSpecImpl) requireNonNullArgument( typeSpec, "typeSpec" );
-            checkState( typeSpecImpl.anonymousTypeArguments().isPresent(), () -> new ValidationException( format( "enum constants must have anonymous type arguments" ) ) );
-            checkState( isValidName( name ), () -> new ValidationException( format( "not a valid enum constant: %s", name ) ) );
+            checkState( typeSpecImpl.anonymousTypeArguments().isPresent(), () -> new ValidationException( "enum constants must have anonymous type arguments" ) );
+            checkState( isValidName( name ), () -> new ValidationException( "not a valid enum constant: %s".formatted( name ) ) );
             if( composer().addDebugOutput() )
             {
                 final var builder = typeSpecImpl.toBuilder();
@@ -213,7 +209,6 @@ public final class EnumSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addField( final FieldSpec fieldSpec )
         {
             final var fieldSpecImpl = (FieldSpecImpl) requireNonNullArgument( fieldSpec, "fieldSpec" );
@@ -227,12 +222,11 @@ public final class EnumSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addMethod( final MethodSpec methodSpec )
         {
             final var methodSpecImpl = (MethodSpecImpl) requireNonNullArgument( methodSpec, "methodSpec" );
-            checkState( methodSpecImpl.defaultValue().isEmpty(), () -> new IllegalStateException( format( "%s %s.%s cannot have a default value", ENUM, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );
-            checkState( !methodSpecImpl.hasModifier( DEFAULT ), () -> new IllegalStateException( format( "%s %s.%s cannot be default", ENUM, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );
+            checkState( methodSpecImpl.defaultValue().isEmpty(), () -> new IllegalStateException( "%s %s.%s cannot have a default value".formatted( ENUM, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );
+            checkState( !methodSpecImpl.hasModifier( DEFAULT ), () -> new IllegalStateException( "%s %s.%s cannot be default".formatted( ENUM, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );
             if( composer().addDebugOutput() )
             {
                 final var builder = methodSpecImpl.toBuilder();
@@ -258,11 +252,10 @@ public final class EnumSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )
         {
             final var fieldSpecImpl = (FieldSpecImpl) requireNonNullArgument( fieldSpec, "fieldSpec" );
-            checkState( fieldSpecImpl.hasModifier( PRIVATE ), () -> new ValidationException( format( "Property %s needs to be private", fieldSpecImpl.name() ) ) );
+            checkState( fieldSpecImpl.hasModifier( PRIVATE ), () -> new ValidationException( "Property %s needs to be private".formatted( fieldSpecImpl.name() ) ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();
@@ -299,10 +292,9 @@ public final class EnumSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "UseOfConcreteClass" )
         public final EnumSpecImpl build()
         {
-            checkState( !getEnumConstants().isEmpty(), () -> new ValidationException( format( "at least one enum constant is required for %s", getName().orElse( NAME_ANONYMOUS_TYPE ) ) ) );
+            checkState( !getEnumConstants().isEmpty(), () -> new ValidationException( "at least one enum constant is required for %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) ) );
 
             final var retValue = new EnumSpecImpl( this );
 
@@ -321,10 +313,9 @@ public final class EnumSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "UseOfConcreteClass" )
         public final BuilderImpl superclass( final TypeName superclass )
         {
-            throw new IllegalStateException( format( "only classes have super classes, not " + ENUM ) );
+            throw new IllegalStateException( "only classes have super classes, not " + ENUM );
         }   //  superclass()
     }
     //  class BuilderImpl
@@ -345,8 +336,8 @@ public final class EnumSpecImpl extends TypeSpecImpl
      *
      *  @param  builder The builder for this instance.
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
-    public EnumSpecImpl( final BuilderImpl builder )
+    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject"} )
+    public EnumSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )
     {
         super( builder );
         m_EnumConstants = builder.m_EnumConstants;
@@ -358,8 +349,7 @@ public final class EnumSpecImpl extends TypeSpecImpl
      *
      *  @param  type    The source type.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
-    private EnumSpecImpl( final EnumSpecImpl type )
+    private EnumSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final EnumSpecImpl type )
     {
         super( type );
         m_EnumConstants = Map.of();
@@ -384,8 +374,9 @@ public final class EnumSpecImpl extends TypeSpecImpl
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "CastToConcreteClass"} )
-    protected final void emit4Foundation( final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
+    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "OverlyLongMethod", "OverlyComplexMethod"} )
+    @Override
+    protected final void emit4Foundation( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         assert isNull( enumName ) : "enumName has to be null";
 
@@ -437,13 +428,12 @@ public final class EnumSpecImpl extends TypeSpecImpl
                 ====** Enum Declaration **=================================================
                     \\*------------------*/""" );
             EmitEnumLoop:
-            //noinspection ForLoopWithMissingComponent
-            for( final var i = new TreeMap<>( getEnumConstants() ).entrySet().iterator(); i.hasNext(); )
+            for( final var iterator = new TreeMap<>( getEnumConstants() ).entrySet().iterator(); iterator.hasNext(); )
             {
-                final var enumConstant = i.next();
+                final var enumConstant = iterator.next();
                 codeWriter.emit( "\n" );
                 enumConstant.getValue().emit( codeWriter, enumConstant.getKey(), Collections.emptySet() );
-                if( i.hasNext() )
+                if( iterator.hasNext() )
                 {
                     codeWriter.emit( ",\n" );
                 }
@@ -486,9 +476,9 @@ public final class EnumSpecImpl extends TypeSpecImpl
 
             //---* Emit the constants *----------------------------------------
             final var constants = getFieldSpecs().stream()
-                .filter( f -> f.hasModifier( PUBLIC ) )
-                .filter( f -> f.hasModifier( STATIC ) )
-                .filter( f -> f.hasModifier( FINAL ) )
+                .filter( constantSpec -> constantSpec.hasModifier( PUBLIC ) )
+                .filter( constantSpec -> constantSpec.hasModifier( STATIC ) )
+                .filter( constantSpec -> constantSpec.hasModifier( FINAL ) )
                 .filter( FieldSpecImpl::hasInitializer )
                 .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )
                 .toList();
@@ -501,19 +491,19 @@ public final class EnumSpecImpl extends TypeSpecImpl
                         /*-----------*\\
                     ====** Constants **========================================================
                         \\*-----------*/""" );
-                constants.forEach( c ->
+                constants.forEach( constantSpec ->
                 {
                     codeWriter.emit( "\n" );
-                    c.emit( codeWriter, ENUM.implicitFieldModifiers() );
-                    alreadyHandled.add( c );
+                    constantSpec.emit( codeWriter, ENUM.implicitFieldModifiers() );
+                    alreadyHandled.add( constantSpec );
                 } );
                 firstMember = false;
             }
 
             //---* Emit the attributes *---------------------------------------
             final var attributes = getFieldSpecs().stream()
-                .filter( f -> !alreadyHandled.contains( f ) )
-                .filter( f -> !(f.hasModifier( STATIC ) && f.hasModifier( FINAL )) )
+                .filter( fieldSpec -> !alreadyHandled.contains( fieldSpec ) )
+                .filter( fieldSpec -> !(fieldSpec.hasModifier( STATIC ) && fieldSpec.hasModifier( FINAL )) )
                 .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )
                 .toList();
 
@@ -537,7 +527,7 @@ public final class EnumSpecImpl extends TypeSpecImpl
 
             //---* Static fields *---------------------------------------------
             final var statics = getFieldSpecs().stream()
-                .filter( f -> !alreadyHandled.contains( f ) )
+                .filter( staticSpec -> !alreadyHandled.contains( staticSpec ) )
                 .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )
                 .toList();
             if( !statics.isEmpty() || !getStaticBlock().isEmpty() )
@@ -549,11 +539,11 @@ public final class EnumSpecImpl extends TypeSpecImpl
                     ====** Static Initialisations **===========================================
                         \\*------------------------*/""" );
 
-                statics.forEach( s ->
+                statics.forEach( staticSpec ->
                 {
                     codeWriter.emit( "\n" );
-                    s.emit( codeWriter, ENUM.implicitFieldModifiers() );
-                    alreadyHandled.add( s );
+                    staticSpec.emit( codeWriter, ENUM.implicitFieldModifiers() );
+                    alreadyHandled.add( staticSpec );
                 } );
 
                 //---* Static Block *------------------------------------------
@@ -588,17 +578,17 @@ public final class EnumSpecImpl extends TypeSpecImpl
             }
 
             //---* Emit the constructors *-------------------------------------
-            constructors.forEach( c ->
+            constructors.forEach( constructorSpec ->
             {
                 codeWriter.emit( "\n" );
-                c.emit( codeWriter, name(), ENUM.implicitMethodModifiers() );
+                constructorSpec.emit( codeWriter, name(), ENUM.implicitMethodModifiers() );
             } );
             firstMember = false;
         }
 
         //---* Methods (static and non-static) *-------------------------------
         final var methods = getMethodSpecs().stream()
-            .filter( m -> !m.isConstructor() )
+            .filter( methodSpec -> !methodSpec.isConstructor() )
             .sorted( TypeSpecImpl::compareMethodSpecs )
             .toList();
         if( !methods.isEmpty() )
@@ -610,10 +600,10 @@ public final class EnumSpecImpl extends TypeSpecImpl
                 ====** Methods **==========================================================
                     \\*---------*/""" );
 
-            methods.forEach( m ->
+            methods.forEach( methodSpec ->
             {
                 codeWriter.emit( "\n" );
-                m.emit( codeWriter, name(), ENUM.implicitMethodModifiers() );
+                methodSpec.emit( codeWriter, name(), ENUM.implicitMethodModifiers() );
             } );
         }
 
@@ -637,8 +627,9 @@ public final class EnumSpecImpl extends TypeSpecImpl
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "CastToConcreteClass"} )
-    protected final void emit4JavaPoet( final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
+    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "OverlyLongMethod", "OverlyComplexMethod"} )
+    @Override
+    protected final void emit4JavaPoet( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         assert isNull( enumName ) : "enumName has to be null";
 
@@ -682,14 +673,13 @@ public final class EnumSpecImpl extends TypeSpecImpl
         var firstMember = true;
 
         //---* Emit the enum constants *---------------------------------------
-        //noinspection ForLoopWithMissingComponent
-        for( final var i = new TreeMap<>( getEnumConstants() ).entrySet().iterator(); i.hasNext(); )
+        for( final var iterator = new TreeMap<>( getEnumConstants() ).entrySet().iterator(); iterator.hasNext(); )
         {
-            final var enumConstant = i.next();
+            final var enumConstant = iterator.next();
             if( !firstMember ) codeWriter.emit( "\n" );
             enumConstant.getValue().emit( codeWriter, enumConstant.getKey(), Collections.emptySet() );
             firstMember = false;
-            if( i.hasNext() )
+            if( iterator.hasNext() )
             {
                 codeWriter.emit( ",\n" );
             }
@@ -775,7 +765,7 @@ public final class EnumSpecImpl extends TypeSpecImpl
     public final boolean equals( final Object o )
     {
         var retValue = this == o;
-        if( !retValue && (o instanceof EnumSpecImpl other) )
+        if( !retValue && (o instanceof final EnumSpecImpl other) )
         {
             retValue = getFactory().equals( other.getFactory() ) && toString().equals( o.toString() );
         }
@@ -800,7 +790,6 @@ public final class EnumSpecImpl extends TypeSpecImpl
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
     @Override
     public final BuilderImpl toBuilder()
     {

@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,6 @@ import static org.apiguardian.api.API.Status.STABLE;
 import static org.tquadrat.foundation.lang.Objects.checkState;
 import static org.tquadrat.foundation.lang.Objects.nonNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import java.io.UncheckedIOException;
 import java.lang.reflect.Modifier;
@@ -53,12 +52,12 @@ import org.tquadrat.foundation.javacomposer.TypeVariableName;
  *  for parameterised types.
  *
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterizedTypeNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: ParameterizedTypeNameImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterizedTypeNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterizedTypeNameImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ParameterizedTypeNameImpl extends TypeNameImpl implements ParameterizedTypeName
 {
@@ -74,7 +73,7 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
     /**
      *  The class name for this type.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final ClassNameImpl m_RawType;
 
     /**
@@ -128,10 +127,10 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
         m_EnclosingType = enclosingType;
         m_TypeArguments = List.copyOf( requireNonNullArgument( typeArguments, "typeArguments" ) );
 
-        checkState( !m_TypeArguments.isEmpty() || enclosingType.isPresent(), () -> new ValidationException( format( "no type arguments: %s", rawType ) ) );
+        checkState( !m_TypeArguments.isEmpty() || enclosingType.isPresent(), () -> new ValidationException( "no type arguments: %s".formatted( rawType ) ) );
         for( final var typeArgument : m_TypeArguments )
         {
-            checkState( !typeArgument.isPrimitive() && (typeArgument != VOID_PRIMITIVE), () -> new ValidationException( format( "invalid type parameter: %s", typeArgument ) ) );
+            checkState( !typeArgument.isPrimitive() && (typeArgument != VOID_PRIMITIVE), () -> new ValidationException( "invalid type parameter: %s".formatted( typeArgument ) ) );
         }
     }   //  ParameterizedTypeNameImpl()
 
@@ -142,7 +141,6 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      *  {@inheritDoc}
      */
     @Override
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final ParameterizedTypeNameImpl annotated( final List<AnnotationSpec> annotations )
     {
         final var retValue = new ParameterizedTypeNameImpl( m_EnclosingType, m_RawType, m_TypeArguments, concatAnnotations( annotations ) );
@@ -201,10 +199,8 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      *  @return The new instance of {@code ParameterizedTypeName}.
      */
     @API( status = STABLE, since = "0.2.0" )
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final ParameterizedTypeNameImpl from( final Class<?> rawType, final Type... typeArguments )
     {
-        @SuppressWarnings( "CastToConcreteClass" )
         final var retValue = new ParameterizedTypeNameImpl( null, (ClassNameImpl) ClassName.from( rawType ), list( typeArguments ) );
 
         //---* Done *----------------------------------------------------------
@@ -220,10 +216,8 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      *  @return The new instance of {@code ParameterizedTypeName}.
      */
     @API( status = STABLE, since = "0.2.0" )
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final ParameterizedTypeNameImpl from( final ClassName rawType, final TypeName... typeArguments )
     {
-        @SuppressWarnings( "CastToConcreteClass" )
         final var retValue = new ParameterizedTypeNameImpl( null, (ClassNameImpl) rawType, stream( requireNonNullArgument( typeArguments, "typeArguments" ) ).map( t -> (TypeNameImpl) t ).collect( toList() ) );
 
         //---* Done *----------------------------------------------------------
@@ -239,10 +233,8 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      *  @return The new instance of {@code ParameterizedTypeName}.
      */
     @API( status = STABLE, since = "0.2.0" )
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final ParameterizedTypeNameImpl from( final ParameterizedType type, final Map<Type,TypeVariableName> typeArguments )
     {
-        @SuppressWarnings( "CastToConcreteClass" )
         final var rawType = (ClassNameImpl) ClassName.from( (Class<?>) type.getRawType() );
         final var ownerType = (type.getOwnerType() instanceof ParameterizedType) && !Modifier.isStatic( ((Class<?>) type.getRawType()).getModifiers() ) ? (ParameterizedType) type.getOwnerType() : null;
         final var typeArgumentList = TypeNameImpl.list( type.getActualTypeArguments(), typeArguments );
@@ -268,10 +260,8 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final ParameterizedTypeNameImpl get( final Class<?> rawType, final Type... typeArguments )
     {
-        @SuppressWarnings( "CastToConcreteClass" )
         final var retValue = from( rawType, typeArguments );
 
         //---* Done *----------------------------------------------------------
@@ -292,7 +282,6 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final ParameterizedTypeNameImpl get( final ClassName rawType, final TypeName... typeArguments )
     {
         final var retValue = from( rawType, typeArguments );
@@ -314,7 +303,6 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static ParameterizedTypeName get( final ParameterizedType type, final Map<Type,TypeVariableName> typeArguments  )
     {
         final var retValue = from( type, typeArguments );
@@ -327,7 +315,6 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      *  {@inheritDoc}
      */
     @Override
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final ParameterizedTypeNameImpl nestedClass( final CharSequence name )
     {
         final var retValue = new ParameterizedTypeNameImpl( this, m_RawType.nestedClass( requireNonNullArgument( name, "name" ) ), new ArrayList<>(), new ArrayList<>() );
@@ -340,10 +327,8 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      *  {@inheritDoc}
      */
     @Override
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final ParameterizedTypeNameImpl nestedClass( final CharSequence name, final List<TypeName> typeArguments )
     {
-        @SuppressWarnings( "CastToConcreteClass" )
         final var retValue = new ParameterizedTypeNameImpl( this, m_RawType.nestedClass( requireNonNullArgument( name, "name" ) ), typeArguments.stream().map( t -> (TypeNameImpl) t ).collect( toList() ), new ArrayList<>() );
 
         //---* Done *----------------------------------------------------------
@@ -354,7 +339,6 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      *  {@inheritDoc}
      */
     @Override
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final ClassNameImpl rawType() { return m_RawType; }
 
     /**
@@ -367,7 +351,6 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      *  {@inheritDoc}
      */
     @Override
-    @SuppressWarnings( "UseOfConcreteClass" )
     public final ParameterizedTypeNameImpl withoutAnnotations()
     {
         final var retValue = new ParameterizedTypeNameImpl( m_EnclosingType, m_RawType.withoutAnnotations(), m_TypeArguments, new ArrayList<>() );

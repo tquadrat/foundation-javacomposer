@@ -13,7 +13,7 @@
 <div class="source-container">
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
-<span class="source-line-no">003</span><span id="line-3"> * Copyright © 2002-2021 by Thomas Thrien.</span>
+<span class="source-line-no">003</span><span id="line-3"> * Copyright © 2002-2023 by Thomas Thrien.</span>
 <span class="source-line-no">004</span><span id="line-4"> * All Rights Reserved.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
@@ -31,12 +31,12 @@
 <span class="source-line-no">018</span><span id="line-18"></span>
 <span class="source-line-no">019</span><span id="line-19">package org.tquadrat.foundation.javacomposer;</span>
 <span class="source-line-no">020</span><span id="line-20"></span>
-<span class="source-line-no">021</span><span id="line-21">import static java.util.Arrays.stream;</span>
-<span class="source-line-no">022</span><span id="line-22">import static java.util.stream.Collectors.joining;</span>
-<span class="source-line-no">023</span><span id="line-23">import static org.apiguardian.api.API.Status.STABLE;</span>
-<span class="source-line-no">024</span><span id="line-24">import static org.tquadrat.foundation.lang.CommonConstants.EMPTY_STRING;</span>
-<span class="source-line-no">025</span><span id="line-25">import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;</span>
-<span class="source-line-no">026</span><span id="line-26">import static org.tquadrat.foundation.util.StringUtils.format;</span>
+<span class="source-line-no">021</span><span id="line-21">import static java.lang.String.format;</span>
+<span class="source-line-no">022</span><span id="line-22">import static java.util.Arrays.stream;</span>
+<span class="source-line-no">023</span><span id="line-23">import static java.util.stream.Collectors.joining;</span>
+<span class="source-line-no">024</span><span id="line-24">import static org.apiguardian.api.API.Status.STABLE;</span>
+<span class="source-line-no">025</span><span id="line-25">import static org.tquadrat.foundation.lang.CommonConstants.EMPTY_STRING;</span>
+<span class="source-line-no">026</span><span id="line-26">import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;</span>
 <span class="source-line-no">027</span><span id="line-27"></span>
 <span class="source-line-no">028</span><span id="line-28">import java.util.Optional;</span>
 <span class="source-line-no">029</span><span id="line-29">import java.util.StringJoiner;</span>
@@ -58,12 +58,12 @@
 <span class="source-line-no">045</span><span id="line-45"> *  @see &lt;a href="http://help.eclipse.org/photon/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Ftasks%2Ftask-suppress_warnings.htm&amp;cp=1_4_8_4"&gt;Eclipse documentation&lt;/a&gt;</span>
 <span class="source-line-no">046</span><span id="line-46"> *</span>
 <span class="source-line-no">047</span><span id="line-47"> *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">048</span><span id="line-48"> *  @version $Id: SuppressableWarnings.java 947 2021-12-23 21:44:25Z tquadrat $</span>
+<span class="source-line-no">048</span><span id="line-48"> *  @version $Id: SuppressableWarnings.java 1068 2023-09-28 21:42:28Z tquadrat $</span>
 <span class="source-line-no">049</span><span id="line-49"> *  @since 0.0.5</span>
 <span class="source-line-no">050</span><span id="line-50"> *</span>
 <span class="source-line-no">051</span><span id="line-51"> *  @UMLGraph.link</span>
 <span class="source-line-no">052</span><span id="line-52"> */</span>
-<span class="source-line-no">053</span><span id="line-53">@ClassVersion( sourceVersion = "$Id: SuppressableWarnings.java 947 2021-12-23 21:44:25Z tquadrat $" )</span>
+<span class="source-line-no">053</span><span id="line-53">@ClassVersion( sourceVersion = "$Id: SuppressableWarnings.java 1068 2023-09-28 21:42:28Z tquadrat $" )</span>
 <span class="source-line-no">054</span><span id="line-54">@API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">055</span><span id="line-55">public enum SuppressableWarnings</span>
 <span class="source-line-no">056</span><span id="line-56">{</span>
@@ -488,9 +488,9 @@
 <span class="source-line-no">475</span><span id="line-475">        requireNonNullArgument( factory, "factory" );</span>
 <span class="source-line-no">476</span><span id="line-476"></span>
 <span class="source-line-no">477</span><span id="line-477">        final var joiner = new StringJoiner( " ", "//noinspection ", EMPTY_STRING ).setEmptyValue( EMPTY_STRING );</span>
-<span class="source-line-no">478</span><span id="line-478">        for( final var s : requireNonNullArgument( suppress, "suppress" ) )</span>
+<span class="source-line-no">478</span><span id="line-478">        for( final var warning : requireNonNullArgument( suppress, "suppress" ) )</span>
 <span class="source-line-no">479</span><span id="line-479">        {</span>
-<span class="source-line-no">480</span><span id="line-480">            joiner.add( s.toString() );</span>
+<span class="source-line-no">480</span><span id="line-480">            joiner.add( warning.toString() );</span>
 <span class="source-line-no">481</span><span id="line-481">        }</span>
 <span class="source-line-no">482</span><span id="line-482">        final var retValue = joiner.length() &gt; 0 ? factory.codeBlockOf( joiner.toString() ) : factory.emptyCodeBlock();</span>
 <span class="source-line-no">483</span><span id="line-483"></span>

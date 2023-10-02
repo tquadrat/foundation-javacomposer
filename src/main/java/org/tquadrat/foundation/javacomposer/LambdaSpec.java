@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2021 by Thomas Thrien.
+ * Copyright © 2002-2023 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  *
@@ -34,8 +34,8 @@ import org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl;
  *  <p>When adding more than one parameter, all of them must have a specified
  *  type or none of them may have one, leaving the compiler to infer the type.
  *  As
- *  {@link ParameterSpec#builder(Type,CharSequence,Modifier...) ParameterSpec.builder()}
- *  do require a type, we take
+ *  {@link JavaComposer#parameterBuilder(Type, CharSequence, Modifier...) paramterBuilder()}
+ *  does require a type, we take
  *  {@link Primitives#VOID}
  *  instead of a concrete type if we want to get the type being inferred.</p>
  *  <h2>Formatting</h2>
@@ -72,13 +72,12 @@ import org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl;
  *  second case.</p>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: LambdaSpec.java 855 2021-01-21 20:22:52Z tquadrat $
+ *  @version $Id: LambdaSpec.java 1067 2023-09-28 21:09:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@SuppressWarnings( "InterfaceMayBeAnnotatedFunctional" )
-@ClassVersion( sourceVersion = "$Id: LambdaSpec.java 855 2021-01-21 20:22:52Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: LambdaSpec.java 1067 2023-09-28 21:09:15Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface LambdaSpec
     permits LambdaSpecImpl
@@ -91,13 +90,13 @@ public sealed interface LambdaSpec
      *  {@link LambdaSpec}
      *
      *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: LambdaSpec.java 855 2021-01-21 20:22:52Z tquadrat $
+     *  @version $Id: LambdaSpec.java 1067 2023-09-28 21:09:15Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: LambdaSpec.java 855 2021-01-21 20:22:52Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: LambdaSpec.java 1067 2023-09-28 21:09:15Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits LambdaSpecImpl.BuilderImpl
@@ -312,7 +311,7 @@ public sealed interface LambdaSpec
     public int hashCode();
 
     /**
-     *  Creates an new builder that is initialised with the components of this
+     *  Creates a new builder that is initialised with the components of this
      *  lambda.
      *
      *  @return The new builder.

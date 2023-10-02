@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,7 +40,6 @@ import static org.tquadrat.foundation.lang.Objects.hash;
 import static org.tquadrat.foundation.lang.Objects.isNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.Modifier;
 import java.io.UncheckedIOException;
@@ -67,12 +66,12 @@ import org.tquadrat.foundation.javacomposer.TypeSpec;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: AnnotationTypeSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $
+ *  @version $Id: AnnotationTypeSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: AnnotationTypeSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: AnnotationTypeSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $" )
 @API( status = INTERNAL, since = "0.2.0" )
 public final class AnnotationTypeSpecImpl extends TypeSpecImpl
 {
@@ -86,12 +85,12 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: AnnotationTypeSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $
+     *  @version $Id: AnnotationTypeSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: AnnotationTypeSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: AnnotationTypeSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $" )
     @API( status = INTERNAL, since = "0.2.0" )
     public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl
     {
@@ -118,8 +117,8 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
          *      builder instance.
          *  @param  name    The name of the type to build.
          */
-        @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType", "CastToConcreteClass"} )
-        public BuilderImpl( final JavaComposer composer, final Optional<String> name )
+        @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType"} )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final Optional<String> name )
         {
             super( composer, ANNOTATION, name );
         }   //  BuilderImpl()
@@ -130,26 +129,24 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            throw new ValidationException( format( "Attributes are not allowed for annotation %s", getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
+            throw new ValidationException( "Attributes are not allowed for annotation %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
         }   //  addAttribute()
 
         /**
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addField( final FieldSpec fieldSpec )
         {
             final var fieldSpecImpl = (FieldSpecImpl) requireNonNullArgument( fieldSpec, "fieldSpec" );
             final var modifiers = fieldSpecImpl.modifiers();
             requireExactlyOneOf( modifiers, PUBLIC, PRIVATE );
             final Set<Modifier> check = EnumSet.of( STATIC, FINAL );
-            checkState( modifiers.containsAll( check ), () -> new ValidationException( format( "%s %s.%s requires modifiers %s", ANNOTATION, getName().orElse( NAME_ANONYMOUS_TYPE ), fieldSpec.name(), check ) ) );
+            checkState( modifiers.containsAll( check ), () -> new ValidationException( "%s %s.%s requires modifiers %s".formatted( ANNOTATION, getName().orElse( NAME_ANONYMOUS_TYPE ), fieldSpec.name(), check ) ) );
             if( composer().addDebugOutput() )
             {
                 final var builder = fieldSpecImpl.toBuilder();
@@ -168,7 +165,6 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addInitializerBlock( final CodeBlock block )
         {
@@ -179,12 +175,11 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl addMethod( final MethodSpec methodSpec )
         {
             final var methodSpecImpl = (MethodSpecImpl) requireNonNullArgument( methodSpec, "methodSpec" );
-            checkState( methodSpecImpl.modifiers().equals( ANNOTATION.implicitMethodModifiers() ), () -> new IllegalStateException( format( "%s %s.%s requires modifiers %s", ANNOTATION, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name(), ANNOTATION.implicitMethodModifiers() ) ) );
-            checkState( !methodSpecImpl.hasModifier( DEFAULT ), () -> new IllegalStateException(( format( "%s %s.%s cannot be default", ANNOTATION, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) ) );
+            checkState( methodSpecImpl.modifiers().equals( ANNOTATION.implicitMethodModifiers() ), () -> new IllegalStateException( "%s %s.%s requires modifiers %s".formatted( ANNOTATION, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name(), ANNOTATION.implicitMethodModifiers() ) ) );
+            checkState( !methodSpecImpl.hasModifier( DEFAULT ), () -> new IllegalStateException(( "%s %s.%s cannot be default".formatted( ANNOTATION, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) ) );
 
             final var methodSpecs = getMethodSpecs();
             if( composer().addDebugOutput() )
@@ -212,32 +207,29 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            throw new ValidationException( format( "Properties are not allowed for annotation %s", getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
+            throw new ValidationException( "Properties are not allowed for annotation %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
         }   //  addProperty()
 
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
        public final BuilderImpl addStaticBlock( final CodeBlock block )
         {
-            throw new ValidationException( format( "Static Blocks are not allowed for annotation %s", getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
+            throw new ValidationException( "Static Blocks are not allowed for annotation %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
         }   //  addStaticBlock()
 
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final AnnotationTypeSpecImpl build()
         {
             for( final var methodSpec : getMethodSpecs() )
             {
-                checkState( methodSpec.hasModifier( ABSTRACT ), () -> new ValidationException( format( "Methods for Annotation %s have to be abstract: %s", getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpec.name() ) ) );
+                checkState( methodSpec.hasModifier( ABSTRACT ), () -> new ValidationException( "Methods for Annotation %s have to be abstract: %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpec.name() ) ) );
             }
 
             final var retValue = new AnnotationTypeSpecImpl( this );
@@ -250,7 +242,6 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
          *  {@inheritDoc}
          */
         @Override
-        @SuppressWarnings( "CastToConcreteClass" )
         public final BuilderImpl superclass( final TypeName superclass )
         {
             throw new IllegalStateException( "only classes have super classes, not " + ANNOTATION );
@@ -303,8 +294,9 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "CastToConcreteClass"} )
-    protected final void emit4Foundation( final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
+    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "OverlyLongMethod", "OverlyComplexMethod"} )
+    @Override
+    protected final void emit4Foundation( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         assert isNull( enumName ) : "enumName has to be null";
 
@@ -357,9 +349,9 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
 
             //---* Emit the constants *----------------------------------------
             final var constants = getFieldSpecs().stream()
-                .filter( f -> f.hasModifier( PUBLIC ) )
-                .filter( f -> f.hasModifier( STATIC ) )
-                .filter( f -> f.hasModifier( FINAL ) )
+                .filter( fieldSpec -> fieldSpec.hasModifier( PUBLIC ) )
+                .filter( fieldSpec -> fieldSpec.hasModifier( STATIC ) )
+                .filter( fieldSpec -> fieldSpec.hasModifier( FINAL ) )
                 .filter( FieldSpecImpl::hasInitializer )
                 .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )
                 .toList();
@@ -372,19 +364,19 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
                         /*-----------*\\
                     ====** Constants **========================================================
                         \\*-----------*/""" );
-                constants.forEach( c ->
+                constants.forEach( constant ->
                 {
                     codeWriter.emit( "\n" );
-                    c.emit( codeWriter, ANNOTATION.implicitFieldModifiers() );
-                    alreadyHandled.add( c );
+                    constant.emit( codeWriter, ANNOTATION.implicitFieldModifiers() );
+                    alreadyHandled.add( constant );
                 } );
                 firstMember = false;
             }
 
             //---* Emit the attributes *---------------------------------------
             final var attributes = getFieldSpecs().stream()
-                .filter( f -> !alreadyHandled.contains( f ) )
-                .filter( f -> !(f.hasModifier( STATIC ) && f.hasModifier( FINAL )) )
+                .filter( fieldSpec -> !alreadyHandled.contains( fieldSpec ) )
+                .filter( fieldSpec -> !(fieldSpec.hasModifier( STATIC ) && fieldSpec.hasModifier( FINAL )) )
                 .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )
                 .toList();
 
@@ -408,7 +400,7 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
 
             //---* Static fields *---------------------------------------------
             final var statics = getFieldSpecs().stream()
-                .filter( f -> !alreadyHandled.contains( f ) )
+                .filter( fieldSpec -> !alreadyHandled.contains( fieldSpec ) )
                 .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )
                 .toList();
             if( !statics.isEmpty() || !getStaticBlock().isEmpty() )
@@ -420,11 +412,11 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
                     ====** Static Initialisations **===========================================
                         \\*------------------------*/""" );
 
-                statics.forEach( s ->
+                statics.forEach( staticField ->
                 {
                     codeWriter.emit( "\n" );
-                    s.emit( codeWriter, ANNOTATION.implicitFieldModifiers() );
-                    alreadyHandled.add( s );
+                    staticField.emit( codeWriter, ANNOTATION.implicitFieldModifiers() );
+                    alreadyHandled.add( staticField );
                 } );
 
                 //---* Static Block *------------------------------------------
@@ -459,17 +451,17 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
             }
 
             //---* Emit the constructors *-------------------------------------
-            constructors.forEach( c ->
+            constructors.forEach( constructorSpec ->
             {
                 codeWriter.emit( "\n" );
-                c.emit( codeWriter, name(), ANNOTATION.implicitMethodModifiers() );
+                constructorSpec.emit( codeWriter, name(), ANNOTATION.implicitMethodModifiers() );
             } );
             firstMember = false;
         }
 
         //---* Methods (static and non-static) *-------------------------------
         final var methods = getMethodSpecs().stream()
-            .filter( m -> !m.isConstructor() )
+            .filter( methodSpec -> !methodSpec.isConstructor() )
             .sorted( TypeSpecImpl::compareMethodSpecs )
             .toList();
         if( !methods.isEmpty() )
@@ -481,10 +473,10 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
                 ====** Attributes **=======================================================
                     \\*------------*/""" );
 
-            methods.forEach( m ->
+            methods.forEach( methodSpec ->
             {
                 codeWriter.emit( "\n" );
-                m.emit( codeWriter, name(), ANNOTATION.implicitMethodModifiers() );
+                methodSpec.emit( codeWriter, name(), ANNOTATION.implicitMethodModifiers() );
             } );
         }
 
@@ -508,8 +500,9 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "CastToConcreteClass"} )
-    protected final void emit4JavaPoet( final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
+    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "OverlyComplexMethod"} )
+    @Override
+    protected final void emit4JavaPoet( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         assert isNull( enumName ) : "enumName has to be null";
 
@@ -607,7 +600,7 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
     public final boolean equals( final Object o )
     {
         var retValue = this == o;
-        if( !retValue && (o instanceof AnnotationTypeSpecImpl other) )
+        if( !retValue && (o instanceof final AnnotationTypeSpecImpl other) )
         {
             retValue = getFactory().equals( other.getFactory() ) && toString().equals( o.toString() );
         }
@@ -625,7 +618,6 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
     @Override
     public final BuilderImpl toBuilder()
     {

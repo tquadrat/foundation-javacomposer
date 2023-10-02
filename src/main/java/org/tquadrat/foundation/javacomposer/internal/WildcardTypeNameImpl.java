@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,6 @@ import static org.tquadrat.foundation.lang.Objects.checkState;
 import static org.tquadrat.foundation.lang.Objects.isNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.type.TypeMirror;
@@ -53,12 +52,12 @@ import org.tquadrat.foundation.javacomposer.WildcardTypeName;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: WildcardTypeNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: WildcardTypeNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: WildcardTypeNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: WildcardTypeNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class WildcardTypeNameImpl extends TypeNameImpl implements WildcardTypeName
 {
@@ -104,16 +103,16 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
             requireValidNonNullArgument( upperBounds,
                 "upperBounds",
                 u -> u.size() ==1,
-                $ -> format( "unexpected extends bounds: %s", upperBounds ) ) );
+                $ -> "unexpected extends bounds: %s".formatted( upperBounds ) ) );
         m_LowerBounds = List.copyOf( requireNonNullArgument( lowerBounds, "lowerBounds" ) );
 
         for( final var upperBound : m_UpperBounds )
         {
-            checkState( !upperBound.isPrimitive() && upperBound != VOID_PRIMITIVE, () -> new ValidationException( format( "invalid upper bound: %s", upperBound ) ) );
+            checkState( !upperBound.isPrimitive() && upperBound != VOID_PRIMITIVE, () -> new ValidationException( "invalid upper bound: %s".formatted( upperBound ) ) );
         }
         for( final var lowerBound : m_LowerBounds )
         {
-            checkState( !lowerBound.isPrimitive() && lowerBound != VOID_PRIMITIVE, () -> new ValidationException( format( "invalid lower bound: %s", lowerBound ) ) );
+            checkState( !lowerBound.isPrimitive() && lowerBound != VOID_PRIMITIVE, () -> new ValidationException( "invalid lower bound: %s".formatted( lowerBound ) ) );
         }
     }   //  WildcardTypeNameImpl()
 
@@ -123,7 +122,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final WildcardTypeNameImpl annotated( final List<AnnotationSpec> annotations )
     {
@@ -169,7 +167,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *  @param  mirror  The type mirror for a wildcard type.
      *  @return The respective {@code TypeName} instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final TypeNameImpl from( final javax.lang.model.type.WildcardType mirror )
     {
@@ -188,7 +185,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *  @param  typeVariables   The type variables.
      *  @return The respective {@code TypeName} instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     static final TypeNameImpl from( final javax.lang.model.type.WildcardType mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
     {
@@ -224,7 +220,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *  @param  wildcardName    The wildcard type.
      *  @return The respective {@code TypeName} instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final TypeNameImpl from( final WildcardType wildcardName )
     {
@@ -243,7 +238,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *  @param  typeVariables   The type variables.
      *  @return The respective {@code TypeName} instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     static final TypeNameImpl from( final WildcardType wildcardName, final Map<Type,TypeVariableName> typeVariables )
     {
@@ -265,7 +259,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *      {@link #from(javax.lang.model.type.WildcardType)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final TypeNameImpl get( final javax.lang.model.type.WildcardType mirror ) { return from( mirror ); }
@@ -283,7 +276,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *      {@link #from(TypeMirror, Map)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     static final TypeNameImpl get( final javax.lang.model.type.WildcardType mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
@@ -306,7 +298,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *      {@link #from(WildcardType)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final TypeNameImpl get( final WildcardType wildcardName ) { return from( wildcardName ); }
@@ -324,7 +315,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *      {@link #from(WildcardType,Map)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     static final TypeNameImpl get( final WildcardType wildcardName, final Map<Type,TypeVariableName> typeVariables )
@@ -341,7 +331,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *  @param  type    The type.
      *  @return The subtype.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final WildcardTypeNameImpl subtypeOf( final Type type )
     {
         final var retValue = subtypeOf( TypeNameImpl.from( type ) );
@@ -362,7 +351,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *  @param  type    The type.
      *  @return The subtype.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public static final WildcardTypeNameImpl subtypeOf( final TypeName type )
     {
         final var retValue = new WildcardTypeNameImpl( List.of( (TypeNameImpl) type ), List.of() );
@@ -377,7 +365,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *  @param  type    The type.
      *  @return The super type.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final WildcardTypeNameImpl supertypeOf( final Type type )
     {
         final var retValue = supertypeOf( TypeName.from( type ) );
@@ -395,7 +382,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      *  @param  type    The type.
      *  @return The super type.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public static final WildcardTypeNameImpl supertypeOf( final TypeName type )
     {
         final var retValue = new WildcardTypeNameImpl( List.of( OBJECT ), List.of( (TypeNameImpl) type ) );
@@ -407,7 +393,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final WildcardTypeNameImpl withoutAnnotations()
     {

@@ -542,22 +542,22 @@ loadScripts(document, 'script');</script>
 
   <h2>Parameters</h2>
   <p>Declare parameters on methods and constructors with either
-  <a href="ParameterSpec.html#builder(org.tquadrat.foundation.javacomposer.TypeName,java.lang.CharSequence,javax.lang.model.element.Modifier...)"><code>ParameterSpec.builder(org.tquadrat.foundation.javacomposer.TypeName,java.lang.CharSequence,javax.lang.model.element.Modifier[])</code></a>
+  <a href="JavaComposer.html#parameterBuilder(org.tquadrat.foundation.javacomposer.TypeName,java.lang.CharSequence,javax.lang.model.element.Modifier...)"><code>JavaComposer.parameterBuilder(org.tquadrat.foundation.javacomposer.TypeName,CharSequence,javax.lang.model.element.Modifier...)</code></a>
   or
   <a href="MethodSpec.Builder.html" title="interface in org.tquadrat.foundation.javacomposer"><code>MethodSpec</code></a>'s
   convenience
   <a href="MethodSpec.Builder.html#addParameter(org.tquadrat.foundation.javacomposer.TypeName,java.lang.String,javax.lang.model.element.Modifier...)"><code>addParameter()</code></a>
   API:</p>
-  <div class="source-container"><pre>  ParameterSpec android = ParameterSpec.builder( String.class, "android" )
+  <div class="source-container"><pre>  ParameterSpec android = composer.parameterBuilder( String.class, "android" )
       .addModifiers( Modifier.FINAL )
       .build();
 
-  MethodSpec welcomeOverlords = MethodSpec.methodBuilder( "welcomeOverlords" )
+  MethodSpec welcomeOverlords = composer.methodBuilder( "welcomeOverlords" )
       .addParameter( android )
       .addParameter( String.class, "robot", Modifier.FINAL )
       .build();</pre></div>
-  <p>Though the code above to generate android and robot parameters is
-  different, the output is the same:</p>
+  <p>Though the code above to generate <code>android</code> and <code>robot</code>
+  parameters is different, the output is the same:</p>
   <div class="source-container"><pre>  void welcomeOverlords(final String android, final String robot) {
   }</pre></div>
   <p>The extended Builder form is mandatory when the parameter has
@@ -640,11 +640,11 @@ loadScripts(document, 'script');</script>
 
   <h2>Enums</h2>
   <p>Use
-  <a href="TypeSpec.html#enumBuilder(java.lang.CharSequence)"><code>enumBuilder</code></a>
+  <a href="JavaComposer.html#enumBuilder(java.lang.CharSequence)"><code>enumBuilder</code></a>
   to create the <code>enum</code> type, and
   <a href="TypeSpec.Builder.html#addEnumConstant(java.lang.CharSequence)"><code>addEnumConstant()</code></a>
   for each value:</p>
-  <div class="source-container"><pre>  TypeSpec helloWorld = TypeSpec.enumBuilder( "Roshambo" )
+  <div class="source-container"><pre>  TypeSpec helloWorld = composer.enumBuilder( "Roshambo" )
       .addModifiers( Modifier.PUBLIC )
       .addEnumConstant( "ROCK" )
       .addEnumConstant( "SCISSORS" )
@@ -661,22 +661,22 @@ loadScripts(document, 'script');</script>
   <p>Fancy enums are supported, where the <code>enum</code> values override
   methods or call a superclass constructor. Here's a comprehensive
   example:</p>
-  <div class="source-container"><pre>  TypeSpec helloWorld = TypeSpec.enumBuilder( "Roshambo" )
+  <div class="source-container"><pre>  TypeSpec helloWorld = composer.enumBuilder( "Roshambo" )
       .addModifiers( Modifier.PUBLIC )
-      .addEnumConstant( "ROCK", TypeSpec.anonymousClassBuilder( "$S", "fist" )
-          .addMethod( MethodSpec.methodBuilder( "toString" )
+      .addEnumConstant( "ROCK", composer.anonymousClassBuilder( "$S", "fist" )
+          .addMethod( composer.methodBuilder( "toString" )
               .addAnnotation( Override.class )
               .addModifiers( Modifier.PUBLIC )
               .addStatement( "return $S", "avalanche!" )
               .returns( String.class )
               .build() )
           .build() )
-      .addEnumConstant( "SCISSORS", TypeSpec.anonymousClassBuilder( "$S", "peace" )
+      .addEnumConstant( "SCISSORS", composer.anonymousClassBuilder( "$S", "peace" )
           .build() )
-      .addEnumConstant( "PAPER", TypeSpec.anonymousClassBuilder( "$S", "flat" )
+      .addEnumConstant( "PAPER", composer.anonymousClassBuilder( "$S", "flat" )
           .build() )
       .addField( String.class, "handsign", Modifier.PRIVATE, Modifier.FINAL )
-      .addMethod( MethodSpec.constructorBuilder()
+      .addMethod( composer.constructorBuilder()
           .addParameter( String.class, "handsign" )
           .addStatement( "this.$N = $N", "handsign", "handsign" )
           .build() )
@@ -703,12 +703,12 @@ loadScripts(document, 'script');</script>
 
   <h2>Anonymous Inner Classes</h2>
   <p>In the enum code above, we used
-  <a href="TypeSpec.html#anonymousClassBuilder(java.lang.String,java.lang.Object...)"><code>TypeSpec.anonymousClassBuilder()</code></a>
+  <a href="JavaComposer.html#anonymousClassBuilder(java.lang.String,java.lang.Object...)"><code>TypeSpec.anonymousClassBuilder()</code></a>
   to create an anonymous inner class. This can also be used in code blocks.
   They are values that can be referenced with <code>$L</code>:</p>
-  <div class="source-container"><pre>  TypeSpec comparator = TypeSpec.anonymousClassBuilder( "" )
+  <div class="source-container"><pre>  TypeSpec comparator = composer.anonymousClassBuilder( "" )
       .addSuperinterface( ParameterizedTypeName.get( Comparator.class, String.class ) )
-      .addMethod( MethodSpec.methodBuilder( "compare" )
+      .addMethod( composer.methodBuilder( "compare" )
           .addAnnotation( Override.class )#
           .addModifiers( Modifier.PUBLIC )#
           .addParameter( String.class, "a" )
@@ -719,7 +719,7 @@ loadScripts(document, 'script');</script>
       .build();
 
   TypeSpec helloWorld = TypeSpec.classBuilder( "HelloWorld" )
-      .addMethod( MethodSpec.methodBuilder( "sortByLength" )
+      .addMethod( composer.methodBuilder( "sortByLength" )
           .addParameter( ParameterizedTypeName.get( List.class, String.class ), "strings" )
           .addStatement( "$T.sort($N, $L)", Collections.class, "strings", comparator )
           .build() )
@@ -737,13 +737,13 @@ loadScripts(document, 'script');</script>
   <p>One particularly tricky part of defining anonymous inner classes is the
   arguments to the superclass constructor. In the above code we're passing
   the empty string for no arguments:
-  <code>TypeSpec.anonymousClassBuilder(&nbsp;&quot;&quot;&nbsp;)</code>. To
+  <code>composer.anonymousClassBuilder(&nbsp;&quot;&quot;&nbsp;)</code>. To
   pass different parameters use JavaComposer's code block syntax with commas
   to separate arguments.</p>
 
   <h2>Annotations</h2>
   <p>Simple annotations are easy:</p>
-  <div class="source-container"><pre>  MethodSpec toString = MethodSpec.methodBuilder( "toString" )
+  <div class="source-container"><pre>  MethodSpec toString = composer.methodBuilder( "toString" )
       .addAnnotation( Override.class )
       .returns( String.class )
       .addModifiers( Modifier.PUBLIC )
@@ -756,11 +756,11 @@ loadScripts(document, 'script');</script>
       return "Hoverboard";
   }</pre></div>
   <p>Use
-  <a href="AnnotationSpec.html#builder(java.lang.Class)"><code>AnnotationSpec.builder()</code></a>
+  <a href="JavaComposer.html#annotationBuilder(java.lang.Class)"><code>JavaComposer.annotationBuilder()</code></a>
   to set properties on annotations:</p>
-  <div class="source-container"><pre>  MethodSpec logRecord = MethodSpec.methodBuilder( "recordEvent" )
+  <div class="source-container"><pre>  MethodSpec logRecord = composer.methodBuilder( "recordEvent" )
       .addModifiers( Modifier.PUBLIC, Modifier.ABSTRACT )
-      .addAnnotation( AnnotationSpec.builder( Headers.class )
+      .addAnnotation( composer.annotationBuilder( Headers.class )
           .addMember( "accept", "$S", "application/json; charset=utf-8" )
           .addMember( "userAgent", "$S", "Square Cash" )
           .build() )
@@ -776,14 +776,14 @@ loadScripts(document, 'script');</script>
   LogReceipt recordEvent(LogRecord logRecord);</pre></div>
   <p>When you get fancy, annotation values can be annotations themselves. Use
   <code>$L</code> for embedded annotations:</p>
-  <div class="sourceContainer"><pre>MethodSpec logRecord = MethodSpec.methodBuilder( "recordEvent" )
+  <div class="sourceContainer"><pre>MethodSpec logRecord = composer.methodBuilder( "recordEvent" )
       .addModifiers( Modifier.PUBLIC, Modifier.ABSTRACT )
-      .addAnnotation( AnnotationSpec.builder( HeaderList.class )
-          .addMember( "value", "$L", AnnotationSpec.builder( Header.class )
+      .addAnnotation( composer.annotationBuilder( HeaderList.class )
+          .addMember( "value", "$L", composer.annotationBuilder( Header.class )
               .addMember( "name", "$S", "Accept" )
               .addMember( "value", "$S", "application/json; charset=utf-8" )
               .build() )
-          .addMember( "value", "$L", AnnotationSpec.builder( Header.class )
+          .addMember( "value", "$L", composer.annotationBuilder( Header.class )
               .addMember( "name", "$S", "User-Agent" )
               .addMember( "value", "$S", "Square Cash" )
               .build() )
@@ -805,7 +805,7 @@ loadScripts(document, 'script');</script>
   <h2>Javadoc</h2>
   <p>Fields, methods and types can be documented with Javadoc (in fact, they
   should be documented, even for generated code):</p>
-  <div class="source-container"><pre>  MethodSpec dismiss = MethodSpec.methodBuilder( "dismiss" )
+  <div class="source-container"><pre>  MethodSpec dismiss = composer.methodBuilder( "dismiss" )
       .addJavadoc( """
                    Hides {&#64;code message} from the caller's history. Other
                    participants in the conversation will continue to see the
@@ -844,17 +844,19 @@ loadScripts(document, 'script');</script>
       CodeBlock codeBlock = CodeBlock.of( "$T&lt;$T&gt; function = $L;", UnaryOperator.class, String.class, candidate );</pre></div>
   <p>generates</p>
   <div class="source-container"><pre>  java.util.function.UnaryOperator&lt;java.lang.String&gt; function = s -&gt; upperCase( s );</pre></div>.
-
   <h2>Layout</h2>
   <p>You may have noticed that the layout for the samples of
   <i>generating</i> code looks different from that of <i>generated</i> code:
   the first was formatted like the code for the Foundation Library, while the
   layout for the second was that used by the original JavaPoet code.</p>
-  <p>When generating a <code>*.java</code> file with
-  <a href="JavaFile.html" title="interface in org.tquadrat.foundation.javacomposer"><code>JavaFile</code></a>,
-  you can specify a layout by calling
-  <a href="JavaFile.Builder.html#layout(org.tquadrat.foundation.javacomposer.Layout)"><code>JavaFile.layout()</code></a>
-  with the name of the desired layout.</p>
+  <p>When creating a new
+  <a href="JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer"><code>JavaComposer</code></a>
+  you can specify a
+  <a href="Layout.html" title="enum class in org.tquadrat.foundation.javacomposer"><code>Layout</code></a>
+  with the
+  <a href="JavaComposer.html#%3Cinit%3E(org.tquadrat.foundation.javacomposer.Layout)">constructor</a>
+  that determines the look of the output, generated by
+  <a href="JavaFile.html" title="interface in org.tquadrat.foundation.javacomposer"><code>JavaFile</code></a>.</p>
   <p>Currently, this implementation supports the following layouts:</p>
   <dl>
       <dt><a href="Layout.html#LAYOUT_JAVAPOET"><code>LAYOUT_JAVAPOET</code></a></dt>
@@ -868,31 +870,10 @@ loadScripts(document, 'script');</script>
   <p>In particular when generating complex code, it is not immediately
   obvious which statement of the generator was responsible for which part of
   the output.</p>
-  <p>To help with the debugging of generated code, several builder methods
-  (see the list
-  <a href="#listofmethod">below</a>)
-  will have an additional <code>boolean</code> argument <code>addDebugOutput</code>; if
-  that is <code>true</code>, the respective output from that method is prepended
-  with the name of the class and the line number where that method is
-  called.</p>
-
-  <h3><a id="listofmethods">Methods with Debug Output</a></h3>
-  <ul>
-      <li><a href="AnnotationSpec.Builder.html#addMember(java.lang.CharSequence,boolean,java.lang.String,java.lang.Object...)"><code>AnnotationSpec.Builder.addMember(CharSequence,boolean,String,Object[])</code></a></li>
-      <li><a href="CodeBlock.html#of(boolean,java.lang.String,java.lang.Object...)"><code>CodeBlock.of(boolean,String,Object[])</code></a></li>
-      <li><a href="CodeBlock.Builder.html#add(boolean,java.lang.String,java.lang.Object...)"><code>CodeBlock.Builder.add(boolean,String,Object[])</code></a></li>
-      <li><a href="CodeBlock.Builder.html#addNamed(boolean,java.lang.String,java.util.Map)"><code>CodeBlock.Builder.addNamed(boolean,String,java.util.Map)</code></a></li>
-      <li><a href="CodeBlock.Builder.html#addStatement(boolean,java.lang.String,java.lang.Object...)"><code>CodeBlock.Builder.addStatement(boolean,String,Object[])</code></a></li>
-      <li><a href="CodeBlock.Builder.html#beginControlFlow(boolean,java.lang.String,java.lang.Object...)"><code>CodeBlock.Builder.beginControlFlow(boolean,String,Object[])</code></a></li>
-      <li><a href="CodeBlock.Builder.html#endControlFlow(boolean,java.lang.String,java.lang.Object...)"><code>CodeBlock.Builder.endControlFlow(boolean,String,Object[])</code></a></li>
-      <li><a href="CodeBlock.Builder.html#nextControlFlow(boolean,java.lang.String,java.lang.Object...)"><code>CodeBlock.Builder.nextControlFlow(boolean,String,Object[])</code></a></li>
-      <li><a href="MethodSpec.Builder.html#addCode(boolean,java.lang.String,java.lang.Object...)"><code>MethodSpec.Builder.addCode(boolean,String,Object[])</code></a></li>
-      <li><a href="MethodSpec.Builder.html#addNamedCode(boolean,java.lang.String,java.util.Map)"><code>MethodSpec.Builder.addNamedCode(boolean,String,java.util.Map)</code></a></li>
-      <li><a href="MethodSpec.Builder.html#addStatement(boolean,java.lang.String,java.lang.Object...)"><code>MethodSpec.Builder.addStatement(boolean,String,Object[])</code></a></li>
-      <li><a href="MethodSpec.Builder.html#beginControlFlow(boolean,java.lang.String,java.lang.Object...)"><code>MethodSpec.Builder.beginControlFlow(boolean,String,Object[])</code></a></li>
-      <li><a href="MethodSpec.Builder.html#endControlFlow(boolean,java.lang.String,java.lang.Object...)"><code>MethodSpec.Builder.endControlFlow(boolean,String,Object[])</code></a></li>
-      <li><a href="MethodSpec.Builder.html#nextControlFlow(boolean,java.lang.String,java.lang.Object...)"><code>MethodSpec.Builder.nextControlFlow(boolean,String,Object[])</code></a></li>
-  </ul>
+  <p>To help with the debugging of generated code, it is possible to prepend
+  each component of the generated code with the name of the class and the
+  line number where the method creating that component was called.</p>
+  <p>This feature is activated when the <code>JavaComposer</code> is created.</p>
 
   <h2><a id="section_License">License</a></h2>
   <p>The original code is

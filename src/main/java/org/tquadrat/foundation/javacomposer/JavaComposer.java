@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  Copyright © 2002-2021 by Thomas Thrien.
+ *  Copyright © 2002-2023 by Thomas Thrien.
  *  All Rights Reserved.
  * ============================================================================
  *  Licensed to the public under the agreements of the GNU Lesser General Public
@@ -17,6 +17,7 @@
 
 package org.tquadrat.foundation.javacomposer;
 
+import static java.lang.String.format;
 import static java.util.Arrays.sort;
 import static java.util.Arrays.stream;
 import static java.util.Comparator.comparing;
@@ -42,7 +43,6 @@ import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;
 import static org.tquadrat.foundation.util.JavaUtils.translateModifiers;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.AnnotationMirror;
@@ -98,13 +98,13 @@ import org.tquadrat.foundation.util.JavaUtils;
  *  thread-safe without any synchronisation.</p>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaComposer.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: JavaComposer.java 1067 2023-09-28 21:09:15Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"OverlyCoupledClass", "ClassWithTooManyMethods", "OverlyComplexClass"} )
-@ClassVersion( sourceVersion = "$Id: JavaComposer.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1067 2023-09-28 21:09:15Z tquadrat $" )
 @API( status = STABLE, since = "0.2.0" )
 public final class JavaComposer
 {
@@ -143,16 +143,19 @@ public final class JavaComposer
     /**
      *  The {@code @ClassVersion} annotation.
      */
+    @SuppressWarnings( "FieldNamingConvention" )
     private final Lazy<AnnotationSpec> m_Annotation_ClassVersion;
 
     /**
      *  The {@code @UtilityClass} annotation.
      */
+    @SuppressWarnings( "FieldNamingConvention" )
     private final Lazy<AnnotationSpec> m_Annotation_UtilityClass;
 
     /**
      *  The Javadoc comment for an overriding method.
      */
+    @SuppressWarnings( "FieldNamingConvention" )
     private final Lazy<CodeBlock> m_JavaDoc_InheritDoc;
 
     /**
@@ -185,23 +188,26 @@ public final class JavaComposer
     /**
      *  A predefined {@code equals()} method.
      */
+    @SuppressWarnings( "FieldNamingConvention" )
     private final Lazy<MethodSpec> m_Method_Equals;
 
     /**
      *  A predefined {@code hashCode()} method.
      */
+    @SuppressWarnings( "FieldNamingConvention" )
     private final Lazy<MethodSpec> m_Method_HashCode;
 
     /**
      *  A predefined {@code toString()} method.
      */
+    @SuppressWarnings( "FieldNamingConvention" )
     private final Lazy<MethodSpec> m_Method_ToString;
 
         /*--------------*\
     ====** Constructors **=====================================================
         \*--------------*/
     /**
-     *  Creates a new instance of {@link JavaComposer} that uses the default
+     *  Creates a new instance of {@code JavaComposer} that uses the default
      *  {@link Layout#LAYOUT_DEFAULT Layout}.
      */
     public JavaComposer()
@@ -210,7 +216,7 @@ public final class JavaComposer
     }   //  JavaComposer()
 
     /**
-     *  Creates a new instance of {@link JavaComposer}.
+     *  Creates a new instance of {@code JavaComposer}.
      *
      *  @param  layout  The layout that is used to format the output.
      */
@@ -220,7 +226,7 @@ public final class JavaComposer
     }   //  JavaComposer()
 
     /**
-     *  Creates a new instance of {@link JavaComposer} that uses the default
+     *  Creates a new instance of {@code JavaComposer} that uses the default
      *  {@link Layout#LAYOUT_DEFAULT Layout} and adds some debug information
      *  to the output.
      *
@@ -233,7 +239,7 @@ public final class JavaComposer
     }   //  JavaComposer()
 
     /**
-     *  Creates a new instance of {@link JavaComposer}.
+     *  Creates a new instance of {@code JavaComposer}.
      *
      *  @param  layout  The layout that is used to format the output.
      *  @param  addDebugOutput  {@code true} if debug information should be
@@ -247,7 +253,6 @@ public final class JavaComposer
         //---* The inherited doc comment *-------------------------------------
         final var codeBlockSupplier = (Supplier<CodeBlock>) () ->
         {
-            @SuppressWarnings( "CastToConcreteClass" )
             final var retValue = new CodeBlockImpl.BuilderImpl( this )
                 .addWithoutDebugInfo( "$L\n", JAVADOC_TAG_INHERITDOC )
                 .build();
@@ -341,6 +346,7 @@ public final class JavaComposer
      *  @return {@code true} if the debug information should be added to the
      *      output, {@code false} otherwise.
      */
+    @SuppressWarnings( "BooleanMethodNameMustStartWithQuestion" )
     public final boolean addDebugOutput() { return m_AddDebugOutput; }
 
     /**
@@ -435,7 +441,6 @@ public final class JavaComposer
      *  @param  typeArguments   The type arguments.
      *  @return The builder.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public final TypeSpec.Builder anonymousClassBuilder( final CodeBlock typeArguments )
     {
         final var retValue = new ClassSpecImpl.BuilderImpl( this, (CodeBlockImpl) requireNonNullArgument( typeArguments, "typeArguments" ) );
@@ -519,7 +524,6 @@ public final class JavaComposer
      *  @param  args    The arguments.
      *  @return The new code block.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public final CodeBlock codeBlockOf( final String format, final Object... args )
     {
         final var retValue = ((CodeBlockImpl.BuilderImpl) codeBlockBuilder())
@@ -574,7 +578,6 @@ public final class JavaComposer
      *      annotation's default values, {@code false} to ignore them.
      *  @return The new instance of {@code AnnotationSpec}.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public final AnnotationSpec createAnnotation( final Annotation annotation, final boolean includeDefaultValues )
     {
         final var builder = (AnnotationSpecImpl.BuilderImpl) annotationBuilder( ClassName.from( requireNonNullArgument( annotation, "annotation" ).annotationType() ) );
@@ -597,7 +600,7 @@ public final class JavaComposer
                     }
                     continue MethodsLoop;
                 }
-                if( value instanceof Annotation annotationValue )
+                if( value instanceof final Annotation annotationValue )
                 {
                     builder.addMember( method.getName(), "$L", createAnnotation( annotationValue, false ) );
                     continue MethodsLoop;
@@ -625,7 +628,6 @@ public final class JavaComposer
      *  @param  annotation  The annotation mirror.
      *  @return The new instance of {@code AnnotationSpec}.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public final AnnotationSpec createAnnotation( final AnnotationMirror annotation )
     {
         final var element = (TypeElement) requireNonNullArgument( annotation, "annotation" ).getAnnotationType().asElement();
@@ -901,7 +903,6 @@ public final class JavaComposer
      *      hash code value.
      *  @return The method specification.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public final MethodSpec createHashCodeMethod( final Collection<? extends FieldSpec> fields )
     {
         final var fieldList = requireNotEmptyArgument( fields, "fields" ).stream()
@@ -1086,7 +1087,7 @@ public final class JavaComposer
      */
     public final TypeSpec.Builder createStaticClassBuilder( final CharSequence className )
     {
-        requireValidNonNullArgument( className, "className", v -> SourceVersion.isName( requireNotEmptyArgument( v, "className" ) ), $ -> format( "not a valid name: %s", className ) );
+        requireValidNonNullArgument( className, "className", v -> SourceVersion.isName( requireNotEmptyArgument( v, "className" ) ), $ -> "not a valid name: %s".formatted( className ) );
         final var constructor = constructorBuilder()
             .addModifiers( PRIVATE )
             .addJavadoc(
@@ -1228,7 +1229,7 @@ public final class JavaComposer
     public final boolean equals( final Object o )
     {
         var retValue = this == o;
-        if( !retValue && o instanceof JavaComposer other )
+        if( !retValue && o instanceof final JavaComposer other )
         {
             retValue = (m_Layout == other.m_Layout) && (m_AddDebugOutput == other.m_AddDebugOutput);
         }
@@ -1265,10 +1266,9 @@ public final class JavaComposer
      *  @param  modifiers   The modifiers.
      *  @return The new builder.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public final FieldSpec.Builder fieldBuilder( final TypeName type, final CharSequence name, final Modifier... modifiers )
     {
-        final var retValue = new FieldSpecImpl.BuilderImpl( this, (TypeNameImpl) requireNonNullArgument( type, "type" ), require( name, v -> format( "not a valid name: %s", name ), JavaUtils::isValidName ) ).addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );
+        final var retValue = new FieldSpecImpl.BuilderImpl( this, (TypeNameImpl) requireNonNullArgument( type, "type" ), require( name, $ -> "not a valid name: %s".formatted( name ), JavaUtils::isValidName ) ).addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );
 
         //---* Done *----------------------------------------------------------
         return retValue;
@@ -1368,7 +1368,6 @@ public final class JavaComposer
      *  @param  typeSpec    The class definition.
      *  @return The builder.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public final JavaFile.Builder javaFileBuilder( final CharSequence packageName, final TypeSpec typeSpec )
     {
         final var retValue = new JavaFileImpl.BuilderImpl( this, packageName, (TypeSpecImpl) typeSpec );
@@ -1489,7 +1488,6 @@ public final class JavaComposer
      *      annotation processor.
      *  @return The builder.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public final MethodSpec.Builder overridingMethodBuilder( final ExecutableElement method, final DeclaredType enclosing, final Types typeUtils )
     {
         final var executableType = (ExecutableType) requireNonNullArgument( typeUtils, "types" ).asMemberOf( requireNonNullArgument( enclosing, "enclosing" ), requireNonNullArgument( method, "method" ) );
@@ -1601,7 +1599,6 @@ public final class JavaComposer
      *  @param  modifiers   The modifiers for the new parameter.
      *  @return The builder.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public final ParameterSpec.Builder parameterBuilder( final TypeName type, final CharSequence name, final Modifier... modifiers )
     {
         final var retValue = new ParameterSpecImpl.BuilderImpl( this, type, name ).addModifiers( modifiers );
@@ -1750,7 +1747,6 @@ public final class JavaComposer
      *  @param  args    The arguments.
      *  @return The new code block.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     public final CodeBlock statementOf( final String format, final Object... args )
     {
         final var retValue = ((CodeBlockImpl.BuilderImpl) codeBlockBuilder())

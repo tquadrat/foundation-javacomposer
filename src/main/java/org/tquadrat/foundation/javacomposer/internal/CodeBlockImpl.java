@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +20,7 @@
 package org.tquadrat.foundation.javacomposer.internal;
 
 import static java.lang.Math.min;
+import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.INTERNAL;
@@ -33,7 +34,6 @@ import static org.tquadrat.foundation.lang.Objects.nonNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 import static org.tquadrat.foundation.util.StringUtils.isNotEmpty;
 import static org.tquadrat.foundation.util.StringUtils.isNotEmptyOrBlank;
 
@@ -78,13 +78,12 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CodeBlockImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@SuppressWarnings( "ClassWithTooManyMethods" )
-@ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class CodeBlockImpl implements CodeBlock
 {
@@ -100,13 +99,13 @@ public final class CodeBlockImpl implements CodeBlock
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeBlockImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @version $Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @SuppressWarnings( {"ClassWithTooManyMethods", "OverlyComplexClass"} )
-    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @SuppressWarnings( {"OverlyComplexClass"} )
+    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements CodeBlock.Builder
     {
@@ -121,7 +120,7 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  The reference to the factory.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final JavaComposer m_Composer;
 
         /**
@@ -143,8 +142,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
-        public BuilderImpl( final JavaComposer composer )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer )
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
         }   //  BuilderImpl()
@@ -157,8 +155,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @param  formatParts The format parts.
          *  @param  args    The arguments.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
-        public BuilderImpl( final JavaComposer composer, final List<String> formatParts, final List<Object> args )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final List<String> formatParts, final List<Object> args )
         {
             this( composer );
             m_FormatParts.addAll( requireNonNullArgument( formatParts, "formatParts" ) );
@@ -171,7 +168,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl add( final CodeBlock codeBlock )
         {
@@ -191,7 +187,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated  Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         public final BuilderImpl add( final Optional<DebugOutput> debugOutput )
         {
@@ -207,7 +203,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated  Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Override
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
@@ -238,7 +234,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated We do no longer expose the debug output generation.
          */
         @Deprecated( since = "0.2.0", forRemoval = true )
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType", "OverlyComplexMethod", "LocalVariableNamingConvention", "CharacterComparison"} )
         @API( status = DEPRECATED, since = "0.0.6" )
         public final BuilderImpl add( final Optional<DebugOutput> debugOutput, final String format, final Object... args )
         {
@@ -275,7 +271,7 @@ public final class CodeBlockImpl implements CodeBlock
                 char c;
                 do
                 {
-                    checkState( pos < format.length(), () -> new ValidationException( format( "dangling format characters in '%s'", format ) ) );
+                    checkState( pos < format.length(), () -> new ValidationException( "dangling format characters in '%s'".formatted( format ) ) );
                     c = format.charAt( pos++ );
                 }
                 while( c >= '0' && c <= '9' );
@@ -284,7 +280,7 @@ public final class CodeBlockImpl implements CodeBlock
                 //---* If 'c' doesn't take an argument, we're done *-----------
                 if( isNoArgPlaceholder( c ) )
                 {
-                    checkState( indexStart == indexEnd, () -> new ValidationException( format( "$$, $>, $<, $[, $], $W, and $Z may not have an index" ) ) );
+                    checkState( indexStart == indexEnd, () -> new ValidationException( "$$, $>, $<, $[, $], $W, and $Z may not have an index" ) );
                     m_FormatParts.add( "$" + c );
                     continue ParseLoop;
                 }
@@ -310,8 +306,8 @@ public final class CodeBlockImpl implements CodeBlock
                     hasRelative = true;
                 }
 
-                checkState( index >= 0 && index < args.length, () -> new ValidationException( format( "index %d for '%s' not in range (received %s arguments)", index + 1, format.substring( indexStart - 1, indexEnd + 1 ), args.length ) ) );
-                checkState( !hasIndexed || !hasRelative, () -> new ValidationException( format( "cannot mix indexed and positional parameters" ) ) );
+                checkState( index >= 0 && index < args.length, () -> new ValidationException( "index %d for '%s' not in range (received %s arguments)".formatted( index + 1, format.substring( indexStart - 1, indexEnd + 1 ), args.length ) ) );
+                checkState( !hasIndexed || !hasRelative, () -> new ValidationException( "cannot mix indexed and positional parameters" ) );
 
                 addArgument( format, c, args [index] );
 
@@ -320,7 +316,7 @@ public final class CodeBlockImpl implements CodeBlock
 
             if( hasRelative && (relativeParameterCount < args.length) )
             {
-                throw new ValidationException( format( "unused arguments: expected %s, received %s", relativeParameterCount, args.length ) );
+                throw new ValidationException( "unused arguments: expected %s, received %s".formatted( relativeParameterCount, args.length ) );
             }
             if( hasIndexed )
             {
@@ -331,7 +327,7 @@ public final class CodeBlockImpl implements CodeBlock
                 final var s = unused.size() == 1 ? "" : "s";
                 if( !unused.isEmpty() )
                 {
-                    throw new ValidationException( format( "unused argument%s: %s", s, String.join( ", ", unused ) ) );
+                    throw new ValidationException( "unused argument%s: %s".formatted( s, String.join( ", ", unused ) ) );
                 }
             }
 
@@ -342,7 +338,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @API( status = INTERNAL, since = "0.2.0" )
         @Override
         public final BuilderImpl add( final String format, final Object... args )
@@ -370,7 +365,7 @@ public final class CodeBlockImpl implements CodeBlock
                 case 'L' -> argToLiteral( arg );
                 case 'S' -> argToString( arg );
                 case 'T' -> argToType( arg );
-                default -> throw new IllegalArgumentException( String.format( "invalid format string: '%s'", format ) );
+                default -> throw new IllegalArgumentException( format( "invalid format string: '%s'", format ) );
             };
             m_Args.add( argument );
         }   //  addArgument()
@@ -390,7 +385,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated  Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Override
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
@@ -422,7 +417,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated We do no longer expose the debug output generation.
          */
         @Deprecated( since = "0.2.0", forRemoval = true )
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType", "LocalVariableNamingConvention"} )
         @API( status = DEPRECATED, since = "0.0.6" )
         public final BuilderImpl addNamed( final Optional<DebugOutput> debugOutput, final String format, final Map<String,?> args )
         {
@@ -430,7 +425,7 @@ public final class CodeBlockImpl implements CodeBlock
 
             for( final var argument : requireNonNullArgument( args, "args" ).keySet() )
             {
-                checkState( LOWERCASE.matcher( argument ).matches(), () -> new ValidationException( format( "argument '%s' must start with a lowercase character", argument ) ) );
+                checkState( LOWERCASE.matcher( argument ).matches(), () -> new ValidationException( "argument '%s' must start with a lowercase character".formatted( argument ) ) );
             }
             if( isNotEmpty( requireNonNullArgument( format, "format" ) ) )
             {
@@ -460,7 +455,7 @@ public final class CodeBlockImpl implements CodeBlock
                     if( nonNull( matcher ) && matcher.lookingAt() )
                     {
                         final var argumentName = matcher.group( "argumentName" );
-                        checkState( args.containsKey( argumentName ), () -> new ValidationException( format( "Missing named argument for $%s", argumentName ) ) );
+                        checkState( args.containsKey( argumentName ), () -> new ValidationException( "Missing named argument for $%s".formatted( argumentName ) ) );
                         final var formatChar = matcher.group( "typeChar" ).charAt( 0 );
                         addArgument( format, formatChar, args.get( argumentName ) );
                         m_FormatParts.add( "$" + formatChar );
@@ -468,10 +463,10 @@ public final class CodeBlockImpl implements CodeBlock
                     }
                     else
                     {
-                        checkState( p < format.length() - 1, () -> new ValidationException( format( "dangling $ at end" ) ) );
+                        checkState( p < format.length() - 1, () -> new ValidationException( "dangling $ at end" ) );
                         if( !isNoArgPlaceholder( format.charAt( p + 1 ) ) )
                         {
-                            throw new ValidationException( format( "unknown format $%s at %s in '%s'", format.charAt( p + 1 ), p + 1, format ) );
+                            throw new ValidationException( "unknown format $%s at %s in '%s'".formatted( format.charAt( p + 1 ), p + 1, format ) );
                         }
                         m_FormatParts.add( format.substring( p, p + 2 ) );
                         p += 2;
@@ -486,7 +481,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @API( status = INTERNAL, since = "0.2.0" )
         @Override
         public final BuilderImpl addNamed( final String format, final Map<String,?> args )
@@ -495,51 +489,51 @@ public final class CodeBlockImpl implements CodeBlock
 
             for( final var argument : requireNonNullArgument( args, "args" ).keySet() )
             {
-                checkState( LOWERCASE.matcher( argument ).matches(), () -> new ValidationException( format( "argument '%s' must start with a lowercase character", argument ) ) );
+                checkState( LOWERCASE.matcher( argument ).matches(), () -> new ValidationException( "argument '%s' must start with a lowercase character".formatted( argument ) ) );
             }
             if( isNotEmpty( requireNonNullArgument( format, "format" ) ) )
             {
-                var p = 0;
-                ParseLoop: while( p < format.length() )
+                var currentPos = 0;
+                ParseLoop: while( currentPos < format.length() )
                 {
-                    final var nextP = format.indexOf( "$", p );
-                    if( nextP == -1 )
+                    final var nextPos = format.indexOf( "$", currentPos );
+                    if( nextPos == -1 )
                     {
-                        m_FormatParts.add( format.substring( p ) );
+                        m_FormatParts.add( format.substring( currentPos ) );
                         break ParseLoop;
                     }
 
-                    if( p != nextP )
+                    if( currentPos != nextPos )
                     {
-                        m_FormatParts.add( format.substring( p, nextP ) );
-                        p = nextP;
+                        m_FormatParts.add( format.substring( currentPos, nextPos ) );
+                        currentPos = nextPos;
                     }
 
                     Matcher matcher = null;
-                    final var colon = format.indexOf( ':', p );
+                    final var colon = format.indexOf( ':', currentPos );
                     if( colon != -1 )
                     {
                         final var endIndex = min( colon + 2, format.length() );
-                        matcher = NAMED_ARGUMENT.matcher( format.substring( p, endIndex ) );
+                        matcher = NAMED_ARGUMENT.matcher( format.substring( currentPos, endIndex ) );
                     }
                     if( nonNull( matcher ) && matcher.lookingAt() )
                     {
                         final var argumentName = matcher.group( "argumentName" );
-                        checkState( args.containsKey( argumentName ), () -> new ValidationException( format( "Missing named argument for $%s", argumentName ) ) );
+                        checkState( args.containsKey( argumentName ), () -> new ValidationException( "Missing named argument for $%s".formatted( argumentName ) ) );
                         final var formatChar = matcher.group( "typeChar" ).charAt( 0 );
                         addArgument( format, formatChar, args.get( argumentName ) );
                         m_FormatParts.add( "$" + formatChar );
-                        p += matcher.regionEnd();
+                        currentPos += matcher.regionEnd();
                     }
                     else
                     {
-                        checkState( p < format.length() - 1, () -> new ValidationException( format( "dangling $ at end" ) ) );
-                        if( !isNoArgPlaceholder( format.charAt( p + 1 ) ) )
+                        checkState( currentPos < format.length() - 1, () -> new ValidationException( "dangling $ at end" ) );
+                        if( !isNoArgPlaceholder( format.charAt( currentPos + 1 ) ) )
                         {
-                            throw new ValidationException( format( "unknown format $%s at %s in '%s'", format.charAt( p + 1 ), p + 1, format ) );
+                            throw new ValidationException( "unknown format $%s at %s in '%s'".formatted( format.charAt( currentPos + 1 ), currentPos + 1, format ) );
                         }
-                        m_FormatParts.add( format.substring( p, p + 2 ) );
-                        p += 2;
+                        m_FormatParts.add( format.substring( currentPos, currentPos + 2 ) );
+                        currentPos += 2;
                     }
                 }   //  ParseLoop:
             }
@@ -551,7 +545,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addStatement( final CodeBlock codeBlock )
         {
@@ -568,7 +561,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated  Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Override
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
@@ -597,7 +590,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated We do no longer expose the debug output generation.
          */
         @Deprecated( since ="0.2.0", forRemoval = true )
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType"} )
         @API( status = DEPRECATED, since = "0.0.6" )
         public final BuilderImpl addStatement( final Optional<DebugOutput> debugOutput, final String format, final Object... args )
         {
@@ -607,7 +600,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final BuilderImpl addStatement( final String format, final Object... args )
@@ -623,7 +615,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final BuilderImpl addStaticImport( final Class<?> clazz, final String... names )
@@ -634,13 +625,12 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final BuilderImpl addStaticImport( final ClassName className, final String... names )
         {
             final var canonicalName = requireNonNullArgument( className, "className" ).canonicalName();
-            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, n -> format( "%s array is empty", n ) ) )
+            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, "%s array is empty"::formatted ) )
             {
                 m_StaticImports.add(
                     format(
@@ -650,7 +640,7 @@ public final class CodeBlockImpl implements CodeBlock
                             name,
                             "name",
                             Objects::nonNull,
-                            $ -> format( "null entry in names array: %s", Arrays.toString( names ) )
+                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -663,7 +653,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final BuilderImpl addStaticImport( final Enum<?> constant )
@@ -679,7 +668,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @param  codeBlock   The code block.
          *  @return This {@code Builder} instance.
          */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "CastToConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
         public final BuilderImpl addWithoutDebugInfo( final CodeBlock codeBlock )
         {
             final var builder = (BuilderImpl) requireNonNullArgument( codeBlock, "codeBlock" )
@@ -708,7 +697,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @param  args    The arguments.
          *  @return This {@code Builder} instance.
          */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OverlyComplexMethod", "CharacterComparison"} )
         @API( status = INTERNAL, since = "0.2.0" )
         public final BuilderImpl addWithoutDebugInfo( final String format, final Object... args )
         {
@@ -740,10 +729,11 @@ public final class CodeBlockImpl implements CodeBlock
                  * non-digit char after the '$'.
                  */
                 final var indexStart = pos;
+                @SuppressWarnings( "LocalVariableNamingConvention" )
                 char c;
                 do
                 {
-                    checkState( pos < format.length(), () -> new ValidationException( format( "dangling format characters in '%s'", format ) ) );
+                    checkState( pos < format.length(), () -> new ValidationException( "dangling format characters in '%s'".formatted( format ) ) );
                     c = format.charAt( pos++ );
                 }
                 while( c >= '0' && c <= '9' );
@@ -752,7 +742,7 @@ public final class CodeBlockImpl implements CodeBlock
                 //---* If 'c' doesn't take an argument, we're done *-----------
                 if( isNoArgPlaceholder( c ) )
                 {
-                    checkState( indexStart == indexEnd, () -> new ValidationException( format( "$$, $>, $<, $[, $], $W, and $Z may not have an index" ) ) );
+                    checkState( indexStart == indexEnd, () -> new ValidationException( "$$, $>, $<, $[, $], $W, and $Z may not have an index" ) );
                     m_FormatParts.add( "$" + c );
                     continue ParseLoop;
                 }
@@ -778,8 +768,8 @@ public final class CodeBlockImpl implements CodeBlock
                     hasRelative = true;
                 }
 
-                checkState( index >= 0 && index < args.length, () -> new ValidationException( format( "index %d for '%s' not in range (received %s arguments)", index + 1, format.substring( indexStart - 1, indexEnd + 1 ), args.length ) ) );
-                checkState( !hasIndexed || !hasRelative, () -> new ValidationException( format( "cannot mix indexed and positional parameters" ) ) );
+                checkState( index >= 0 && index < args.length, () -> new ValidationException( "index %d for '%s' not in range (received %s arguments)".formatted( index + 1, format.substring( indexStart - 1, indexEnd + 1 ), args.length ) ) );
+                checkState( !hasIndexed || !hasRelative, () -> new ValidationException(  "cannot mix indexed and positional parameters" ) );
 
                 addArgument( format, c, args [index] );
 
@@ -788,7 +778,7 @@ public final class CodeBlockImpl implements CodeBlock
 
             if( hasRelative && (relativeParameterCount < args.length) )
             {
-                throw new ValidationException( format( "unused arguments: expected %s, received %s", relativeParameterCount, args.length ) );
+                throw new ValidationException( "unused arguments: expected %s, received %s".formatted( relativeParameterCount, args.length ) );
             }
             if( hasIndexed )
             {
@@ -796,10 +786,9 @@ public final class CodeBlockImpl implements CodeBlock
                     .filter( i -> indexedParameterCount[i] == 0 )
                     .mapToObj( i -> "$" + (i + 1) )
                     .collect( toList() );
-                final var s = unused.size() == 1 ? "" : "s";
                 if( !unused.isEmpty() )
                 {
-                    throw new ValidationException( format( "unused argument%s: %s", s, String.join( ", ", unused ) ) );
+                    throw new ValidationException( "unused argument%s: %s".formatted( unused.size() == 1 ? "" : "s", String.join( ", ", unused ) ) );
                 }
             }
 
@@ -835,16 +824,15 @@ public final class CodeBlockImpl implements CodeBlock
          *  @param  o   The object.
          *  @return The name.
          */
-        @SuppressWarnings( {"IfStatementWithTooManyBranches", "ChainOfInstanceofChecks"} )
         private static final Object argToName( final Object o )
         {
             final var retValue = switch( o )
                 {
-                    case CharSequence charSequence -> charSequence.toString();
-                    case ParameterSpec parameterSpec -> parameterSpec.name();
-                    case FieldSpec fieldSpec -> fieldSpec.name();
-                    case MethodSpec methodSpec -> methodSpec.name();
-                    case TypeSpec typeSpec ->
+                    case final CharSequence charSequence -> charSequence.toString();
+                    case final ParameterSpec parameterSpec -> parameterSpec.name();
+                    case final FieldSpec fieldSpec -> fieldSpec.name();
+                    case final MethodSpec methodSpec -> methodSpec.name();
+                    case final TypeSpec typeSpec ->
                         /*
                          * Does not work for anonymous types, so no check for the name
                          * is required.
@@ -881,15 +869,14 @@ public final class CodeBlockImpl implements CodeBlock
          *  @param  o   The object.
          *  @return The resulting type.
          */
-        @SuppressWarnings( {"IfStatementWithTooManyBranches", "ChainOfInstanceofChecks", "InstanceofConcreteClass"} )
         private static final TypeNameImpl argToType( final Object o )
         {
             final var retValue = switch( o )
                 {
-                    case TypeNameImpl typeName -> typeName;
-                    case TypeMirror typeMirror -> TypeNameImpl.from( typeMirror );
-                    case Element element -> TypeNameImpl.from( element.asType() );
-                    case Type type -> TypeNameImpl.from( type );
+                    case final TypeNameImpl typeName -> typeName;
+                    case final TypeMirror typeMirror -> TypeNameImpl.from( typeMirror );
+                    case final Element element -> TypeNameImpl.from( element.asType() );
+                    case final Type type -> TypeNameImpl.from( type );
                     case null, default -> throw new IllegalArgumentException( "expected type but was " + o );
                 };
 
@@ -903,7 +890,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"DeprecatedIsStillUsed", "removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
         @Override
@@ -930,7 +917,7 @@ public final class CodeBlockImpl implements CodeBlock
          */
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType", "DeprecatedIsStillUsed", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType"} )
         public final BuilderImpl beginControlFlow( final Optional<DebugOutput> debugOutput, final String controlFlow, final Object... args )
         {
             if( isNotEmptyOrBlank( requireNonNullArgument( controlFlow, "controlFlow" ) ) )
@@ -952,7 +939,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @API( status = INTERNAL, since = "0.0.5" )
         @Override
         public final BuilderImpl beginControlFlow( final String controlFlow, final Object... args )
@@ -973,14 +959,12 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final CodeBlockImpl build() { return new CodeBlockImpl( this ); }
 
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl endControlFlow()
         {
@@ -998,9 +982,10 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"DeprecatedIsStillUsed", "removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
+        @Override
         public final BuilderImpl endControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args )
         {
             return endControlFlow( createDebugOutput( addDebugOutput, true ), controlFlow, args );
@@ -1026,7 +1011,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "DeprecatedIsStillUsed", "OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
         public final BuilderImpl endControlFlow( final Optional<DebugOutput> debugOutput, final String controlFlow, final Object... args )
@@ -1041,7 +1026,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @API( status = INTERNAL, since = "0.0.5" )
         @Override
         public final BuilderImpl endControlFlow( final String controlFlow, final Object... args )
@@ -1065,7 +1049,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl indent()
         {
@@ -1104,7 +1087,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"DeprecatedIsStillUsed", "removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
         @Override
@@ -1129,7 +1112,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "DeprecatedIsStillUsed", "OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
         public final BuilderImpl nextControlFlow( final Optional<DebugOutput> debugOutput, final String controlFlow, final Object... args )
@@ -1149,7 +1132,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @API( status = INTERNAL, since = "0.0.5" )
         @Override
         public final BuilderImpl nextControlFlow( final String controlFlow, final Object... args )
@@ -1169,7 +1151,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl unindent()
         {
@@ -1185,12 +1166,12 @@ public final class CodeBlockImpl implements CodeBlock
      *  A helper class that supports to join code blocks.
      *
      *  @author Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeBlockImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @version $Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     private static final class CodeBlockJoiner
     {
@@ -1200,7 +1181,7 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  The builder that is used to deliver the final code block.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final BuilderImpl m_Builder;
 
         /**
@@ -1224,8 +1205,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @param  builder The builder that is used to deliver the final code
          *      block.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
-        public CodeBlockJoiner( final String delimiter, final BuilderImpl builder )
+        public CodeBlockJoiner( final String delimiter, @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )
         {
             m_Delimiter = requireNonNullArgument( delimiter, "delimiter" );
             m_Builder = requireNonNullArgument( builder, "builder" );
@@ -1240,8 +1220,8 @@ public final class CodeBlockImpl implements CodeBlock
          *  @param  codeBlock   The new code block.
          *  @return This {@code CodeBlockJoiner} instance.
          */
-        @SuppressWarnings( {"TypeMayBeWeakened", "UseOfConcreteClass"} )
-        public final CodeBlockJoiner add( final CodeBlockImpl codeBlock )
+        @SuppressWarnings( {"TypeMayBeWeakened", "UnusedReturnValue"} )
+        public final CodeBlockJoiner add( @SuppressWarnings( "UseOfConcreteClass" ) final CodeBlockImpl codeBlock )
         {
             if( !m_First ) m_Builder.addWithoutDebugInfo( m_Delimiter );
             m_First = false;
@@ -1257,7 +1237,6 @@ public final class CodeBlockImpl implements CodeBlock
          *
          *  @return The new code block.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         public final CodeBlockImpl join() { return m_Builder.build(); }
 
         /**
@@ -1266,8 +1245,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @param  other   The other code block joiner.
          *  @return This {@code CodeBlockJoiner} instance.
          */
-        @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
-        public final CodeBlockJoiner merge( final CodeBlockJoiner other )
+        public final CodeBlockJoiner merge( @SuppressWarnings( "UseOfConcreteClass" ) final CodeBlockJoiner other )
         {
             final var otherBlock = requireNonNullArgument( other, "other" ).m_Builder.build();
             if( !otherBlock.isEmpty() ) add( otherBlock );
@@ -1296,7 +1274,7 @@ public final class CodeBlockImpl implements CodeBlock
     /**
      *  The reference to the factory.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final JavaComposer m_Composer;
 
     /**
@@ -1329,7 +1307,7 @@ public final class CodeBlockImpl implements CodeBlock
         try
         {
             LOWERCASE = Pattern.compile( "[a-z]+[\\w_]*" );
-            NAMED_ARGUMENT = Pattern.compile( "\\$(?<argumentName>[\\w_]+):(?<typeChar>[\\w]).*" );
+            NAMED_ARGUMENT = Pattern.compile( "\\$(?<argumentName>[\\w_]+):(?<typeChar>\\w).*" );
         }
         catch( final PatternSyntaxException e )
         {
@@ -1345,8 +1323,8 @@ public final class CodeBlockImpl implements CodeBlock
      *
      *  @param  builder The builder for this instance.
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
-    public CodeBlockImpl( final BuilderImpl builder )
+    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject"} )
+    public CodeBlockImpl( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )
     {
         m_Composer = builder.m_Composer;
         m_FormatParts = builder.formatParts();
@@ -1378,7 +1356,6 @@ public final class CodeBlockImpl implements CodeBlock
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.6" )
     public static BuilderImpl builder() { return new BuilderImpl( new JavaComposer() ); }
@@ -1390,7 +1367,7 @@ public final class CodeBlockImpl implements CodeBlock
     public final boolean equals( final Object o )
     {
         var retValue = this == o;
-        if( !retValue && (o instanceof CodeBlockImpl other) )
+        if( !retValue && (o instanceof final CodeBlockImpl other) )
         {
             retValue = m_Composer.equals( other.m_Composer ) && toString().equals( o.toString() );
         }
@@ -1414,7 +1391,7 @@ public final class CodeBlockImpl implements CodeBlock
      *
      *  @return The reference to the factory.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final JavaComposer getFactory() { return m_Composer; }
 
     /**
@@ -1519,11 +1496,10 @@ public final class CodeBlockImpl implements CodeBlock
      *      {@link JavaComposer}.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "CastToConcreteClass" )
     public static final CodeBlockImpl join( final Iterable<CodeBlock> codeBlocks, final String separator )
     {
         final var retValue = StreamSupport.stream( codeBlocks.spliterator(), false )
-            .map( c -> (CodeBlockImpl) c )
+            .map( codeBlock -> (CodeBlockImpl) codeBlock )
             .collect( joiningStatic( separator ) );
 
         //---* Done *----------------------------------------------------------
@@ -1550,11 +1526,10 @@ public final class CodeBlockImpl implements CodeBlock
      *      {@link JavaComposer}.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "CastToConcreteClass" )
     public static CodeBlockImpl join( final Iterable<CodeBlock> codeBlocks, final String separator, final String prefix, final String suffix  )
     {
         final var retValue = StreamSupport.stream( codeBlocks.spliterator(), false )
-            .map( c -> (CodeBlockImpl) c )
+            .map( codeBlock -> (CodeBlockImpl) codeBlock )
             .collect( joiningStatic( separator, prefix, suffix ) );
 
         //---* Done *----------------------------------------------------------
@@ -1705,7 +1680,6 @@ public final class CodeBlockImpl implements CodeBlock
      *      {@link Stream}
      *      instance with the {@code CodeBlock} instances.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     private static final Stream<CodeBlockImpl> makeCodeBlockStream( final CodeBlock head, final CodeBlock... tail )
     {
         final var builder = Stream.<CodeBlockImpl>builder();
@@ -1731,7 +1705,6 @@ public final class CodeBlockImpl implements CodeBlock
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.6" )
     public static final CodeBlockImpl of( final String format, final Object... args )
@@ -1757,7 +1730,7 @@ public final class CodeBlockImpl implements CodeBlock
      *      {@link JavaComposer}.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType"} )
     @API( status = DEPRECATED, since = "0.0.6" )
     public static final CodeBlockImpl of( final Optional<DebugOutput> debugOutput, final String format, final Object... args )
     {
@@ -1773,7 +1746,7 @@ public final class CodeBlockImpl implements CodeBlock
      *
      *  @return The new builder.
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject"} )
     @Override
     public final BuilderImpl toBuilder()
     {

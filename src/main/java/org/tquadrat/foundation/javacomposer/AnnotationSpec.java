@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,13 +34,12 @@ import org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: AnnotationSpec.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: AnnotationSpec.java 1066 2023-09-28 19:51:53Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@SuppressWarnings( "InterfaceMayBeAnnotatedFunctional" )
-@ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1066 2023-09-28 19:51:53Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface AnnotationSpec
     permits AnnotationSpecImpl
@@ -54,13 +53,13 @@ public sealed interface AnnotationSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: AnnotationSpec.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @version $Id: AnnotationSpec.java 1066 2023-09-28 19:51:53Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1066 2023-09-28 19:51:53Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits AnnotationSpecImpl.BuilderImpl

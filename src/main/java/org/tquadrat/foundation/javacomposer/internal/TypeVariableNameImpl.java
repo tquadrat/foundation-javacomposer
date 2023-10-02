@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +29,6 @@ import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.OBJECT
 import static org.tquadrat.foundation.lang.Objects.checkState;
 import static org.tquadrat.foundation.lang.Objects.isNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.type.TypeMirror;
@@ -56,12 +55,12 @@ import org.tquadrat.foundation.javacomposer.TypeVariableName;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeVariableNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: TypeVariableNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: TypeVariableNameImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeVariableNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVariableName
 {
@@ -107,7 +106,7 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
 
         for( final var bound : m_Bounds )
         {
-            checkState( !bound.isPrimitive() && bound != VOID_PRIMITIVE, () -> new ValidationException( format( "invalid bound: %s", bound ) ) );
+            checkState( !bound.isPrimitive() && bound != VOID_PRIMITIVE, () -> new ValidationException( "invalid bound: %s".formatted( bound ) ) );
         }
     }   //  TypeVariableNameImpl()
 
@@ -117,7 +116,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     @Override
     public final TypeVariableNameImpl annotated( final List<AnnotationSpec> annotations )
     {
@@ -156,7 +154,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *  @param  type    The type.
      *  @return The type variable name.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final TypeVariableNameImpl from( final java.lang.reflect.TypeVariable<?> type )
     {
@@ -174,7 +171,7 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *  @param  typeVariables   The type variables.
      *  @return The type variable name.
      */
-    @SuppressWarnings( {"BoundedWildcard", "CastToConcreteClass"} )
+    @SuppressWarnings( {"BoundedWildcard"} )
     @API( status = STABLE, since = "0.2.0" )
     public static final TypeVariableNameImpl from( final java.lang.reflect.TypeVariable<?> type, final Map<Type,TypeVariableName> typeVariables )
     {
@@ -204,7 +201,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *  @param  name    The name.
      *  @return The type variable name.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final TypeVariableNameImpl from( final String name )
     {
@@ -221,7 +217,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *  @param  bounds  The bounds.
      *  @return The type variable name.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final TypeVariableNameImpl from( final String name, final Type... bounds )
     {
@@ -238,11 +233,12 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *  @param  bounds  The bounds.
      *  @return The type variable name.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final TypeVariableNameImpl from( final String name, final TypeName... bounds )
     {
-        final var retValue = of( name, stream( requireNonNullArgument( bounds, "bounds" ) ).map( b -> (TypeNameImpl) b ).collect( toList() ) );
+        final var retValue = of( name, stream( requireNonNullArgument( bounds, "bounds" ) )
+            .map( typeName -> (TypeNameImpl) typeName )
+            .toList() );
 
         //---* Done *----------------------------------------------------------
         return retValue;
@@ -254,7 +250,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *  @param  element The element.
      *  @return The new type variable name.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final TypeVariableNameImpl from( final TypeParameterElement element )
     {
@@ -262,7 +257,7 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
         final var boundsMirrors = element.getBounds();
 
         final var boundsTypeNames = boundsMirrors.stream()
-            .map( m -> TypeNameImpl.from( m, Map.of() ) )
+            .map( typeMirror -> TypeNameImpl.from( typeMirror, Map.of() ) )
             .toList();
         final var retValue = of( name, boundsTypeNames );
 
@@ -276,7 +271,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *  @param  mirror  The mirror.
      *  @return The new type variable name.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static TypeVariableNameImpl from( final TypeVariable mirror )
     {
@@ -302,7 +296,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *  @param  typeVariables   The type variables.
      *  @return The new type variable name.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final TypeVariableNameImpl from( final TypeVariable mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
     {
@@ -338,7 +331,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *      {@link #from(java.lang.reflect.TypeVariable)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final TypeVariableNameImpl get( final java.lang.reflect.TypeVariable<?> type ) { return from( type ); }
@@ -357,7 +349,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( {"BoundedWildcard", "UseOfConcreteClass"} )
     public static final TypeVariableNameImpl get( final java.lang.reflect.TypeVariable<?> type, final Map<Type,TypeVariableName> typeVariables )
     {
         final var retValue = from( type, typeVariables );
@@ -376,7 +367,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *      {@link #from(String)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final TypeVariableNameImpl get( final String name ) { return from( name ); }
@@ -392,7 +382,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *      {@link #from(String,Type...)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final TypeVariableNameImpl get( final String name, final Type... bounds )
@@ -414,7 +403,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *      {@link #from(String,TypeName...)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final TypeVariableNameImpl get( final String name, final TypeName... bounds )
@@ -435,7 +423,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *      {@link #from(TypeParameterElement)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final TypeVariableNameImpl get( final TypeParameterElement element ) { return from( element ); }
@@ -450,7 +437,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *      {@link #from(TypeVariable)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static TypeVariableNameImpl get( final TypeVariable mirror ) { return from( mirror ); }
@@ -475,7 +461,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *      {@link #from(TypeVariable, Map)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final TypeVariableNameImpl get( final TypeVariable mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
@@ -502,12 +487,11 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *  @param  bounds  The bounds.
      *  @return The new instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     private static final TypeVariableNameImpl of( final String name, final Collection<TypeNameImpl> bounds )
     {
         //---* Strip java.lang.Object from bounds if it is present *-----------
         final var boundsNoObject = bounds.stream()
-            .filter( b -> !b.equals( OBJECT ) )
+            .filter( typeName -> !typeName.equals( OBJECT ) )
             .toList();
         final var retValue = new TypeVariableNameImpl( name, boundsNoObject );
 
@@ -518,7 +502,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     @Override
     public final TypeVariableNameImpl withBounds( final List<TypeName> bounds )
     {
@@ -541,7 +524,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *  @param  bounds  The additional bounds.
      *  @return The new type variable name.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final TypeVariableNameImpl withBounds( final Type... bounds )
     {
@@ -560,7 +542,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
      *  @param  bounds  The additional bounds.
      *  @return The new type variable name.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final TypeVariableNameImpl withBounds( final TypeName... bounds )
     {
@@ -573,7 +554,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final TypeVariableNameImpl withoutAnnotations() { return new TypeVariableNameImpl( m_Name, m_Bounds ); }
 }

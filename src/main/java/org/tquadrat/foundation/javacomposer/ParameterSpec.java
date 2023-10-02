@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,12 +35,12 @@ import org.tquadrat.foundation.javacomposer.internal.ParameterSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterSpec.java 923 2021-05-24 08:11:36Z tquadrat $
+ *  @version $Id: ParameterSpec.java 1068 2023-09-28 21:42:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterSpec.java 923 2021-05-24 08:11:36Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1068 2023-09-28 21:42:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public interface ParameterSpec
 {
@@ -53,13 +53,13 @@ public interface ParameterSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: ParameterSpec.java 923 2021-05-24 08:11:36Z tquadrat $
+     *  @version $Id: ParameterSpec.java 1068 2023-09-28 21:42:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: ParameterSpec.java 923 2021-05-24 08:11:36Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1068 2023-09-28 21:42:28Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static interface Builder
     {
@@ -121,7 +121,6 @@ public interface ParameterSpec
          *  @param  modifiers   The modifiers.
          *  @return This {@code Builder} instance.
          */
-        @SuppressWarnings( "BoundedWildcard" )
         public Builder addModifiers( final Iterable<Modifier> modifiers );
 
         /**
@@ -327,7 +326,7 @@ public interface ParameterSpec
      *  @param  type    The type for the new parameter.
      *  @param  name    The name for the new parameter.
      *  @param  keepJavadoc {@code true} if an existing Javadoc comment should
-     *      be preserved, {@code false} it it should be dropped.
+     *      be preserved, {@code false} if it should be dropped.
      *  @return The builder.
      */
     public Builder toBuilder( final TypeName type, final CharSequence name, final boolean keepJavadoc );

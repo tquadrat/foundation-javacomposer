@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2021 by Thomas Thrien.
+ * Copyright © 2002-2023 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  * Licensed to the public under the agreements of the GNU Lesser General Public
@@ -487,22 +487,22 @@
  *
  *  <h2>Parameters</h2>
  *  <p>Declare parameters on methods and constructors with either
- *  {@link org.tquadrat.foundation.javacomposer.ParameterSpec#builder(org.tquadrat.foundation.javacomposer.TypeName,java.lang.CharSequence,javax.lang.model.element.Modifier[])}
+ *  {@link org.tquadrat.foundation.javacomposer.JavaComposer#parameterBuilder(org.tquadrat.foundation.javacomposer.TypeName,CharSequence,javax.lang.model.element.Modifier...)}
  *  or
  *  {@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder MethodSpec}'s
  *  convenience
  *  {@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder#addParameter(org.tquadrat.foundation.javacomposer.TypeName,java.lang.String,javax.lang.model.element.Modifier[]) addParameter()}
  *  API:</p>
- *  <div class="source-container"><pre>  ParameterSpec android = ParameterSpec.builder( String.class, "android" )
+ *  <div class="source-container"><pre>  ParameterSpec android = composer.parameterBuilder( String.class, "android" )
  *      .addModifiers( Modifier.FINAL )
  *      .build();
  *
- *  MethodSpec welcomeOverlords = MethodSpec.methodBuilder( "welcomeOverlords" )
+ *  MethodSpec welcomeOverlords = composer.methodBuilder( "welcomeOverlords" )
  *      .addParameter( android )
  *      .addParameter( String.class, "robot", Modifier.FINAL )
  *      .build();</pre></div>
- *  <p>Though the code above to generate android and robot parameters is
- *  different, the output is the same:</p>
+ *  <p>Though the code above to generate {@code android} and {@code robot}
+ *  parameters is different, the output is the same:</p>
  *  <div class="source-container"><pre>  void welcomeOverlords(final String android, final String robot) {
  *  }</pre></div>
  *  <p>The extended Builder form is mandatory when the parameter has
@@ -585,11 +585,11 @@
  *
  *  <h2>Enums</h2>
  *  <p>Use
- *  {@link org.tquadrat.foundation.javacomposer.TypeSpec#enumBuilder(java.lang.CharSequence) enumBuilder}
+ *  {@link org.tquadrat.foundation.javacomposer.JavaComposer#enumBuilder(java.lang.CharSequence) enumBuilder}
  *  to create the <code>enum</code> type, and
  *  {@link org.tquadrat.foundation.javacomposer.TypeSpec.Builder#addEnumConstant(java.lang.CharSequence) addEnumConstant()}
  *  for each value:</p>
- *  <div class="source-container"><pre>  TypeSpec helloWorld = TypeSpec.enumBuilder( "Roshambo" )
+ *  <div class="source-container"><pre>  TypeSpec helloWorld = composer.enumBuilder( "Roshambo" )
  *      .addModifiers( Modifier.PUBLIC )
  *      .addEnumConstant( "ROCK" )
  *      .addEnumConstant( "SCISSORS" )
@@ -606,22 +606,22 @@
  *  <p>Fancy enums are supported, where the <code>enum</code> values override
  *  methods or call a superclass constructor. Here's a comprehensive
  *  example:</p>
- *  <div class="source-container"><pre>  TypeSpec helloWorld = TypeSpec.enumBuilder( "Roshambo" )
+ *  <div class="source-container"><pre>  TypeSpec helloWorld = composer.enumBuilder( "Roshambo" )
  *      .addModifiers( Modifier.PUBLIC )
- *      .addEnumConstant( "ROCK", TypeSpec.anonymousClassBuilder( "$S", "fist" )
- *          .addMethod( MethodSpec.methodBuilder( "toString" )
+ *      .addEnumConstant( "ROCK", composer.anonymousClassBuilder( "$S", "fist" )
+ *          .addMethod( composer.methodBuilder( "toString" )
  *              .addAnnotation( Override.class )
  *              .addModifiers( Modifier.PUBLIC )
  *              .addStatement( "return $S", "avalanche!" )
  *              .returns( String.class )
  *              .build() )
  *          .build() )
- *      .addEnumConstant( "SCISSORS", TypeSpec.anonymousClassBuilder( "$S", "peace" )
+ *      .addEnumConstant( "SCISSORS", composer.anonymousClassBuilder( "$S", "peace" )
  *          .build() )
- *      .addEnumConstant( "PAPER", TypeSpec.anonymousClassBuilder( "$S", "flat" )
+ *      .addEnumConstant( "PAPER", composer.anonymousClassBuilder( "$S", "flat" )
  *          .build() )
  *      .addField( String.class, "handsign", Modifier.PRIVATE, Modifier.FINAL )
- *      .addMethod( MethodSpec.constructorBuilder()
+ *      .addMethod( composer.constructorBuilder()
  *          .addParameter( String.class, "handsign" )
  *          .addStatement( "this.$N = $N", "handsign", "handsign" )
  *          .build() )
@@ -648,12 +648,12 @@
  *
  *  <h2>Anonymous Inner Classes</h2>
  *  <p>In the enum code above, we used
- *  {@link org.tquadrat.foundation.javacomposer.TypeSpec#anonymousClassBuilder(java.lang.String,java.lang.Object[]) TypeSpec.anonymousClassBuilder()}
+ *  {@link org.tquadrat.foundation.javacomposer.JavaComposer#anonymousClassBuilder(java.lang.String,java.lang.Object[]) TypeSpec.anonymousClassBuilder()}
  *  to create an anonymous inner class. This can also be used in code blocks.
  *  They are values that can be referenced with <code>$L</code>:</p>
- *  <div class="source-container"><pre>  TypeSpec comparator = TypeSpec.anonymousClassBuilder( "" )
+ *  <div class="source-container"><pre>  TypeSpec comparator = composer.anonymousClassBuilder( "" )
  *      .addSuperinterface( ParameterizedTypeName.get( Comparator.class, String.class ) )
- *      .addMethod( MethodSpec.methodBuilder( "compare" )
+ *      .addMethod( composer.methodBuilder( "compare" )
  *          .addAnnotation( Override.class )#
  *          .addModifiers( Modifier.PUBLIC )#
  *          .addParameter( String.class, "a" )
@@ -664,7 +664,7 @@
  *      .build();
  *
  *  TypeSpec helloWorld = TypeSpec.classBuilder( "HelloWorld" )
- *      .addMethod( MethodSpec.methodBuilder( "sortByLength" )
+ *      .addMethod( composer.methodBuilder( "sortByLength" )
  *          .addParameter( ParameterizedTypeName.get( List.class, String.class ), "strings" )
  *          .addStatement( "$T.sort($N, $L)", Collections.class, "strings", comparator )
  *          .build() )
@@ -682,13 +682,13 @@
  *  <p>One particularly tricky part of defining anonymous inner classes is the
  *  arguments to the superclass constructor. In the above code we're passing
  *  the empty string for no arguments:
- *  <code>TypeSpec.anonymousClassBuilder(&nbsp;&quot;&quot;&nbsp;)</code>. To
+ *  <code>composer.anonymousClassBuilder(&nbsp;&quot;&quot;&nbsp;)</code>. To
  *  pass different parameters use JavaComposer's code block syntax with commas
  *  to separate arguments.</p>
  *
  *  <h2>Annotations</h2>
  *  <p>Simple annotations are easy:</p>
- *  <div class="source-container"><pre>  MethodSpec toString = MethodSpec.methodBuilder( "toString" )
+ *  <div class="source-container"><pre>  MethodSpec toString = composer.methodBuilder( "toString" )
  *      .addAnnotation( Override.class )
  *      .returns( String.class )
  *      .addModifiers( Modifier.PUBLIC )
@@ -701,11 +701,11 @@
  *      return "Hoverboard";
  *  }</pre></div>
  *  <p>Use
- *  {@link org.tquadrat.foundation.javacomposer.AnnotationSpec#builder(java.lang.Class) AnnotationSpec.builder()}
+ *  {@link org.tquadrat.foundation.javacomposer.JavaComposer#annotationBuilder(java.lang.Class) JavaComposer.annotationBuilder()}
  *  to set properties on annotations:</p>
- *  <div class="source-container"><pre>  MethodSpec logRecord = MethodSpec.methodBuilder( "recordEvent" )
+ *  <div class="source-container"><pre>  MethodSpec logRecord = composer.methodBuilder( "recordEvent" )
  *      .addModifiers( Modifier.PUBLIC, Modifier.ABSTRACT )
- *      .addAnnotation( AnnotationSpec.builder( Headers.class )
+ *      .addAnnotation( composer.annotationBuilder( Headers.class )
  *          .addMember( "accept", "$S", "application/json; charset=utf-8" )
  *          .addMember( "userAgent", "$S", "Square Cash" )
  *          .build() )
@@ -721,14 +721,14 @@
  *  LogReceipt recordEvent(LogRecord logRecord);</pre></div>
  *  <p>When you get fancy, annotation values can be annotations themselves. Use
  *  <code>$L</code> for embedded annotations:</p>
- *  <div class="sourceContainer"><pre>MethodSpec logRecord = MethodSpec.methodBuilder( "recordEvent" )
+ *  <div class="sourceContainer"><pre>MethodSpec logRecord = composer.methodBuilder( "recordEvent" )
  *      .addModifiers( Modifier.PUBLIC, Modifier.ABSTRACT )
- *      .addAnnotation( AnnotationSpec.builder( HeaderList.class )
- *          .addMember( "value", "$L", AnnotationSpec.builder( Header.class )
+ *      .addAnnotation( composer.annotationBuilder( HeaderList.class )
+ *          .addMember( "value", "$L", composer.annotationBuilder( Header.class )
  *              .addMember( "name", "$S", "Accept" )
  *              .addMember( "value", "$S", "application/json; charset=utf-8" )
  *              .build() )
- *          .addMember( "value", "$L", AnnotationSpec.builder( Header.class )
+ *          .addMember( "value", "$L", composer.annotationBuilder( Header.class )
  *              .addMember( "name", "$S", "User-Agent" )
  *              .addMember( "value", "$S", "Square Cash" )
  *              .build() )
@@ -750,7 +750,7 @@
  *  <h2>Javadoc</h2>
  *  <p>Fields, methods and types can be documented with Javadoc (in fact, they
  *  should be documented, even for generated code):</p>
- *  <div class="source-container"><pre>  MethodSpec dismiss = MethodSpec.methodBuilder( "dismiss" )
+ *  <div class="source-container"><pre>  MethodSpec dismiss = composer.methodBuilder( "dismiss" )
  *      .addJavadoc( """
  *                   Hides {&#64;code message} from the caller's history. Other
  *                   participants in the conversation will continue to see the
@@ -789,17 +789,19 @@
  *      CodeBlock codeBlock = CodeBlock.of( "$T&lt;$T&gt; function = $L;", UnaryOperator.class, String.class, candidate );</pre></div>
  *  <p>generates</p>
  *  <div class="source-container"><pre>  java.util.function.UnaryOperator&lt;java.lang.String&gt; function = s -&gt; upperCase( s );</pre></div>.
- *
  *  <h2>Layout</h2>
  *  <p>You may have noticed that the layout for the samples of
  *  <i>generating</i> code looks different from that of <i>generated</i> code:
  *  the first was formatted like the code for the Foundation Library, while the
  *  layout for the second was that used by the original JavaPoet code.</p>
- *  <p>When generating a <code>*.java</code> file with
- *  {@link org.tquadrat.foundation.javacomposer.JavaFile},
- *  you can specify a layout by calling
- *  {@link org.tquadrat.foundation.javacomposer.JavaFile.Builder#layout(Layout) JavaFile.layout()}
- *  with the name of the desired layout.</p>
+ *  <p>When creating a new
+ *  {@link org.tquadrat.foundation.javacomposer.JavaComposer}
+ *  you can specify a
+ *  {@link org.tquadrat.foundation.javacomposer.Layout}
+ *  with the
+ *  {@linkplain org.tquadrat.foundation.javacomposer.JavaComposer#JavaComposer(org.tquadrat.foundation.javacomposer.Layout) constructor}
+ *  that determines the look of the output, generated by
+ *  {@link org.tquadrat.foundation.javacomposer.JavaFile}.</p>
  *  <p>Currently, this implementation supports the following layouts:</p>
  *  <dl>
  *      <dt>{@link org.tquadrat.foundation.javacomposer.Layout#LAYOUT_JAVAPOET LAYOUT_JAVAPOET}</dt>
@@ -813,31 +815,10 @@
  *  <p>In particular when generating complex code, it is not immediately
  *  obvious which statement of the generator was responsible for which part of
  *  the output.</p>
- *  <p>To help with the debugging of generated code, several builder methods
- *  (see the list
- *  {@href #listofmethod below})
- *  will have an additional {@code boolean} argument {@code addDebugOutput}; if
- *  that is {@code true}, the respective output from that method is prepended
- *  with the name of the class and the line number where that method is
- *  called.</p>
- *
- *  <h3>{@anchor #listofmethods Methods with Debug Output}</h3>
- *  <ul>
- *      <li>{@link org.tquadrat.foundation.javacomposer.AnnotationSpec.Builder#addMember(CharSequence,boolean,String,Object[])}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.CodeBlock#of(boolean,String,Object[])}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.CodeBlock.Builder#add(boolean,String,Object[])}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.CodeBlock.Builder#addNamed(boolean,String,java.util.Map)}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.CodeBlock.Builder#addStatement(boolean,String,Object[])}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.CodeBlock.Builder#beginControlFlow(boolean,String,Object[])}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.CodeBlock.Builder#endControlFlow(boolean,String,Object[])}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.CodeBlock.Builder#nextControlFlow(boolean,String,Object[])}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder#addCode(boolean,String,Object[])}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder#addNamedCode(boolean,String,java.util.Map)}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder#addStatement(boolean,String,Object[])}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder#beginControlFlow(boolean,String,Object[])}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder#endControlFlow(boolean,String,Object[])}</li>
- *      <li>{@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder#nextControlFlow(boolean,String,Object[])}</li>
- *  </ul>
+ *  <p>To help with the debugging of generated code, it is possible to prepend
+ *  each component of the generated code with the name of the class and the
+ *  line number where the method creating that component was called.</p>
+ *  <p>This feature is activated when the {@code JavaComposer} is created.</p>
  *
  *  <h2>{@anchor #section_License License}</h2>
  *  <p>The original code is

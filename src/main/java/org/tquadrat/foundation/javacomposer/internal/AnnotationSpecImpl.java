@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,6 @@ import static org.tquadrat.foundation.lang.CommonConstants.EMPTY_STRING;
 import static org.tquadrat.foundation.lang.Objects.hash;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.AnnotationMirror;
 import java.io.UncheckedIOException;
@@ -56,12 +55,12 @@ import org.tquadrat.foundation.util.JavaUtils;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: AnnotationSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: AnnotationSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class AnnotationSpecImpl implements AnnotationSpec
 {
@@ -77,12 +76,12 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: AnnotationSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @version $Id: AnnotationSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements AnnotationSpec.Builder
     {
@@ -97,7 +96,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         /**
          *  The reference to the factory.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final JavaComposer m_Composer;
 
         /**
@@ -111,7 +110,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         /**
          *  The name of the annotation type to build.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final TypeNameImpl m_Type;
 
             /*--------------*\
@@ -124,7 +123,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
          *      builder instance.
          *  @param  type    The name of the annotation type to build.
          */
-        @SuppressWarnings( "CastToConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         public BuilderImpl( final JavaComposer composer, final TypeName type )
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
@@ -137,7 +136,6 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addMember( final CharSequence name, final String format, final Object... args )
         {
@@ -156,7 +154,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
          *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
         @Override
@@ -171,15 +169,14 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addMember( final CharSequence name, final CodeBlock codeBlock )
         {
-            final var n = requireValidArgument( name, "name", JavaUtils::isValidName, $ -> format( "not a valid name: %s", name ) )
+            final var validatedName = requireValidArgument( name, "name", JavaUtils::isValidName, $ -> "not a valid name: %s".formatted( name ) )
                 .toString()
                 .intern();
             requireNonNullArgument( codeBlock, "codeBlock" );
-            final var values = m_CodeBlocks.computeIfAbsent( n, k -> new ArrayList<>() );
+            final var values = m_CodeBlocks.computeIfAbsent( validatedName, key -> new ArrayList<>() );
             values.add( createDebugOutput( m_Composer.addDebugOutput() )
                 .map( output -> ((CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder())
                     .addWithoutDebugInfo( output.asComment() )
@@ -202,15 +199,15 @@ public final class AnnotationSpecImpl implements AnnotationSpec
          *  @param  value   The value for the new member.
          *  @return This {@code Builder} instance.
          */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UnusedReturnValue", "IfStatementWithTooManyBranches", "ChainOfInstanceofChecks", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UnusedReturnValue", "IfStatementWithTooManyBranches", "ChainOfInstanceofChecks"} )
         public final BuilderImpl addMemberForValue( final String name, final Object value )
         {
-            requireValidArgument( name, "name", JavaUtils::isValidName, $ -> format( "not a valid name: %s", name ) );
+            requireValidArgument( name, "name", JavaUtils::isValidName, $ -> "not a valid name: %s".formatted( name ) );
             if( requireNonNullArgument( value, "value" ) instanceof Class<?> )
             {
                 addMember( name, "$T.class", value );
             }
-            else if( value instanceof Enum<?> enumValue )
+            else if( value instanceof final Enum<?> enumValue )
             {
                 addMember( name, "$T.$L", value.getClass(), enumValue.name() );
             }
@@ -222,7 +219,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
             {
                 addMember( name, "$Lf", value );
             }
-            else if( value instanceof Character charValue )
+            else if( value instanceof final Character charValue )
             {
                 addMember( name, "'$L'", characterLiteralWithoutSingleQuotes( charValue.charValue() ) );
             }
@@ -240,14 +237,12 @@ public final class AnnotationSpecImpl implements AnnotationSpec
          *
          *  @return The built instance.
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final AnnotationSpecImpl build() { return new AnnotationSpecImpl( this ); }
 
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl forceInline( final boolean flag )
         {
@@ -264,7 +259,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
          *  @return {@code true} for the inline presentation, {@code false} for
          *      multi-line.
          */
-        @SuppressWarnings( "PublicMethodNotExposedInInterface" )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "BooleanMethodNameMustStartWithQuestion"} )
         public final boolean forceInline() { return m_ForceInline; }
 
         /**
@@ -274,7 +269,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
          *
          *  @return The reference to the factory.
          */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
         public final JavaComposer getFactory() { return m_Composer; }
 
         /**
@@ -286,7 +281,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         public final Map<String,List<CodeBlockImpl>> members()
         {
             final Map<String,List<CodeBlockImpl>> members = new LinkedHashMap<>();
-            m_CodeBlocks.forEach( (k,v) -> members.put( k, List.copyOf( v ) ) );
+            m_CodeBlocks.forEach( (key,value) -> members.put( key, List.copyOf( value ) ) );
             final var retValue = unmodifiableMap( members );
 
             //---* Done *------------------------------------------------------
@@ -298,7 +293,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
          *
          *  @return The type.
          */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
         public final TypeNameImpl type() { return m_Type; }
     }
     //  class BuilderImpl
@@ -316,7 +311,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
     /**
      *  The reference to the factory.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final JavaComposer m_Composer;
 
     /**
@@ -335,7 +330,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
     /**
      *  The name of this annotation.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final TypeNameImpl m_Type;
 
         /*--------------*\
@@ -372,7 +367,6 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final BuilderImpl builder( final ClassName type )
     {
@@ -391,7 +385,6 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final BuilderImpl builder( final Class<?> type )
     {
@@ -411,7 +404,6 @@ public final class AnnotationSpecImpl implements AnnotationSpec
     public final void emit( final CodeWriter codeWriter, final boolean inline ) throws UncheckedIOException
     {
         final var layout = requireNonNullArgument( codeWriter, "codeWriter" ).layout();
-        //noinspection EnumSwitchStatementWhichMissesCases
         switch( layout )
         {
             case LAYOUT_FOUNDATION -> emit4Foundation( codeWriter, inline );
@@ -464,13 +456,12 @@ public final class AnnotationSpecImpl implements AnnotationSpec
              */
             codeWriter.emit( "@$T(" + whitespace, m_Type );
             codeWriter.indent( 1 );
-            //noinspection ForLoopWithMissingComponent
-            for( final var i = m_Members.entrySet().iterator(); i.hasNext(); )
+            for( final var iterator = m_Members.entrySet().iterator(); iterator.hasNext(); )
             {
-                final var entry = i.next();
+                final var entry = iterator.next();
                 codeWriter.emit( "$L = ", entry.getKey() );
                 emitAnnotationValues( codeWriter, whitespace, memberSeparator, entry.getValue() );
-                if( i.hasNext() ) codeWriter.emit( memberSeparator );
+                if( iterator.hasNext() ) codeWriter.emit( memberSeparator );
             }
             codeWriter.unindent( 1 );
             codeWriter.emit( whitespace + ")" );
@@ -521,13 +512,12 @@ public final class AnnotationSpecImpl implements AnnotationSpec
              */
             codeWriter.emit( "@$T(" + whitespace, m_Type );
             codeWriter.indent( 2 );
-            //noinspection ForLoopWithMissingComponent
-            for( final var i = m_Members.entrySet().iterator(); i.hasNext(); )
+            for( final var iterator = m_Members.entrySet().iterator(); iterator.hasNext(); )
             {
-                final var entry = i.next();
+                final var entry = iterator.next();
                 codeWriter.emit( "$L = ", entry.getKey() );
                 emitAnnotationValues( codeWriter, whitespace, memberSeparator, entry.getValue() );
-                if( i.hasNext() ) codeWriter.emit( memberSeparator );
+                if( iterator.hasNext() ) codeWriter.emit( memberSeparator );
             }
             codeWriter.unindent( 2 );
             codeWriter.emit( whitespace + ")" );
@@ -576,7 +566,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
     public final boolean equals( final Object o )
     {
         var retValue = this == o;
-        if( !retValue && (o instanceof AnnotationSpecImpl other) )
+        if( !retValue && (o instanceof final AnnotationSpecImpl other) )
         {
             retValue = m_Composer.equals( other.m_Composer ) && toString().equals( o.toString() );
         }
@@ -596,7 +586,6 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final AnnotationSpecImpl get( final Annotation annotation ) { return get( annotation, false ); }
 
@@ -613,7 +602,6 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final AnnotationSpecImpl get( final Annotation annotation, final boolean includeDefaultValues )
     {
@@ -635,7 +623,6 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     public static final AnnotationSpecImpl get( final AnnotationMirror annotation )
     {
@@ -653,7 +640,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *
      *  @return The reference to the factory.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final JavaComposer getFactory() { return m_Composer; }
 
     /**

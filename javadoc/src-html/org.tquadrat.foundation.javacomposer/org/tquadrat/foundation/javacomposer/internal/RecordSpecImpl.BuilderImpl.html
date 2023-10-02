@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2021 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2023 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -56,732 +56,724 @@
 <span class="source-line-no">043</span><span id="line-43">import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;</span>
 <span class="source-line-no">044</span><span id="line-44">import static org.tquadrat.foundation.util.StringUtils.capitalize;</span>
 <span class="source-line-no">045</span><span id="line-45">import static org.tquadrat.foundation.util.StringUtils.decapitalize;</span>
-<span class="source-line-no">046</span><span id="line-46">import static org.tquadrat.foundation.util.StringUtils.format;</span>
-<span class="source-line-no">047</span><span id="line-47"></span>
-<span class="source-line-no">048</span><span id="line-48">import javax.lang.model.element.Modifier;</span>
-<span class="source-line-no">049</span><span id="line-49">import java.io.UncheckedIOException;</span>
-<span class="source-line-no">050</span><span id="line-50">import java.util.ArrayList;</span>
-<span class="source-line-no">051</span><span id="line-51">import java.util.Collection;</span>
-<span class="source-line-no">052</span><span id="line-52">import java.util.EnumSet;</span>
-<span class="source-line-no">053</span><span id="line-53">import java.util.HashSet;</span>
-<span class="source-line-no">054</span><span id="line-54">import java.util.Optional;</span>
-<span class="source-line-no">055</span><span id="line-55">import java.util.Set;</span>
-<span class="source-line-no">056</span><span id="line-56">import java.util.function.Predicate;</span>
-<span class="source-line-no">057</span><span id="line-57"></span>
-<span class="source-line-no">058</span><span id="line-58">import org.apiguardian.api.API;</span>
-<span class="source-line-no">059</span><span id="line-59">import org.tquadrat.foundation.annotation.ClassVersion;</span>
-<span class="source-line-no">060</span><span id="line-60">import org.tquadrat.foundation.javacomposer.FieldSpec;</span>
-<span class="source-line-no">061</span><span id="line-61">import org.tquadrat.foundation.javacomposer.JavaComposer;</span>
-<span class="source-line-no">062</span><span id="line-62">import org.tquadrat.foundation.javacomposer.MethodSpec;</span>
-<span class="source-line-no">063</span><span id="line-63">import org.tquadrat.foundation.javacomposer.SuppressableWarnings;</span>
-<span class="source-line-no">064</span><span id="line-64">import org.tquadrat.foundation.javacomposer.TypeName;</span>
-<span class="source-line-no">065</span><span id="line-65">import org.tquadrat.foundation.javacomposer.TypeSpec;</span>
-<span class="source-line-no">066</span><span id="line-66"></span>
-<span class="source-line-no">067</span><span id="line-67">/**</span>
-<span class="source-line-no">068</span><span id="line-68"> *  The implementation of</span>
-<span class="source-line-no">069</span><span id="line-69"> *  {@link TypeSpec}</span>
-<span class="source-line-no">070</span><span id="line-70"> *  for a record.</span>
-<span class="source-line-no">071</span><span id="line-71"> *</span>
-<span class="source-line-no">072</span><span id="line-72"> *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">073</span><span id="line-73"> *  @thanks Square,Inc.</span>
-<span class="source-line-no">074</span><span id="line-74"> *  @version $Id: RecordSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $</span>
-<span class="source-line-no">075</span><span id="line-75"> *  @since 0.2.0</span>
-<span class="source-line-no">076</span><span id="line-76"> *</span>
-<span class="source-line-no">077</span><span id="line-77"> *  @UMLGraph.link</span>
-<span class="source-line-no">078</span><span id="line-78"> */</span>
-<span class="source-line-no">079</span><span id="line-79">@ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $" )</span>
-<span class="source-line-no">080</span><span id="line-80">@API( status = INTERNAL, since = "0.2.0" )</span>
-<span class="source-line-no">081</span><span id="line-81">public final class RecordSpecImpl extends TypeSpecImpl</span>
-<span class="source-line-no">082</span><span id="line-82">{</span>
-<span class="source-line-no">083</span><span id="line-83">        /*---------------*\</span>
-<span class="source-line-no">084</span><span id="line-84">    ====** Inner Classes **====================================================</span>
-<span class="source-line-no">085</span><span id="line-85">        \*---------------*/</span>
-<span class="source-line-no">086</span><span id="line-86">    /**</span>
-<span class="source-line-no">087</span><span id="line-87">     *  The implementation of</span>
-<span class="source-line-no">088</span><span id="line-88">     *  {@link Builder}</span>
-<span class="source-line-no">089</span><span id="line-89">     *  for a class.</span>
-<span class="source-line-no">090</span><span id="line-90">     *</span>
-<span class="source-line-no">091</span><span id="line-91">     *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">092</span><span id="line-92">     *  @thanks Square,Inc.</span>
-<span class="source-line-no">093</span><span id="line-93">     *  @version $Id: RecordSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $</span>
-<span class="source-line-no">094</span><span id="line-94">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">095</span><span id="line-95">     *  @version $Id: RecordSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $</span>
-<span class="source-line-no">096</span><span id="line-96">     *  @since 0.2.0</span>
-<span class="source-line-no">097</span><span id="line-97">     *</span>
-<span class="source-line-no">098</span><span id="line-98">     *  @UMLGraph.link</span>
-<span class="source-line-no">099</span><span id="line-99">     */</span>
-<span class="source-line-no">100</span><span id="line-100">    @ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 936 2021-12-13 16:08:37Z tquadrat $" )</span>
-<span class="source-line-no">101</span><span id="line-101">    @API( status = INTERNAL, since = "0.2.0" )</span>
-<span class="source-line-no">102</span><span id="line-102">    public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl</span>
-<span class="source-line-no">103</span><span id="line-103">    {</span>
-<span class="source-line-no">104</span><span id="line-104">            /*--------------*\</span>
-<span class="source-line-no">105</span><span id="line-105">        ====** Constructors **=================================================</span>
-<span class="source-line-no">106</span><span id="line-106">            \*--------------*/</span>
-<span class="source-line-no">107</span><span id="line-107">        /**</span>
-<span class="source-line-no">108</span><span id="line-108">         *  Creates a new {@code BuilderImpl} instance.</span>
-<span class="source-line-no">109</span><span id="line-109">         *</span>
-<span class="source-line-no">110</span><span id="line-110">         *  @param  composer    The reference to the factory that created this</span>
-<span class="source-line-no">111</span><span id="line-111">         *      builder instance.</span>
-<span class="source-line-no">112</span><span id="line-112">         *  @param  name    The name of the type to build.</span>
-<span class="source-line-no">113</span><span id="line-113">         */</span>
-<span class="source-line-no">114</span><span id="line-114">        @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">115</span><span id="line-115">        public BuilderImpl( final JavaComposer composer, final CharSequence name )</span>
-<span class="source-line-no">116</span><span id="line-116">        {</span>
-<span class="source-line-no">117</span><span id="line-117">            super( composer, RECORD, Optional.of( requireNotEmptyArgument( name, "name" ).toString() ) );</span>
-<span class="source-line-no">118</span><span id="line-118">        }   //  BuilderImpl()</span>
-<span class="source-line-no">119</span><span id="line-119"></span>
-<span class="source-line-no">120</span><span id="line-120">            /*---------*\</span>
-<span class="source-line-no">121</span><span id="line-121">        ====** Methods **======================================================</span>
-<span class="source-line-no">122</span><span id="line-122">            \*---------*/</span>
-<span class="source-line-no">123</span><span id="line-123">        /**</span>
-<span class="source-line-no">124</span><span id="line-124">         *  {@inheritDoc}</span>
-<span class="source-line-no">125</span><span id="line-125">         */</span>
-<span class="source-line-no">126</span><span id="line-126">        @SuppressWarnings( "CastToConcreteClass" )</span>
-<span class="source-line-no">127</span><span id="line-127">        @API( status = STABLE, since = "0.2.0" )</span>
-<span class="source-line-no">128</span><span id="line-128">        @Override</span>
-<span class="source-line-no">129</span><span id="line-129">        public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )</span>
-<span class="source-line-no">130</span><span id="line-130">        {</span>
-<span class="source-line-no">131</span><span id="line-131">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), $ -&gt; format( "Field %s needs to be private", fieldSpec.name() ) );</span>
-<span class="source-line-no">132</span><span id="line-132">            addField( fieldSpecImpl );</span>
+<span class="source-line-no">046</span><span id="line-46"></span>
+<span class="source-line-no">047</span><span id="line-47">import javax.lang.model.element.Modifier;</span>
+<span class="source-line-no">048</span><span id="line-48">import java.io.UncheckedIOException;</span>
+<span class="source-line-no">049</span><span id="line-49">import java.util.ArrayList;</span>
+<span class="source-line-no">050</span><span id="line-50">import java.util.Collection;</span>
+<span class="source-line-no">051</span><span id="line-51">import java.util.EnumSet;</span>
+<span class="source-line-no">052</span><span id="line-52">import java.util.HashSet;</span>
+<span class="source-line-no">053</span><span id="line-53">import java.util.Optional;</span>
+<span class="source-line-no">054</span><span id="line-54">import java.util.Set;</span>
+<span class="source-line-no">055</span><span id="line-55">import java.util.function.Predicate;</span>
+<span class="source-line-no">056</span><span id="line-56"></span>
+<span class="source-line-no">057</span><span id="line-57">import org.apiguardian.api.API;</span>
+<span class="source-line-no">058</span><span id="line-58">import org.tquadrat.foundation.annotation.ClassVersion;</span>
+<span class="source-line-no">059</span><span id="line-59">import org.tquadrat.foundation.javacomposer.FieldSpec;</span>
+<span class="source-line-no">060</span><span id="line-60">import org.tquadrat.foundation.javacomposer.JavaComposer;</span>
+<span class="source-line-no">061</span><span id="line-61">import org.tquadrat.foundation.javacomposer.MethodSpec;</span>
+<span class="source-line-no">062</span><span id="line-62">import org.tquadrat.foundation.javacomposer.SuppressableWarnings;</span>
+<span class="source-line-no">063</span><span id="line-63">import org.tquadrat.foundation.javacomposer.TypeName;</span>
+<span class="source-line-no">064</span><span id="line-64">import org.tquadrat.foundation.javacomposer.TypeSpec;</span>
+<span class="source-line-no">065</span><span id="line-65"></span>
+<span class="source-line-no">066</span><span id="line-66">/**</span>
+<span class="source-line-no">067</span><span id="line-67"> *  The implementation of</span>
+<span class="source-line-no">068</span><span id="line-68"> *  {@link TypeSpec}</span>
+<span class="source-line-no">069</span><span id="line-69"> *  for a record.</span>
+<span class="source-line-no">070</span><span id="line-70"> *</span>
+<span class="source-line-no">071</span><span id="line-71"> *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org</span>
+<span class="source-line-no">072</span><span id="line-72"> *  @thanks Square,Inc.</span>
+<span class="source-line-no">073</span><span id="line-73"> *  @version $Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $</span>
+<span class="source-line-no">074</span><span id="line-74"> *  @since 0.2.0</span>
+<span class="source-line-no">075</span><span id="line-75"> *</span>
+<span class="source-line-no">076</span><span id="line-76"> *  @UMLGraph.link</span>
+<span class="source-line-no">077</span><span id="line-77"> */</span>
+<span class="source-line-no">078</span><span id="line-78">@ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )</span>
+<span class="source-line-no">079</span><span id="line-79">@API( status = INTERNAL, since = "0.2.0" )</span>
+<span class="source-line-no">080</span><span id="line-80">public final class RecordSpecImpl extends TypeSpecImpl</span>
+<span class="source-line-no">081</span><span id="line-81">{</span>
+<span class="source-line-no">082</span><span id="line-82">        /*---------------*\</span>
+<span class="source-line-no">083</span><span id="line-83">    ====** Inner Classes **====================================================</span>
+<span class="source-line-no">084</span><span id="line-84">        \*---------------*/</span>
+<span class="source-line-no">085</span><span id="line-85">    /**</span>
+<span class="source-line-no">086</span><span id="line-86">     *  The implementation of</span>
+<span class="source-line-no">087</span><span id="line-87">     *  {@link Builder}</span>
+<span class="source-line-no">088</span><span id="line-88">     *  for a class.</span>
+<span class="source-line-no">089</span><span id="line-89">     *</span>
+<span class="source-line-no">090</span><span id="line-90">     *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org</span>
+<span class="source-line-no">091</span><span id="line-91">     *  @thanks Square,Inc.</span>
+<span class="source-line-no">092</span><span id="line-92">     *  @version $Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $</span>
+<span class="source-line-no">093</span><span id="line-93">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
+<span class="source-line-no">094</span><span id="line-94">     *  @version $Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $</span>
+<span class="source-line-no">095</span><span id="line-95">     *  @since 0.2.0</span>
+<span class="source-line-no">096</span><span id="line-96">     *</span>
+<span class="source-line-no">097</span><span id="line-97">     *  @UMLGraph.link</span>
+<span class="source-line-no">098</span><span id="line-98">     */</span>
+<span class="source-line-no">099</span><span id="line-99">    @ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )</span>
+<span class="source-line-no">100</span><span id="line-100">    @API( status = INTERNAL, since = "0.2.0" )</span>
+<span class="source-line-no">101</span><span id="line-101">    public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl</span>
+<span class="source-line-no">102</span><span id="line-102">    {</span>
+<span class="source-line-no">103</span><span id="line-103">            /*--------------*\</span>
+<span class="source-line-no">104</span><span id="line-104">        ====** Constructors **=================================================</span>
+<span class="source-line-no">105</span><span id="line-105">            \*--------------*/</span>
+<span class="source-line-no">106</span><span id="line-106">        /**</span>
+<span class="source-line-no">107</span><span id="line-107">         *  Creates a new {@code BuilderImpl} instance.</span>
+<span class="source-line-no">108</span><span id="line-108">         *</span>
+<span class="source-line-no">109</span><span id="line-109">         *  @param  composer    The reference to the factory that created this</span>
+<span class="source-line-no">110</span><span id="line-110">         *      builder instance.</span>
+<span class="source-line-no">111</span><span id="line-111">         *  @param  name    The name of the type to build.</span>
+<span class="source-line-no">112</span><span id="line-112">         */</span>
+<span class="source-line-no">113</span><span id="line-113">        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final CharSequence name )</span>
+<span class="source-line-no">114</span><span id="line-114">        {</span>
+<span class="source-line-no">115</span><span id="line-115">            super( composer, RECORD, Optional.of( requireNotEmptyArgument( name, "name" ).toString() ) );</span>
+<span class="source-line-no">116</span><span id="line-116">        }   //  BuilderImpl()</span>
+<span class="source-line-no">117</span><span id="line-117"></span>
+<span class="source-line-no">118</span><span id="line-118">            /*---------*\</span>
+<span class="source-line-no">119</span><span id="line-119">        ====** Methods **======================================================</span>
+<span class="source-line-no">120</span><span id="line-120">            \*---------*/</span>
+<span class="source-line-no">121</span><span id="line-121">        /**</span>
+<span class="source-line-no">122</span><span id="line-122">         *  {@inheritDoc}</span>
+<span class="source-line-no">123</span><span id="line-123">         */</span>
+<span class="source-line-no">124</span><span id="line-124">        @API( status = STABLE, since = "0.2.0" )</span>
+<span class="source-line-no">125</span><span id="line-125">        @Override</span>
+<span class="source-line-no">126</span><span id="line-126">        public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )</span>
+<span class="source-line-no">127</span><span id="line-127">        {</span>
+<span class="source-line-no">128</span><span id="line-128">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), $ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
+<span class="source-line-no">129</span><span id="line-129">            addField( fieldSpecImpl );</span>
+<span class="source-line-no">130</span><span id="line-130"></span>
+<span class="source-line-no">131</span><span id="line-131">            final var fieldName = fieldSpecImpl.name();</span>
+<span class="source-line-no">132</span><span id="line-132">            final var propertyName = decapitalize( fieldName.startsWith( "m_" ) ? fieldName.substring( 2 )  : fieldName );</span>
 <span class="source-line-no">133</span><span id="line-133"></span>
-<span class="source-line-no">134</span><span id="line-134">            final var fieldName = fieldSpecImpl.name();</span>
-<span class="source-line-no">135</span><span id="line-135">            final var propertyName = decapitalize( fieldName.startsWith( "m_" ) ? fieldName.substring( 2 )  : fieldName );</span>
+<span class="source-line-no">134</span><span id="line-134">            final Set&lt;Modifier&gt; modifiers = EnumSet.of( PUBLIC, FINAL );</span>
+<span class="source-line-no">135</span><span id="line-135">            if( fieldSpec.hasModifier( STATIC ) ) modifiers.add( STATIC );</span>
 <span class="source-line-no">136</span><span id="line-136"></span>
-<span class="source-line-no">137</span><span id="line-137">            final Set&lt;Modifier&gt; modifiers = EnumSet.of( PUBLIC, FINAL );</span>
-<span class="source-line-no">138</span><span id="line-138">            if( fieldSpec.hasModifier( STATIC ) ) modifiers.add( STATIC );</span>
-<span class="source-line-no">139</span><span id="line-139"></span>
-<span class="source-line-no">140</span><span id="line-140">            final var accessor = getFactory().methodBuilder( propertyName )</span>
-<span class="source-line-no">141</span><span id="line-141">                .addModifiers( modifiers )</span>
-<span class="source-line-no">142</span><span id="line-142">                .returns( fieldSpecImpl.type() )</span>
-<span class="source-line-no">143</span><span id="line-143">                .addStatement( "return $N", fieldSpecImpl )</span>
-<span class="source-line-no">144</span><span id="line-144">                .build();</span>
-<span class="source-line-no">145</span><span id="line-145">            addMethod( accessor );</span>
-<span class="source-line-no">146</span><span id="line-146"></span>
-<span class="source-line-no">147</span><span id="line-147">            if( !(readOnly || fieldSpecImpl.hasModifier( FINAL )) )</span>
-<span class="source-line-no">148</span><span id="line-148">            {</span>
-<span class="source-line-no">149</span><span id="line-149">                final var param = getFactory().parameterBuilder( fieldSpecImpl.type(), "value", FINAL )</span>
-<span class="source-line-no">150</span><span id="line-150">                    .build();</span>
-<span class="source-line-no">151</span><span id="line-151">                final var setter = getFactory().methodBuilder( propertyName )</span>
-<span class="source-line-no">152</span><span id="line-152">                    .addModifiers( modifiers )</span>
-<span class="source-line-no">153</span><span id="line-153">                    .addParameter( param )</span>
-<span class="source-line-no">154</span><span id="line-154">                    .returns( VOID_PRIMITIVE )</span>
-<span class="source-line-no">155</span><span id="line-155">                    .addStatement( "$N = $N", fieldSpecImpl, param )</span>
-<span class="source-line-no">156</span><span id="line-156">                    .build();</span>
-<span class="source-line-no">157</span><span id="line-157">                addMethod( setter );</span>
-<span class="source-line-no">158</span><span id="line-158">            }</span>
-<span class="source-line-no">159</span><span id="line-159"></span>
-<span class="source-line-no">160</span><span id="line-160">            //---* Done *------------------------------------------------------</span>
-<span class="source-line-no">161</span><span id="line-161">            return this;</span>
-<span class="source-line-no">162</span><span id="line-162">        }   //  addAttribute()</span>
-<span class="source-line-no">163</span><span id="line-163"></span>
-<span class="source-line-no">164</span><span id="line-164">        /**</span>
-<span class="source-line-no">165</span><span id="line-165">         *  {@inheritDoc}</span>
-<span class="source-line-no">166</span><span id="line-166">         */</span>
-<span class="source-line-no">167</span><span id="line-167">        @Override</span>
-<span class="source-line-no">168</span><span id="line-168">        @SuppressWarnings( "CastToConcreteClass" )</span>
-<span class="source-line-no">169</span><span id="line-169">        public TypeSpecImpl.BuilderImpl addField( final FieldSpec fieldSpec )</span>
-<span class="source-line-no">170</span><span id="line-170">        {</span>
-<span class="source-line-no">171</span><span id="line-171">            final var validation = (Predicate&lt;FieldSpec&gt;) f -&gt;</span>
-<span class="source-line-no">172</span><span id="line-172">            {</span>
-<span class="source-line-no">173</span><span id="line-173">                if( f.hasModifier( STATIC ) )</span>
+<span class="source-line-no">137</span><span id="line-137">            final var accessor = getFactory().methodBuilder( propertyName )</span>
+<span class="source-line-no">138</span><span id="line-138">                .addModifiers( modifiers )</span>
+<span class="source-line-no">139</span><span id="line-139">                .returns( fieldSpecImpl.type() )</span>
+<span class="source-line-no">140</span><span id="line-140">                .addStatement( "return $N", fieldSpecImpl )</span>
+<span class="source-line-no">141</span><span id="line-141">                .build();</span>
+<span class="source-line-no">142</span><span id="line-142">            addMethod( accessor );</span>
+<span class="source-line-no">143</span><span id="line-143"></span>
+<span class="source-line-no">144</span><span id="line-144">            if( !(readOnly || fieldSpecImpl.hasModifier( FINAL )) )</span>
+<span class="source-line-no">145</span><span id="line-145">            {</span>
+<span class="source-line-no">146</span><span id="line-146">                final var param = getFactory().parameterBuilder( fieldSpecImpl.type(), "value", FINAL )</span>
+<span class="source-line-no">147</span><span id="line-147">                    .build();</span>
+<span class="source-line-no">148</span><span id="line-148">                final var setter = getFactory().methodBuilder( propertyName )</span>
+<span class="source-line-no">149</span><span id="line-149">                    .addModifiers( modifiers )</span>
+<span class="source-line-no">150</span><span id="line-150">                    .addParameter( param )</span>
+<span class="source-line-no">151</span><span id="line-151">                    .returns( VOID_PRIMITIVE )</span>
+<span class="source-line-no">152</span><span id="line-152">                    .addStatement( "$N = $N", fieldSpecImpl, param )</span>
+<span class="source-line-no">153</span><span id="line-153">                    .build();</span>
+<span class="source-line-no">154</span><span id="line-154">                addMethod( setter );</span>
+<span class="source-line-no">155</span><span id="line-155">            }</span>
+<span class="source-line-no">156</span><span id="line-156"></span>
+<span class="source-line-no">157</span><span id="line-157">            //---* Done *------------------------------------------------------</span>
+<span class="source-line-no">158</span><span id="line-158">            return this;</span>
+<span class="source-line-no">159</span><span id="line-159">        }   //  addAttribute()</span>
+<span class="source-line-no">160</span><span id="line-160"></span>
+<span class="source-line-no">161</span><span id="line-161">        /**</span>
+<span class="source-line-no">162</span><span id="line-162">         *  {@inheritDoc}</span>
+<span class="source-line-no">163</span><span id="line-163">         */</span>
+<span class="source-line-no">164</span><span id="line-164">        @Override</span>
+<span class="source-line-no">165</span><span id="line-165">        public TypeSpecImpl.BuilderImpl addField( final FieldSpec fieldSpec )</span>
+<span class="source-line-no">166</span><span id="line-166">        {</span>
+<span class="source-line-no">167</span><span id="line-167">            final var validation = (Predicate&lt;FieldSpec&gt;) spec -&gt;</span>
+<span class="source-line-no">168</span><span id="line-168">            {</span>
+<span class="source-line-no">169</span><span id="line-169">                if( spec.hasModifier( STATIC ) )</span>
+<span class="source-line-no">170</span><span id="line-170">                {</span>
+<span class="source-line-no">171</span><span id="line-171">                    return !spec.hasModifier( PROTECTED );</span>
+<span class="source-line-no">172</span><span id="line-172">                }</span>
+<span class="source-line-no">173</span><span id="line-173">                else</span>
 <span class="source-line-no">174</span><span id="line-174">                {</span>
-<span class="source-line-no">175</span><span id="line-175">                    return !f.hasModifier( PROTECTED );</span>
+<span class="source-line-no">175</span><span id="line-175">                    return spec.hasModifier( PRIVATE ) &amp;&amp; !spec.hasModifier( FINAL );</span>
 <span class="source-line-no">176</span><span id="line-176">                }</span>
-<span class="source-line-no">177</span><span id="line-177">                else</span>
-<span class="source-line-no">178</span><span id="line-178">                {</span>
-<span class="source-line-no">179</span><span id="line-179">                    return f.hasModifier( PRIVATE ) &amp;&amp; !f.hasModifier( FINAL );</span>
-<span class="source-line-no">180</span><span id="line-180">                }</span>
-<span class="source-line-no">181</span><span id="line-181">            };</span>
-<span class="source-line-no">182</span><span id="line-182">            super.addField( requireValidNonNullArgument( fieldSpec, "fieldSpec", validation, $ -&gt; "Invalid modifiers for record field" ) );</span>
+<span class="source-line-no">177</span><span id="line-177">            };</span>
+<span class="source-line-no">178</span><span id="line-178">            super.addField( requireValidNonNullArgument( fieldSpec, "fieldSpec", validation, $ -&gt; "Invalid modifiers for record field" ) );</span>
+<span class="source-line-no">179</span><span id="line-179"></span>
+<span class="source-line-no">180</span><span id="line-180">            //---* Done *------------------------------------------------------</span>
+<span class="source-line-no">181</span><span id="line-181">            return this;</span>
+<span class="source-line-no">182</span><span id="line-182">        }   //  addField()</span>
 <span class="source-line-no">183</span><span id="line-183"></span>
-<span class="source-line-no">184</span><span id="line-184">            //---* Done *------------------------------------------------------</span>
-<span class="source-line-no">185</span><span id="line-185">            return this;</span>
-<span class="source-line-no">186</span><span id="line-186">        }   //  addField()</span>
-<span class="source-line-no">187</span><span id="line-187"></span>
-<span class="source-line-no">188</span><span id="line-188">        /**</span>
-<span class="source-line-no">189</span><span id="line-189">         *  {@inheritDoc}</span>
-<span class="source-line-no">190</span><span id="line-190">         */</span>
-<span class="source-line-no">191</span><span id="line-191">        @Override</span>
-<span class="source-line-no">192</span><span id="line-192">        @SuppressWarnings( "CastToConcreteClass" )</span>
-<span class="source-line-no">193</span><span id="line-193">        public final BuilderImpl addMethod( final MethodSpec methodSpec )</span>
-<span class="source-line-no">194</span><span id="line-194">        {</span>
-<span class="source-line-no">195</span><span id="line-195">            final var methodSpecImpl = (MethodSpecImpl) requireNonNullArgument( methodSpec, "methodSpec" );</span>
-<span class="source-line-no">196</span><span id="line-196">            checkState( methodSpecImpl.defaultValue().isEmpty(), () -&gt; new IllegalStateException( format( "%s %s.%s cannot have a default value", RECORD, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );</span>
-<span class="source-line-no">197</span><span id="line-197">            checkState( !methodSpecImpl.hasModifier( DEFAULT ), () -&gt; new IllegalStateException( format( "%s %s.%s cannot be default", RECORD, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );</span>
-<span class="source-line-no">198</span><span id="line-198"></span>
-<span class="source-line-no">199</span><span id="line-199">            final var methodSpecs = getMethodSpecs();</span>
-<span class="source-line-no">200</span><span id="line-200">            if( composer().addDebugOutput() )</span>
-<span class="source-line-no">201</span><span id="line-201">            {</span>
-<span class="source-line-no">202</span><span id="line-202">                final var builder = methodSpecImpl.toBuilder( false );</span>
-<span class="source-line-no">203</span><span id="line-203">                createDebugOutput( true ).ifPresent( debug -&gt; builder.addJavadoc( "\n$L\n", debug.asLiteral() ) );</span>
-<span class="source-line-no">204</span><span id="line-204">                methodSpecs.add( builder.build() );</span>
-<span class="source-line-no">205</span><span id="line-205">            }</span>
-<span class="source-line-no">206</span><span id="line-206">            else</span>
-<span class="source-line-no">207</span><span id="line-207">            {</span>
-<span class="source-line-no">208</span><span id="line-208">                methodSpecs.add( methodSpecImpl );</span>
-<span class="source-line-no">209</span><span id="line-209">            }</span>
-<span class="source-line-no">210</span><span id="line-210"></span>
-<span class="source-line-no">211</span><span id="line-211">            final var maxMethods = composer().getMaxMethods();</span>
-<span class="source-line-no">212</span><span id="line-212">            if( (maxMethods &gt; 0) &amp;&amp; (methodSpecs.size() &gt;= maxMethods) )</span>
-<span class="source-line-no">213</span><span id="line-213">            {</span>
-<span class="source-line-no">214</span><span id="line-214">                addSuppressableWarning( CLASS_WITH_TOO_MANY_METHODS );</span>
-<span class="source-line-no">215</span><span id="line-215">            }</span>
-<span class="source-line-no">216</span><span id="line-216"></span>
-<span class="source-line-no">217</span><span id="line-217">            //---* Done *------------------------------------------------------</span>
-<span class="source-line-no">218</span><span id="line-218">            return this;</span>
-<span class="source-line-no">219</span><span id="line-219">        }   //  addMethod()</span>
-<span class="source-line-no">220</span><span id="line-220"></span>
-<span class="source-line-no">221</span><span id="line-221">        /**</span>
-<span class="source-line-no">222</span><span id="line-222">         *  {@inheritDoc}</span>
-<span class="source-line-no">223</span><span id="line-223">         */</span>
-<span class="source-line-no">224</span><span id="line-224">        @Override</span>
-<span class="source-line-no">225</span><span id="line-225">        @SuppressWarnings( "CastToConcreteClass" )</span>
-<span class="source-line-no">226</span><span id="line-226">        public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )</span>
-<span class="source-line-no">227</span><span id="line-227">        {</span>
-<span class="source-line-no">228</span><span id="line-228">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), $ -&gt; format( "Field %s needs to be private", fieldSpec.name() ) );</span>
-<span class="source-line-no">229</span><span id="line-229">            addField( fieldSpecImpl );</span>
+<span class="source-line-no">184</span><span id="line-184">        /**</span>
+<span class="source-line-no">185</span><span id="line-185">         *  {@inheritDoc}</span>
+<span class="source-line-no">186</span><span id="line-186">         */</span>
+<span class="source-line-no">187</span><span id="line-187">        @Override</span>
+<span class="source-line-no">188</span><span id="line-188">        public final BuilderImpl addMethod( final MethodSpec methodSpec )</span>
+<span class="source-line-no">189</span><span id="line-189">        {</span>
+<span class="source-line-no">190</span><span id="line-190">            final var methodSpecImpl = (MethodSpecImpl) requireNonNullArgument( methodSpec, "methodSpec" );</span>
+<span class="source-line-no">191</span><span id="line-191">            checkState( methodSpecImpl.defaultValue().isEmpty(), () -&gt; new IllegalStateException( "%s %s.%s cannot have a default value".formatted( RECORD, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );</span>
+<span class="source-line-no">192</span><span id="line-192">            checkState( !methodSpecImpl.hasModifier( DEFAULT ), () -&gt; new IllegalStateException( "%s %s.%s cannot be default".formatted( RECORD, getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpecImpl.name() ) ) );</span>
+<span class="source-line-no">193</span><span id="line-193"></span>
+<span class="source-line-no">194</span><span id="line-194">            final var methodSpecs = getMethodSpecs();</span>
+<span class="source-line-no">195</span><span id="line-195">            if( composer().addDebugOutput() )</span>
+<span class="source-line-no">196</span><span id="line-196">            {</span>
+<span class="source-line-no">197</span><span id="line-197">                final var builder = methodSpecImpl.toBuilder( false );</span>
+<span class="source-line-no">198</span><span id="line-198">                createDebugOutput( true ).ifPresent( debug -&gt; builder.addJavadoc( "\n$L\n", debug.asLiteral() ) );</span>
+<span class="source-line-no">199</span><span id="line-199">                methodSpecs.add( builder.build() );</span>
+<span class="source-line-no">200</span><span id="line-200">            }</span>
+<span class="source-line-no">201</span><span id="line-201">            else</span>
+<span class="source-line-no">202</span><span id="line-202">            {</span>
+<span class="source-line-no">203</span><span id="line-203">                methodSpecs.add( methodSpecImpl );</span>
+<span class="source-line-no">204</span><span id="line-204">            }</span>
+<span class="source-line-no">205</span><span id="line-205"></span>
+<span class="source-line-no">206</span><span id="line-206">            final var maxMethods = composer().getMaxMethods();</span>
+<span class="source-line-no">207</span><span id="line-207">            if( (maxMethods &gt; 0) &amp;&amp; (methodSpecs.size() &gt;= maxMethods) )</span>
+<span class="source-line-no">208</span><span id="line-208">            {</span>
+<span class="source-line-no">209</span><span id="line-209">                addSuppressableWarning( CLASS_WITH_TOO_MANY_METHODS );</span>
+<span class="source-line-no">210</span><span id="line-210">            }</span>
+<span class="source-line-no">211</span><span id="line-211"></span>
+<span class="source-line-no">212</span><span id="line-212">            //---* Done *------------------------------------------------------</span>
+<span class="source-line-no">213</span><span id="line-213">            return this;</span>
+<span class="source-line-no">214</span><span id="line-214">        }   //  addMethod()</span>
+<span class="source-line-no">215</span><span id="line-215"></span>
+<span class="source-line-no">216</span><span id="line-216">        /**</span>
+<span class="source-line-no">217</span><span id="line-217">         *  {@inheritDoc}</span>
+<span class="source-line-no">218</span><span id="line-218">         */</span>
+<span class="source-line-no">219</span><span id="line-219">        @Override</span>
+<span class="source-line-no">220</span><span id="line-220">        public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )</span>
+<span class="source-line-no">221</span><span id="line-221">        {</span>
+<span class="source-line-no">222</span><span id="line-222">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), $ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
+<span class="source-line-no">223</span><span id="line-223">            addField( fieldSpecImpl );</span>
+<span class="source-line-no">224</span><span id="line-224"></span>
+<span class="source-line-no">225</span><span id="line-225">            final var fieldName = fieldSpecImpl.name();</span>
+<span class="source-line-no">226</span><span id="line-226">            final var propertyName = fieldName.startsWith( "m_" ) ? fieldName.substring( 2 ) : capitalize( fieldName );</span>
+<span class="source-line-no">227</span><span id="line-227"></span>
+<span class="source-line-no">228</span><span id="line-228">            final Set&lt;Modifier&gt; modifiers = EnumSet.of( PUBLIC, FINAL );</span>
+<span class="source-line-no">229</span><span id="line-229">            if( fieldSpec.hasModifier( STATIC ) ) modifiers.add( STATIC );</span>
 <span class="source-line-no">230</span><span id="line-230"></span>
-<span class="source-line-no">231</span><span id="line-231">            final var fieldName = fieldSpecImpl.name();</span>
-<span class="source-line-no">232</span><span id="line-232">            final var propertyName = fieldName.startsWith( "m_" ) ? fieldName.substring( 2 ) : capitalize( fieldName );</span>
-<span class="source-line-no">233</span><span id="line-233"></span>
-<span class="source-line-no">234</span><span id="line-234">            final Set&lt;Modifier&gt; modifiers = EnumSet.of( PUBLIC, FINAL );</span>
-<span class="source-line-no">235</span><span id="line-235">            if( fieldSpec.hasModifier( STATIC ) ) modifiers.add( STATIC );</span>
-<span class="source-line-no">236</span><span id="line-236"></span>
-<span class="source-line-no">237</span><span id="line-237">            final var getter = getFactory().methodBuilder( "get" + propertyName )</span>
-<span class="source-line-no">238</span><span id="line-238">                .addModifiers( modifiers )</span>
-<span class="source-line-no">239</span><span id="line-239">                .returns( fieldSpecImpl.type() )</span>
-<span class="source-line-no">240</span><span id="line-240">                .addStatement( "return $N", fieldSpecImpl )</span>
-<span class="source-line-no">241</span><span id="line-241">                .build();</span>
-<span class="source-line-no">242</span><span id="line-242">            addMethod( getter );</span>
-<span class="source-line-no">243</span><span id="line-243"></span>
-<span class="source-line-no">244</span><span id="line-244">            if( !(readOnly || fieldSpecImpl.hasModifier( FINAL )) )</span>
-<span class="source-line-no">245</span><span id="line-245">            {</span>
-<span class="source-line-no">246</span><span id="line-246">                final var param = getFactory().parameterBuilder( fieldSpecImpl.type(), "value", FINAL )</span>
+<span class="source-line-no">231</span><span id="line-231">            final var getter = getFactory().methodBuilder( "get" + propertyName )</span>
+<span class="source-line-no">232</span><span id="line-232">                .addModifiers( modifiers )</span>
+<span class="source-line-no">233</span><span id="line-233">                .returns( fieldSpecImpl.type() )</span>
+<span class="source-line-no">234</span><span id="line-234">                .addStatement( "return $N", fieldSpecImpl )</span>
+<span class="source-line-no">235</span><span id="line-235">                .build();</span>
+<span class="source-line-no">236</span><span id="line-236">            addMethod( getter );</span>
+<span class="source-line-no">237</span><span id="line-237"></span>
+<span class="source-line-no">238</span><span id="line-238">            if( !(readOnly || fieldSpecImpl.hasModifier( FINAL )) )</span>
+<span class="source-line-no">239</span><span id="line-239">            {</span>
+<span class="source-line-no">240</span><span id="line-240">                final var param = getFactory().parameterBuilder( fieldSpecImpl.type(), "value", FINAL )</span>
+<span class="source-line-no">241</span><span id="line-241">                    .build();</span>
+<span class="source-line-no">242</span><span id="line-242">                final var setter = getFactory().methodBuilder( "set" + propertyName )</span>
+<span class="source-line-no">243</span><span id="line-243">                    .addModifiers( modifiers )</span>
+<span class="source-line-no">244</span><span id="line-244">                    .addParameter( param )</span>
+<span class="source-line-no">245</span><span id="line-245">                    .returns( VOID_PRIMITIVE )</span>
+<span class="source-line-no">246</span><span id="line-246">                    .addStatement( "$N = $N", fieldSpecImpl, param )</span>
 <span class="source-line-no">247</span><span id="line-247">                    .build();</span>
-<span class="source-line-no">248</span><span id="line-248">                final var setter = getFactory().methodBuilder( "set" + propertyName )</span>
-<span class="source-line-no">249</span><span id="line-249">                    .addModifiers( modifiers )</span>
-<span class="source-line-no">250</span><span id="line-250">                    .addParameter( param )</span>
-<span class="source-line-no">251</span><span id="line-251">                    .returns( VOID_PRIMITIVE )</span>
-<span class="source-line-no">252</span><span id="line-252">                    .addStatement( "$N = $N", fieldSpecImpl, param )</span>
-<span class="source-line-no">253</span><span id="line-253">                    .build();</span>
-<span class="source-line-no">254</span><span id="line-254">                addMethod( setter );</span>
-<span class="source-line-no">255</span><span id="line-255">            }</span>
-<span class="source-line-no">256</span><span id="line-256"></span>
-<span class="source-line-no">257</span><span id="line-257">            //---* Done *------------------------------------------------------</span>
-<span class="source-line-no">258</span><span id="line-258">            return this;</span>
-<span class="source-line-no">259</span><span id="line-259">        }   //  addProperty()</span>
-<span class="source-line-no">260</span><span id="line-260"></span>
-<span class="source-line-no">261</span><span id="line-261">        /**</span>
-<span class="source-line-no">262</span><span id="line-262">         *  {@inheritDoc}</span>
-<span class="source-line-no">263</span><span id="line-263">         */</span>
-<span class="source-line-no">264</span><span id="line-264">        @Override</span>
-<span class="source-line-no">265</span><span id="line-265">        @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">266</span><span id="line-266">        public final RecordSpecImpl build()</span>
-<span class="source-line-no">267</span><span id="line-267">        {</span>
-<span class="source-line-no">268</span><span id="line-268">            checkState( getFieldSpecs().stream().anyMatch( fs -&gt; !fs.hasModifier( STATIC ) ), () -&gt; new IllegalStateException( "records without fields are not allowed" ) );</span>
-<span class="source-line-no">269</span><span id="line-269"></span>
-<span class="source-line-no">270</span><span id="line-270">            final var retValue = new RecordSpecImpl( this );</span>
-<span class="source-line-no">271</span><span id="line-271"></span>
-<span class="source-line-no">272</span><span id="line-272">            //---* Done *------------------------------------------------------</span>
-<span class="source-line-no">273</span><span id="line-273">            return retValue;</span>
-<span class="source-line-no">274</span><span id="line-274">        }   //  build()</span>
-<span class="source-line-no">275</span><span id="line-275"></span>
-<span class="source-line-no">276</span><span id="line-276">        /**</span>
-<span class="source-line-no">277</span><span id="line-277">         *  {@inheritDoc}</span>
-<span class="source-line-no">278</span><span id="line-278">         */</span>
-<span class="source-line-no">279</span><span id="line-279">        @Override</span>
-<span class="source-line-no">280</span><span id="line-280">        @SuppressWarnings( "CastToConcreteClass" )</span>
-<span class="source-line-no">281</span><span id="line-281">        public final BuilderImpl superclass( final TypeName superclass )</span>
-<span class="source-line-no">282</span><span id="line-282">        {</span>
-<span class="source-line-no">283</span><span id="line-283">            throw new IllegalStateException( format( "only classes have super classes, not " + RECORD ) );</span>
-<span class="source-line-no">284</span><span id="line-284">        }   //  superclass()</span>
-<span class="source-line-no">285</span><span id="line-285">    }</span>
-<span class="source-line-no">286</span><span id="line-286">    //  class BuilderImpl</span>
-<span class="source-line-no">287</span><span id="line-287"></span>
-<span class="source-line-no">288</span><span id="line-288">        /*--------------*\</span>
-<span class="source-line-no">289</span><span id="line-289">    ====** Constructors **=====================================================</span>
-<span class="source-line-no">290</span><span id="line-290">        \*--------------*/</span>
-<span class="source-line-no">291</span><span id="line-291">    /**</span>
-<span class="source-line-no">292</span><span id="line-292">     *  Creates a new {@code RecordSpecImpl} instance.</span>
-<span class="source-line-no">293</span><span id="line-293">     *</span>
-<span class="source-line-no">294</span><span id="line-294">     *  @param  builder The builder for this instance.</span>
-<span class="source-line-no">295</span><span id="line-295">     */</span>
-<span class="source-line-no">296</span><span id="line-296">    @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">297</span><span id="line-297">    public RecordSpecImpl( final BuilderImpl builder )</span>
-<span class="source-line-no">298</span><span id="line-298">    {</span>
-<span class="source-line-no">299</span><span id="line-299">        super( builder );</span>
-<span class="source-line-no">300</span><span id="line-300">    }   //  RecordSpecImpl()</span>
-<span class="source-line-no">301</span><span id="line-301"></span>
-<span class="source-line-no">302</span><span id="line-302">    /**</span>
-<span class="source-line-no">303</span><span id="line-303">     *  Creates a dummy type spec for type-resolution in CodeWriter only while</span>
-<span class="source-line-no">304</span><span id="line-304">     *  emitting the type declaration but before entering the type body.</span>
-<span class="source-line-no">305</span><span id="line-305">     *</span>
-<span class="source-line-no">306</span><span id="line-306">     *  @param  type    The source type.</span>
-<span class="source-line-no">307</span><span id="line-307">     */</span>
-<span class="source-line-no">308</span><span id="line-308">    @SuppressWarnings( "UseOfConcreteClass" )</span>
-<span class="source-line-no">309</span><span id="line-309">    private RecordSpecImpl( final RecordSpecImpl type )</span>
-<span class="source-line-no">310</span><span id="line-310">    {</span>
-<span class="source-line-no">311</span><span id="line-311">        super( type );</span>
-<span class="source-line-no">312</span><span id="line-312">    }   //  RecordSpecImpl()</span>
-<span class="source-line-no">313</span><span id="line-313"></span>
-<span class="source-line-no">314</span><span id="line-314">        /*---------*\</span>
-<span class="source-line-no">315</span><span id="line-315">    ====** Methods **==========================================================</span>
-<span class="source-line-no">316</span><span id="line-316">        \*---------*/</span>
-<span class="source-line-no">317</span><span id="line-317">    /**</span>
-<span class="source-line-no">318</span><span id="line-318">     *  {@inheritDoc}</span>
-<span class="source-line-no">319</span><span id="line-319">     */</span>
-<span class="source-line-no">320</span><span id="line-320">    @Override</span>
-<span class="source-line-no">321</span><span id="line-321">    protected final TypeSpecImpl createCopy() { return new RecordSpecImpl( this ); }</span>
-<span class="source-line-no">322</span><span id="line-322"></span>
-<span class="source-line-no">323</span><span id="line-323">    /**</span>
-<span class="source-line-no">324</span><span id="line-324">     *  Emits the type to the given code writer, using the layout as defined</span>
-<span class="source-line-no">325</span><span id="line-325">     *  by the Foundation library code.</span>
-<span class="source-line-no">326</span><span id="line-326">     *</span>
-<span class="source-line-no">327</span><span id="line-327">     *  @param  codeWriter  The target code writer.</span>
-<span class="source-line-no">328</span><span id="line-328">     *  @param  enumName    The name of the enum; can be {@code null}.</span>
-<span class="source-line-no">329</span><span id="line-329">     *  @param  implicitModifiers   The implicit modifiers.</span>
-<span class="source-line-no">330</span><span id="line-330">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
-<span class="source-line-no">331</span><span id="line-331">     *      output target.</span>
-<span class="source-line-no">332</span><span id="line-332">     */</span>
-<span class="source-line-no">333</span><span id="line-333">    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "CastToConcreteClass"} )</span>
-<span class="source-line-no">334</span><span id="line-334">    protected final void emit4Foundation( final CodeWriter codeWriter, final String enumName, final Set&lt;Modifier&gt; implicitModifiers ) throws UncheckedIOException</span>
-<span class="source-line-no">335</span><span id="line-335">    {</span>
-<span class="source-line-no">336</span><span id="line-336">        /*</span>
-<span class="source-line-no">337</span><span id="line-337">         * Push an empty type (specifically without nested types) for</span>
-<span class="source-line-no">338</span><span id="line-338">         * type-resolution.</span>
-<span class="source-line-no">339</span><span id="line-339">         */</span>
-<span class="source-line-no">340</span><span id="line-340">        codeWriter.pushType( createCopy() );</span>
-<span class="source-line-no">341</span><span id="line-341"></span>
-<span class="source-line-no">342</span><span id="line-342">        var javadoc = (CodeBlockImpl) getJavadoc();</span>
-<span class="source-line-no">343</span><span id="line-343">        var needSuppressWarningJavadoc = javadoc.isEmpty();</span>
-<span class="source-line-no">344</span><span id="line-344"></span>
-<span class="source-line-no">345</span><span id="line-345">        //--* Non-static fields *----------------------------------------------</span>
-<span class="source-line-no">346</span><span id="line-346">        final Collection&lt;ParameterSpecImpl&gt; nonStaticFields = new ArrayList&lt;&gt;();</span>
-<span class="source-line-no">347</span><span id="line-347">        for( final var fieldSpec : getFieldSpecs() )</span>
-<span class="source-line-no">348</span><span id="line-348">        {</span>
-<span class="source-line-no">349</span><span id="line-349">            if( fieldSpec.hasModifier( STATIC ) ) continue;</span>
-<span class="source-line-no">350</span><span id="line-350">            final var paramSpec = (ParameterSpecImpl) getFactory().parameterBuilder( fieldSpec.type(), fieldSpec.name() )</span>
-<span class="source-line-no">351</span><span id="line-351">                .build();</span>
-<span class="source-line-no">352</span><span id="line-352">            nonStaticFields.add( paramSpec );</span>
-<span class="source-line-no">353</span><span id="line-353">            final var fieldJavaDoc = fieldSpec.getJavadoc();</span>
-<span class="source-line-no">354</span><span id="line-354">            if( fieldJavaDoc.isEmpty() )</span>
-<span class="source-line-no">355</span><span id="line-355">            {</span>
-<span class="source-line-no">356</span><span id="line-356">                needSuppressWarningJavadoc = true;</span>
-<span class="source-line-no">357</span><span id="line-357">            }</span>
-<span class="source-line-no">358</span><span id="line-358">            else</span>
-<span class="source-line-no">359</span><span id="line-359">            {</span>
-<span class="source-line-no">360</span><span id="line-360">                final var codeBlock = (CodeBlockImpl) getFactory().codeBlockOf( "@param $N", fieldSpec )</span>
-<span class="source-line-no">361</span><span id="line-361">                    .join( " ", fieldJavaDoc );</span>
-<span class="source-line-no">362</span><span id="line-362">                javadoc = (CodeBlockImpl) javadoc.join( "\n", codeBlock );</span>
-<span class="source-line-no">363</span><span id="line-363">            }</span>
-<span class="source-line-no">364</span><span id="line-364">        }</span>
-<span class="source-line-no">365</span><span id="line-365"></span>
-<span class="source-line-no">366</span><span id="line-366">        needSuppressWarningJavadoc &amp;= !javadoc.isEmpty() ;</span>
-<span class="source-line-no">367</span><span id="line-367">        codeWriter.emitJavadoc( javadoc );</span>
-<span class="source-line-no">368</span><span id="line-368"></span>
-<span class="source-line-no">369</span><span id="line-369">        final Set&lt;SuppressableWarnings&gt; suppressableWarnings = EnumSet.copyOf( getSuppressableWarnings() );</span>
-<span class="source-line-no">370</span><span id="line-370">        if( needSuppressWarningJavadoc ) suppressableWarnings.add( JAVADOC );</span>
-<span class="source-line-no">371</span><span id="line-371">        final Collection&lt;AnnotationSpecImpl&gt; annotations = new ArrayList&lt;&gt;( getAnnotations() );</span>
-<span class="source-line-no">372</span><span id="line-372">        getFactory().createSuppressWarningsAnnotation( suppressableWarnings )</span>
-<span class="source-line-no">373</span><span id="line-373">            .map( a -&gt; (AnnotationSpecImpl) a )</span>
-<span class="source-line-no">374</span><span id="line-374">            .ifPresent( annotations::add );</span>
-<span class="source-line-no">375</span><span id="line-375">        codeWriter.emitAnnotations( annotations, false );</span>
-<span class="source-line-no">376</span><span id="line-376">        codeWriter.emitModifiers( modifiers(), union( implicitModifiers, RECORD.asMemberModifiers() ) );</span>
-<span class="source-line-no">377</span><span id="line-377">        codeWriter.emit( "$1L $2L", RECORD.name().toLowerCase( ROOT ), name().get() );</span>
-<span class="source-line-no">378</span><span id="line-378">        codeWriter.emitTypeVariables( getTypeVariables() );</span>
+<span class="source-line-no">248</span><span id="line-248">                addMethod( setter );</span>
+<span class="source-line-no">249</span><span id="line-249">            }</span>
+<span class="source-line-no">250</span><span id="line-250"></span>
+<span class="source-line-no">251</span><span id="line-251">            //---* Done *------------------------------------------------------</span>
+<span class="source-line-no">252</span><span id="line-252">            return this;</span>
+<span class="source-line-no">253</span><span id="line-253">        }   //  addProperty()</span>
+<span class="source-line-no">254</span><span id="line-254"></span>
+<span class="source-line-no">255</span><span id="line-255">        /**</span>
+<span class="source-line-no">256</span><span id="line-256">         *  {@inheritDoc}</span>
+<span class="source-line-no">257</span><span id="line-257">         */</span>
+<span class="source-line-no">258</span><span id="line-258">        @Override</span>
+<span class="source-line-no">259</span><span id="line-259">        public final RecordSpecImpl build()</span>
+<span class="source-line-no">260</span><span id="line-260">        {</span>
+<span class="source-line-no">261</span><span id="line-261">            checkState( getFieldSpecs().stream().anyMatch( fs -&gt; !fs.hasModifier( STATIC ) ), () -&gt; new IllegalStateException( "records without fields are not allowed" ) );</span>
+<span class="source-line-no">262</span><span id="line-262"></span>
+<span class="source-line-no">263</span><span id="line-263">            final var retValue = new RecordSpecImpl( this );</span>
+<span class="source-line-no">264</span><span id="line-264"></span>
+<span class="source-line-no">265</span><span id="line-265">            //---* Done *------------------------------------------------------</span>
+<span class="source-line-no">266</span><span id="line-266">            return retValue;</span>
+<span class="source-line-no">267</span><span id="line-267">        }   //  build()</span>
+<span class="source-line-no">268</span><span id="line-268"></span>
+<span class="source-line-no">269</span><span id="line-269">        /**</span>
+<span class="source-line-no">270</span><span id="line-270">         *  {@inheritDoc}</span>
+<span class="source-line-no">271</span><span id="line-271">         */</span>
+<span class="source-line-no">272</span><span id="line-272">        @Override</span>
+<span class="source-line-no">273</span><span id="line-273">        public final BuilderImpl superclass( final TypeName superclass )</span>
+<span class="source-line-no">274</span><span id="line-274">        {</span>
+<span class="source-line-no">275</span><span id="line-275">            throw new IllegalStateException( "only classes have super classes, not " + RECORD );</span>
+<span class="source-line-no">276</span><span id="line-276">        }   //  superclass()</span>
+<span class="source-line-no">277</span><span id="line-277">    }</span>
+<span class="source-line-no">278</span><span id="line-278">    //  class BuilderImpl</span>
+<span class="source-line-no">279</span><span id="line-279"></span>
+<span class="source-line-no">280</span><span id="line-280">        /*--------------*\</span>
+<span class="source-line-no">281</span><span id="line-281">    ====** Constructors **=====================================================</span>
+<span class="source-line-no">282</span><span id="line-282">        \*--------------*/</span>
+<span class="source-line-no">283</span><span id="line-283">    /**</span>
+<span class="source-line-no">284</span><span id="line-284">     *  Creates a new {@code RecordSpecImpl} instance.</span>
+<span class="source-line-no">285</span><span id="line-285">     *</span>
+<span class="source-line-no">286</span><span id="line-286">     *  @param  builder The builder for this instance.</span>
+<span class="source-line-no">287</span><span id="line-287">     */</span>
+<span class="source-line-no">288</span><span id="line-288">    public RecordSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )</span>
+<span class="source-line-no">289</span><span id="line-289">    {</span>
+<span class="source-line-no">290</span><span id="line-290">        super( builder );</span>
+<span class="source-line-no">291</span><span id="line-291">    }   //  RecordSpecImpl()</span>
+<span class="source-line-no">292</span><span id="line-292"></span>
+<span class="source-line-no">293</span><span id="line-293">    /**</span>
+<span class="source-line-no">294</span><span id="line-294">     *  Creates a dummy type spec for type-resolution in CodeWriter only while</span>
+<span class="source-line-no">295</span><span id="line-295">     *  emitting the type declaration but before entering the type body.</span>
+<span class="source-line-no">296</span><span id="line-296">     *</span>
+<span class="source-line-no">297</span><span id="line-297">     *  @param  type    The source type.</span>
+<span class="source-line-no">298</span><span id="line-298">     */</span>
+<span class="source-line-no">299</span><span id="line-299">    private RecordSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final RecordSpecImpl type )</span>
+<span class="source-line-no">300</span><span id="line-300">    {</span>
+<span class="source-line-no">301</span><span id="line-301">        super( type );</span>
+<span class="source-line-no">302</span><span id="line-302">    }   //  RecordSpecImpl()</span>
+<span class="source-line-no">303</span><span id="line-303"></span>
+<span class="source-line-no">304</span><span id="line-304">        /*---------*\</span>
+<span class="source-line-no">305</span><span id="line-305">    ====** Methods **==========================================================</span>
+<span class="source-line-no">306</span><span id="line-306">        \*---------*/</span>
+<span class="source-line-no">307</span><span id="line-307">    /**</span>
+<span class="source-line-no">308</span><span id="line-308">     *  {@inheritDoc}</span>
+<span class="source-line-no">309</span><span id="line-309">     */</span>
+<span class="source-line-no">310</span><span id="line-310">    @Override</span>
+<span class="source-line-no">311</span><span id="line-311">    protected final TypeSpecImpl createCopy() { return new RecordSpecImpl( this ); }</span>
+<span class="source-line-no">312</span><span id="line-312"></span>
+<span class="source-line-no">313</span><span id="line-313">    /**</span>
+<span class="source-line-no">314</span><span id="line-314">     *  Emits the type to the given code writer, using the layout as defined</span>
+<span class="source-line-no">315</span><span id="line-315">     *  by the Foundation library code.</span>
+<span class="source-line-no">316</span><span id="line-316">     *</span>
+<span class="source-line-no">317</span><span id="line-317">     *  @param  codeWriter  The target code writer.</span>
+<span class="source-line-no">318</span><span id="line-318">     *  @param  enumName    The name of the enum; can be {@code null}.</span>
+<span class="source-line-no">319</span><span id="line-319">     *  @param  implicitModifiers   The implicit modifiers.</span>
+<span class="source-line-no">320</span><span id="line-320">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
+<span class="source-line-no">321</span><span id="line-321">     *      output target.</span>
+<span class="source-line-no">322</span><span id="line-322">     */</span>
+<span class="source-line-no">323</span><span id="line-323">    @Override</span>
+<span class="source-line-no">324</span><span id="line-324">    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "OverlyLongMethod", "OverlyComplexMethod"} )</span>
+<span class="source-line-no">325</span><span id="line-325">    protected final void emit4Foundation( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set&lt;Modifier&gt; implicitModifiers ) throws UncheckedIOException</span>
+<span class="source-line-no">326</span><span id="line-326">    {</span>
+<span class="source-line-no">327</span><span id="line-327">        /*</span>
+<span class="source-line-no">328</span><span id="line-328">         * Push an empty type (specifically without nested types) for</span>
+<span class="source-line-no">329</span><span id="line-329">         * type-resolution.</span>
+<span class="source-line-no">330</span><span id="line-330">         */</span>
+<span class="source-line-no">331</span><span id="line-331">        codeWriter.pushType( createCopy() );</span>
+<span class="source-line-no">332</span><span id="line-332"></span>
+<span class="source-line-no">333</span><span id="line-333">        var javadoc = (CodeBlockImpl) getJavadoc();</span>
+<span class="source-line-no">334</span><span id="line-334">        var needSuppressWarningJavadoc = javadoc.isEmpty();</span>
+<span class="source-line-no">335</span><span id="line-335"></span>
+<span class="source-line-no">336</span><span id="line-336">        //--* Non-static fields *----------------------------------------------</span>
+<span class="source-line-no">337</span><span id="line-337">        final Collection&lt;ParameterSpecImpl&gt; nonStaticFields = new ArrayList&lt;&gt;();</span>
+<span class="source-line-no">338</span><span id="line-338">        for( final var fieldSpec : getFieldSpecs() )</span>
+<span class="source-line-no">339</span><span id="line-339">        {</span>
+<span class="source-line-no">340</span><span id="line-340">            if( fieldSpec.hasModifier( STATIC ) ) continue;</span>
+<span class="source-line-no">341</span><span id="line-341">            final var paramSpec = (ParameterSpecImpl) getFactory().parameterBuilder( fieldSpec.type(), fieldSpec.name() )</span>
+<span class="source-line-no">342</span><span id="line-342">                .build();</span>
+<span class="source-line-no">343</span><span id="line-343">            nonStaticFields.add( paramSpec );</span>
+<span class="source-line-no">344</span><span id="line-344">            final var fieldJavaDoc = fieldSpec.getJavadoc();</span>
+<span class="source-line-no">345</span><span id="line-345">            if( fieldJavaDoc.isEmpty() )</span>
+<span class="source-line-no">346</span><span id="line-346">            {</span>
+<span class="source-line-no">347</span><span id="line-347">                needSuppressWarningJavadoc = true;</span>
+<span class="source-line-no">348</span><span id="line-348">            }</span>
+<span class="source-line-no">349</span><span id="line-349">            else</span>
+<span class="source-line-no">350</span><span id="line-350">            {</span>
+<span class="source-line-no">351</span><span id="line-351">                final var codeBlock = (CodeBlockImpl) getFactory().codeBlockOf( "@param $N", fieldSpec )</span>
+<span class="source-line-no">352</span><span id="line-352">                    .join( " ", fieldJavaDoc );</span>
+<span class="source-line-no">353</span><span id="line-353">                javadoc = (CodeBlockImpl) javadoc.join( "\n", codeBlock );</span>
+<span class="source-line-no">354</span><span id="line-354">            }</span>
+<span class="source-line-no">355</span><span id="line-355">        }</span>
+<span class="source-line-no">356</span><span id="line-356"></span>
+<span class="source-line-no">357</span><span id="line-357">        needSuppressWarningJavadoc = needSuppressWarningJavadoc &amp;&amp; !javadoc.isEmpty();</span>
+<span class="source-line-no">358</span><span id="line-358">        codeWriter.emitJavadoc( javadoc );</span>
+<span class="source-line-no">359</span><span id="line-359"></span>
+<span class="source-line-no">360</span><span id="line-360">        final Set&lt;SuppressableWarnings&gt; suppressableWarnings = EnumSet.copyOf( getSuppressableWarnings() );</span>
+<span class="source-line-no">361</span><span id="line-361">        if( needSuppressWarningJavadoc ) suppressableWarnings.add( JAVADOC );</span>
+<span class="source-line-no">362</span><span id="line-362">        final Collection&lt;AnnotationSpecImpl&gt; annotations = new ArrayList&lt;&gt;( getAnnotations() );</span>
+<span class="source-line-no">363</span><span id="line-363">        getFactory().createSuppressWarningsAnnotation( suppressableWarnings )</span>
+<span class="source-line-no">364</span><span id="line-364">            .map( a -&gt; (AnnotationSpecImpl) a )</span>
+<span class="source-line-no">365</span><span id="line-365">            .ifPresent( annotations::add );</span>
+<span class="source-line-no">366</span><span id="line-366">        codeWriter.emitAnnotations( annotations, false );</span>
+<span class="source-line-no">367</span><span id="line-367">        codeWriter.emitModifiers( modifiers(), union( implicitModifiers, RECORD.asMemberModifiers() ) );</span>
+<span class="source-line-no">368</span><span id="line-368">        codeWriter.emit( "$1L $2L", RECORD.name().toLowerCase( ROOT ), name().get() );</span>
+<span class="source-line-no">369</span><span id="line-369">        codeWriter.emitTypeVariables( getTypeVariables() );</span>
+<span class="source-line-no">370</span><span id="line-370"></span>
+<span class="source-line-no">371</span><span id="line-371">        var firstMember = true;</span>
+<span class="source-line-no">372</span><span id="line-372">        for( final var paramSpec : nonStaticFields )</span>
+<span class="source-line-no">373</span><span id="line-373">        {</span>
+<span class="source-line-no">374</span><span id="line-374">            codeWriter.emit( firstMember ? "( " : ", " );</span>
+<span class="source-line-no">375</span><span id="line-375">            paramSpec.emit( codeWriter, false );</span>
+<span class="source-line-no">376</span><span id="line-376">            firstMember = false;</span>
+<span class="source-line-no">377</span><span id="line-377">        }</span>
+<span class="source-line-no">378</span><span id="line-378">        codeWriter.emit( " )" );</span>
 <span class="source-line-no">379</span><span id="line-379"></span>
-<span class="source-line-no">380</span><span id="line-380">        var firstMember = true;</span>
-<span class="source-line-no">381</span><span id="line-381">        for( final var paramSpec : nonStaticFields )</span>
-<span class="source-line-no">382</span><span id="line-382">        {</span>
-<span class="source-line-no">383</span><span id="line-383">            codeWriter.emit( firstMember ? "( " : ", " );</span>
-<span class="source-line-no">384</span><span id="line-384">            paramSpec.emit( codeWriter, false );</span>
-<span class="source-line-no">385</span><span id="line-385">            firstMember = false;</span>
-<span class="source-line-no">386</span><span id="line-386">        }</span>
-<span class="source-line-no">387</span><span id="line-387">        codeWriter.emit( " )" );</span>
-<span class="source-line-no">388</span><span id="line-388"></span>
-<span class="source-line-no">389</span><span id="line-389">        //---* The implemented interfaces *------------------------------------</span>
-<span class="source-line-no">390</span><span id="line-390">        final var implementsTypes = getSuperInterfaces();</span>
-<span class="source-line-no">391</span><span id="line-391">        if( !implementsTypes.isEmpty() )</span>
-<span class="source-line-no">392</span><span id="line-392">        {</span>
-<span class="source-line-no">393</span><span id="line-393">            codeWriter.emit( " implements" );</span>
-<span class="source-line-no">394</span><span id="line-394">            var firstType = true;</span>
-<span class="source-line-no">395</span><span id="line-395">            for( final var type : implementsTypes )</span>
-<span class="source-line-no">396</span><span id="line-396">            {</span>
-<span class="source-line-no">397</span><span id="line-397">                if( !firstType ) codeWriter.emit( "," );</span>
-<span class="source-line-no">398</span><span id="line-398">                codeWriter.emit( " $T", type );</span>
-<span class="source-line-no">399</span><span id="line-399">                firstType = false;</span>
-<span class="source-line-no">400</span><span id="line-400">            }</span>
-<span class="source-line-no">401</span><span id="line-401">        }</span>
-<span class="source-line-no">402</span><span id="line-402"></span>
-<span class="source-line-no">403</span><span id="line-403">        codeWriter.popType();</span>
-<span class="source-line-no">404</span><span id="line-404"></span>
-<span class="source-line-no">405</span><span id="line-405">        //---* Get the static fields *-----------------------------------------</span>
-<span class="source-line-no">406</span><span id="line-406">        final var staticFields = getFieldSpecs().stream()</span>
-<span class="source-line-no">407</span><span id="line-407">            .filter( fs -&gt; fs.hasModifier( STATIC ) )</span>
-<span class="source-line-no">408</span><span id="line-408">            .toList();</span>
+<span class="source-line-no">380</span><span id="line-380">        //---* The implemented interfaces *------------------------------------</span>
+<span class="source-line-no">381</span><span id="line-381">        final var implementsTypes = getSuperInterfaces();</span>
+<span class="source-line-no">382</span><span id="line-382">        if( !implementsTypes.isEmpty() )</span>
+<span class="source-line-no">383</span><span id="line-383">        {</span>
+<span class="source-line-no">384</span><span id="line-384">            codeWriter.emit( " implements" );</span>
+<span class="source-line-no">385</span><span id="line-385">            var firstType = true;</span>
+<span class="source-line-no">386</span><span id="line-386">            for( final var type : implementsTypes )</span>
+<span class="source-line-no">387</span><span id="line-387">            {</span>
+<span class="source-line-no">388</span><span id="line-388">                if( !firstType ) codeWriter.emit( "," );</span>
+<span class="source-line-no">389</span><span id="line-389">                codeWriter.emit( " $T", type );</span>
+<span class="source-line-no">390</span><span id="line-390">                firstType = false;</span>
+<span class="source-line-no">391</span><span id="line-391">            }</span>
+<span class="source-line-no">392</span><span id="line-392">        }</span>
+<span class="source-line-no">393</span><span id="line-393"></span>
+<span class="source-line-no">394</span><span id="line-394">        codeWriter.popType();</span>
+<span class="source-line-no">395</span><span id="line-395"></span>
+<span class="source-line-no">396</span><span id="line-396">        //---* Get the static fields *-----------------------------------------</span>
+<span class="source-line-no">397</span><span id="line-397">        final var staticFields = getFieldSpecs().stream()</span>
+<span class="source-line-no">398</span><span id="line-398">            .filter( fs -&gt; fs.hasModifier( STATIC ) )</span>
+<span class="source-line-no">399</span><span id="line-399">            .toList();</span>
+<span class="source-line-no">400</span><span id="line-400"></span>
+<span class="source-line-no">401</span><span id="line-401">        if( staticFields.isEmpty() &amp;&amp; getStaticBlock().isEmpty() &amp;&amp; getInitializerBlock().isEmpty() &amp;&amp; getMethodSpecs().isEmpty() )</span>
+<span class="source-line-no">402</span><span id="line-402">        {</span>
+<span class="source-line-no">403</span><span id="line-403">            //---* We do not have a body for the record … *--------------------</span>
+<span class="source-line-no">404</span><span id="line-404">            codeWriter.emit( " { /* Empty */ " );</span>
+<span class="source-line-no">405</span><span id="line-405">        }</span>
+<span class="source-line-no">406</span><span id="line-406">        else</span>
+<span class="source-line-no">407</span><span id="line-407">        {</span>
+<span class="source-line-no">408</span><span id="line-408">            codeWriter.pushType( this );</span>
 <span class="source-line-no">409</span><span id="line-409"></span>
-<span class="source-line-no">410</span><span id="line-410">        if( staticFields.isEmpty() &amp;&amp; getStaticBlock().isEmpty() &amp;&amp; getInitializerBlock().isEmpty() &amp;&amp; getMethodSpecs().isEmpty() )</span>
-<span class="source-line-no">411</span><span id="line-411">        {</span>
-<span class="source-line-no">412</span><span id="line-412">            //---* We do not have a body for the record … *--------------------</span>
-<span class="source-line-no">413</span><span id="line-413">            codeWriter.emit( " { /* Empty */ " );</span>
-<span class="source-line-no">414</span><span id="line-414">        }</span>
-<span class="source-line-no">415</span><span id="line-415">        else</span>
-<span class="source-line-no">416</span><span id="line-416">        {</span>
-<span class="source-line-no">417</span><span id="line-417">            codeWriter.pushType( this );</span>
+<span class="source-line-no">410</span><span id="line-410">            codeWriter.emit(</span>
+<span class="source-line-no">411</span><span id="line-411">                """</span>
+<span class="source-line-no">412</span><span id="line-412">                \n{</span>
+<span class="source-line-no">413</span><span id="line-413">                """ );</span>
+<span class="source-line-no">414</span><span id="line-414"></span>
+<span class="source-line-no">415</span><span id="line-415">            //---* Emit the class body *---------------------------------------</span>
+<span class="source-line-no">416</span><span id="line-416">            codeWriter.indent();</span>
+<span class="source-line-no">417</span><span id="line-417">            firstMember = true;</span>
 <span class="source-line-no">418</span><span id="line-418"></span>
-<span class="source-line-no">419</span><span id="line-419">            codeWriter.emit(</span>
-<span class="source-line-no">420</span><span id="line-420">                """</span>
-<span class="source-line-no">421</span><span id="line-421">                \n{</span>
-<span class="source-line-no">422</span><span id="line-422">                """ );</span>
-<span class="source-line-no">423</span><span id="line-423"></span>
-<span class="source-line-no">424</span><span id="line-424">            //---* Emit the class body *---------------------------------------</span>
-<span class="source-line-no">425</span><span id="line-425">            codeWriter.indent();</span>
-<span class="source-line-no">426</span><span id="line-426">            firstMember = true;</span>
-<span class="source-line-no">427</span><span id="line-427"></span>
-<span class="source-line-no">428</span><span id="line-428">            //---* Emit the inner types *--------------------------------------</span>
-<span class="source-line-no">429</span><span id="line-429">            if( !innerClasses().isEmpty() )</span>
-<span class="source-line-no">430</span><span id="line-430">            {</span>
-<span class="source-line-no">431</span><span id="line-431">                if( !firstMember ) codeWriter.emit( "\n" );</span>
-<span class="source-line-no">432</span><span id="line-432">                codeWriter.emit(</span>
-<span class="source-line-no">433</span><span id="line-433">                    """</span>
-<span class="source-line-no">434</span><span id="line-434">                        /*---------------*\\</span>
-<span class="source-line-no">435</span><span id="line-435">                    ====** Inner Classes **====================================================</span>
-<span class="source-line-no">436</span><span id="line-436">                        \\*---------------*/""" );</span>
-<span class="source-line-no">437</span><span id="line-437">                innerClasses().stream()</span>
-<span class="source-line-no">438</span><span id="line-438">                    .sorted( comparing( t -&gt; t.name().get(), CASE_INSENSITIVE_ORDER ) )</span>
-<span class="source-line-no">439</span><span id="line-439">                    .map( t -&gt; (TypeSpecImpl) t)</span>
-<span class="source-line-no">440</span><span id="line-440">                    .forEachOrdered( t -&gt;</span>
-<span class="source-line-no">441</span><span id="line-441">                    {</span>
-<span class="source-line-no">442</span><span id="line-442">                        codeWriter.emit( "\n" );</span>
-<span class="source-line-no">443</span><span id="line-443">                        t.emit( codeWriter, null, RECORD.implicitTypeModifiers() );</span>
-<span class="source-line-no">444</span><span id="line-444">                    } );</span>
-<span class="source-line-no">445</span><span id="line-445">                firstMember = false;</span>
-<span class="source-line-no">446</span><span id="line-446">            }</span>
-<span class="source-line-no">447</span><span id="line-447"></span>
-<span class="source-line-no">448</span><span id="line-448">            //--- Constants and attributes *-----------------------------------</span>
-<span class="source-line-no">449</span><span id="line-449">            if( !staticFields.isEmpty() )</span>
-<span class="source-line-no">450</span><span id="line-450">            {</span>
-<span class="source-line-no">451</span><span id="line-451">                final Collection&lt;FieldSpecImpl&gt; alreadyHandled = new HashSet&lt;&gt;();</span>
-<span class="source-line-no">452</span><span id="line-452"></span>
-<span class="source-line-no">453</span><span id="line-453">                //---* Emit the constants *----------------------------------------</span>
-<span class="source-line-no">454</span><span id="line-454">                final var constants = staticFields.stream()</span>
-<span class="source-line-no">455</span><span id="line-455">                    .filter( f -&gt; f.hasModifier( PUBLIC ) )</span>
-<span class="source-line-no">456</span><span id="line-456">                    .filter( f -&gt; f.hasModifier( FINAL ) )</span>
-<span class="source-line-no">457</span><span id="line-457">                    .filter( FieldSpecImpl::hasInitializer )</span>
-<span class="source-line-no">458</span><span id="line-458">                    .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )</span>
-<span class="source-line-no">459</span><span id="line-459">                    .toList();</span>
-<span class="source-line-no">460</span><span id="line-460"></span>
-<span class="source-line-no">461</span><span id="line-461">                if( !constants.isEmpty() )</span>
-<span class="source-line-no">462</span><span id="line-462">                {</span>
-<span class="source-line-no">463</span><span id="line-463">                    if( !firstMember ) codeWriter.emit( "\n" );</span>
-<span class="source-line-no">464</span><span id="line-464">                    codeWriter.emit(</span>
-<span class="source-line-no">465</span><span id="line-465">                        """    </span>
-<span class="source-line-no">466</span><span id="line-466">                            /*-----------*\\</span>
-<span class="source-line-no">467</span><span id="line-467">                        ====** Constants **========================================================</span>
-<span class="source-line-no">468</span><span id="line-468">                            \\*-----------*/""" );</span>
-<span class="source-line-no">469</span><span id="line-469">                    constants.forEach( c -&gt;</span>
-<span class="source-line-no">470</span><span id="line-470">                    {</span>
-<span class="source-line-no">471</span><span id="line-471">                        codeWriter.emit( "\n" );</span>
-<span class="source-line-no">472</span><span id="line-472">                        c.emit( codeWriter, RECORD.implicitFieldModifiers() );</span>
-<span class="source-line-no">473</span><span id="line-473">                        alreadyHandled.add( c );</span>
-<span class="source-line-no">474</span><span id="line-474">                    } );</span>
-<span class="source-line-no">475</span><span id="line-475">                    firstMember = false;</span>
-<span class="source-line-no">476</span><span id="line-476">                }</span>
-<span class="source-line-no">477</span><span id="line-477"></span>
-<span class="source-line-no">478</span><span id="line-478">                //---* Static fields *-----------------------------------------</span>
-<span class="source-line-no">479</span><span id="line-479">                final var statics = getFieldSpecs().stream()</span>
-<span class="source-line-no">480</span><span id="line-480">                    .filter( f -&gt; !alreadyHandled.contains( f ) )</span>
-<span class="source-line-no">481</span><span id="line-481">                    .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )</span>
-<span class="source-line-no">482</span><span id="line-482">                    .toList();</span>
-<span class="source-line-no">483</span><span id="line-483">                if( !statics.isEmpty() || !getStaticBlock().isEmpty() )</span>
-<span class="source-line-no">484</span><span id="line-484">                {</span>
-<span class="source-line-no">485</span><span id="line-485">                    if( !firstMember ) codeWriter.emit( "\n" );</span>
-<span class="source-line-no">486</span><span id="line-486">                    codeWriter.emit(</span>
-<span class="source-line-no">487</span><span id="line-487">                        """</span>
-<span class="source-line-no">488</span><span id="line-488">                            /*------------------------*\\</span>
-<span class="source-line-no">489</span><span id="line-489">                        ====** Static Initialisations **===========================================</span>
-<span class="source-line-no">490</span><span id="line-490">                            \\*------------------------*/""" );</span>
-<span class="source-line-no">491</span><span id="line-491"></span>
-<span class="source-line-no">492</span><span id="line-492">                    statics.forEach( s -&gt;</span>
-<span class="source-line-no">493</span><span id="line-493">                    {</span>
-<span class="source-line-no">494</span><span id="line-494">                        codeWriter.emit( "\n" );</span>
-<span class="source-line-no">495</span><span id="line-495">                        s.emit( codeWriter, RECORD.implicitFieldModifiers() );</span>
-<span class="source-line-no">496</span><span id="line-496">                        alreadyHandled.add( s );</span>
-<span class="source-line-no">497</span><span id="line-497">                    } );</span>
-<span class="source-line-no">498</span><span id="line-498"></span>
-<span class="source-line-no">499</span><span id="line-499">                    //---* Static Block *--------------------------------------</span>
-<span class="source-line-no">500</span><span id="line-500">                    if( !getStaticBlock().isEmpty() )</span>
-<span class="source-line-no">501</span><span id="line-501">                    {</span>
-<span class="source-line-no">502</span><span id="line-502">                        codeWriter.emit( "\n" );</span>
-<span class="source-line-no">503</span><span id="line-503">                        codeWriter.emit( getStaticBlock() );</span>
-<span class="source-line-no">504</span><span id="line-504">                    }</span>
-<span class="source-line-no">505</span><span id="line-505">                    firstMember = false;</span>
-<span class="source-line-no">506</span><span id="line-506">                }</span>
-<span class="source-line-no">507</span><span id="line-507">            }</span>
-<span class="source-line-no">508</span><span id="line-508"></span>
-<span class="source-line-no">509</span><span id="line-509">            //---* Constructors *----------------------------------------------</span>
-<span class="source-line-no">510</span><span id="line-510">            final var constructors = getMethodSpecs().stream()</span>
-<span class="source-line-no">511</span><span id="line-511">                .filter( MethodSpecImpl::isConstructor )</span>
-<span class="source-line-no">512</span><span id="line-512">                .sorted( comparing( MethodSpecImpl::toString, CASE_INSENSITIVE_ORDER ) )</span>
-<span class="source-line-no">513</span><span id="line-513">                .toList();</span>
-<span class="source-line-no">514</span><span id="line-514">            if( !getInitializerBlock().isEmpty() || !constructors.isEmpty() )</span>
-<span class="source-line-no">515</span><span id="line-515">            {</span>
-<span class="source-line-no">516</span><span id="line-516">                if( !firstMember ) codeWriter.emit( "\n" );</span>
-<span class="source-line-no">517</span><span id="line-517">                codeWriter.emit(</span>
-<span class="source-line-no">518</span><span id="line-518">                    """</span>
-<span class="source-line-no">519</span><span id="line-519">                        /*--------------*\\</span>
-<span class="source-line-no">520</span><span id="line-520">                    ====** Constructors **=====================================================</span>
-<span class="source-line-no">521</span><span id="line-521">                        \\*--------------*/""" );</span>
-<span class="source-line-no">522</span><span id="line-522"></span>
-<span class="source-line-no">523</span><span id="line-523">                //---* Initializer block *-------------------------------------</span>
-<span class="source-line-no">524</span><span id="line-524">                if( !getInitializerBlock().isEmpty() )</span>
-<span class="source-line-no">525</span><span id="line-525">                {</span>
-<span class="source-line-no">526</span><span id="line-526">                    codeWriter.emit( "\n" );</span>
-<span class="source-line-no">527</span><span id="line-527">                    codeWriter.emit( getInitializerBlock() );</span>
-<span class="source-line-no">528</span><span id="line-528">                }</span>
+<span class="source-line-no">419</span><span id="line-419">            //---* Emit the inner types *--------------------------------------</span>
+<span class="source-line-no">420</span><span id="line-420">            if( !innerClasses().isEmpty() )</span>
+<span class="source-line-no">421</span><span id="line-421">            {</span>
+<span class="source-line-no">422</span><span id="line-422">                if( !firstMember ) codeWriter.emit( "\n" );</span>
+<span class="source-line-no">423</span><span id="line-423">                codeWriter.emit(</span>
+<span class="source-line-no">424</span><span id="line-424">                    """</span>
+<span class="source-line-no">425</span><span id="line-425">                        /*---------------*\\</span>
+<span class="source-line-no">426</span><span id="line-426">                    ====** Inner Classes **====================================================</span>
+<span class="source-line-no">427</span><span id="line-427">                        \\*---------------*/""" );</span>
+<span class="source-line-no">428</span><span id="line-428">                innerClasses().stream()</span>
+<span class="source-line-no">429</span><span id="line-429">                    .sorted( comparing( t -&gt; t.name().get(), CASE_INSENSITIVE_ORDER ) )</span>
+<span class="source-line-no">430</span><span id="line-430">                    .map( t -&gt; (TypeSpecImpl) t)</span>
+<span class="source-line-no">431</span><span id="line-431">                    .forEachOrdered( t -&gt;</span>
+<span class="source-line-no">432</span><span id="line-432">                    {</span>
+<span class="source-line-no">433</span><span id="line-433">                        codeWriter.emit( "\n" );</span>
+<span class="source-line-no">434</span><span id="line-434">                        t.emit( codeWriter, null, RECORD.implicitTypeModifiers() );</span>
+<span class="source-line-no">435</span><span id="line-435">                    } );</span>
+<span class="source-line-no">436</span><span id="line-436">                firstMember = false;</span>
+<span class="source-line-no">437</span><span id="line-437">            }</span>
+<span class="source-line-no">438</span><span id="line-438"></span>
+<span class="source-line-no">439</span><span id="line-439">            //--- Constants and attributes *-----------------------------------</span>
+<span class="source-line-no">440</span><span id="line-440">            if( !staticFields.isEmpty() )</span>
+<span class="source-line-no">441</span><span id="line-441">            {</span>
+<span class="source-line-no">442</span><span id="line-442">                final Collection&lt;FieldSpecImpl&gt; alreadyHandled = new HashSet&lt;&gt;();</span>
+<span class="source-line-no">443</span><span id="line-443"></span>
+<span class="source-line-no">444</span><span id="line-444">                //---* Emit the constants *----------------------------------------</span>
+<span class="source-line-no">445</span><span id="line-445">                final var constants = staticFields.stream()</span>
+<span class="source-line-no">446</span><span id="line-446">                    .filter( constantSpec -&gt; constantSpec.hasModifier( PUBLIC ) )</span>
+<span class="source-line-no">447</span><span id="line-447">                    .filter( constantSpec -&gt; constantSpec.hasModifier( FINAL ) )</span>
+<span class="source-line-no">448</span><span id="line-448">                    .filter( FieldSpecImpl::hasInitializer )</span>
+<span class="source-line-no">449</span><span id="line-449">                    .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )</span>
+<span class="source-line-no">450</span><span id="line-450">                    .toList();</span>
+<span class="source-line-no">451</span><span id="line-451"></span>
+<span class="source-line-no">452</span><span id="line-452">                if( !constants.isEmpty() )</span>
+<span class="source-line-no">453</span><span id="line-453">                {</span>
+<span class="source-line-no">454</span><span id="line-454">                    if( !firstMember ) codeWriter.emit( "\n" );</span>
+<span class="source-line-no">455</span><span id="line-455">                    codeWriter.emit(</span>
+<span class="source-line-no">456</span><span id="line-456">                        """    </span>
+<span class="source-line-no">457</span><span id="line-457">                            /*-----------*\\</span>
+<span class="source-line-no">458</span><span id="line-458">                        ====** Constants **========================================================</span>
+<span class="source-line-no">459</span><span id="line-459">                            \\*-----------*/""" );</span>
+<span class="source-line-no">460</span><span id="line-460">                    constants.forEach( constantSpec -&gt;</span>
+<span class="source-line-no">461</span><span id="line-461">                    {</span>
+<span class="source-line-no">462</span><span id="line-462">                        codeWriter.emit( "\n" );</span>
+<span class="source-line-no">463</span><span id="line-463">                        constantSpec.emit( codeWriter, RECORD.implicitFieldModifiers() );</span>
+<span class="source-line-no">464</span><span id="line-464">                        alreadyHandled.add( constantSpec );</span>
+<span class="source-line-no">465</span><span id="line-465">                    } );</span>
+<span class="source-line-no">466</span><span id="line-466">                    firstMember = false;</span>
+<span class="source-line-no">467</span><span id="line-467">                }</span>
+<span class="source-line-no">468</span><span id="line-468"></span>
+<span class="source-line-no">469</span><span id="line-469">                //---* Static fields *-----------------------------------------</span>
+<span class="source-line-no">470</span><span id="line-470">                final var statics = getFieldSpecs().stream()</span>
+<span class="source-line-no">471</span><span id="line-471">                    .filter( staticSpec -&gt; !alreadyHandled.contains( staticSpec ) )</span>
+<span class="source-line-no">472</span><span id="line-472">                    .sorted( comparing( FieldSpecImpl::name, CASE_INSENSITIVE_ORDER ) )</span>
+<span class="source-line-no">473</span><span id="line-473">                    .toList();</span>
+<span class="source-line-no">474</span><span id="line-474">                if( !statics.isEmpty() || !getStaticBlock().isEmpty() )</span>
+<span class="source-line-no">475</span><span id="line-475">                {</span>
+<span class="source-line-no">476</span><span id="line-476">                    if( !firstMember ) codeWriter.emit( "\n" );</span>
+<span class="source-line-no">477</span><span id="line-477">                    codeWriter.emit(</span>
+<span class="source-line-no">478</span><span id="line-478">                        """</span>
+<span class="source-line-no">479</span><span id="line-479">                            /*------------------------*\\</span>
+<span class="source-line-no">480</span><span id="line-480">                        ====** Static Initialisations **===========================================</span>
+<span class="source-line-no">481</span><span id="line-481">                            \\*------------------------*/""" );</span>
+<span class="source-line-no">482</span><span id="line-482"></span>
+<span class="source-line-no">483</span><span id="line-483">                    statics.forEach( staticSpec -&gt;</span>
+<span class="source-line-no">484</span><span id="line-484">                    {</span>
+<span class="source-line-no">485</span><span id="line-485">                        codeWriter.emit( "\n" );</span>
+<span class="source-line-no">486</span><span id="line-486">                        staticSpec.emit( codeWriter, RECORD.implicitFieldModifiers() );</span>
+<span class="source-line-no">487</span><span id="line-487">                        alreadyHandled.add( staticSpec );</span>
+<span class="source-line-no">488</span><span id="line-488">                    } );</span>
+<span class="source-line-no">489</span><span id="line-489"></span>
+<span class="source-line-no">490</span><span id="line-490">                    //---* Static Block *--------------------------------------</span>
+<span class="source-line-no">491</span><span id="line-491">                    if( !getStaticBlock().isEmpty() )</span>
+<span class="source-line-no">492</span><span id="line-492">                    {</span>
+<span class="source-line-no">493</span><span id="line-493">                        codeWriter.emit( "\n" );</span>
+<span class="source-line-no">494</span><span id="line-494">                        codeWriter.emit( getStaticBlock() );</span>
+<span class="source-line-no">495</span><span id="line-495">                    }</span>
+<span class="source-line-no">496</span><span id="line-496">                    firstMember = false;</span>
+<span class="source-line-no">497</span><span id="line-497">                }</span>
+<span class="source-line-no">498</span><span id="line-498">            }</span>
+<span class="source-line-no">499</span><span id="line-499"></span>
+<span class="source-line-no">500</span><span id="line-500">            //---* Constructors *----------------------------------------------</span>
+<span class="source-line-no">501</span><span id="line-501">            final var constructors = getMethodSpecs().stream()</span>
+<span class="source-line-no">502</span><span id="line-502">                .filter( MethodSpecImpl::isConstructor )</span>
+<span class="source-line-no">503</span><span id="line-503">                .sorted( comparing( MethodSpecImpl::toString, CASE_INSENSITIVE_ORDER ) )</span>
+<span class="source-line-no">504</span><span id="line-504">                .toList();</span>
+<span class="source-line-no">505</span><span id="line-505">            if( !getInitializerBlock().isEmpty() || !constructors.isEmpty() )</span>
+<span class="source-line-no">506</span><span id="line-506">            {</span>
+<span class="source-line-no">507</span><span id="line-507">                if( !firstMember ) codeWriter.emit( "\n" );</span>
+<span class="source-line-no">508</span><span id="line-508">                codeWriter.emit(</span>
+<span class="source-line-no">509</span><span id="line-509">                    """</span>
+<span class="source-line-no">510</span><span id="line-510">                        /*--------------*\\</span>
+<span class="source-line-no">511</span><span id="line-511">                    ====** Constructors **=====================================================</span>
+<span class="source-line-no">512</span><span id="line-512">                        \\*--------------*/""" );</span>
+<span class="source-line-no">513</span><span id="line-513"></span>
+<span class="source-line-no">514</span><span id="line-514">                //---* Initializer block *-------------------------------------</span>
+<span class="source-line-no">515</span><span id="line-515">                if( !getInitializerBlock().isEmpty() )</span>
+<span class="source-line-no">516</span><span id="line-516">                {</span>
+<span class="source-line-no">517</span><span id="line-517">                    codeWriter.emit( "\n" );</span>
+<span class="source-line-no">518</span><span id="line-518">                    codeWriter.emit( getInitializerBlock() );</span>
+<span class="source-line-no">519</span><span id="line-519">                }</span>
+<span class="source-line-no">520</span><span id="line-520"></span>
+<span class="source-line-no">521</span><span id="line-521">                //---* Emit the constructors *---------------------------------</span>
+<span class="source-line-no">522</span><span id="line-522">                constructors.forEach( constructorSpec -&gt;</span>
+<span class="source-line-no">523</span><span id="line-523">                {</span>
+<span class="source-line-no">524</span><span id="line-524">                    codeWriter.emit( "\n" );</span>
+<span class="source-line-no">525</span><span id="line-525">                    constructorSpec.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );</span>
+<span class="source-line-no">526</span><span id="line-526">                } );</span>
+<span class="source-line-no">527</span><span id="line-527">                firstMember = false;</span>
+<span class="source-line-no">528</span><span id="line-528">            }</span>
 <span class="source-line-no">529</span><span id="line-529"></span>
-<span class="source-line-no">530</span><span id="line-530">                //---* Emit the constructors *---------------------------------</span>
-<span class="source-line-no">531</span><span id="line-531">                constructors.forEach( c -&gt;</span>
-<span class="source-line-no">532</span><span id="line-532">                {</span>
-<span class="source-line-no">533</span><span id="line-533">                    codeWriter.emit( "\n" );</span>
-<span class="source-line-no">534</span><span id="line-534">                    c.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );</span>
-<span class="source-line-no">535</span><span id="line-535">                } );</span>
-<span class="source-line-no">536</span><span id="line-536">                firstMember = false;</span>
-<span class="source-line-no">537</span><span id="line-537">            }</span>
-<span class="source-line-no">538</span><span id="line-538"></span>
-<span class="source-line-no">539</span><span id="line-539">            //---* Methods (static and non-static) *---------------------------</span>
-<span class="source-line-no">540</span><span id="line-540">            final var methods = getMethodSpecs().stream()</span>
-<span class="source-line-no">541</span><span id="line-541">                .filter( m -&gt; !m.isConstructor() )</span>
-<span class="source-line-no">542</span><span id="line-542">                .sorted( TypeSpecImpl::compareMethodSpecs )</span>
-<span class="source-line-no">543</span><span id="line-543">                .toList();</span>
-<span class="source-line-no">544</span><span id="line-544">            if( !methods.isEmpty() )</span>
-<span class="source-line-no">545</span><span id="line-545">            {</span>
-<span class="source-line-no">546</span><span id="line-546">                if( !firstMember ) codeWriter.emit( "\n" );</span>
-<span class="source-line-no">547</span><span id="line-547">                codeWriter.emit(</span>
-<span class="source-line-no">548</span><span id="line-548">                    """</span>
-<span class="source-line-no">549</span><span id="line-549">                        /*---------*\\</span>
-<span class="source-line-no">550</span><span id="line-550">                    ====** Methods **==========================================================</span>
-<span class="source-line-no">551</span><span id="line-551">                        \\*---------*/""" );</span>
-<span class="source-line-no">552</span><span id="line-552"></span>
-<span class="source-line-no">553</span><span id="line-553">                methods.forEach( m -&gt;</span>
-<span class="source-line-no">554</span><span id="line-554">                {</span>
-<span class="source-line-no">555</span><span id="line-555">                    codeWriter.emit( "\n" );</span>
-<span class="source-line-no">556</span><span id="line-556">                    m.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );</span>
-<span class="source-line-no">557</span><span id="line-557">                } );</span>
-<span class="source-line-no">558</span><span id="line-558">            }</span>
-<span class="source-line-no">559</span><span id="line-559"></span>
-<span class="source-line-no">560</span><span id="line-560">            codeWriter.unindent();</span>
-<span class="source-line-no">561</span><span id="line-561">            codeWriter.popType();</span>
-<span class="source-line-no">562</span><span id="line-562">        }</span>
-<span class="source-line-no">563</span><span id="line-563"></span>
-<span class="source-line-no">564</span><span id="line-564">        codeWriter.emit(</span>
-<span class="source-line-no">565</span><span id="line-565">            """</span>
-<span class="source-line-no">566</span><span id="line-566">            }</span>
-<span class="source-line-no">567</span><span id="line-567">            //  $L $N</span>
-<span class="source-line-no">568</span><span id="line-568">            """, RECORD.name().toLowerCase( ROOT ), this );</span>
-<span class="source-line-no">569</span><span id="line-569">    }   //  emit4Foundation()</span>
-<span class="source-line-no">570</span><span id="line-570"></span>
-<span class="source-line-no">571</span><span id="line-571">    /**</span>
-<span class="source-line-no">572</span><span id="line-572">     *  Emits the type to the given code writer, using the layout as defined</span>
-<span class="source-line-no">573</span><span id="line-573">     *  by the original JavaPoet code.</span>
-<span class="source-line-no">574</span><span id="line-574">     *</span>
-<span class="source-line-no">575</span><span id="line-575">     *  @param  codeWriter  The target code writer.</span>
-<span class="source-line-no">576</span><span id="line-576">     *  @param  enumName    The name of the enum; can be {@code null}.</span>
-<span class="source-line-no">577</span><span id="line-577">     *  @param  implicitModifiers   The implicit modifiers.</span>
-<span class="source-line-no">578</span><span id="line-578">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
-<span class="source-line-no">579</span><span id="line-579">     *      output target.</span>
-<span class="source-line-no">580</span><span id="line-580">     */</span>
-<span class="source-line-no">581</span><span id="line-581">    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "CastToConcreteClass"} )</span>
-<span class="source-line-no">582</span><span id="line-582">    protected final void emit4JavaPoet( final CodeWriter codeWriter, final String enumName, final Set&lt;Modifier&gt; implicitModifiers ) throws UncheckedIOException</span>
-<span class="source-line-no">583</span><span id="line-583">    {</span>
-<span class="source-line-no">584</span><span id="line-584">        /*</span>
-<span class="source-line-no">585</span><span id="line-585">         * Push an empty type (specifically without nested types) for</span>
-<span class="source-line-no">586</span><span id="line-586">         * type-resolution.</span>
-<span class="source-line-no">587</span><span id="line-587">         */</span>
-<span class="source-line-no">588</span><span id="line-588">        codeWriter.pushType( createCopy() );</span>
-<span class="source-line-no">589</span><span id="line-589"></span>
-<span class="source-line-no">590</span><span id="line-590">        var javadoc = getJavadoc();</span>
-<span class="source-line-no">591</span><span id="line-591"></span>
-<span class="source-line-no">592</span><span id="line-592">        //--* Non-static fields *----------------------------------------------</span>
-<span class="source-line-no">593</span><span id="line-593">        final Collection&lt;ParameterSpecImpl&gt; nonStaticFields = new ArrayList&lt;&gt;();</span>
-<span class="source-line-no">594</span><span id="line-594">        for( final var fieldSpec : getFieldSpecs() )</span>
-<span class="source-line-no">595</span><span id="line-595">        {</span>
-<span class="source-line-no">596</span><span id="line-596">            if( fieldSpec.hasModifier( STATIC ) ) continue;</span>
-<span class="source-line-no">597</span><span id="line-597">            final var paramSpec = (ParameterSpecImpl) getFactory().parameterBuilder( fieldSpec.type(), fieldSpec.name() )</span>
-<span class="source-line-no">598</span><span id="line-598">                .build();</span>
-<span class="source-line-no">599</span><span id="line-599">            nonStaticFields.add( paramSpec );</span>
-<span class="source-line-no">600</span><span id="line-600">            final var fieldJavaDoc = fieldSpec.getJavadoc();</span>
-<span class="source-line-no">601</span><span id="line-601">            if( !fieldJavaDoc.isEmpty() )</span>
-<span class="source-line-no">602</span><span id="line-602">            {</span>
-<span class="source-line-no">603</span><span id="line-603">                final var codeBlock = (CodeBlockImpl) getFactory().codeBlockOf( "@param $N", fieldSpec )</span>
-<span class="source-line-no">604</span><span id="line-604">                    .join( " ", fieldJavaDoc );</span>
-<span class="source-line-no">605</span><span id="line-605">                javadoc = (CodeBlockImpl) javadoc.join( "\n", codeBlock );</span>
-<span class="source-line-no">606</span><span id="line-606">            }</span>
-<span class="source-line-no">607</span><span id="line-607">        }</span>
-<span class="source-line-no">608</span><span id="line-608"></span>
-<span class="source-line-no">609</span><span id="line-609">        codeWriter.emitJavadoc( javadoc );</span>
-<span class="source-line-no">610</span><span id="line-610">        final Collection&lt;AnnotationSpecImpl&gt; annotations = new ArrayList&lt;&gt;( getAnnotations() );</span>
-<span class="source-line-no">611</span><span id="line-611">        getFactory().createSuppressWarningsAnnotation( getSuppressableWarnings() )</span>
-<span class="source-line-no">612</span><span id="line-612">            .map( a -&gt; (AnnotationSpecImpl) a )</span>
-<span class="source-line-no">613</span><span id="line-613">            .ifPresent( annotations::add );</span>
-<span class="source-line-no">614</span><span id="line-614">        codeWriter.emitAnnotations( annotations, false );</span>
-<span class="source-line-no">615</span><span id="line-615">        codeWriter.emitModifiers( modifiers(), union( implicitModifiers, RECORD.asMemberModifiers() ) );</span>
-<span class="source-line-no">616</span><span id="line-616">        codeWriter.emit( "$1L $2L", RECORD.name().toLowerCase( ROOT ), name().get() );</span>
-<span class="source-line-no">617</span><span id="line-617">        codeWriter.emitTypeVariables( getTypeVariables() );</span>
-<span class="source-line-no">618</span><span id="line-618"></span>
-<span class="source-line-no">619</span><span id="line-619">        var firstMember = true;</span>
-<span class="source-line-no">620</span><span id="line-620">        for( final var paramSpec : nonStaticFields )</span>
-<span class="source-line-no">621</span><span id="line-621">        {</span>
-<span class="source-line-no">622</span><span id="line-622">            codeWriter.emit( firstMember ? "(" : ", " );</span>
-<span class="source-line-no">623</span><span id="line-623">            paramSpec.emit( codeWriter, false );</span>
-<span class="source-line-no">624</span><span id="line-624">            firstMember = false;</span>
-<span class="source-line-no">625</span><span id="line-625">        }</span>
-<span class="source-line-no">626</span><span id="line-626">        codeWriter.emit( ")" );</span>
-<span class="source-line-no">627</span><span id="line-627"></span>
-<span class="source-line-no">628</span><span id="line-628">        //---* The implemented interfaces *------------------------------------</span>
-<span class="source-line-no">629</span><span id="line-629">        final var implementsTypes = getSuperInterfaces();</span>
-<span class="source-line-no">630</span><span id="line-630">        if( !implementsTypes.isEmpty() )</span>
-<span class="source-line-no">631</span><span id="line-631">        {</span>
-<span class="source-line-no">632</span><span id="line-632">            codeWriter.emit( " implements" );</span>
-<span class="source-line-no">633</span><span id="line-633">            var firstType = true;</span>
-<span class="source-line-no">634</span><span id="line-634">            for( final var type : implementsTypes )</span>
-<span class="source-line-no">635</span><span id="line-635">            {</span>
-<span class="source-line-no">636</span><span id="line-636">                if( !firstType ) codeWriter.emit( "," );</span>
-<span class="source-line-no">637</span><span id="line-637">                codeWriter.emit( " $T", type );</span>
-<span class="source-line-no">638</span><span id="line-638">                firstType = false;</span>
-<span class="source-line-no">639</span><span id="line-639">            }</span>
-<span class="source-line-no">640</span><span id="line-640">        }</span>
-<span class="source-line-no">641</span><span id="line-641"></span>
-<span class="source-line-no">642</span><span id="line-642">        codeWriter.popType();</span>
-<span class="source-line-no">643</span><span id="line-643"></span>
-<span class="source-line-no">644</span><span id="line-644">        //---* Get the static fields *-----------------------------------------</span>
-<span class="source-line-no">645</span><span id="line-645">        final var staticFields = getFieldSpecs().stream()</span>
-<span class="source-line-no">646</span><span id="line-646">            .filter( fs -&gt; fs.hasModifier( STATIC ) )</span>
-<span class="source-line-no">647</span><span id="line-647">            .toList();</span>
-<span class="source-line-no">648</span><span id="line-648"></span>
-<span class="source-line-no">649</span><span id="line-649">        if( staticFields.isEmpty() &amp;&amp; getStaticBlock().isEmpty() &amp;&amp; getInitializerBlock().isEmpty() &amp;&amp; getMethodSpecs().isEmpty() )</span>
-<span class="source-line-no">650</span><span id="line-650">        {</span>
-<span class="source-line-no">651</span><span id="line-651">            //---* We do not have a body for the record … *--------------------</span>
-<span class="source-line-no">652</span><span id="line-652">            codeWriter.emit( " {}\n" );</span>
-<span class="source-line-no">653</span><span id="line-653">        }</span>
-<span class="source-line-no">654</span><span id="line-654">        else</span>
-<span class="source-line-no">655</span><span id="line-655">        {</span>
-<span class="source-line-no">656</span><span id="line-656">            codeWriter.pushType( this );</span>
-<span class="source-line-no">657</span><span id="line-657"></span>
-<span class="source-line-no">658</span><span id="line-658">            //---* Emit the record body *--------------------------------------</span>
-<span class="source-line-no">659</span><span id="line-659">            codeWriter.emit( " {\n" );</span>
-<span class="source-line-no">660</span><span id="line-660"></span>
-<span class="source-line-no">661</span><span id="line-661">            codeWriter.indent();</span>
-<span class="source-line-no">662</span><span id="line-662"></span>
-<span class="source-line-no">663</span><span id="line-663">            //---* Static fields *---------------------------------------------</span>
-<span class="source-line-no">664</span><span id="line-664">            firstMember = true;</span>
-<span class="source-line-no">665</span><span id="line-665">            for( final var fieldSpec : staticFields )</span>
-<span class="source-line-no">666</span><span id="line-666">            {</span>
-<span class="source-line-no">667</span><span id="line-667">                if( !firstMember ) codeWriter.emit( "\n" );</span>
-<span class="source-line-no">668</span><span id="line-668">                fieldSpec.emit( codeWriter, EnumSet.noneOf( Modifier.class ) );</span>
-<span class="source-line-no">669</span><span id="line-669">                firstMember = false;</span>
-<span class="source-line-no">670</span><span id="line-670">            }</span>
-<span class="source-line-no">671</span><span id="line-671"></span>
-<span class="source-line-no">672</span><span id="line-672">            if( !getStaticBlock().isEmpty() )</span>
+<span class="source-line-no">530</span><span id="line-530">            //---* Methods (static and non-static) *---------------------------</span>
+<span class="source-line-no">531</span><span id="line-531">            final var methods = getMethodSpecs().stream()</span>
+<span class="source-line-no">532</span><span id="line-532">                .filter( methodSpec -&gt; !methodSpec.isConstructor() )</span>
+<span class="source-line-no">533</span><span id="line-533">                .sorted( TypeSpecImpl::compareMethodSpecs )</span>
+<span class="source-line-no">534</span><span id="line-534">                .toList();</span>
+<span class="source-line-no">535</span><span id="line-535">            if( !methods.isEmpty() )</span>
+<span class="source-line-no">536</span><span id="line-536">            {</span>
+<span class="source-line-no">537</span><span id="line-537">                if( !firstMember ) codeWriter.emit( "\n" );</span>
+<span class="source-line-no">538</span><span id="line-538">                codeWriter.emit(</span>
+<span class="source-line-no">539</span><span id="line-539">                    """</span>
+<span class="source-line-no">540</span><span id="line-540">                        /*---------*\\</span>
+<span class="source-line-no">541</span><span id="line-541">                    ====** Methods **==========================================================</span>
+<span class="source-line-no">542</span><span id="line-542">                        \\*---------*/""" );</span>
+<span class="source-line-no">543</span><span id="line-543"></span>
+<span class="source-line-no">544</span><span id="line-544">                methods.forEach( methodSpec -&gt;</span>
+<span class="source-line-no">545</span><span id="line-545">                {</span>
+<span class="source-line-no">546</span><span id="line-546">                    codeWriter.emit( "\n" );</span>
+<span class="source-line-no">547</span><span id="line-547">                    methodSpec.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );</span>
+<span class="source-line-no">548</span><span id="line-548">                } );</span>
+<span class="source-line-no">549</span><span id="line-549">            }</span>
+<span class="source-line-no">550</span><span id="line-550"></span>
+<span class="source-line-no">551</span><span id="line-551">            codeWriter.unindent();</span>
+<span class="source-line-no">552</span><span id="line-552">            codeWriter.popType();</span>
+<span class="source-line-no">553</span><span id="line-553">        }</span>
+<span class="source-line-no">554</span><span id="line-554"></span>
+<span class="source-line-no">555</span><span id="line-555">        codeWriter.emit(</span>
+<span class="source-line-no">556</span><span id="line-556">            """</span>
+<span class="source-line-no">557</span><span id="line-557">            }</span>
+<span class="source-line-no">558</span><span id="line-558">            //  $L $N</span>
+<span class="source-line-no">559</span><span id="line-559">            """, RECORD.name().toLowerCase( ROOT ), this );</span>
+<span class="source-line-no">560</span><span id="line-560">    }   //  emit4Foundation()</span>
+<span class="source-line-no">561</span><span id="line-561"></span>
+<span class="source-line-no">562</span><span id="line-562">    /**</span>
+<span class="source-line-no">563</span><span id="line-563">     *  Emits the type to the given code writer, using the layout as defined</span>
+<span class="source-line-no">564</span><span id="line-564">     *  by the original JavaPoet code.</span>
+<span class="source-line-no">565</span><span id="line-565">     *</span>
+<span class="source-line-no">566</span><span id="line-566">     *  @param  codeWriter  The target code writer.</span>
+<span class="source-line-no">567</span><span id="line-567">     *  @param  enumName    The name of the enum; can be {@code null}.</span>
+<span class="source-line-no">568</span><span id="line-568">     *  @param  implicitModifiers   The implicit modifiers.</span>
+<span class="source-line-no">569</span><span id="line-569">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
+<span class="source-line-no">570</span><span id="line-570">     *      output target.</span>
+<span class="source-line-no">571</span><span id="line-571">     */</span>
+<span class="source-line-no">572</span><span id="line-572">    @Override</span>
+<span class="source-line-no">573</span><span id="line-573">    @SuppressWarnings( {"BoundedWildcard", "OptionalGetWithoutIsPresent", "OverlyLongMethod", "OverlyComplexMethod"} )</span>
+<span class="source-line-no">574</span><span id="line-574">    protected final void emit4JavaPoet( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set&lt;Modifier&gt; implicitModifiers ) throws UncheckedIOException</span>
+<span class="source-line-no">575</span><span id="line-575">    {</span>
+<span class="source-line-no">576</span><span id="line-576">        /*</span>
+<span class="source-line-no">577</span><span id="line-577">         * Push an empty type (specifically without nested types) for</span>
+<span class="source-line-no">578</span><span id="line-578">         * type-resolution.</span>
+<span class="source-line-no">579</span><span id="line-579">         */</span>
+<span class="source-line-no">580</span><span id="line-580">        codeWriter.pushType( createCopy() );</span>
+<span class="source-line-no">581</span><span id="line-581"></span>
+<span class="source-line-no">582</span><span id="line-582">        var javadoc = getJavadoc();</span>
+<span class="source-line-no">583</span><span id="line-583"></span>
+<span class="source-line-no">584</span><span id="line-584">        //--* Non-static fields *----------------------------------------------</span>
+<span class="source-line-no">585</span><span id="line-585">        final Collection&lt;ParameterSpecImpl&gt; nonStaticFields = new ArrayList&lt;&gt;();</span>
+<span class="source-line-no">586</span><span id="line-586">        for( final var fieldSpec : getFieldSpecs() )</span>
+<span class="source-line-no">587</span><span id="line-587">        {</span>
+<span class="source-line-no">588</span><span id="line-588">            if( fieldSpec.hasModifier( STATIC ) ) continue;</span>
+<span class="source-line-no">589</span><span id="line-589">            final var paramSpec = (ParameterSpecImpl) getFactory().parameterBuilder( fieldSpec.type(), fieldSpec.name() )</span>
+<span class="source-line-no">590</span><span id="line-590">                .build();</span>
+<span class="source-line-no">591</span><span id="line-591">            nonStaticFields.add( paramSpec );</span>
+<span class="source-line-no">592</span><span id="line-592">            final var fieldJavaDoc = fieldSpec.getJavadoc();</span>
+<span class="source-line-no">593</span><span id="line-593">            if( !fieldJavaDoc.isEmpty() )</span>
+<span class="source-line-no">594</span><span id="line-594">            {</span>
+<span class="source-line-no">595</span><span id="line-595">                final var codeBlock = (CodeBlockImpl) getFactory().codeBlockOf( "@param $N", fieldSpec )</span>
+<span class="source-line-no">596</span><span id="line-596">                    .join( " ", fieldJavaDoc );</span>
+<span class="source-line-no">597</span><span id="line-597">                javadoc = (CodeBlockImpl) javadoc.join( "\n", codeBlock );</span>
+<span class="source-line-no">598</span><span id="line-598">            }</span>
+<span class="source-line-no">599</span><span id="line-599">        }</span>
+<span class="source-line-no">600</span><span id="line-600"></span>
+<span class="source-line-no">601</span><span id="line-601">        codeWriter.emitJavadoc( javadoc );</span>
+<span class="source-line-no">602</span><span id="line-602">        final Collection&lt;AnnotationSpecImpl&gt; annotations = new ArrayList&lt;&gt;( getAnnotations() );</span>
+<span class="source-line-no">603</span><span id="line-603">        getFactory().createSuppressWarningsAnnotation( getSuppressableWarnings() )</span>
+<span class="source-line-no">604</span><span id="line-604">            .map( a -&gt; (AnnotationSpecImpl) a )</span>
+<span class="source-line-no">605</span><span id="line-605">            .ifPresent( annotations::add );</span>
+<span class="source-line-no">606</span><span id="line-606">        codeWriter.emitAnnotations( annotations, false );</span>
+<span class="source-line-no">607</span><span id="line-607">        codeWriter.emitModifiers( modifiers(), union( implicitModifiers, RECORD.asMemberModifiers() ) );</span>
+<span class="source-line-no">608</span><span id="line-608">        codeWriter.emit( "$1L $2L", RECORD.name().toLowerCase( ROOT ), name().get() );</span>
+<span class="source-line-no">609</span><span id="line-609">        codeWriter.emitTypeVariables( getTypeVariables() );</span>
+<span class="source-line-no">610</span><span id="line-610"></span>
+<span class="source-line-no">611</span><span id="line-611">        var firstMember = true;</span>
+<span class="source-line-no">612</span><span id="line-612">        for( final var paramSpec : nonStaticFields )</span>
+<span class="source-line-no">613</span><span id="line-613">        {</span>
+<span class="source-line-no">614</span><span id="line-614">            codeWriter.emit( firstMember ? "(" : ", " );</span>
+<span class="source-line-no">615</span><span id="line-615">            paramSpec.emit( codeWriter, false );</span>
+<span class="source-line-no">616</span><span id="line-616">            firstMember = false;</span>
+<span class="source-line-no">617</span><span id="line-617">        }</span>
+<span class="source-line-no">618</span><span id="line-618">        codeWriter.emit( ")" );</span>
+<span class="source-line-no">619</span><span id="line-619"></span>
+<span class="source-line-no">620</span><span id="line-620">        //---* The implemented interfaces *------------------------------------</span>
+<span class="source-line-no">621</span><span id="line-621">        final var implementsTypes = getSuperInterfaces();</span>
+<span class="source-line-no">622</span><span id="line-622">        if( !implementsTypes.isEmpty() )</span>
+<span class="source-line-no">623</span><span id="line-623">        {</span>
+<span class="source-line-no">624</span><span id="line-624">            codeWriter.emit( " implements" );</span>
+<span class="source-line-no">625</span><span id="line-625">            var firstType = true;</span>
+<span class="source-line-no">626</span><span id="line-626">            for( final var type : implementsTypes )</span>
+<span class="source-line-no">627</span><span id="line-627">            {</span>
+<span class="source-line-no">628</span><span id="line-628">                if( !firstType ) codeWriter.emit( "," );</span>
+<span class="source-line-no">629</span><span id="line-629">                codeWriter.emit( " $T", type );</span>
+<span class="source-line-no">630</span><span id="line-630">                firstType = false;</span>
+<span class="source-line-no">631</span><span id="line-631">            }</span>
+<span class="source-line-no">632</span><span id="line-632">        }</span>
+<span class="source-line-no">633</span><span id="line-633"></span>
+<span class="source-line-no">634</span><span id="line-634">        codeWriter.popType();</span>
+<span class="source-line-no">635</span><span id="line-635"></span>
+<span class="source-line-no">636</span><span id="line-636">        //---* Get the static fields *-----------------------------------------</span>
+<span class="source-line-no">637</span><span id="line-637">        final var staticFields = getFieldSpecs().stream()</span>
+<span class="source-line-no">638</span><span id="line-638">            .filter( fs -&gt; fs.hasModifier( STATIC ) )</span>
+<span class="source-line-no">639</span><span id="line-639">            .toList();</span>
+<span class="source-line-no">640</span><span id="line-640"></span>
+<span class="source-line-no">641</span><span id="line-641">        if( staticFields.isEmpty() &amp;&amp; getStaticBlock().isEmpty() &amp;&amp; getInitializerBlock().isEmpty() &amp;&amp; getMethodSpecs().isEmpty() )</span>
+<span class="source-line-no">642</span><span id="line-642">        {</span>
+<span class="source-line-no">643</span><span id="line-643">            //---* We do not have a body for the record … *--------------------</span>
+<span class="source-line-no">644</span><span id="line-644">            codeWriter.emit( " {}\n" );</span>
+<span class="source-line-no">645</span><span id="line-645">        }</span>
+<span class="source-line-no">646</span><span id="line-646">        else</span>
+<span class="source-line-no">647</span><span id="line-647">        {</span>
+<span class="source-line-no">648</span><span id="line-648">            codeWriter.pushType( this );</span>
+<span class="source-line-no">649</span><span id="line-649"></span>
+<span class="source-line-no">650</span><span id="line-650">            //---* Emit the record body *--------------------------------------</span>
+<span class="source-line-no">651</span><span id="line-651">            codeWriter.emit( " {\n" );</span>
+<span class="source-line-no">652</span><span id="line-652"></span>
+<span class="source-line-no">653</span><span id="line-653">            codeWriter.indent();</span>
+<span class="source-line-no">654</span><span id="line-654"></span>
+<span class="source-line-no">655</span><span id="line-655">            //---* Static fields *---------------------------------------------</span>
+<span class="source-line-no">656</span><span id="line-656">            firstMember = true;</span>
+<span class="source-line-no">657</span><span id="line-657">            for( final var fieldSpec : staticFields )</span>
+<span class="source-line-no">658</span><span id="line-658">            {</span>
+<span class="source-line-no">659</span><span id="line-659">                if( !firstMember ) codeWriter.emit( "\n" );</span>
+<span class="source-line-no">660</span><span id="line-660">                fieldSpec.emit( codeWriter, EnumSet.noneOf( Modifier.class ) );</span>
+<span class="source-line-no">661</span><span id="line-661">                firstMember = false;</span>
+<span class="source-line-no">662</span><span id="line-662">            }</span>
+<span class="source-line-no">663</span><span id="line-663"></span>
+<span class="source-line-no">664</span><span id="line-664">            if( !getStaticBlock().isEmpty() )</span>
+<span class="source-line-no">665</span><span id="line-665">            {</span>
+<span class="source-line-no">666</span><span id="line-666">                if( !firstMember ) codeWriter.emit( "\n" );</span>
+<span class="source-line-no">667</span><span id="line-667">                codeWriter.emit( getStaticBlock() );</span>
+<span class="source-line-no">668</span><span id="line-668">                firstMember = false;</span>
+<span class="source-line-no">669</span><span id="line-669">            }</span>
+<span class="source-line-no">670</span><span id="line-670"></span>
+<span class="source-line-no">671</span><span id="line-671">            //---* Initializer block *-----------------------------------------</span>
+<span class="source-line-no">672</span><span id="line-672">            if( !getInitializerBlock().isEmpty() )</span>
 <span class="source-line-no">673</span><span id="line-673">            {</span>
 <span class="source-line-no">674</span><span id="line-674">                if( !firstMember ) codeWriter.emit( "\n" );</span>
-<span class="source-line-no">675</span><span id="line-675">                codeWriter.emit( getStaticBlock() );</span>
+<span class="source-line-no">675</span><span id="line-675">                codeWriter.emit( getInitializerBlock() );</span>
 <span class="source-line-no">676</span><span id="line-676">                firstMember = false;</span>
 <span class="source-line-no">677</span><span id="line-677">            }</span>
 <span class="source-line-no">678</span><span id="line-678"></span>
-<span class="source-line-no">679</span><span id="line-679">            //---* Initializer block *-----------------------------------------</span>
-<span class="source-line-no">680</span><span id="line-680">            if( !getInitializerBlock().isEmpty() )</span>
+<span class="source-line-no">679</span><span id="line-679">            //---* Constructors *----------------------------------------------</span>
+<span class="source-line-no">680</span><span id="line-680">            for( final var methodSpec : getMethodSpecs() )</span>
 <span class="source-line-no">681</span><span id="line-681">            {</span>
-<span class="source-line-no">682</span><span id="line-682">                if( !firstMember ) codeWriter.emit( "\n" );</span>
-<span class="source-line-no">683</span><span id="line-683">                codeWriter.emit( getInitializerBlock() );</span>
-<span class="source-line-no">684</span><span id="line-684">                firstMember = false;</span>
-<span class="source-line-no">685</span><span id="line-685">            }</span>
-<span class="source-line-no">686</span><span id="line-686"></span>
-<span class="source-line-no">687</span><span id="line-687">            //---* Constructors *----------------------------------------------</span>
-<span class="source-line-no">688</span><span id="line-688">            for( final var methodSpec : getMethodSpecs() )</span>
-<span class="source-line-no">689</span><span id="line-689">            {</span>
-<span class="source-line-no">690</span><span id="line-690">                if( !methodSpec.isConstructor() ) continue;</span>
-<span class="source-line-no">691</span><span id="line-691">                if( !firstMember ) codeWriter.emit( "\n" );</span>
-<span class="source-line-no">692</span><span id="line-692">                methodSpec.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );</span>
-<span class="source-line-no">693</span><span id="line-693">                firstMember = false;</span>
-<span class="source-line-no">694</span><span id="line-694">            }</span>
-<span class="source-line-no">695</span><span id="line-695"></span>
-<span class="source-line-no">696</span><span id="line-696">            //---* Methods (static and non-static) *---------------------------</span>
-<span class="source-line-no">697</span><span id="line-697">            for( final var methodSpec : getMethodSpecs() )</span>
-<span class="source-line-no">698</span><span id="line-698">            {</span>
-<span class="source-line-no">699</span><span id="line-699">                if( methodSpec.isConstructor() ) continue;</span>
+<span class="source-line-no">682</span><span id="line-682">                if( !methodSpec.isConstructor() ) continue;</span>
+<span class="source-line-no">683</span><span id="line-683">                if( !firstMember ) codeWriter.emit( "\n" );</span>
+<span class="source-line-no">684</span><span id="line-684">                methodSpec.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );</span>
+<span class="source-line-no">685</span><span id="line-685">                firstMember = false;</span>
+<span class="source-line-no">686</span><span id="line-686">            }</span>
+<span class="source-line-no">687</span><span id="line-687"></span>
+<span class="source-line-no">688</span><span id="line-688">            //---* Methods (static and non-static) *---------------------------</span>
+<span class="source-line-no">689</span><span id="line-689">            for( final var methodSpec : getMethodSpecs() )</span>
+<span class="source-line-no">690</span><span id="line-690">            {</span>
+<span class="source-line-no">691</span><span id="line-691">                if( methodSpec.isConstructor() ) continue;</span>
+<span class="source-line-no">692</span><span id="line-692">                if( !firstMember ) codeWriter.emit( "\n" );</span>
+<span class="source-line-no">693</span><span id="line-693">                methodSpec.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );</span>
+<span class="source-line-no">694</span><span id="line-694">                firstMember = false;</span>
+<span class="source-line-no">695</span><span id="line-695">            }</span>
+<span class="source-line-no">696</span><span id="line-696"></span>
+<span class="source-line-no">697</span><span id="line-697">            //---* Types (inner classes) *-------------------------------------</span>
+<span class="source-line-no">698</span><span id="line-698">            for( final var typeSpec : innerClasses() )</span>
+<span class="source-line-no">699</span><span id="line-699">            {</span>
 <span class="source-line-no">700</span><span id="line-700">                if( !firstMember ) codeWriter.emit( "\n" );</span>
-<span class="source-line-no">701</span><span id="line-701">                methodSpec.emit( codeWriter, name(), RECORD.implicitMethodModifiers() );</span>
+<span class="source-line-no">701</span><span id="line-701">                ((TypeSpecImpl) typeSpec).emit( codeWriter, null, RECORD.implicitTypeModifiers() );</span>
 <span class="source-line-no">702</span><span id="line-702">                firstMember = false;</span>
 <span class="source-line-no">703</span><span id="line-703">            }</span>
 <span class="source-line-no">704</span><span id="line-704"></span>
-<span class="source-line-no">705</span><span id="line-705">            //---* Types (inner classes) *-------------------------------------</span>
-<span class="source-line-no">706</span><span id="line-706">            for( final var typeSpec : innerClasses() )</span>
-<span class="source-line-no">707</span><span id="line-707">            {</span>
-<span class="source-line-no">708</span><span id="line-708">                if( !firstMember ) codeWriter.emit( "\n" );</span>
-<span class="source-line-no">709</span><span id="line-709">                ((TypeSpecImpl) typeSpec).emit( codeWriter, null, RECORD.implicitTypeModifiers() );</span>
-<span class="source-line-no">710</span><span id="line-710">                firstMember = false;</span>
-<span class="source-line-no">711</span><span id="line-711">            }</span>
-<span class="source-line-no">712</span><span id="line-712"></span>
-<span class="source-line-no">713</span><span id="line-713">            codeWriter.unindent();</span>
-<span class="source-line-no">714</span><span id="line-714">            codeWriter.emit( "}\n" );</span>
-<span class="source-line-no">715</span><span id="line-715">            codeWriter.popType();</span>
-<span class="source-line-no">716</span><span id="line-716">        }</span>
-<span class="source-line-no">717</span><span id="line-717">    }   //  emit4JavaPoet()</span>
-<span class="source-line-no">718</span><span id="line-718"></span>
-<span class="source-line-no">719</span><span id="line-719">    /**</span>
-<span class="source-line-no">720</span><span id="line-720">     *  {@inheritDoc}</span>
-<span class="source-line-no">721</span><span id="line-721">     */</span>
-<span class="source-line-no">722</span><span id="line-722">    @Override</span>
-<span class="source-line-no">723</span><span id="line-723">    public final boolean equals( final Object o )</span>
-<span class="source-line-no">724</span><span id="line-724">    {</span>
-<span class="source-line-no">725</span><span id="line-725">        var retValue = this == o;</span>
-<span class="source-line-no">726</span><span id="line-726">        if( !retValue &amp;&amp; (o instanceof RecordSpecImpl other) )</span>
-<span class="source-line-no">727</span><span id="line-727">        {</span>
-<span class="source-line-no">728</span><span id="line-728">            retValue = getFactory().equals( other.getFactory() ) &amp;&amp; toString().equals( o.toString() );</span>
-<span class="source-line-no">729</span><span id="line-729">        }</span>
-<span class="source-line-no">730</span><span id="line-730"></span>
-<span class="source-line-no">731</span><span id="line-731">        //---* Done *----------------------------------------------------------</span>
-<span class="source-line-no">732</span><span id="line-732">        return retValue;</span>
-<span class="source-line-no">733</span><span id="line-733">    }   //  equals()</span>
-<span class="source-line-no">734</span><span id="line-734"></span>
-<span class="source-line-no">735</span><span id="line-735">    /**</span>
-<span class="source-line-no">736</span><span id="line-736">     *  {@inheritDoc}</span>
-<span class="source-line-no">737</span><span id="line-737">     */</span>
-<span class="source-line-no">738</span><span id="line-738">    @Override</span>
-<span class="source-line-no">739</span><span id="line-739">    public final int hashCode() { return hash( getFactory(), toString() ); }</span>
-<span class="source-line-no">740</span><span id="line-740"></span>
-<span class="source-line-no">741</span><span id="line-741">    /**</span>
-<span class="source-line-no">742</span><span id="line-742">     *  {@inheritDoc}</span>
-<span class="source-line-no">743</span><span id="line-743">     */</span>
-<span class="source-line-no">744</span><span id="line-744">    @SuppressWarnings( {"CastToConcreteClass", "OptionalGetWithoutIsPresent"} )</span>
-<span class="source-line-no">745</span><span id="line-745">    @Override</span>
-<span class="source-line-no">746</span><span id="line-746">    public final TypeSpecImpl.BuilderImpl toBuilder()</span>
-<span class="source-line-no">747</span><span id="line-747">    {</span>
-<span class="source-line-no">748</span><span id="line-748">        final var retValue = new BuilderImpl( getFactory(), name().get() );</span>
-<span class="source-line-no">749</span><span id="line-749">        retValue.getJavadoc().addWithoutDebugInfo( getJavadoc() );</span>
-<span class="source-line-no">750</span><span id="line-750">        retValue.getAnnotations().addAll( getAnnotations() );</span>
-<span class="source-line-no">751</span><span id="line-751">        retValue.getModifiers().addAll( modifiers() );</span>
-<span class="source-line-no">752</span><span id="line-752">        retValue.getTypeVariables().addAll( getTypeVariables() );</span>
-<span class="source-line-no">753</span><span id="line-753">        retValue.superclass( getSuperClass() );</span>
-<span class="source-line-no">754</span><span id="line-754">        retValue.getSuperinterfaces().addAll( getSuperInterfaces() );</span>
-<span class="source-line-no">755</span><span id="line-755">        retValue.getFieldSpecs().addAll( getFieldSpecs() );</span>
-<span class="source-line-no">756</span><span id="line-756">        retValue.getMethodSpecs().addAll( getMethodSpecs() );</span>
-<span class="source-line-no">757</span><span id="line-757">        retValue.getTypeSpecs().addAll( typeSpecs() );</span>
-<span class="source-line-no">758</span><span id="line-758">        retValue.getInitializerBlock().addWithoutDebugInfo( getInitializerBlock() );</span>
-<span class="source-line-no">759</span><span id="line-759">        retValue.getStaticBlock().addWithoutDebugInfo( getStaticBlock() );</span>
-<span class="source-line-no">760</span><span id="line-760">        retValue.getStaticImports().addAll( getStaticImports() );</span>
-<span class="source-line-no">761</span><span id="line-761">        retValue.addSuppressableWarning( getSuppressableWarnings().toArray( SuppressableWarnings[]::new ) );</span>
-<span class="source-line-no">762</span><span id="line-762"></span>
-<span class="source-line-no">763</span><span id="line-763">        //---* Done *----------------------------------------------------------</span>
-<span class="source-line-no">764</span><span id="line-764">        return retValue;</span>
-<span class="source-line-no">765</span><span id="line-765">    }   //  toBuilder()</span>
-<span class="source-line-no">766</span><span id="line-766">}</span>
-<span class="source-line-no">767</span><span id="line-767">//  class RecordSpecImpl</span>
-<span class="source-line-no">768</span><span id="line-768"></span>
-<span class="source-line-no">769</span><span id="line-769">/*</span>
-<span class="source-line-no">770</span><span id="line-770"> *  End of File</span>
-<span class="source-line-no">771</span><span id="line-771"> */</span>
+<span class="source-line-no">705</span><span id="line-705">            codeWriter.unindent();</span>
+<span class="source-line-no">706</span><span id="line-706">            codeWriter.emit( "}\n" );</span>
+<span class="source-line-no">707</span><span id="line-707">            codeWriter.popType();</span>
+<span class="source-line-no">708</span><span id="line-708">        }</span>
+<span class="source-line-no">709</span><span id="line-709">    }   //  emit4JavaPoet()</span>
+<span class="source-line-no">710</span><span id="line-710"></span>
+<span class="source-line-no">711</span><span id="line-711">    /**</span>
+<span class="source-line-no">712</span><span id="line-712">     *  {@inheritDoc}</span>
+<span class="source-line-no">713</span><span id="line-713">     */</span>
+<span class="source-line-no">714</span><span id="line-714">    @Override</span>
+<span class="source-line-no">715</span><span id="line-715">    public final boolean equals( final Object o )</span>
+<span class="source-line-no">716</span><span id="line-716">    {</span>
+<span class="source-line-no">717</span><span id="line-717">        var retValue = this == o;</span>
+<span class="source-line-no">718</span><span id="line-718">        if( !retValue &amp;&amp; (o instanceof final RecordSpecImpl other) )</span>
+<span class="source-line-no">719</span><span id="line-719">        {</span>
+<span class="source-line-no">720</span><span id="line-720">            retValue = getFactory().equals( other.getFactory() ) &amp;&amp; toString().equals( o.toString() );</span>
+<span class="source-line-no">721</span><span id="line-721">        }</span>
+<span class="source-line-no">722</span><span id="line-722"></span>
+<span class="source-line-no">723</span><span id="line-723">        //---* Done *----------------------------------------------------------</span>
+<span class="source-line-no">724</span><span id="line-724">        return retValue;</span>
+<span class="source-line-no">725</span><span id="line-725">    }   //  equals()</span>
+<span class="source-line-no">726</span><span id="line-726"></span>
+<span class="source-line-no">727</span><span id="line-727">    /**</span>
+<span class="source-line-no">728</span><span id="line-728">     *  {@inheritDoc}</span>
+<span class="source-line-no">729</span><span id="line-729">     */</span>
+<span class="source-line-no">730</span><span id="line-730">    @Override</span>
+<span class="source-line-no">731</span><span id="line-731">    public final int hashCode() { return hash( getFactory(), toString() ); }</span>
+<span class="source-line-no">732</span><span id="line-732"></span>
+<span class="source-line-no">733</span><span id="line-733">    /**</span>
+<span class="source-line-no">734</span><span id="line-734">     *  {@inheritDoc}</span>
+<span class="source-line-no">735</span><span id="line-735">     */</span>
+<span class="source-line-no">736</span><span id="line-736">    @SuppressWarnings( {"OptionalGetWithoutIsPresent"} )</span>
+<span class="source-line-no">737</span><span id="line-737">    @Override</span>
+<span class="source-line-no">738</span><span id="line-738">    public final TypeSpecImpl.BuilderImpl toBuilder()</span>
+<span class="source-line-no">739</span><span id="line-739">    {</span>
+<span class="source-line-no">740</span><span id="line-740">        final var retValue = new BuilderImpl( getFactory(), name().get() );</span>
+<span class="source-line-no">741</span><span id="line-741">        retValue.getJavadoc().addWithoutDebugInfo( getJavadoc() );</span>
+<span class="source-line-no">742</span><span id="line-742">        retValue.getAnnotations().addAll( getAnnotations() );</span>
+<span class="source-line-no">743</span><span id="line-743">        retValue.getModifiers().addAll( modifiers() );</span>
+<span class="source-line-no">744</span><span id="line-744">        retValue.getTypeVariables().addAll( getTypeVariables() );</span>
+<span class="source-line-no">745</span><span id="line-745">        retValue.superclass( getSuperClass() );</span>
+<span class="source-line-no">746</span><span id="line-746">        retValue.getSuperinterfaces().addAll( getSuperInterfaces() );</span>
+<span class="source-line-no">747</span><span id="line-747">        retValue.getFieldSpecs().addAll( getFieldSpecs() );</span>
+<span class="source-line-no">748</span><span id="line-748">        retValue.getMethodSpecs().addAll( getMethodSpecs() );</span>
+<span class="source-line-no">749</span><span id="line-749">        retValue.getTypeSpecs().addAll( typeSpecs() );</span>
+<span class="source-line-no">750</span><span id="line-750">        retValue.getInitializerBlock().addWithoutDebugInfo( getInitializerBlock() );</span>
+<span class="source-line-no">751</span><span id="line-751">        retValue.getStaticBlock().addWithoutDebugInfo( getStaticBlock() );</span>
+<span class="source-line-no">752</span><span id="line-752">        retValue.getStaticImports().addAll( getStaticImports() );</span>
+<span class="source-line-no">753</span><span id="line-753">        retValue.addSuppressableWarning( getSuppressableWarnings().toArray( SuppressableWarnings[]::new ) );</span>
+<span class="source-line-no">754</span><span id="line-754"></span>
+<span class="source-line-no">755</span><span id="line-755">        //---* Done *----------------------------------------------------------</span>
+<span class="source-line-no">756</span><span id="line-756">        return retValue;</span>
+<span class="source-line-no">757</span><span id="line-757">    }   //  toBuilder()</span>
+<span class="source-line-no">758</span><span id="line-758">}</span>
+<span class="source-line-no">759</span><span id="line-759">//  class RecordSpecImpl</span>
+<span class="source-line-no">760</span><span id="line-760"></span>
+<span class="source-line-no">761</span><span id="line-761">/*</span>
+<span class="source-line-no">762</span><span id="line-762"> *  End of File</span>
+<span class="source-line-no">763</span><span id="line-763"> */</span>
 
 
 

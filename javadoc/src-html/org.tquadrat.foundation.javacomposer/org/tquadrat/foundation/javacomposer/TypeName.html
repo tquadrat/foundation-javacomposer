@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2ß21 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2023 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -98,12 +98,12 @@
 <span class="source-line-no">085</span><span id="line-85"> *</span>
 <span class="source-line-no">086</span><span id="line-86"> *  @author Square,Inc.</span>
 <span class="source-line-no">087</span><span id="line-87"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">088</span><span id="line-88"> *  @version $Id: TypeName.java 997 2022-01-26 14:55:05Z tquadrat $</span>
+<span class="source-line-no">088</span><span id="line-88"> *  @version $Id: TypeName.java 1068 2023-09-28 21:42:28Z tquadrat $</span>
 <span class="source-line-no">089</span><span id="line-89"> *  @since 0.0.5</span>
 <span class="source-line-no">090</span><span id="line-90"> *</span>
 <span class="source-line-no">091</span><span id="line-91"> *  @UMLGraph.link</span>
 <span class="source-line-no">092</span><span id="line-92"> */</span>
-<span class="source-line-no">093</span><span id="line-93">@ClassVersion( sourceVersion = "$Id: TypeName.java 997 2022-01-26 14:55:05Z tquadrat $" )</span>
+<span class="source-line-no">093</span><span id="line-93">@ClassVersion( sourceVersion = "$Id: TypeName.java 1068 2023-09-28 21:42:28Z tquadrat $" )</span>
 <span class="source-line-no">094</span><span id="line-94">@API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">095</span><span id="line-95">public sealed interface TypeName</span>
 <span class="source-line-no">096</span><span id="line-96">    permits ArrayTypeName, ClassName, ParameterizedTypeName, TypeVariableName, WildcardTypeName, TypeNameImpl</span>
@@ -145,7 +145,7 @@
 <span class="source-line-no">132</span><span id="line-132">    @API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">133</span><span id="line-133">    public static Optional&lt;TypeName&gt; arrayComponent( final TypeName type )</span>
 <span class="source-line-no">134</span><span id="line-134">    {</span>
-<span class="source-line-no">135</span><span id="line-135">        return type instanceof ArrayTypeName arrayType ? Optional.of( arrayType.componentType() ) : Optional.empty();</span>
+<span class="source-line-no">135</span><span id="line-135">        return type instanceof final ArrayTypeName arrayType ? Optional.of( arrayType.componentType() ) : Optional.empty();</span>
 <span class="source-line-no">136</span><span id="line-136">    }   //  arrayComponent()</span>
 <span class="source-line-no">137</span><span id="line-137"></span>
 <span class="source-line-no">138</span><span id="line-138">    /**</span>

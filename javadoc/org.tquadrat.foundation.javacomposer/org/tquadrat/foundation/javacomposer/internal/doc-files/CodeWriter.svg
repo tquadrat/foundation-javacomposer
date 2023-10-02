@@ -184,13 +184,13 @@
                     <text x='5.000'
                           y='267.000'>+ CodeWriter(composer:org.tquadrat.foundation.javacomposer.JavaComposer,out:java.lang.Appendable,importedTypes:java.util.Map&lt;java.lang.String,org.tquadrat.foundation.javacomposer.internal.ClassNameImpl&gt;,staticImports:java.util.Set&lt;java.lang.String&gt;)</text>
                     <text x='5.000'
-                          y='278.000'>+ emit(s:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                          y='278.000'>+ emit(input:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
                     <text x='5.000'
                           y='289.000'>+ emit(format:java.lang.String,args:java.lang.Object&#x2026;):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
                     <text x='5.000'
                           y='300.000'>+ emit(codeBlock:org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
                     <text x='5.000'
-                          y='311.000'>+ emitAndIndent(s:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
+                          y='311.000'>+ emitAndIndent(input:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.CodeWriter</text>
                     <text x='5.000'
                           y='322.000'>+ emitAnnotations(annotations:java.lang.Iterable&lt;org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl&gt;,inline:boolean):void</text>
                     <text x='5.000'

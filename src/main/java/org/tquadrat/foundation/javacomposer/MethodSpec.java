@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,12 +41,12 @@ import org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: MethodSpec.java 938 2021-12-15 14:42:53Z tquadrat $
+ *  @version $Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: MethodSpec.java 938 2021-12-15 14:42:53Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface MethodSpec
     permits MethodSpecImpl
@@ -60,13 +60,13 @@ public sealed interface MethodSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: MethodSpec.java 938 2021-12-15 14:42:53Z tquadrat $
+     *  @version $Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( {"ClassWithTooManyMethods", "InnerClassOfInterface"} )
-    @ClassVersion( sourceVersion = "$Id: MethodSpec.java 938 2021-12-15 14:42:53Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits MethodSpecImpl.BuilderImpl
@@ -421,7 +421,7 @@ public sealed interface MethodSpec
         public Builder addTypeVariables( final Iterable<TypeVariableName> typeVariables );
 
         /**
-         *  Adds the begin of a control flow for the method.
+         *  Adds the beginning of a control flow for the method.
          *
          *  @param  controlFlow The control flow construct and its code, such
          *      as &quot;{@code if (foo == 5)}&quot;; it should not contain
@@ -436,7 +436,7 @@ public sealed interface MethodSpec
         public Builder beginControlFlow( final String controlFlow, final Object... args );
 
         /**
-         *  Adds the begin of a control flow for the method.
+         *  Adds the beginning of a control flow for the method.
          *
          *  @param  addDebugOutput  {@code true} if debug output should be
          *      added to the generated code, {@code false} if not.
@@ -454,7 +454,7 @@ public sealed interface MethodSpec
          *
          *  @since 0.0.6
          *
-         *  @deprecated Got obsolete with the the introduction of
+         *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
         @Deprecated( since = "0.2.0", forRemoval = true )
@@ -531,7 +531,7 @@ public sealed interface MethodSpec
          *
          *  @since 0.0.6
          *
-         *  @deprecated Got obsolete with the the introduction of
+         *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
         @Deprecated( since = "0.2.0", forRemoval = true )
@@ -569,7 +569,7 @@ public sealed interface MethodSpec
          *
          *  @since 0.0.6
          *
-         *  @deprecated Got obsolete with the the introduction of
+         *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
         @Deprecated( since = "0.2.0", forRemoval = true )
@@ -813,7 +813,7 @@ public sealed interface MethodSpec
     }   //  overriding()
 
     /**
-     *  Returns the parameters for the this method.
+     *  Returns the parameters for this method.
      *
      *  @return The parameters.
      */

@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,12 +37,12 @@ import org.tquadrat.foundation.javacomposer.internal.ClassNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ClassName.java 997 2022-01-26 14:55:05Z tquadrat $
+ *  @version $Id: ClassName.java 1067 2023-09-28 21:09:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ClassName.java 997 2022-01-26 14:55:05Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ClassName.java 1067 2023-09-28 21:09:15Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface ClassName extends TypeName, Comparable<ClassName>
     permits ClassNameImpl
@@ -96,7 +96,6 @@ public sealed interface ClassName extends TypeName, Comparable<ClassName>
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "AbstractMethodOverridesAbstractMethod" )
     @Override
     public int compareTo( final ClassName o );
 
@@ -233,7 +232,6 @@ public sealed interface ClassName extends TypeName, Comparable<ClassName>
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "AbstractMethodOverridesAbstractMethod" )
     @Override
     public boolean isAnnotated();
 

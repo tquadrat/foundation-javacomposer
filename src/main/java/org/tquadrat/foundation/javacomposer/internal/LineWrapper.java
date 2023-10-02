@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,6 @@ import static org.apiguardian.api.API.Status.INTERNAL;
 import static org.tquadrat.foundation.lang.Objects.nonNull;
 import static org.tquadrat.foundation.lang.Objects.require;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 import static org.tquadrat.foundation.util.StringUtils.isNotEmpty;
 
 import java.io.Closeable;
@@ -43,12 +42,12 @@ import org.tquadrat.foundation.exception.UnsupportedEnumError;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: LineWrapper.java 934 2021-12-06 15:19:40Z tquadrat $
+ *  @version $Id: LineWrapper.java 1065 2023-09-28 06:16:50Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: LineWrapper.java 934 2021-12-06 15:19:40Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: LineWrapper.java 1065 2023-09-28 06:16:50Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class LineWrapper implements Closeable
 {
@@ -62,7 +61,7 @@ public final class LineWrapper implements Closeable
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: LineWrapper.java 934 2021-12-06 15:19:40Z tquadrat $
+     *  @version $Id: LineWrapper.java 1065 2023-09-28 06:16:50Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
@@ -96,6 +95,7 @@ public final class LineWrapper implements Closeable
      *  Characters written since the last wrapping space that haven't yet been
      *  flushed.
      */
+    @SuppressWarnings( "StringBufferField" )
     private final StringBuilder m_Buffer = new StringBuilder();
 
     /**
@@ -154,7 +154,7 @@ public final class LineWrapper implements Closeable
     {
         m_Out = requireNonNullArgument( out, "out" );
         m_Indent = requireNonNullArgument( indent, "indent" );
-        m_ColumnLimit = require( columnLimit, v -> format( "columnLimit is 0 or negative: %d", columnLimit ), v -> v > 0 );
+        m_ColumnLimit = require( columnLimit, v -> "columnLimit is 0 or negative: %d".formatted( columnLimit ), v -> v > 0 );
     }   //  LineWrapper()
 
         /*---------*\
@@ -164,17 +164,17 @@ public final class LineWrapper implements Closeable
      *  Emits the given String. This may be buffered to permit line wraps to be
      *  inserted.
      *
-     *  @param  s The string to emit.
+     *  @param  input The string to emit.
      *  @throws IOException A problem occurred when writing to the
      *      output target.
      */
-    public final void append( final CharSequence s ) throws IOException
+    public final void append( final CharSequence input ) throws IOException
     {
         if( m_Closed ) throw new IllegalStateException( "closed" );
 
-        if( isNotEmpty( s ) )
+        if( isNotEmpty( input ) )
         {
-            final var data = s.toString();
+            final var data = input.toString();
             final var len = data.length();
             var buffered = false;
             if( nonNull( m_NextFlush ) )
@@ -183,8 +183,8 @@ public final class LineWrapper implements Closeable
 
                 /*
                  * If data doesn't cause the current line to cross the limit,
-                 * buffer it and return. We'll decide whether or not we have to
-                 * wrap it later.
+                 * buffer it and return. We'll decide later whether we have to
+                 * wrap it or not.
                  */
                 if( (nextNewline == -1) && (m_Column + len <= m_ColumnLimit) )
                 {
@@ -303,7 +303,7 @@ public final class LineWrapper implements Closeable
     }   //  wrappingSpace()
 
     /**
-     *  Emits a newline character if the line will exceed it's limit, otherwise
+     *  Emits a newline character if the line will exceed its limit, otherwise
      *  do nothing.
      *
      *  @param  indentLevel The indentation level.

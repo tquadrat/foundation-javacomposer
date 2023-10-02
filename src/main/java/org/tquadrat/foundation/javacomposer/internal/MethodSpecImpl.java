@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +19,7 @@
 
 package org.tquadrat.foundation.javacomposer.internal;
 
+import static java.lang.String.format;
 import static java.util.Collections.addAll;
 import static javax.lang.model.element.Modifier.ABSTRACT;
 import static javax.lang.model.element.Modifier.NATIVE;
@@ -36,7 +37,6 @@ import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;
 import static org.tquadrat.foundation.util.JavaUtils.isValidName;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
@@ -80,13 +80,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: MethodSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: MethodSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@SuppressWarnings( {"ClassWithTooManyFields", "ClassWithTooManyMethods"} )
-@ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@SuppressWarnings( {"ClassWithTooManyFields"} )
+@ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class MethodSpecImpl implements MethodSpec
 {
@@ -99,12 +99,12 @@ public final class MethodSpecImpl implements MethodSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: MethodSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @version $Id: MethodSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements MethodSpec.Builder
     {
@@ -119,19 +119,19 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  The code for the method.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final CodeBlockImpl.BuilderImpl m_Code;
 
         /**
          *  The reference to the factory.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final JavaComposer m_Composer;
 
         /**
          *  The default value for the method; this is for annotations only.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private CodeBlockImpl m_DefaultValue;
 
         /**
@@ -142,7 +142,7 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  The Javadoc comment for the method.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final CodeBlockImpl.BuilderImpl m_Javadoc;
 
         /**
@@ -163,13 +163,13 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  The comment for the return value for the method.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final CodeBlockImpl.BuilderImpl m_ReturnComment;
 
         /**
          *  The return type for the method.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private TypeNameImpl m_ReturnType;
 
         /**
@@ -198,11 +198,10 @@ public final class MethodSpecImpl implements MethodSpec
          *      builder instance.
          *  @param  name    The name for the method.
          */
-        @SuppressWarnings( "CastToConcreteClass" )
-        public BuilderImpl( final JavaComposer composer, final CharSequence name )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final CharSequence name )
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
-            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -> v.equals( CONSTRUCTOR ) || isValidName( v ), $ -> format( "not a valid name: %s", name ) ).toString().intern();
+            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -> v.equals( CONSTRUCTOR ) || isValidName( v ), $ -> "not a valid name: %s".formatted( name ) ).toString().intern();
             m_ReturnType = name.equals( CONSTRUCTOR ) ? null : VOID_PRIMITIVE;
 
             m_Code = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
@@ -216,7 +215,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addAnnotation( final AnnotationSpec annotationSpec )
         {
@@ -229,7 +227,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addAnnotation( final Class<?> annotation )
         {
@@ -239,7 +236,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addAnnotation( final ClassName annotationClass )
         {
@@ -254,7 +250,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addAnnotations( final Iterable<? extends AnnotationSpec> annotationSpecs )
         {
@@ -270,7 +265,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addCode( final CodeBlock codeBlock )
         {
@@ -283,7 +277,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addCode( final String format, final Object... args )
         {
@@ -296,7 +289,7 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         @Override
         @API( status = DEPRECATED, since = "0.0.6" )
@@ -311,7 +304,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addComment( final String format, final Object... args )
         {
@@ -324,7 +316,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addException( final Type exception )
         {
@@ -334,7 +325,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addException( final TypeName exception )
         {
@@ -347,7 +337,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addExceptions( final Iterable<? extends TypeName> exceptions )
         {
@@ -363,7 +352,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addJavadoc( final CodeBlock block )
         {
@@ -376,7 +364,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addJavadoc( final String format, final Object... args )
         {
@@ -389,7 +376,7 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( {"BoundedWildcard", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"BoundedWildcard"} )
         @Override
         public final BuilderImpl addModifiers( final Iterable<Modifier> modifiers )
         {
@@ -405,7 +392,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addModifiers( final Modifier... modifiers )
         {
@@ -418,7 +404,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addNamedCode( final String format, final Map<String,?> args )
         {
@@ -434,7 +419,7 @@ public final class MethodSpecImpl implements MethodSpec
          *  @deprecated  Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Override
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
@@ -449,7 +434,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addParameter( final ParameterSpec parameterSpec )
         {
@@ -462,7 +446,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addParameter( final Type type, final String name, final Modifier... modifiers )
         {
@@ -472,7 +455,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addParameter( final TypeName type, final String name, final Modifier... modifiers )
         {
@@ -487,7 +469,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addParameters( final Iterable<? extends ParameterSpec> parameterSpecs )
         {
@@ -503,7 +484,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addStatement( final CodeBlock statement )
         {
@@ -516,7 +496,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addStatement( final String format, final Object... args )
         {
@@ -532,7 +511,7 @@ public final class MethodSpecImpl implements MethodSpec
          *  @deprecated  Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Override
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
@@ -547,7 +526,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final MethodSpecImpl.BuilderImpl addStaticImport( final Class<?> clazz, final String... names )
@@ -558,13 +536,12 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final MethodSpecImpl.BuilderImpl addStaticImport( final ClassName className, final String... names )
         {
             final var canonicalName = requireNonNullArgument( className, "className" ).canonicalName();
-            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, n -> format( "%s array is empty", n ) ) )
+            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, "%s array is empty"::formatted ) )
             {
                 m_StaticImports.add(
                     format(
@@ -574,7 +551,7 @@ public final class MethodSpecImpl implements MethodSpec
                             name,
                             "name",
                             Objects::nonNull,
-                            $ -> format( "null entry in names array: %s", Arrays.toString( names ) )
+                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -587,7 +564,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final MethodSpecImpl.BuilderImpl addStaticImport( final Enum<?> constant )
@@ -598,7 +574,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addTypeVariable( final TypeVariableName typeVariable )
         {
@@ -611,7 +586,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addTypeVariables( final Iterable<TypeVariableName> typeVariables )
         {
@@ -627,7 +601,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl beginControlFlow( final String controlFlow, final Object... args )
         {
@@ -643,13 +616,13 @@ public final class MethodSpecImpl implements MethodSpec
          *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
         @Override
-        public final BuilderImpl beginControlFlow( final boolean addDebugOutput, final String format, final Object... args )
+        public final BuilderImpl beginControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args )
         {
-            m_Code.beginControlFlow( createDebugOutput( addDebugOutput, true ), format, args );
+            m_Code.beginControlFlow( createDebugOutput( addDebugOutput, true ), controlFlow, args );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -658,7 +631,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final MethodSpecImpl build()
         {
@@ -680,7 +652,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl defaultValue( final CodeBlock defaultValue )
         {
@@ -703,7 +674,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl defaultValue( final String format, final Object... args )
         {
@@ -713,7 +683,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl endControlFlow()
         {
@@ -726,7 +695,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl endControlFlow( final String controlFlow, final Object... args )
         {
@@ -742,13 +710,13 @@ public final class MethodSpecImpl implements MethodSpec
          *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
         @Override
-        public final BuilderImpl endControlFlow( final boolean addDebugOutput, final String format, final Object... args )
+        public final BuilderImpl endControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args )
         {
-            m_Code.endControlFlow( createDebugOutput( addDebugOutput, true ), format, args );
+            m_Code.endControlFlow( createDebugOutput( addDebugOutput, true ), controlFlow, args );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -768,7 +736,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl nextControlFlow( final String controlFlow, final Object... args )
         {
@@ -784,13 +751,13 @@ public final class MethodSpecImpl implements MethodSpec
          *  @deprecated Got obsolete with the introduction of
          *      {@link JavaComposer}.
          */
-        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         @API( status = DEPRECATED, since = "0.0.6" )
         @Override
-        public final BuilderImpl nextControlFlow( final boolean addDebugOutput, final String format, final Object... args )
+        public final BuilderImpl nextControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args )
         {
-            m_Code.nextControlFlow( createDebugOutput( addDebugOutput, true ), format, args );
+            m_Code.nextControlFlow( createDebugOutput( addDebugOutput, true ), controlFlow, args );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -809,7 +776,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl returns( final Type returnType )
         {
@@ -819,7 +785,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl returns( final Type returnType, final String format, final Object... args )
         {
@@ -829,7 +794,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl returns( final TypeName returnType )
         {
@@ -845,7 +809,6 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl returns( final TypeName returnType, final String format, final Object... args )
         {
@@ -859,14 +822,12 @@ public final class MethodSpecImpl implements MethodSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl varargs() { return varargs( true ); }
 
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl varargs( final boolean varargs )
         {
@@ -896,13 +857,13 @@ public final class MethodSpecImpl implements MethodSpec
     /**
      *  The code of this method.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_Code;
 
     /**
      *  The reference to the factory.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final JavaComposer m_Composer;
 
     /**
@@ -919,7 +880,7 @@ public final class MethodSpecImpl implements MethodSpec
     /**
      *  The Javadoc comment of this method.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_Javadoc;
 
     /**
@@ -940,13 +901,13 @@ public final class MethodSpecImpl implements MethodSpec
     /**
      *  The comment for the return value of the method.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_ReturnComment;
 
     /**
      *  The return type of the method.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final TypeNameImpl m_ReturnType;
 
     /**
@@ -973,13 +934,13 @@ public final class MethodSpecImpl implements MethodSpec
      *
      *  @param  builder The builder.
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "CastToConcreteClass"} )
-    public MethodSpecImpl( final BuilderImpl builder )
+    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject"} )
+    public MethodSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )
     {
-        checkState( !builder.m_Varargs || lastParameterIsArray( builder.m_Parameters ), () -> new ValidationException( format( "last parameter of varargs method %s must be an array", builder.m_Name ) ) );
+        checkState( !builder.m_Varargs || lastParameterIsArray( builder.m_Parameters ), () -> new ValidationException( "last parameter of varargs method %s must be an array".formatted( builder.m_Name ) ) );
 
         final var code = builder.m_Code.build();
-        checkState( code.isEmpty() || !builder.m_Modifiers.contains( ABSTRACT ), () -> new ValidationException( format( "abstract method %s cannot have code", builder.m_Name ) ) );
+        checkState( code.isEmpty() || !builder.m_Modifiers.contains( ABSTRACT ), () -> new ValidationException( "abstract method %s cannot have code".formatted( builder.m_Name ) ) );
 
         m_Composer = builder.m_Composer;
         m_Name = builder.m_Name;
@@ -1001,9 +962,9 @@ public final class MethodSpecImpl implements MethodSpec
         m_Parameters.stream()
             .map( ParameterSpecImpl::javadoc )
             .filter( Optional::isPresent )
-            .map( j -> j.map( c -> (CodeBlockImpl) c ).get().getStaticImports() )
+            .map( codeBlock -> codeBlock.map( block -> (CodeBlockImpl) block ).get().getStaticImports() )
             .forEach( staticImports::addAll );
-        m_DefaultValue.ifPresent( c -> staticImports.addAll( c.getStaticImports() ) );
+        m_DefaultValue.ifPresent( codeBlock -> staticImports.addAll( codeBlock.getStaticImports() ) );
         staticImports.addAll( m_Code.getStaticImports() );
         m_StaticImports = Set.copyOf( staticImports );
 
@@ -1022,7 +983,6 @@ public final class MethodSpecImpl implements MethodSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final BuilderImpl constructorBuilder()
@@ -1050,12 +1010,11 @@ public final class MethodSpecImpl implements MethodSpec
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
-    private final void emitJavadoc( final CodeWriter codeWriter ) throws UncheckedIOException
+    private final void emitJavadoc( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter ) throws UncheckedIOException
     {
         final var javaDocBuilder = m_Javadoc.toBuilder();
         var addNewLine = false;
-        @SuppressWarnings( {"OptionalGetWithoutIsPresent", "CastToConcreteClass"} )
+        @SuppressWarnings( {"OptionalGetWithoutIsPresent"} )
         final var paramComments = m_Parameters.stream()
             .filter( p -> p.javadoc().isPresent() )
             .map( p -> (CodeBlockImpl) p.javadoc().get() )
@@ -1083,8 +1042,8 @@ public final class MethodSpecImpl implements MethodSpec
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
-    public final void emit( final CodeWriter codeWriter, final Optional<String> enclosingName, final Collection<Modifier> implicitModifiers ) throws UncheckedIOException
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType"} )
+    public final void emit( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final Optional<String> enclosingName, final Collection<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         switch( codeWriter.layout() )
         {
@@ -1104,8 +1063,8 @@ public final class MethodSpecImpl implements MethodSpec
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
-    private final void emit4Foundation( final CodeWriter codeWriter, final Optional<String> enclosingName, final Collection<Modifier> implicitModifiers ) throws UncheckedIOException
+    @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType", "OverlyComplexMethod"} )
+    private final void emit4Foundation( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final Optional<String> enclosingName, final Collection<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         emitJavadoc( codeWriter );
         codeWriter.emitAnnotations( m_Annotations, false );
@@ -1135,12 +1094,11 @@ public final class MethodSpecImpl implements MethodSpec
         {
             codeWriter.emit( "( " );
             var firstParameter = true;
-            //noinspection ForLoopWithMissingComponent
-            for( final var i = m_Parameters.iterator(); i.hasNext(); )
+            for( final var iterator = m_Parameters.iterator(); iterator.hasNext(); )
             {
-                final var parameter = i.next();
+                final var parameter = iterator.next();
                 if( !firstParameter ) codeWriter.emit( "," ).emitWrappingSpace();
-                parameter.emit( codeWriter, !i.hasNext() && m_Varargs );
+                parameter.emit( codeWriter, !iterator.hasNext() && m_Varargs );
                 firstParameter = false;
             }
             codeWriter.emit( " )" );
@@ -1211,8 +1169,8 @@ public final class MethodSpecImpl implements MethodSpec
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType", "UseOfConcreteClass"} )
-    private final void emit4JavaPoet( final CodeWriter codeWriter, final Optional<String> enclosingName, final Collection<Modifier> implicitModifiers ) throws UncheckedIOException
+    @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType", "OverlyComplexMethod"} )
+    private final void emit4JavaPoet( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final Optional<String> enclosingName, final Collection<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         emitJavadoc( codeWriter );
         codeWriter.emitAnnotations( m_Annotations, false );
@@ -1239,12 +1197,11 @@ public final class MethodSpecImpl implements MethodSpec
         }
 
         var firstParameter = true;
-        //noinspection ForLoopWithMissingComponent
-        for( final var i = m_Parameters.iterator(); i.hasNext(); )
+        for( final var iterator = m_Parameters.iterator(); iterator.hasNext(); )
         {
-            final var parameter = i.next();
+            final var parameter = iterator.next();
             if( !firstParameter ) codeWriter.emit( "," ).emitWrappingSpace();
-            parameter.emit( codeWriter, !i.hasNext() && m_Varargs );
+            parameter.emit( codeWriter, !iterator.hasNext() && m_Varargs );
             firstParameter = false;
         }
 
@@ -1297,7 +1254,7 @@ public final class MethodSpecImpl implements MethodSpec
     public final boolean equals( final Object o )
     {
         var retValue = this == o;
-        if( !retValue && (o instanceof MethodSpecImpl other) )
+        if( !retValue && (o instanceof final MethodSpecImpl other) )
         {
             retValue = m_Composer.equals( other.m_Composer ) && toString().equals( o.toString() );
         }
@@ -1321,7 +1278,7 @@ public final class MethodSpecImpl implements MethodSpec
      *
      *  @return The reference to the factory.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final JavaComposer getFactory() { return m_Composer; }
 
     /**
@@ -1383,6 +1340,7 @@ public final class MethodSpecImpl implements MethodSpec
      *  @return {@code true} if the last entry of the given parameter list is
      *      an array type, {@code false} if not.
      */
+    @SuppressWarnings( "BooleanMethodNameMustStartWithQuestion" )
     private static final boolean lastParameterIsArray( final List<ParameterSpecImpl> parameters )
     {
         final var retValue = !parameters.isEmpty() && TypeName.asArray( (parameters.get( parameters.size() - 1 ).type() ) ).isPresent();
@@ -1400,7 +1358,6 @@ public final class MethodSpecImpl implements MethodSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final BuilderImpl methodBuilder( final CharSequence name )
@@ -1442,7 +1399,6 @@ public final class MethodSpecImpl implements MethodSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final BuilderImpl overriding( final ExecutableElement method )
@@ -1480,7 +1436,6 @@ public final class MethodSpecImpl implements MethodSpec
      *      {@link JavaComposer}.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "CastToConcreteClass"} )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final BuilderImpl overriding( final ExecutableElement method, final DeclaredType enclosing, final Types types )
     {
@@ -1509,7 +1464,6 @@ public final class MethodSpecImpl implements MethodSpec
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "CastToConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.8" )
     public static final BuilderImpl overriding( final Method method )
@@ -1559,7 +1513,7 @@ public final class MethodSpecImpl implements MethodSpec
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject"} )
     @Override
     public final BuilderImpl toBuilder( final boolean omitCode )
     {

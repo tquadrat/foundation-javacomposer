@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,12 +36,12 @@ import org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderI
  *  Annotation value visitor adding members to the given builder instance.
  *
  *  @author Square, Inc.
- *  @version $Id: AnnotationValueVisitor.java 920 2021-05-23 14:27:24Z tquadrat $
+ *  @version $Id: AnnotationValueVisitor.java 1062 2023-09-25 23:11:41Z tquadrat $
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
  *  @UMLGraph.link
  *  @since 0.0.5
  */
-@ClassVersion( sourceVersion = "$Id: AnnotationValueVisitor.java 920 2021-05-23 14:27:24Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: AnnotationValueVisitor.java 1062 2023-09-25 23:11:41Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public class AnnotationValueVisitor extends SimpleAnnotationValueVisitor14<BuilderImpl, String>
 {
@@ -51,7 +51,7 @@ public class AnnotationValueVisitor extends SimpleAnnotationValueVisitor14<Build
     /**
      * The builder.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final BuilderImpl m_Builder;
 
         /*--------------*\
@@ -62,7 +62,7 @@ public class AnnotationValueVisitor extends SimpleAnnotationValueVisitor14<Build
      *
      * @param builder The builder that takes the new members.
      */
-    public AnnotationValueVisitor( final BuilderImpl builder )
+    public AnnotationValueVisitor( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )
     {
         super( builder );
         m_Builder = builder;

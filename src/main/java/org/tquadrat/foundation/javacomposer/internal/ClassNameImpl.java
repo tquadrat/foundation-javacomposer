@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,12 +31,11 @@ import static org.tquadrat.foundation.lang.Objects.nonNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.SimpleElementVisitor9;
+import javax.lang.model.util.SimpleElementVisitor14;
 import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,13 +54,13 @@ import org.tquadrat.foundation.javacomposer.ClassName;
  *  for a fully-qualified class name for top-level and member classes.
  *
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ClassNameImpl.java 997 2022-01-26 14:55:05Z tquadrat $
+ *  @version $Id: ClassNameImpl.java 1062 2023-09-25 23:11:41Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "ComparableImplementedButEqualsNotOverridden"} )
-@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 997 2022-01-26 14:55:05Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 1062 2023-09-25 23:11:41Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ClassNameImpl extends TypeNameImpl implements ClassName
 {
@@ -229,7 +228,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final ClassNameImpl annotated( final List<AnnotationSpec> annotations )
     {
@@ -259,7 +257,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      */
     @Deprecated( since = "0.1.0" )
     @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( "UseOfConcreteClass" )
     public static final ClassNameImpl bestGuess( final CharSequence className )
     {
         final var classNameString = requireNotEmptyArgument( className, "className" ).toString().intern();
@@ -267,19 +264,19 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
          * Add the package name, like "java.util.concurrent", or "" for no
          * package.
          */
-        var p = 0;
-        while( p < classNameString.length() && Character.isLowerCase( classNameString.codePointAt( p ) ) )
+        var pos = 0;
+        while( pos < classNameString.length() && Character.isLowerCase( classNameString.codePointAt( pos ) ) )
         {
-            p = classNameString.indexOf( '.', p ) + 1;
-            checkState( p != 0, () -> new ValidationException( format( "couldn't make a guess for %s", classNameString ) ) );
+            pos = classNameString.indexOf( '.', pos ) + 1;
+            checkState( pos != 0, () -> new ValidationException( "couldn't make a guess for %s".formatted( classNameString ) ) );
         }
-        final var packageName = p == 0 ? EMPTY_STRING : classNameString.substring( 0, p - 1 );
+        final var packageName = pos == 0 ? EMPTY_STRING : classNameString.substring( 0, pos - 1 );
 
         //---* Add class names like "Map" and "Entry" *------------------------
         ClassNameImpl retValue = null;
-        for( final var simpleName : classNameString.substring( p ).split( "\\.", -1 ) )
+        for( final var simpleName : classNameString.substring( pos ).split( "\\.", -1 ) )
         {
-            checkState( !simpleName.isEmpty() && Character.isUpperCase( simpleName.codePointAt( 0 ) ), () -> new ValidationException( format( "couldn't make a guess for %s", classNameString ) ) );
+            checkState( !simpleName.isEmpty() && Character.isUpperCase( simpleName.codePointAt( 0 ) ), () -> new ValidationException(  "couldn't make a guess for %s".formatted( classNameString ) ) );
             retValue = new ClassNameImpl( packageName, retValue, simpleName );
         }
 
@@ -370,9 +367,9 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
     private final List<ClassNameImpl> enclosingClasses()
     {
         final List<ClassNameImpl> retValue = new ArrayList<>();
-        for( var c = this; nonNull( c ); c = c.m_EnclosingClassName.orElse( null ) )
+        for( var currentClass = this; nonNull( currentClass ); currentClass = currentClass.m_EnclosingClassName.orElse( null ) )
         {
-            retValue.add( c );
+            retValue.add( currentClass );
         }
         reverse( retValue );
 
@@ -400,39 +397,38 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *  @param  sourceClass The instance of {@code java.lang.Class}.
      *  @return The respective instance of {@code ClassName}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final ClassNameImpl from( final Class<?> sourceClass )
     {
-        var c = requireNonNullArgument( sourceClass, "sourceClass" );
-        requireValidArgument( c, "sourceClass", v -> !v.isPrimitive(), $ -> "primitive types cannot be represented as a ClassName" );
-        requireValidArgument( c, "sourceClass", v -> !void.class.equals( v ), $ -> "'void' type cannot be represented as a ClassName" );
-        requireValidArgument( c, "sourceClass", v -> !v.isArray(), $ -> "array types cannot be represented as a ClassName" );
+        var validatedClass = requireNonNullArgument( sourceClass, "sourceClass" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !v.isPrimitive(), $ -> "primitive types cannot be represented as a ClassName" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !void.class.equals( v ), $ -> "'void' type cannot be represented as a ClassName" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !v.isArray(), $ -> "array types cannot be represented as a ClassName" );
 
         final ClassNameImpl retValue;
         var anonymousSuffix = EMPTY_STRING;
-        while( c.isAnonymousClass() )
+        while( validatedClass.isAnonymousClass() )
         {
-            final var lastDollar = c.getName().lastIndexOf( '$' );
+            final var lastDollar = validatedClass.getName().lastIndexOf( '$' );
             //noinspection CallToStringConcatCanBeReplacedByOperator
-            anonymousSuffix = c.getName().substring( lastDollar ).concat( anonymousSuffix );
-            c = c.getEnclosingClass();
+            anonymousSuffix = validatedClass.getName().substring( lastDollar ).concat( anonymousSuffix );
+            validatedClass = validatedClass.getEnclosingClass();
         }
-        final var name = c.getSimpleName() + anonymousSuffix;
+        final var name = validatedClass.getSimpleName() + anonymousSuffix;
 
-        if( isNull( c.getEnclosingClass() ) )
+        if( isNull( validatedClass.getEnclosingClass() ) )
         {
             /*
              * Avoid unreliable Class.getPackage():
              * https://github.com/square/javapoet/issues/295
              */
-            final var lastDot = c.getName().lastIndexOf( '.' );
-            final var packageName = (lastDot < 0) ? null : c.getName().substring( 0, lastDot );
+            final var lastDot = validatedClass.getName().lastIndexOf( '.' );
+            final var packageName = (lastDot < 0) ? null : validatedClass.getName().substring( 0, lastDot );
             retValue = new ClassNameImpl( packageName, Optional.empty(), name );
         }
         else
         {
-            retValue = get( c.getEnclosingClass() ).nestedClass( name );
+            retValue = get( validatedClass.getEnclosingClass() ).nestedClass( name );
         }
 
         // ---* Done *----------------------------------------------------------
@@ -447,13 +443,14 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *  @param  element The type element instance.
      *  @return The new class name instance.
      */
-    @SuppressWarnings( {"AnonymousInnerClassWithTooManyMethods", "OverlyComplexAnonymousInnerClass", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"AnonymousInnerClassWithTooManyMethods", "OverlyComplexAnonymousInnerClass"} )
     @API( status = STABLE, since = "0.2.0" )
     public static final ClassNameImpl from( final TypeElement element )
     {
         final var simpleName = requireNonNullArgument( element, "element" ).getSimpleName().toString();
 
-        final var retValue = element.getEnclosingElement().accept( new SimpleElementVisitor9<ClassNameImpl,Void>()
+        @SuppressWarnings( "AnonymousInnerClass" )
+        final var retValue = element.getEnclosingElement().accept( new SimpleElementVisitor14<ClassNameImpl,Void>()
         {
             /**
              *  {@inheritDoc}
@@ -508,7 +505,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *      inner.
      *  @return The new {@code ClassName} instance.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @API( status = STABLE, since = "0.2.0" )
     public static final ClassNameImpl from( final CharSequence packageName, final CharSequence simpleName, final CharSequence... simpleNames )
     {
@@ -533,7 +529,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *      {@link #from(Class)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final ClassNameImpl get( final Class<?> sourceClass ) { return from( sourceClass ); }
@@ -550,7 +545,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *      {@link #from(TypeElement)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final ClassNameImpl get( final TypeElement element ) { return from( element ); }
@@ -571,7 +565,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *      {@link #from(CharSequence, CharSequence, CharSequence...)}
      *      instead.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static final ClassNameImpl get( final CharSequence packageName, final CharSequence simpleName, final CharSequence... simpleNames )
@@ -597,7 +590,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final ClassNameImpl nestedClass( final CharSequence name )
     {
@@ -626,7 +618,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *  Otherwise, it is equivalent to
      *  {@link #get(CharSequence,CharSequence,CharSequence...) get(packageName(),name)}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final ClassNameImpl peerClass( final CharSequence name )
     {
@@ -642,7 +633,7 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
     @Override
     public final String reflectionName()
     {
-        final var retValue = m_EnclosingClassName.map( c -> c.reflectionName() + '$' + m_SimpleName )
+        final var retValue = m_EnclosingClassName.map( className -> className.reflectionName() + '$' + m_SimpleName )
             .orElse( m_PackageName.isEmpty() ? m_SimpleName : m_PackageName + '.' + m_SimpleName );
 
         //---* Done *----------------------------------------------------------
@@ -662,7 +653,7 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
     public final List<String> simpleNames()
     {
         final List<String> retValue = new ArrayList<>();
-        m_EnclosingClassName.ifPresent( c -> retValue.addAll( c.simpleNames() ) );
+        m_EnclosingClassName.ifPresent( className -> retValue.addAll( className.simpleNames() ) );
         retValue.add( m_SimpleName );
 
         //---* Done *----------------------------------------------------------
@@ -674,7 +665,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *  {@link #enclosingClassName()}
      *  until the result's enclosing class is not present.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final ClassNameImpl topLevelClassName()
     {
@@ -687,7 +677,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Override
     public final ClassNameImpl withoutAnnotations()
     {

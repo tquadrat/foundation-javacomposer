@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,13 +20,13 @@
 package org.tquadrat.foundation.javacomposer.internal;
 
 import static java.lang.Character.isISOControl;
+import static java.lang.String.format;
 import static java.lang.Thread.currentThread;
 import static java.util.stream.Collectors.toMap;
 import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.INTERNAL;
 import static org.tquadrat.foundation.lang.Objects.nonNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.Modifier;
 import java.util.ArrayList;
@@ -56,20 +56,21 @@ import org.tquadrat.foundation.util.JavaUtils;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: Util.java 920 2021-05-23 14:27:24Z tquadrat $
+ *  @version $Id: Util.java 1066 2023-09-28 19:51:53Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
+@SuppressWarnings( "NewClassNamingConvention" )
 @UtilityClass
-@ClassVersion( sourceVersion = "$Id: Util.java 920 2021-05-23 14:27:24Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: Util.java 1066 2023-09-28 19:51:53Z tquadrat $" )
 public final class Util
 {
         /*-----------*\
     ====** Constants **========================================================
         \*-----------*/
     /**
-     *  The place holder for {@code null} references.
+     *  The placeholder for {@code null} references.
      */
     @API( status = INTERNAL, since = "0.0.5" )
     public static final Object NULL_REFERENCE = new Object();
@@ -318,12 +319,12 @@ public final class Util
     }   //  immutableMap()
 
     /**
-     *  Creates an immutable multi map from the given multi map.
+     *  Creates an immutable multimap from the given multimap.
      *
      *  @param  <K> The type of the map's keys.
      *  @param  <V> The type of the map's values.
-     *  @param  multiMap    The multi map.
-     *  @return The immutable copy of the input multi map.
+     *  @param  multiMap    The multimap.
+     *  @return The immutable copy of the input multimap.
      *
      *  @deprecated No replacement!
      */
@@ -333,10 +334,10 @@ public final class Util
     {
         final BinaryOperator<List<V>> merger = (v1,v2) ->
         {
-            final Collection<V> l = new ArrayList<>( v1.size() + v2.size() );
-            l.addAll( v1 );
-            l.addAll( v2 );
-            return List.copyOf( l );
+            final Collection<V> collection = new ArrayList<>( v1.size() + v2.size() );
+            collection.addAll( v1 );
+            collection.addAll( v2 );
+            return List.copyOf( collection );
         };
 
         final Map<K,List<V>> buffer = requireNonNullArgument( multiMap, "multiMap" ).entrySet().stream()
@@ -385,17 +386,17 @@ public final class Util
         retValue.append( '"' );
         ScanLoop: for( var i = 0; i < value.length(); ++i )
         {
-            final var c = value.charAt( i );
+            final var currentChar = value.charAt( i );
 
             //---* The trivial case: single quote must not be escaped *--------
-            if( c == '\'' )
+            if( currentChar == '\'' )
             {
                 retValue.append( "'" );
                 continue ScanLoop;
             }
 
             //---* Another trivial case: double quotes must be escaped *-------
-            if( c == '"' )
+            if( currentChar == '"' )
             {
                 retValue.append( '\\' ).append( '"' );
                 continue ScanLoop;
@@ -405,10 +406,10 @@ public final class Util
              * The default case: just let characterLiteralWithoutSingleQuotes()
              * do its work.
              */
-            retValue.append( characterLiteralWithoutSingleQuotes( c ) );
+            retValue.append( characterLiteralWithoutSingleQuotes( currentChar ) );
 
             //---* Do we need to append indent after linefeed? *---------------
-            if( c == '\n' && i + 1 < value.length() )
+            if( currentChar == '\n' && i + 1 < value.length() )
             {
                 /*
                  * Originally, the indentation string was appended twice.
@@ -450,16 +451,16 @@ public final class Util
      *  Creates a new set with the combined contents of the given sets.
      *
      *  @param  <T> The type of the set elements.
-     *  @param  a   The first set.
-     *  @param  b   The second set.
+     *  @param  firstSet    The first set.
+     *  @param  secondSet   The second set.
      *  @return The combined set.
      */
     @SuppressWarnings( "TypeMayBeWeakened" )
     @API( status = INTERNAL, since = "0.0.5" )
-    public static final <T> Set<T> union( final Set<? extends T> a, final Set<? extends T> b )
+    public static final <T> Set<T> union( final Set<? extends T> firstSet, final Set<? extends T> secondSet )
     {
-        final Set<T> retValue = new LinkedHashSet<>( a );
-        retValue.addAll( b );
+        final Set<T> retValue = new LinkedHashSet<>( firstSet );
+        retValue.addAll( secondSet );
 
         //---* Done *----------------------------------------------------------
         return retValue;

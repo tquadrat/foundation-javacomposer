@@ -101,10 +101,10 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="../AnnotationSpec.html" title="interface in org.tquadrat.foundation.javacomposer">AnnotationSpec</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://tquadrat.github.io/foundation-base/javadoc/org.tquadrat.foundation.base/org/tquadrat/foundation/annotation/ClassVersion.html" title="class or interface in org.tquadrat.foundation.annotation" class="external-link">@ClassVersion</a>(<a href="https://tquadrat.github.io/foundation-base/javadoc/org.tquadrat.foundation.base/org/tquadrat/foundation/annotation/ClassVersion.html#sourceVersion()" title="class or interface in org.tquadrat.foundation.annotation" class="external-link">sourceVersion</a>="$Id: AnnotationSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $")
+<div class="type-signature"><span class="annotations"><a href="https://tquadrat.github.io/foundation-base/javadoc/org.tquadrat.foundation.base/org/tquadrat/foundation/annotation/ClassVersion.html" title="class or interface in org.tquadrat.foundation.annotation" class="external-link">@ClassVersion</a>(<a href="https://tquadrat.github.io/foundation-base/javadoc/org.tquadrat.foundation.base/org/tquadrat/foundation/annotation/ClassVersion.html#sourceVersion()" title="class or interface in org.tquadrat.foundation.annotation" class="external-link">sourceVersion</a>="$Id: AnnotationSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $")
 <a href="https://apiguardian-team.github.io/apiguardian/docs/current/api/org/apiguardian/api/API.html" title="class or interface in org.apiguardian.api" class="external-link">@API</a>(<a href="https://apiguardian-team.github.io/apiguardian/docs/current/api/org/apiguardian/api/API.html#status()" title="class or interface in org.apiguardian.api" class="external-link">status</a>=<a href="https://apiguardian-team.github.io/apiguardian/docs/current/api/org/apiguardian/api/API.Status.html#INTERNAL" title="class or interface in org.apiguardian.api" class="external-link">INTERNAL</a>,
      <a href="https://apiguardian-team.github.io/apiguardian/docs/current/api/org/apiguardian/api/API.html#since()" title="class or interface in org.apiguardian.api" class="external-link">since</a>="0.0.5")
-</span><span class="modifiers">public final class </span><span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-64">AnnotationSpecImpl</a></span>
+</span><span class="modifiers">public final class </span><span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-63">AnnotationSpecImpl</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.foundation.javacomposer">AnnotationSpec</a></span></div>
 <div class="block">The implementation of
@@ -117,7 +117,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <dt><span class="simpleTagLabel">Modified by:</span></dt>
   <dd>Thomas Thrien (<a href="mailto:thomas.thrien@tquadrat.org">thomas.thrien@tquadrat.org</a>)</dd>
 <dt>Version:</dt>
-<dd>$Id: AnnotationSpecImpl.java 943 2021-12-21 01:34:32Z tquadrat $</dd>
+<dd>$Id: AnnotationSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $</dd>
 <dt>Since:</dt>
 <dd>0.0.5</dd>
 
@@ -348,7 +348,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="m_CachedString">
 <h3>m_CachedString</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://tquadrat.github.io/foundation-base/javadoc/org.tquadrat.foundation.base/org/tquadrat/foundation/lang/Lazy.html" title="class or interface in org.tquadrat.foundation.lang" class="external-link">Lazy</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-314">m_CachedString</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://tquadrat.github.io/foundation-base/javadoc/org.tquadrat.foundation.base/org/tquadrat/foundation/lang/Lazy.html" title="class or interface in org.tquadrat.foundation.lang" class="external-link">Lazy</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-309">m_CachedString</a></span></div>
 <div class="block">Lazily initialised return value of
   <a href="#toString()"><code>toString()</code></a>
   for this annotation.</div>
@@ -357,14 +357,14 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="m_Composer">
 <h3>m_Composer</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-319">m_Composer</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-314">m_Composer</a></span></div>
 <div class="block">The reference to the factory.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_ForceInline">
 <h3>m_ForceInline</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-328">m_ForceInline</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-323">m_ForceInline</a></span></div>
 <div class="block">A flag that indicates whether the inline representation is forced for
   this annotation.</div>
 <dl class="notes">
@@ -380,14 +380,14 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="m_Members">
 <h3>m_Members</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeBlockImpl</a>&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-333">m_Members</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeBlockImpl</a>&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-328">m_Members</a></span></div>
 <div class="block">The code blocks that define this annotation.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m_Type">
 <h3>m_Type</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="TypeNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">TypeNameImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-338">m_Type</a></span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="TypeNameImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">TypeNameImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-333">m_Type</a></span></div>
 <div class="block">The name of this annotation.</div>
 </section>
 </li>
@@ -402,7 +402,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="&lt;init&gt;(org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderImpl)">
 <h3>AnnotationSpecImpl</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-349">AnnotationSpecImpl</a></span><wbr><span class="parameters">(<a href="AnnotationSpecImpl.BuilderImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl.BuilderImpl</a>&nbsp;builder)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-344">AnnotationSpecImpl</a></span><wbr><span class="parameters">(<a href="AnnotationSpecImpl.BuilderImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl.BuilderImpl</a>&nbsp;builder)</span></div>
 <div class="block">Creates a new <code>AnnotationSpecImpl</code> instance.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -423,7 +423,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <h3>builder</h3>
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="0.2.0",
             <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
-</span><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AnnotationSpecImpl.BuilderImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl.BuilderImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-375">builder</a></span><wbr><span class="parameters">(<a href="../ClassName.html" title="interface in org.tquadrat.foundation.javacomposer">ClassName</a>&nbsp;type)</span></div>
+</span><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AnnotationSpecImpl.BuilderImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl.BuilderImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-370">builder</a></span><wbr><span class="parameters">(<a href="../ClassName.html" title="interface in org.tquadrat.foundation.javacomposer">ClassName</a>&nbsp;type)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">Got obsolete with the introduction of
       <a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer"><code>JavaComposer</code></a>.</div>
@@ -445,7 +445,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <h3>builder</h3>
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="0.2.0",
             <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
-</span><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AnnotationSpecImpl.BuilderImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl.BuilderImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-394">builder</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;type)</span></div>
+</span><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AnnotationSpecImpl.BuilderImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl.BuilderImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-388">builder</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;type)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">Got obsolete with the introduction of
       <a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer"><code>JavaComposer</code></a>.</div>
@@ -465,7 +465,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="emit(org.tquadrat.foundation.javacomposer.internal.CodeWriter,boolean)">
 <h3>emit</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-410">emit</a></span><wbr><span class="parameters">(<a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a>&nbsp;codeWriter,
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-403">emit</a></span><wbr><span class="parameters">(<a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a>&nbsp;codeWriter,
  boolean&nbsp;inline)</span>
                 throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits this annotation to the given code writer.</div>
@@ -483,7 +483,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="emit4Foundation(org.tquadrat.foundation.javacomposer.internal.CodeWriter,boolean)">
 <h3>emit4Foundation</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-433">emit4Foundation</a></span><wbr><span class="parameters">(<a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a>&nbsp;codeWriter,
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-425">emit4Foundation</a></span><wbr><span class="parameters">(<a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a>&nbsp;codeWriter,
  boolean&nbsp;inline)</span>
                             throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits this annotation to the given code writer.</div>
@@ -501,7 +501,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="emit4JavaPoet(org.tquadrat.foundation.javacomposer.internal.CodeWriter,boolean)">
 <h3>emit4JavaPoet</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-490">emit4JavaPoet</a></span><wbr><span class="parameters">(<a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a>&nbsp;codeWriter,
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-481">emit4JavaPoet</a></span><wbr><span class="parameters">(<a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a>&nbsp;codeWriter,
  boolean&nbsp;inline)</span>
                           throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/UncheckedIOException.html" title="class or interface in java.io" class="external-link">UncheckedIOException</a></span></div>
 <div class="block">Emits this annotation to the given code writer using the original
@@ -520,7 +520,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="emitAnnotationValues(org.tquadrat.foundation.javacomposer.internal.CodeWriter,java.lang.String,java.lang.String,java.util.List)">
 <h3>emitAnnotationValues</h3>
-<div class="member-signature"><span class="modifiers">private static final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-547">emitAnnotationValues</a></span><wbr><span class="parameters">(<a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a>&nbsp;codeWriter,
+<div class="member-signature"><span class="modifiers">private static final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-537">emitAnnotationValues</a></span><wbr><span class="parameters">(<a href="CodeWriter.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeWriter</a>&nbsp;codeWriter,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;whitespace,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;memberSeparator,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="CodeBlockImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">CodeBlockImpl</a>&gt;&nbsp;values)</span>
@@ -541,7 +541,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-575">equals</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-565">equals</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../AnnotationSpec.html#equals(java.lang.Object)">equals</a></code>&nbsp;in interface&nbsp;<code><a href="../AnnotationSpec.html" title="interface in org.tquadrat.foundation.javacomposer">AnnotationSpec</a></code></dd>
@@ -555,7 +555,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <h3>get</h3>
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="0.2.0",
             <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
-</span><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AnnotationSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-599">get</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation)</span></div>
+</span><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AnnotationSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-589">get</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">Got obsolete with the introduction of
       <a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer"><code>JavaComposer</code></a>.</div>
@@ -576,7 +576,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <h3>get</h3>
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="0.2.0",
             <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
-</span><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AnnotationSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-616">get</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation,
+</span><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AnnotationSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-605">get</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation,
  boolean&nbsp;includeDefaultValues)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">Got obsolete with the introduction of
@@ -600,7 +600,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <h3>get</h3>
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="0.2.0",
             <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
-</span><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AnnotationSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-638">get</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.compiler/javax/lang/model/element/AnnotationMirror.html" title="class or interface in javax.lang.model.element" class="external-link">AnnotationMirror</a>&nbsp;annotation)</span></div>
+</span><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AnnotationSpecImpl.html" title="class in org.tquadrat.foundation.javacomposer.internal">AnnotationSpecImpl</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-626">get</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.compiler/javax/lang/model/element/AnnotationMirror.html" title="class or interface in javax.lang.model.element" class="external-link">AnnotationMirror</a>&nbsp;annotation)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">Got obsolete with the introduction of
       <a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer"><code>JavaComposer</code></a>.</div>
@@ -619,7 +619,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="getFactory()">
 <h3>getFactory</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-656">getFactory</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer">JavaComposer</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-643">getFactory</a></span>()</div>
 <div class="block">Returns the
   <a href="../JavaComposer.html" title="class in org.tquadrat.foundation.javacomposer"><code>JavaComposer</code></a>
   factory.</div>
@@ -632,7 +632,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-662">hashCode</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-649">hashCode</a></span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../AnnotationSpec.html#hashCode()">hashCode</a></code>&nbsp;in interface&nbsp;<code><a href="../AnnotationSpec.html" title="interface in org.tquadrat.foundation.javacomposer">AnnotationSpec</a></code></dd>
@@ -644,7 +644,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="initializeCachedString()">
 <h3>initializeCachedString</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-672">initializeCachedString</a></span>()</div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-659">initializeCachedString</a></span>()</div>
 <div class="block">The initializer for
   <a href="#m_CachedString"><code>m_CachedString</code></a>.</div>
 <dl class="notes">
@@ -657,7 +657,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="toBuilder()">
 <h3>toBuilder</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="../AnnotationSpec.Builder.html" title="interface in org.tquadrat.foundation.javacomposer">AnnotationSpec.Builder</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-696">toBuilder</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="../AnnotationSpec.Builder.html" title="interface in org.tquadrat.foundation.javacomposer">AnnotationSpec.Builder</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-683">toBuilder</a></span>()</div>
 <div class="block">Creates a new builder that is initialised with the components of this
   annotation.</div>
 <dl class="notes">
@@ -671,7 +671,7 @@ implements <a href="../AnnotationSpec.html" title="interface in org.tquadrat.fou
 <li>
 <section class="detail" id="toString()">
 <h3>toString</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-713">toString</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../../src-html/org.tquadrat.foundation.javacomposer/org/tquadrat/foundation/javacomposer/internal/AnnotationSpecImpl.html#line-700">toString</a></span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../AnnotationSpec.html#toString()">toString</a></code>&nbsp;in interface&nbsp;<code><a href="../AnnotationSpec.html" title="interface in org.tquadrat.foundation.javacomposer">AnnotationSpec</a></code></dd>

@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,12 +38,12 @@ import org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterizedTypeName.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: ParameterizedTypeName.java 1068 2023-09-28 21:42:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterizedTypeName.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterizedTypeName.java 1068 2023-09-28 21:42:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface ParameterizedTypeName extends TypeName
     permits ParameterizedTypeNameImpl
@@ -122,7 +122,6 @@ public sealed interface ParameterizedTypeName extends TypeName
      *      instead.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "ClassReferencesSubclass" )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static ParameterizedTypeName get( final Class<?> rawType, final Type... typeArguments )
     {
@@ -145,7 +144,6 @@ public sealed interface ParameterizedTypeName extends TypeName
      *      instead.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "ClassReferencesSubclass" )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static ParameterizedTypeName get( final ClassName rawType, final TypeName... typeArguments )
     {
@@ -166,7 +164,6 @@ public sealed interface ParameterizedTypeName extends TypeName
      *      instead.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "ClassReferencesSubclass" )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static ParameterizedTypeName get( final ParameterizedType type ) { return from( type ); }
 
@@ -206,7 +203,6 @@ public sealed interface ParameterizedTypeName extends TypeName
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "AbstractMethodOverridesAbstractMethod" )
     @Override
     public TypeName withoutAnnotations();
 }

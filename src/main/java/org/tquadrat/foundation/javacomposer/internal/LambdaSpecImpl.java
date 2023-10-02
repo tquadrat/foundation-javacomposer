@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2021 by Thomas Thrien.
+ * Copyright © 2002-2023 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  *
@@ -27,7 +27,6 @@ import static org.tquadrat.foundation.lang.Objects.checkState;
 import static org.tquadrat.foundation.lang.Objects.hash;
 import static org.tquadrat.foundation.lang.Objects.isNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import java.io.UncheckedIOException;
 import java.lang.reflect.Type;
@@ -52,12 +51,12 @@ import org.tquadrat.foundation.lang.Lazy;
  *  {@link LambdaSpec}.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: LambdaSpecImpl.java 923 2021-05-24 08:11:36Z tquadrat $
+ *  @version $Id: LambdaSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 923 2021-05-24 08:11:36Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class LambdaSpecImpl implements LambdaSpec
 {
@@ -69,12 +68,12 @@ public final class LambdaSpecImpl implements LambdaSpec
      *  {@link org.tquadrat.foundation.javacomposer.LambdaSpec.Builder}.
      *
      *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: LambdaSpecImpl.java 923 2021-05-24 08:11:36Z tquadrat $
+     *  @version $Id: LambdaSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 923 2021-05-24 08:11:36Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements Builder
     {
@@ -84,13 +83,13 @@ public final class LambdaSpecImpl implements LambdaSpec
         /**
          *  The code for the lambda body.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final CodeBlockImpl.BuilderImpl m_Code;
 
         /**
          *  The reference to the factory.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final JavaComposer m_Composer;
 
         /**
@@ -117,8 +116,7 @@ public final class LambdaSpecImpl implements LambdaSpec
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
          */
-        @SuppressWarnings( "CastToConcreteClass" )
-        public BuilderImpl( final JavaComposer composer )
+        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer )
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
             m_Code = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
@@ -183,18 +181,17 @@ public final class LambdaSpecImpl implements LambdaSpec
         @Override
         public final BuilderImpl addParameter( final ParameterSpec parameterSpec )
         {
-            @SuppressWarnings( "CastToConcreteClass" )
             final var parameter = (ParameterSpecImpl) requireNonNullArgument( parameterSpec, "parameterSpec" );
             final var type = parameter.type();
             final var name = parameter.name();
             if( type == VOID_PRIMITIVE )
             {
-                checkState( isNull( m_InferTypes) || m_InferTypes.booleanValue(), () -> new ValidationException( format( "Not inferring types; type required for %s", name ) ) );
+                checkState( isNull( m_InferTypes) || m_InferTypes.booleanValue(), () -> new ValidationException( "Not inferring types; type required for %s".formatted( name ) ) );
                 m_InferTypes = TRUE;
             }
             else
             {
-                checkState( isNull( m_InferTypes ) || !m_InferTypes.booleanValue(), () -> new ValidationException( format( "Inferring types; no type allowed for %s", name ) ) );
+                checkState( isNull( m_InferTypes ) || !m_InferTypes.booleanValue(), () -> new ValidationException( "Inferring types; no type allowed for %s".formatted( name ) ) );
                 m_InferTypes = FALSE;
             }
             m_Parameters.add( parameter );
@@ -224,7 +221,6 @@ public final class LambdaSpecImpl implements LambdaSpec
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "CastToConcreteClass" )
         @Override
         public final BuilderImpl addParameters( final Iterable<? extends ParameterSpec> parameterSpecs )
         {
@@ -328,7 +324,7 @@ public final class LambdaSpecImpl implements LambdaSpec
          *  @return {@code true} if the parameter types are inferred,
          *      {@code false} if they are explicit.
          */
-        @SuppressWarnings( "PublicMethodNotExposedInInterface" )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "BooleanMethodNameMustStartWithQuestion"} )
         public final boolean inferTypes() { return isNull( m_InferTypes ) || m_InferTypes.booleanValue(); }
 
         /**
@@ -378,13 +374,13 @@ public final class LambdaSpecImpl implements LambdaSpec
     /**
      *  The code of the body for this lambda.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_Code;
 
     /**
      *  The reference to the factory.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final JavaComposer m_Composer;
 
     /**
@@ -413,7 +409,7 @@ public final class LambdaSpecImpl implements LambdaSpec
      *  @param  builder The builder.
      */
     @SuppressWarnings( "AccessingNonPublicFieldOfAnotherObject" )
-    public LambdaSpecImpl( final BuilderImpl builder )
+    public LambdaSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )
     {
         m_Composer = builder.m_Composer;
         m_Code = builder.code();
@@ -446,7 +442,7 @@ public final class LambdaSpecImpl implements LambdaSpec
      *      output target.
      */
     @SuppressWarnings( "PublicMethodNotExposedInInterface" )
-    public final void emit( final CodeWriter codeWriter ) throws UncheckedIOException
+    public final void emit( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter ) throws UncheckedIOException
     {
         //---* Get the parameters *--------------------------------------------
         if( m_Parameters.isEmpty() )
@@ -517,7 +513,7 @@ public final class LambdaSpecImpl implements LambdaSpec
     public final boolean equals( final Object o )
     {
         var retValue = this == o;
-        if( !retValue && (o instanceof LambdaSpecImpl other) )
+        if( !retValue && (o instanceof final LambdaSpecImpl other) )
         {
             retValue = m_Composer.equals( other.m_Composer ) && toString().equals( o.toString() );
         }

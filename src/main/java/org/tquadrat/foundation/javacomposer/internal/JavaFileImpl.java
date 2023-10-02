@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2023 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +19,7 @@
 
 package org.tquadrat.foundation.javacomposer.internal;
 
+import static java.lang.String.format;
 import static java.lang.System.currentTimeMillis;
 import static java.nio.file.Files.createDirectories;
 import static java.nio.file.Files.isDirectory;
@@ -33,7 +34,6 @@ import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;
 import static org.tquadrat.foundation.util.IOUtils.getNullAppendable;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Element;
@@ -71,12 +71,12 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaFileImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: JavaFileImpl.java 1064 2023-09-26 20:16:12Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1064 2023-09-26 20:16:12Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class JavaFileImpl implements JavaFile
 {
@@ -91,12 +91,12 @@ public final class JavaFileImpl implements JavaFile
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: JavaFileImpl.java 943 2021-12-21 01:34:32Z tquadrat $
+     *  @version $Id: JavaFileImpl.java 1064 2023-09-26 20:16:12Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 943 2021-12-21 01:34:32Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1064 2023-09-26 20:16:12Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements JavaFile.Builder
     {
@@ -106,13 +106,13 @@ public final class JavaFileImpl implements JavaFile
         /**
          *  The reference to the factory.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final JavaComposer m_Composer;
 
         /**
          *  The file comment.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+        @SuppressWarnings( "UseOfConcreteClass" )
         private final CodeBlockImpl.BuilderImpl m_FileComment;
 
         /**
@@ -144,7 +144,6 @@ public final class JavaFileImpl implements JavaFile
          *  for the class in the
          *  {@link JavaFileImpl}.
          */
-        @SuppressWarnings( "InstanceVariableOfConcreteClass" )
         private final TypeSpecImpl m_TypeSpec;
 
             /*--------------*\
@@ -192,7 +191,7 @@ public final class JavaFileImpl implements JavaFile
          *      classes from the package {@code java.lang} are skipped,
          *      {@code false} means that the imports are added explicitly.
          */
-        @SuppressWarnings( {"TypeMayBeWeakened", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"TypeMayBeWeakened", "UseOfConcreteClass", "ConstructorWithTooManyParameters"} )
         public BuilderImpl( final JavaComposer composer, final CharSequence packageName, final TypeSpecImpl typeSpec, final CodeBlockImpl fileComment, final Layout layout, final boolean skipJavaLangImports )
         {
             this( composer, packageName, typeSpec );
@@ -207,7 +206,6 @@ public final class JavaFileImpl implements JavaFile
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addFileComment( final String format, final Object... args )
         {
@@ -220,7 +218,6 @@ public final class JavaFileImpl implements JavaFile
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addStaticImport( final Class<?> clazz, final String... names )
         {
@@ -230,12 +227,11 @@ public final class JavaFileImpl implements JavaFile
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addStaticImport( final ClassName className, final String... names )
         {
             final var canonicalName = requireNonNullArgument( className, "className" ).canonicalName();
-            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, n -> format( "%s array is empty", n ) ) )
+            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, "%s array is empty"::formatted ) )
             {
                 m_StaticImports.add(
                     format(
@@ -245,7 +241,7 @@ public final class JavaFileImpl implements JavaFile
                             name,
                             "name",
                             Objects::nonNull,
-                            $ -> format( "null entry in names array: %s", Arrays.toString( names ) )
+                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -258,7 +254,6 @@ public final class JavaFileImpl implements JavaFile
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl addStaticImport( final Enum<?> constant )
         {
@@ -268,7 +263,6 @@ public final class JavaFileImpl implements JavaFile
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final JavaFileImpl build() { return new JavaFileImpl( this ); }
 
@@ -277,7 +271,7 @@ public final class JavaFileImpl implements JavaFile
          *
          *  @return The file comment.
          */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
         public final CodeBlockImpl fileComment() { return m_FileComment.build(); }
 
         /**
@@ -287,7 +281,7 @@ public final class JavaFileImpl implements JavaFile
          *      cannot be overwritten. This implementation of this method does
          *      nothing.
          */
-        @SuppressWarnings( {"UseOfConcreteClass", "removal"} )
+        @SuppressWarnings( {"removal"} )
         @Deprecated( since = "0.2.0", forRemoval = true )
         @Override
         @API( status = DEPRECATED, since = "0.0.5" )
@@ -312,14 +306,14 @@ public final class JavaFileImpl implements JavaFile
          *      cannot be overwritten. This makes this method obsolete.
          */
         @Deprecated( since = "0.2.0", forRemoval = true )
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "removal"} )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
         @API( status = DEPRECATED, since = "0.0.5" )
         public final String indent() { return m_Layout.indent(); }
 
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( {"removal", "UseOfConcreteClass"} )
+        @SuppressWarnings( {"removal"} )
         @Override
         public final BuilderImpl layout( final Layout layout )
         {
@@ -349,7 +343,6 @@ public final class JavaFileImpl implements JavaFile
         /**
          *  {@inheritDoc}
          */
-        @SuppressWarnings( "UseOfConcreteClass" )
         @Override
         public final BuilderImpl skipJavaLangImports( final boolean flag )
         {
@@ -369,7 +362,7 @@ public final class JavaFileImpl implements JavaFile
          *
          *  @see #skipJavaLangImports(boolean)
          */
-        @SuppressWarnings( "PublicMethodNotExposedInInterface" )
+        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "BooleanMethodNameMustStartWithQuestion"} )
         public final boolean skipJavaLangImports() { return m_SkipJavaLangImports; }
 
         /**
@@ -422,13 +415,13 @@ public final class JavaFileImpl implements JavaFile
     /**
      *  The reference to the factory.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final JavaComposer m_Composer;
 
     /**
      *  The file comment.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
+    @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_FileComment;
 
     /**
@@ -458,7 +451,6 @@ public final class JavaFileImpl implements JavaFile
      *  for the class in the
      *  {@link JavaFileImpl}.
      */
-    @SuppressWarnings( "InstanceVariableOfConcreteClass" )
     private final TypeSpecImpl m_TypeSpec;
 
         /*--------------*\
@@ -498,12 +490,10 @@ public final class JavaFileImpl implements JavaFile
      *  @deprecated Got obsolete with the introduction of
      *      {@link JavaComposer}.
      */
-    @SuppressWarnings( "UseOfConcreteClass" )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static BuilderImpl builder( final CharSequence packageName, final TypeSpec typeSpec )
     {
-        @SuppressWarnings( "CastToConcreteClass" )
         final var typeSpecImpl = (TypeSpecImpl) requireNonNullArgument( typeSpec, "typeSpec" );
         final var composer = typeSpecImpl.getFactory();
         final var retValue = new BuilderImpl( composer, requireNonNullArgument( packageName, "packageName" ), typeSpecImpl );
@@ -585,7 +575,7 @@ public final class JavaFileImpl implements JavaFile
     public final boolean equals( final Object o )
     {
         var retValue = this == o;
-        if( !retValue && (o instanceof JavaFileImpl other) )
+        if( !retValue && (o instanceof final JavaFileImpl other) )
         {
             retValue = m_Composer.equals( other.m_Composer ) && toString().equals( o.toString() );
         }
@@ -601,7 +591,7 @@ public final class JavaFileImpl implements JavaFile
      *
      *  @return The reference to the factory.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UseOfConcreteClass"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final JavaComposer getFactory() { return m_Composer; }
 
     /**
@@ -666,7 +656,7 @@ public final class JavaFileImpl implements JavaFile
         @SuppressWarnings( "OptionalGetWithoutIsPresent" )
         final var name = m_TypeSpec.name().get();
         final var uri = URI.create( (m_PackageName.isEmpty() ? name : m_PackageName.replace( '.', '/' ) + '/' + name) + SOURCE.extension );
-        @SuppressWarnings( "AnonymousInnerClassWithTooManyMethods" )
+        @SuppressWarnings( "AnonymousInnerClass" )
         final var retValue = new SimpleJavaFileObject( uri, SOURCE )
         {
             /**
@@ -798,7 +788,7 @@ public final class JavaFileImpl implements JavaFile
     @Override
     public void writeTo( final Path directory ) throws IOException
     {
-        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -> notExists( v ) || isDirectory( v ), $ -> format( "path %s exists but is not a directory.", directory ) );
+        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -> notExists( v ) || isDirectory( v ), $ -> "path %s exists but is not a directory.".formatted( directory ) );
         if( !m_PackageName.isEmpty() )
         {
             for( final var packageComponent : m_PackageName.split( "\\." ) )

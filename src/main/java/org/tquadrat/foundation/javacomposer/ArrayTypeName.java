@@ -39,12 +39,12 @@ import org.tquadrat.foundation.javacomposer.internal.ArrayTypeNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ArrayTypeName.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: ArrayTypeName.java 1067 2023-09-28 21:09:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ArrayTypeName.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ArrayTypeName.java 1067 2023-09-28 21:09:15Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface ArrayTypeName extends TypeName
     permits ArrayTypeNameImpl
@@ -111,7 +111,6 @@ public sealed interface ArrayTypeName extends TypeName
      *      instead.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "ClassReferencesSubclass" )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static ArrayTypeName get( final ArrayType mirror ) { return from( mirror ); }
 
@@ -127,7 +126,6 @@ public sealed interface ArrayTypeName extends TypeName
      *      instead.
      */
     @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "ClassReferencesSubclass" )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static ArrayTypeName get( final GenericArrayType type ) { return from( type ); }
 
@@ -160,7 +158,6 @@ public sealed interface ArrayTypeName extends TypeName
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "AbstractMethodOverridesAbstractMethod" )
     @Override
     public TypeName withoutAnnotations();
 }
