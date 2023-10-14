@@ -17,6 +17,7 @@
 
 package test.org.tquadrat.javacomposer;
 
+import static java.lang.String.format;
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.tquadrat.foundation.javacomposer.SuppressableWarnings.DEPRECATION;
 import static org.tquadrat.foundation.javacomposer.SuppressableWarnings.JAVADOC;
 import static org.tquadrat.foundation.javacomposer.SuppressableWarnings.createSuppressWarningsAnnotation;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import org.junit.jupiter.api.Test;
 import org.tquadrat.foundation.annotation.ClassVersion;
@@ -38,10 +38,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  {@link SuppressableWarnings}.
  *
  *  @author Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestSuppressableWarnings.java 937 2021-12-14 21:59:00Z tquadrat $
+ *  @version $Id: TestSuppressableWarnings.java 1076 2023-10-03 18:36:07Z tquadrat $
  */
-@SuppressWarnings( "MisorderedAssertEqualsArguments" )
-@ClassVersion( sourceVersion = "$Id: TestSuppressableWarnings.java 937 2021-12-14 21:59:00Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestSuppressableWarnings.java 1076 2023-10-03 18:36:07Z tquadrat $" )
 public class TestSuppressableWarnings extends TestBaseClass
 {
         /*---------*\

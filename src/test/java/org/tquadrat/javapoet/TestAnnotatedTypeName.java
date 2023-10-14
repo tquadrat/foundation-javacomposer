@@ -18,6 +18,7 @@
 package org.tquadrat.javapoet;
 
 import static com.google.common.truth.Truth.assertThat;
+import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -26,7 +27,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.tquadrat.foundation.javacomposer.internal.TypeNameImpl.BOOLEAN_PRIMITIVE;
 import static org.tquadrat.foundation.javacomposer.internal.TypeNameImpl.DOUBLE_PRIMITIVE;
 import static org.tquadrat.foundation.javacomposer.internal.TypeNameImpl.VOID_PRIMITIVE;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
@@ -46,7 +46,7 @@ import org.tquadrat.foundation.javacomposer.TypeName;
 import org.tquadrat.foundation.javacomposer.WildcardTypeName;
 
 @SuppressWarnings( {"static-method", "javadoc", "ClassWithTooManyMethods"} )
-@ClassVersion( sourceVersion = "$Id: TestAnnotatedTypeName.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestAnnotatedTypeName.java 1076 2023-10-03 18:36:07Z tquadrat $" )
 @DisplayName( "org.tquadrat.javapoet.TestAnnotatedTypeName" )
 public class TestAnnotatedTypeName
 {

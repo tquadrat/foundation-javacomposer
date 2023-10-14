@@ -17,6 +17,7 @@
 
 package test.org.tquadrat.javacomposer.composer;
 
+import static java.lang.String.format;
 import static java.lang.System.out;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -25,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.tquadrat.foundation.javacomposer.Layout.LAYOUT_FOUNDATION;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import java.util.Collection;
 
@@ -49,10 +49,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  {@link org.tquadrat.foundation.javacomposer.JavaComposer}.
  *
  *  @author Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestCreateHashCodeMethod.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: TestCreateHashCodeMethod.java 1076 2023-10-03 18:36:07Z tquadrat $
  */
-@SuppressWarnings( "MisorderedAssertEqualsArguments" )
-@ClassVersion( sourceVersion = "$Id: TestCreateHashCodeMethod.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestCreateHashCodeMethod.java 1076 2023-10-03 18:36:07Z tquadrat $" )
 @DisplayName( "TestCreateHashCodeMethod" )
 public class TestCreateHashCodeMethod extends TestBaseClass
 {

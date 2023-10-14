@@ -17,6 +17,7 @@
 
 package test.org.tquadrat.javacomposer;
 
+import static java.lang.String.format;
 import static java.lang.System.out;
 import static org.junit.Assume.assumeNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -24,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.tquadrat.foundation.javacomposer.Layout.LAYOUT_DEFAULT;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,10 +38,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  {@link JavaComposer}.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestComposer.java 937 2021-12-14 21:59:00Z tquadrat $
+ *  @version $Id: TestComposer.java 1076 2023-10-03 18:36:07Z tquadrat $
  */
-@SuppressWarnings( "MisorderedAssertEqualsArguments" )
-@ClassVersion( sourceVersion = "$Id: TestComposer.java 937 2021-12-14 21:59:00Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestComposer.java 1076 2023-10-03 18:36:07Z tquadrat $" )
 @DisplayName( "TestComposer" )
 public class TestComposer extends TestBaseClass
 {

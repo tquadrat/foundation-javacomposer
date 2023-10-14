@@ -17,10 +17,10 @@
 
 package test.org.tquadrat.javacomposer.composer;
 
+import static java.lang.String.format;
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.AnnotationMirror;
 import java.lang.annotation.Annotation;
@@ -42,10 +42,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  {@link JavaComposer}.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestCreateAnnotation.java 937 2021-12-14 21:59:00Z tquadrat $
+ *  @version $Id: TestCreateAnnotation.java 1076 2023-10-03 18:36:07Z tquadrat $
  */
-@SuppressWarnings( "MisorderedAssertEqualsArguments" )
-@ClassVersion( sourceVersion = "$Id: TestCreateAnnotation.java 937 2021-12-14 21:59:00Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestCreateAnnotation.java 1076 2023-10-03 18:36:07Z tquadrat $" )
 @DisplayName( "TestCreateAnnotation" )
 public class TestCreateAnnotation extends TestBaseClass
 {

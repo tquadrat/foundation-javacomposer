@@ -17,13 +17,13 @@
 
 package test.org.tquadrat.javacomposer.lambdaspec;
 
+import static java.lang.String.format;
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.tquadrat.foundation.javacomposer.Primitives.INT;
 import static org.tquadrat.foundation.javacomposer.Primitives.VOID;
 import static org.tquadrat.foundation.lang.CommonConstants.EMPTY_STRING;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import java.lang.reflect.Type;
 
@@ -49,10 +49,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  {@link LambdaSpec.Builder}.
  *
  *  @author Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestBuilderAddParameter.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: TestBuilderAddParameter.java 1076 2023-10-03 18:36:07Z tquadrat $
  */
-@SuppressWarnings( "MisorderedAssertEqualsArguments" )
-@ClassVersion( sourceVersion = "$Id: TestBuilderAddParameter.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestBuilderAddParameter.java 1076 2023-10-03 18:36:07Z tquadrat $" )
 @DisplayName( "TestBuilderAddParameter" )
 public class TestBuilderAddParameter extends TestBaseClass
 {

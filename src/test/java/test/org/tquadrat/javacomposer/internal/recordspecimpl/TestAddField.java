@@ -17,11 +17,11 @@
 
 package test.org.tquadrat.javacomposer.internal.recordspecimpl;
 
+import static java.lang.String.format;
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.tquadrat.foundation.lang.CommonConstants.EMPTY_STRING;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.Modifier;
 import java.lang.reflect.Type;
@@ -54,7 +54,7 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
  */
-@ClassVersion( sourceVersion = "$Id: TestAddField.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestAddField.java 1076 2023-10-03 18:36:07Z tquadrat $" )
 @DisplayName( "test.org.tquadrat.javacomposer.internal.recordspecimpl.TestAddField" )
 public class TestAddField extends TestBaseClass
 {

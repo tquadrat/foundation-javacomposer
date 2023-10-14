@@ -18,6 +18,7 @@
 package org.tquadrat.javapoet;
 
 import static com.google.common.truth.Truth.assertThat;
+import static java.lang.String.format;
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.tquadrat.foundation.lang.CommonConstants.EMPTY_STRING;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
@@ -66,7 +66,7 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
 import org.tquadrat.javapoet.helper.CompilationRule;
 import com.google.common.collect.ImmutableMap;
 
-@SuppressWarnings( {"javadoc", "MisorderedAssertEqualsArguments", "OverlyCoupledClass", "ClassWithTooManyMethods", "OverlyComplexClass"} )
+@SuppressWarnings( {"javadoc", "OverlyCoupledClass", "ClassWithTooManyMethods", "OverlyComplexClass"} )
 @DisplayName( "TestTypeSpec" )
 public final class TestTypeSpec extends TestBaseClass
 {

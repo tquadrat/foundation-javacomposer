@@ -17,10 +17,10 @@
 
 package test.org.tquadrat.javacomposer.typespec;
 
+import static java.lang.String.format;
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,10 +35,9 @@ import org.tquadrat.javapoet.TestTypeSpec;
  *  {@link TypeSpec}.
  *
  *  @author Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestEnumConstants.java 937 2021-12-14 21:59:00Z tquadrat $
+ *  @version $Id: TestEnumConstants.java 1076 2023-10-03 18:36:07Z tquadrat $
  */
-@SuppressWarnings( "MisorderedAssertEqualsArguments" )
-@ClassVersion( sourceVersion = "$Id: TestEnumConstants.java 937 2021-12-14 21:59:00Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestEnumConstants.java 1076 2023-10-03 18:36:07Z tquadrat $" )
 @DisplayName( "TestEnumConstants" )
 public class TestEnumConstants extends TestBaseClass
 {

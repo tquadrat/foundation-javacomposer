@@ -17,11 +17,11 @@
 
 package test.org.tquadrat.javacomposer.composer;
 
+import static java.lang.String.format;
 import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.tquadrat.foundation.lang.CommonConstants.EMPTY_STRING;
-import static org.tquadrat.foundation.util.StringUtils.format;
 
 import javax.lang.model.element.Modifier;
 import java.lang.reflect.Type;
@@ -47,10 +47,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  {@link JavaComposer}.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestFieldBuilder.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: TestFieldBuilder.java 1076 2023-10-03 18:36:07Z tquadrat $
  */
-@SuppressWarnings( "MisorderedAssertEqualsArguments" )
-@ClassVersion( sourceVersion = "$Id: TestFieldBuilder.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestFieldBuilder.java 1076 2023-10-03 18:36:07Z tquadrat $" )
 @DisplayName( "TestFieldBuilder" )
 public class TestFieldBuilder extends TestBaseClass
 {
