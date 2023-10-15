@@ -185,7 +185,7 @@
                     <text x='5.000'
                           y='212.000'>+ rawType():org.tquadrat.foundation.javacomposer.internal.ClassNameImpl</text>
                     <text x='5.000'
-                          y='223.000'>+ typeArguments():java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;</text>
+                          y='223.000'>+ typeArguments():java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;</text>
                     <text x='5.000'
                           y='234.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
                 </g>
@@ -379,7 +379,7 @@
                           class='abstract'>+ rawType():org.tquadrat.foundation.javacomposer.ClassName</text>
                     <text x='5.000'
                           y='168.000'
-                          class='abstract'>+ typeArguments():java.util.List&lt;? extends org.tquadrat.foundation.javacomposer.TypeName&gt;</text>
+                          class='abstract'>+ typeArguments():java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;</text>
                     <text x='5.000'
                           y='179.000'
                           class='abstract'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.TypeName</text>

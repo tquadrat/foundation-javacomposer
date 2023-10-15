@@ -345,7 +345,15 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
      *  {@inheritDoc}
      */
     @Override
-    public final List<TypeNameImpl> typeArguments() { return m_TypeArguments; }
+    public final List<TypeName> typeArguments()
+    {
+        final var retValue = m_TypeArguments.stream()
+            .map( typeArgument -> (TypeName) typeArgument )
+            .toList();
+
+        //---* Done *----------------------------------------------------------
+        return retValue;
+    }   //  typeArguments()
 
     /**
      *  {@inheritDoc}

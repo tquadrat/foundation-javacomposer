@@ -29,6 +29,7 @@ import javax.tools.ToolProvider;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 
@@ -83,7 +84,14 @@ public class TestFileReading
         @SuppressWarnings( "resource" )
         final var fileManager = compiler.getStandardFileManager( diagnosticCollector, Locale.getDefault(), UTF_8 );
         fileManager.setLocation( StandardLocation.CLASS_OUTPUT, Collections.singleton( m_TemporaryFolder.newFolder() ) );
-        final var task = compiler.getTask( null, fileManager, diagnosticCollector, Collections.emptySet(), Collections.emptySet(), Collections.singleton( javaFile.toJavaFileObject() ) );
+        final var task = compiler.getTask(
+            null,
+            fileManager,
+            diagnosticCollector,
+            List.of( "-proc:none" ),
+            Collections.emptySet(),
+            Collections.singleton( javaFile.toJavaFileObject() )
+        );
 
         assertThat( task.call() ).isTrue();
         assertThat( diagnosticCollector.getDiagnostics() ).isEmpty();

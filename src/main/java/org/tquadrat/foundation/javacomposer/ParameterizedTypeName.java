@@ -198,7 +198,7 @@ public sealed interface ParameterizedTypeName extends TypeName
      *
      *  @return The type arguments.
      */
-    public List<? extends TypeName> typeArguments();
+    public List<TypeName> typeArguments();
 
     /**
      *  {@inheritDoc}
