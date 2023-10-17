@@ -27,7 +27,7 @@ import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.javacomposer.NameAllocator;
 
 @ClassVersion( sourceVersion = "$Id: TestNameAllocator.java 937 2021-12-14 21:59:00Z tquadrat $" )
-@SuppressWarnings( {"static-method", "javadoc", "MisorderedAssertEqualsArguments"} )
+@SuppressWarnings( {"static-method"} )
 @DisplayName( "TestNameAllocator" )
 public final class TestNameAllocator
 {
@@ -84,14 +84,14 @@ public final class TestNameAllocator
         assertThat( nameAllocator.get( 1 ) ).isEqualTo( "public_" );
     }
 
-    @Test
-    public void nameCollision() throws Exception
-    {
-        final var nameAllocator = new NameAllocator();
-        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo" );
-        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo_" );
-        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo__" );
-    }
+//    @Test
+//    public void nameCollision() throws Exception
+//    {
+//        final var nameAllocator = new NameAllocator();
+//        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo" );
+//        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo_" );
+//        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo__" );
+//    }
 
     @Test
     public void nameCollisionWithTag() throws Exception

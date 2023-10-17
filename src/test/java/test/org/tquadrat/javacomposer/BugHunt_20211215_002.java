@@ -33,7 +33,6 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
  *  @version $Id: BugHunt_20211215_002.java 938 2021-12-15 14:42:53Z tquadrat $
  */
-@SuppressWarnings( "MisorderedAssertEqualsArguments" )
 @ClassVersion( sourceVersion = "$Id: BugHunt_20211215_002.java 938 2021-12-15 14:42:53Z tquadrat $" )
 @DisplayName( "test.org.tquadrat.javacomposer.BugHunt_20211215_002" )
 public class BugHunt_20211215_002 extends TestBaseClass
@@ -46,8 +45,12 @@ public class BugHunt_20211215_002 extends TestBaseClass
      *  {@link CodeBlock.Builder#addStatement(CodeBlock)}
      *
      *  @throws Exception   Something went wrong unexpectedly.
+     *
+     *  @deprecated {@link CodeBlock.Builder#addStatement(CodeBlock)} is
+     *      deprecated.
      */
     @Test
+    @Deprecated
     final void testCodeBlockAddStatement1() throws Exception
     {
         skipThreadTest();
@@ -82,8 +85,11 @@ public class BugHunt_20211215_002 extends TestBaseClass
      *  {@link CodeBlock.Builder#addStatement(CodeBlock)}
      *
      *  @throws Exception   Something went wrong unexpectedly.
+     *
+     *  @deprecated {@link CodeBlock.Builder#addStatement(CodeBlock)} is
+     *      deprecated.
      */
-    @SuppressWarnings( "ResultOfMethodCallIgnored" )
+    @Deprecated
     @Test
     final void testCodeBlockAddStatement2() throws Exception
     {

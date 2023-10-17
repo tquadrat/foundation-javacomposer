@@ -567,7 +567,7 @@ public sealed interface CodeBlock
      *  @deprecated Replaced by
      *      {@link #join(String, CodeBlock...)}.
      */
-    @SuppressWarnings( "removal" )
+    @SuppressWarnings( {"removal", "DeprecatedIsStillUsed"} )
     @Deprecated( since = "0.2.0", forRemoval = true )
     @API( status = DEPRECATED, since = "0.0.5" )
     public static CodeBlock join( final Iterable<CodeBlock> codeBlocks, final String separator )
