@@ -84,14 +84,14 @@ public final class TestNameAllocator
         assertThat( nameAllocator.get( 1 ) ).isEqualTo( "public_" );
     }
 
-//    @Test
-//    public void nameCollision() throws Exception
-//    {
-//        final var nameAllocator = new NameAllocator();
-//        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo" );
-//        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo_" );
-//        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo__" );
-//    }
+    @Test
+    public void nameCollision() throws Exception
+    {
+        final var nameAllocator = new NameAllocator();
+        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo" );
+        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo_" );
+        assertThat( nameAllocator.newName( "foo" ) ).isEqualTo( "foo__" );
+    }
 
     @Test
     public void nameCollisionWithTag() throws Exception
