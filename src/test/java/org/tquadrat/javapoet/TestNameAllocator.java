@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.javacomposer.NameAllocator;
 
-@ClassVersion( sourceVersion = "$Id: TestNameAllocator.java 937 2021-12-14 21:59:00Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestNameAllocator.java 1078 2023-10-19 14:39:47Z tquadrat $" )
 @SuppressWarnings( {"static-method"} )
 @DisplayName( "TestNameAllocator" )
 public final class TestNameAllocator

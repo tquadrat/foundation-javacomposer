@@ -31,9 +31,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  Some tests regarding some errors.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: BugHunt_20211215_002.java 938 2021-12-15 14:42:53Z tquadrat $
+ *  @version $Id: BugHunt_20211215_002.java 1078 2023-10-19 14:39:47Z tquadrat $
  */
-@ClassVersion( sourceVersion = "$Id: BugHunt_20211215_002.java 938 2021-12-15 14:42:53Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: BugHunt_20211215_002.java 1078 2023-10-19 14:39:47Z tquadrat $" )
 @DisplayName( "test.org.tquadrat.javacomposer.BugHunt_20211215_002" )
 public class BugHunt_20211215_002 extends TestBaseClass
 {

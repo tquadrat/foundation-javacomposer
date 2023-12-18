@@ -52,12 +52,12 @@ import org.tquadrat.foundation.javacomposer.TypeVariableName;
  *  for parameterised types.
  *
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterizedTypeNameImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
+ *  @version $Id: ParameterizedTypeNameImpl.java 1078 2023-10-19 14:39:47Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterizedTypeNameImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterizedTypeNameImpl.java 1078 2023-10-19 14:39:47Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ParameterizedTypeNameImpl extends TypeNameImpl implements ParameterizedTypeName
 {

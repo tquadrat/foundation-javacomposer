@@ -78,6 +78,7 @@ import org.tquadrat.foundation.javacomposer.internal.AnnotationValueVisitor;
 import org.tquadrat.foundation.javacomposer.internal.ClassNameImpl;
 import org.tquadrat.foundation.javacomposer.internal.ClassSpecImpl;
 import org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl;
+import org.tquadrat.foundation.javacomposer.internal.CodeProcessorImpl;
 import org.tquadrat.foundation.javacomposer.internal.EnumSpecImpl;
 import org.tquadrat.foundation.javacomposer.internal.FieldSpecImpl;
 import org.tquadrat.foundation.javacomposer.internal.InterfaceSpecImpl;
@@ -98,13 +99,13 @@ import org.tquadrat.foundation.util.JavaUtils;
  *  thread-safe without any synchronisation.</p>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaComposer.java 1067 2023-09-28 21:09:15Z tquadrat $
+ *  @version $Id: JavaComposer.java 1079 2023-10-22 17:44:34Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
-@SuppressWarnings( {"OverlyCoupledClass", "ClassWithTooManyMethods", "OverlyComplexClass"} )
-@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1067 2023-09-28 21:09:15Z tquadrat $" )
+@SuppressWarnings( {"OverlyCoupledClass", "ClassWithTooManyMethods", "OverlyComplexClass", "ClassWithTooManyFields"} )
+@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1079 2023-10-22 17:44:34Z tquadrat $" )
 @API( status = STABLE, since = "0.2.0" )
 public final class JavaComposer
 {
@@ -151,6 +152,11 @@ public final class JavaComposer
      */
     @SuppressWarnings( "FieldNamingConvention" )
     private final Lazy<AnnotationSpec> m_Annotation_UtilityClass;
+
+    /**
+     *  The code processor associated with this composer instance.
+     */
+    private final CodeProcessor m_CodeProcessor;
 
     /**
      *  The Javadoc comment for an overriding method.
@@ -334,6 +340,10 @@ public final class JavaComposer
             return retValue;
         };
         m_Method_ToString = Lazy.use( methodSpecSupplier );
+
+        //---* The code processor *--------------------------------------------
+        //noinspection ThisEscapedInObjectConstruction
+        m_CodeProcessor = new CodeProcessorImpl( this );
     }   //  JavaComposer()
 
         /*---------*\
@@ -1292,6 +1302,13 @@ public final class JavaComposer
         //---* Done *----------------------------------------------------------
         return retValue;
     }   //  fieldBuilder()
+
+    /**
+     *  Provides access to the code processor for this composer instance.
+     *
+     *  @return The code processor.
+     */
+    public final CodeProcessor getCodeProcessor() { return m_CodeProcessor; }
 
     /**
      *  Returns the layout that is used to format the output.

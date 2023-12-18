@@ -78,12 +78,12 @@ import org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CodeBlock.java 1067 2023-09-28 21:09:15Z tquadrat $
+ *  @version $Id: CodeBlock.java 1078 2023-10-19 14:39:47Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: CodeBlock.java 1067 2023-09-28 21:09:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: CodeBlock.java 1078 2023-10-19 14:39:47Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface CodeBlock
     permits CodeBlockImpl
@@ -97,13 +97,13 @@ public sealed interface CodeBlock
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeBlock.java 1067 2023-09-28 21:09:15Z tquadrat $
+     *  @version $Id: CodeBlock.java 1078 2023-10-19 14:39:47Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( {"InnerClassOfInterface", "ClassWithTooManyMethods"} )
-    @ClassVersion( sourceVersion = "$Id: CodeBlock.java 1067 2023-09-28 21:09:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeBlock.java 1078 2023-10-19 14:39:47Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static interface Builder
     {

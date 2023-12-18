@@ -43,7 +43,7 @@ import org.tquadrat.foundation.javacomposer.ParameterizedTypeName;
 import com.google.common.io.ByteStreams;
 
 @SuppressWarnings( {"static-method", "javadoc"} )
-@ClassVersion( sourceVersion = "$Id: TestFileReading.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestFileReading.java 1078 2023-10-19 14:39:47Z tquadrat $" )
 @DisplayName( "TestFileReading" )
 public class TestFileReading
 {

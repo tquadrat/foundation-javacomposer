@@ -38,12 +38,12 @@ import org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterizedTypeName.java 1068 2023-09-28 21:42:28Z tquadrat $
+ *  @version $Id: ParameterizedTypeName.java 1078 2023-10-19 14:39:47Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterizedTypeName.java 1068 2023-09-28 21:42:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterizedTypeName.java 1078 2023-10-19 14:39:47Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface ParameterizedTypeName extends TypeName
     permits ParameterizedTypeNameImpl
