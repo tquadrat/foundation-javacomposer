@@ -7,7 +7,7 @@
      version='1.1'
      baseProfile='full'
      width='1920.000'
-     height='987.000'>
+     height='899.000'>
     <defs>
         <style><![CDATA[
             line
@@ -118,7 +118,7 @@
         </marker>
         <clipPath id='ID000001'>
             <rect class='focusClass'
-                  height='161.000'
+                  height='139.000'
                   width='886.000'
                   x='0.000'
                   y='0.000'/>
@@ -130,7 +130,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='886.000'
-                          height='161.000'
+                          height='139.000'
                           class='focusClass'/>
                     <line x1='0.000'
                           y1='28.000'
@@ -161,31 +161,25 @@
                           class='abstract static'>+ from(wildcardName:java.lang.reflect.WildcardType):org.tquadrat.foundation.javacomposer.TypeName</text>
                     <text x='5.000'
                           y='91.000'
-                          class='abstract static'>+ get(mirror:javax.lang.model.type.WildcardType):org.tquadrat.foundation.javacomposer.TypeName</text>
-                    <text x='5.000'
-                          y='102.000'
-                          class='abstract static'>+ get(wildcardName:java.lang.reflect.WildcardType):org.tquadrat.foundation.javacomposer.TypeName</text>
-                    <text x='5.000'
-                          y='113.000'
                           class='abstract static'>+ subtypeOf(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.WildcardTypeName</text>
                     <text x='5.000'
-                          y='124.000'
+                          y='102.000'
                           class='abstract static'>+ subtypeOf(type:org.tquadrat.foundation.javacomposer.TypeName):org.tquadrat.foundation.javacomposer.WildcardTypeName</text>
                     <text x='5.000'
-                          y='135.000'
+                          y='113.000'
                           class='abstract static'>+ supertypeOf(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.WildcardTypeName</text>
                     <text x='5.000'
-                          y='146.000'
+                          y='124.000'
                           class='abstract static'>+ supertypeOf(type:org.tquadrat.foundation.javacomposer.TypeName):org.tquadrat.foundation.javacomposer.WildcardTypeName</text>
                     <text x='5.000'
-                          y='157.000'
+                          y='135.000'
                           class='abstract'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.WildcardTypeName</text>
                 </g>
             </g>
         </symbol>
         <clipPath id='ID000002'>
             <rect class='otherClass'
-                  height='238.000'
+                  height='194.000'
                   width='1870.000'
                   x='0.000'
                   y='0.000'/>
@@ -196,7 +190,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='1870.000'
-                          height='238.000'
+                          height='194.000'
                           class='otherClass'/>
                     <line x1='0.000'
                           y1='17.000'
@@ -236,36 +230,24 @@
                           class='static'>~ from(wildcardName:java.lang.reflect.WildcardType,typeVariables:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
                     <text x='5.000'
                           y='146.000'
-                          class='static'>+ get(mirror:javax.lang.model.type.WildcardType):org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
-                    <text x='5.000'
-                          y='157.000'
-                          class='static'>~ get(mirror:javax.lang.model.type.WildcardType,typeVariables:java.util.Map&lt;javax.lang.model.element.TypeParameterElement,org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl&gt;):org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
-                    <text x='5.000'
-                          y='168.000'
-                          class='static'>+ get(wildcardName:java.lang.reflect.WildcardType):org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
-                    <text x='5.000'
-                          y='179.000'
-                          class='static'>~ get(wildcardName:java.lang.reflect.WildcardType,typeVariables:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
-                    <text x='5.000'
-                          y='190.000'
                           class='static'>+ subtypeOf(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.internal.WildcardTypeNameImpl</text>
                     <text x='5.000'
-                          y='201.000'
+                          y='157.000'
                           class='static'>+ subtypeOf(type:org.tquadrat.foundation.javacomposer.TypeName):org.tquadrat.foundation.javacomposer.internal.WildcardTypeNameImpl</text>
                     <text x='5.000'
-                          y='212.000'
+                          y='168.000'
                           class='static'>+ supertypeOf(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.internal.WildcardTypeNameImpl</text>
                     <text x='5.000'
-                          y='223.000'
+                          y='179.000'
                           class='static'>+ supertypeOf(type:org.tquadrat.foundation.javacomposer.TypeName):org.tquadrat.foundation.javacomposer.internal.WildcardTypeNameImpl</text>
                     <text x='5.000'
-                          y='234.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.WildcardTypeNameImpl</text>
+                          y='190.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.WildcardTypeNameImpl</text>
                 </g>
             </g>
         </symbol>
         <clipPath id='ID000003'>
             <rect class='otherClass'
-                  height='238.000'
+                  height='216.000'
                   width='838.000'
                   x='0.000'
                   y='0.000'/>
@@ -276,7 +258,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='838.000'
-                          height='238.000'
+                          height='216.000'
                           class='otherClass'/>
                     <line x1='0.000'
                           y1='28.000'
@@ -321,48 +303,42 @@
                           class='abstract static'>+ from(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.TypeName</text>
                     <text x='5.000'
                           y='146.000'
-                          class='abstract static'>+ get(mirror:javax.lang.model.type.TypeMirror):org.tquadrat.foundation.javacomposer.TypeName</text>
-                    <text x='5.000'
-                          y='157.000'
-                          class='abstract static'>+ get(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.TypeName</text>
-                    <text x='5.000'
-                          y='168.000'
                           class='abstract'>+ hashCode():int</text>
                     <text x='5.000'
-                          y='179.000'
+                          y='157.000'
                           class='abstract'>+ isAnnotated():boolean</text>
                     <text x='5.000'
-                          y='190.000'
+                          y='168.000'
                           class='abstract'>+ isBoxedPrimitive():boolean</text>
                     <text x='5.000'
-                          y='201.000'
+                          y='179.000'
                           class='abstract'>+ isPrimitive():boolean</text>
                     <text x='5.000'
-                          y='212.000'
+                          y='190.000'
                           class='abstract'>+ toString():java.lang.String</text>
                     <text x='5.000'
-                          y='223.000'
+                          y='201.000'
                           class='abstract'>+ unbox():org.tquadrat.foundation.javacomposer.TypeName</text>
                     <text x='5.000'
-                          y='234.000'
+                          y='212.000'
                           class='abstract'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.TypeName</text>
                 </g>
             </g>
         </symbol>
     </defs>
     <path class='implementation'
-          d='M960.000,624.000 L960.000,524.000'
+          d='M960.000,580.000 L960.000,480.000'
           marker-end='url(#implementation)'/>
     <path class='inheritance'
-          d='M960.000,363.000 L960.000,263.000'
+          d='M960.000,341.000 L960.000,241.000'
           marker-end='url(#inheritance)'/>
     <use x='541.000'
          y='25.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.TypeName'/>
     <use x='517.000'
-         y='363.000'
+         y='341.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.WildcardTypeName'/>
     <use x='25.000'
-         y='624.000'
+         y='580.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.internal.WildcardTypeNameImpl'/>
 </svg>

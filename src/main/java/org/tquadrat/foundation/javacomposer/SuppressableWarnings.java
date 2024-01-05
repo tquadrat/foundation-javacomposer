@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2023 by Thomas Thrien.
+ * Copyright © 2002-2024 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  *
@@ -45,12 +45,12 @@ import org.tquadrat.foundation.annotation.ClassVersion;
  *  @see <a href="http://help.eclipse.org/photon/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Ftasks%2Ftask-suppress_warnings.htm&cp=1_4_8_4">Eclipse documentation</a>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: SuppressableWarnings.java 1068 2023-09-28 21:42:28Z tquadrat $
+ *  @version $Id: SuppressableWarnings.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: SuppressableWarnings.java 1068 2023-09-28 21:42:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: SuppressableWarnings.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public enum SuppressableWarnings
 {
@@ -393,17 +393,6 @@ public enum SuppressableWarnings
      *  is preferred.
      */
     USE_OF_CONCRETE_CLASS( "UseOfConcreteClass" );
-
-        /*-----------*\
-    ====** Constants **========================================================
-        \*-----------*/
-    /**
-     *  An empty array of {@code SuppressableWarnings} objects.
-     *
-     *  @deprecated Got obsolete.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final SuppressableWarnings [] EMPTY_SuppressableWarnings_ARRAY = new SuppressableWarnings [0];
 
         /*------------*\
     ====** Attributes **=======================================================

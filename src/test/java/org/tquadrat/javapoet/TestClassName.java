@@ -43,9 +43,9 @@ import org.tquadrat.javapoet.helper.CompilationRule;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestClassName.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: TestClassName.java 1085 2024-01-05 16:23:28Z tquadrat $
  */
-@ClassVersion( sourceVersion = "$Id: TestClassName.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestClassName.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @SuppressWarnings( {"javadoc", "MisorderedAssertEqualsArguments", "InnerClassTooDeeplyNested"} )
 @RunWith( JUnit4.class )
 @DisplayName( "TestClassName" )
@@ -84,71 +84,6 @@ public final class TestClassName
         /*---------*\
     ====** Methods **==========================================================
         \*---------*/
-    @SuppressWarnings( {"static-method", "deprecation"} )
-    private void assertBestGuessThrows( final String s )
-    {
-        try
-        {
-            ClassName.bestGuess( s );
-            fail( "Expected Exception was not thrown" );
-        }
-        catch( @SuppressWarnings( "unused" ) final IllegalArgumentException expected )
-        { /* Deliberately ignored */}
-    }
-
-    @Test
-    public void bestGuessForString_confusingInput()
-    {
-        assertBestGuessThrows( "" );
-        assertBestGuessThrows( "." );
-        assertBestGuessThrows( ".Map" );
-        assertBestGuessThrows( "java" );
-        assertBestGuessThrows( "java.util" );
-        assertBestGuessThrows( "java.util." );
-        assertBestGuessThrows( "java..util.Map.Entry" );
-        assertBestGuessThrows( "java.util..Map.Entry" );
-        assertBestGuessThrows( "java.util.Map..Entry" );
-        assertBestGuessThrows( "com.test.$" );
-        assertBestGuessThrows( "com.test.LooksLikeAClass.pkg" );
-        assertBestGuessThrows( "!@#$gibberish%^&*" );
-    }
-
-    @SuppressWarnings( {"static-method", "deprecation"} )
-    @Test
-    public void bestGuessForString_defaultPackage()
-    {
-        assertThat( ClassName.bestGuess( "SomeClass" ) ).isEqualTo( ClassName.from( "", "SomeClass" ) );
-        assertThat( ClassName.bestGuess( "SomeClass.Nested" ) ).isEqualTo( ClassName.from( "", "SomeClass", "Nested" ) );
-        assertThat( ClassName.bestGuess( "SomeClass.Nested.EvenMore" ) ).isEqualTo( ClassName.from( "", "SomeClass", "Nested", "EvenMore" ) );
-    }
-
-    @SuppressWarnings( {"static-method", "deprecation"} )
-    @Test
-    public void bestGuessForString_nestedClass()
-    {
-        assertThat( ClassName.bestGuess( Map.Entry.class.getCanonicalName() ) ).isEqualTo( ClassName.from( "java.util", "Map", "Entry" ) );
-
-        final var actual = ClassName.bestGuess( OuterClass.InnerClass.class.getCanonicalName() );
-        final var expected = ClassName.from( "org.tquadrat.foundation.javapoet", "TestClassName", "OuterClass", "InnerClass" );
-        assertEquals( expected, actual );
-    }
-
-    @SuppressWarnings( {"static-method", "deprecation"} )
-    @Test
-    public void bestGuessForString_simpleClass()
-    {
-        assertThat( ClassName.bestGuess( String.class.getName() ) ).isEqualTo( ClassName.from( "java.lang", "String" ) );
-    }
-
-    @SuppressWarnings( {"static-method", "deprecation"} )
-    @Test
-    public void bestGuessNonAscii()
-    {
-        final var className = ClassName.bestGuess( "com.\ud835\udc1andro\ud835\udc22d.\ud835\udc00ctiv\ud835\udc22ty" );
-        assertEquals( "com.\ud835\udc1andro\ud835\udc22d", className.packageName() );
-        assertEquals( "\ud835\udc00ctiv\ud835\udc22ty", className.simpleName() );
-    }
-
     @SuppressWarnings( "static-method" )
     @Test
     public void classNameFromClass()
@@ -165,9 +100,9 @@ public final class TestClassName
 
         actual = (ClassName.from( new Object()
         {
-            final Object inner = new Object()
+            final Object m_Inner = new Object()
             {/**/};
-        }.inner.getClass() )).toString();
+        }.m_Inner.getClass() )).toString();
         expected = "TestClassName$2$1";
         assertEquals( expected, actual );
 

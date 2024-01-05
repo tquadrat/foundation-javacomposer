@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -68,13 +68,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CodeWriter.java 1063 2023-09-26 15:14:16Z tquadrat $
+ *  @version $Id: CodeWriter.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "ClassWithTooManyMethods", "OverlyComplexClass"} )
-@ClassVersion( sourceVersion = "$Id: CodeWriter.java 1063 2023-09-26 15:14:16Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: CodeWriter.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class CodeWriter
 {
@@ -85,12 +85,12 @@ public final class CodeWriter
      *  The comment types.
      *
      *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeWriter.java 1063 2023-09-26 15:14:16Z tquadrat $
+     *  @version $Id: CodeWriter.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: CodeWriter.java 1063 2023-09-26 15:14:16Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeWriter.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     private static enum CommentType
     {
@@ -337,8 +337,6 @@ public final class CodeWriter
      *  @return This {@code CodeWriter} instance.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
-     *
-     *  @see CodeBlockImpl#of(String, Object...)
      */
     public final CodeWriter emit( final String format, final Object... args ) throws UncheckedIOException
     {
@@ -879,7 +877,7 @@ public final class CodeWriter
      */
     private static final String extractMemberName( final String part )
     {
-        var retValue = requireValidNonNullArgument( part, "part", v -> Character.isJavaIdentifierStart( v.charAt( 0 ) ), $ -> "not an identifier: %s".formatted( part ) );
+        var retValue = requireValidNonNullArgument( part, "part", v -> Character.isJavaIdentifierStart( v.charAt( 0 ) ), _ -> "not an identifier: %s".formatted( part ) );
         CheckLoop: for( var i = 1; i <= part.length(); ++i )
         {
             if( !SourceVersion.isIdentifier( part.substring( 0, i ) ) )
@@ -1036,7 +1034,7 @@ public final class CodeWriter
     @SuppressWarnings( "UnusedReturnValue" )
     public final CodeWriter popType()
     {
-        m_TypeSpecStack.remove( m_TypeSpecStack.size() - 1 );
+        m_TypeSpecStack.removeLast();
 
         //---* Done *----------------------------------------------------------
         return this;
@@ -1104,7 +1102,7 @@ public final class CodeWriter
         if( retValue.isEmpty() )
         {
             //---* Match the top-level class *---------------------------------
-            if( (!m_TypeSpecStack.isEmpty()) && Objects.equals( m_TypeSpecStack.get( 0 ).name(), simpleName ) )
+            if( (!m_TypeSpecStack.isEmpty()) && Objects.equals( m_TypeSpecStack.getFirst().name(), simpleName ) )
             {
                 retValue = Optional.of( ClassNameImpl.from( m_PackageName, simpleName ) );
             }
@@ -1136,7 +1134,7 @@ public final class CodeWriter
          * the name is required.
          */
         @SuppressWarnings( "OptionalGetWithoutIsPresent" )
-        var className = ClassNameImpl.from( m_PackageName, m_TypeSpecStack.get( 0 ).name().get() );
+        var className = ClassNameImpl.from( m_PackageName, m_TypeSpecStack.getFirst().name().get() );
         for( var i = 1; i <= stackDepth; ++i )
         {
             className = className.nestedClass( m_TypeSpecStack.get( i ).name().get() );
@@ -1199,7 +1197,7 @@ public final class CodeWriter
      */
     public final CodeWriter unindent( final int levels )
     {
-        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", v -> m_IndentLevel - levels >= 0, $ -> "cannot unindent %d from %d".formatted( levels, m_IndentLevel ) );
+        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", _ -> m_IndentLevel - levels >= 0, _ -> "cannot unindent %d from %d".formatted( levels, m_IndentLevel ) );
 
         //---* Done *----------------------------------------------------------
         return this;

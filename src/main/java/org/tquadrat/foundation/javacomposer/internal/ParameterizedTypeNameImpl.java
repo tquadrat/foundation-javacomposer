@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,6 @@ package org.tquadrat.foundation.javacomposer.internal;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.INTERNAL;
 import static org.apiguardian.api.API.Status.STABLE;
 import static org.tquadrat.foundation.lang.Objects.checkState;
@@ -52,12 +51,12 @@ import org.tquadrat.foundation.javacomposer.TypeVariableName;
  *  for parameterised types.
  *
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterizedTypeNameImpl.java 1078 2023-10-19 14:39:47Z tquadrat $
+ *  @version $Id: ParameterizedTypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterizedTypeNameImpl.java 1078 2023-10-19 14:39:47Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterizedTypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ParameterizedTypeNameImpl extends TypeNameImpl implements ParameterizedTypeName
 {
@@ -241,71 +240,6 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
         final var retValue = nonNull( ownerType )
             ? from( ownerType, typeArguments ).nestedClass( rawType.simpleName(), typeArgumentList.stream().map( t -> (TypeName) t ).collect( toList() ) )
             : new ParameterizedTypeNameImpl( null, rawType, typeArgumentList );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  from()
-
-    /**
-     *  Returns a parameterised type, applying the given type arguments to the
-     *  given raw type.
-     *
-     *  @param  rawType The class name for the new type.
-     *  @param  typeArguments   The type arguments.
-     *  @return The new instance of {@code ParameterizedTypeName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(Class, Type...)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final ParameterizedTypeNameImpl get( final Class<?> rawType, final Type... typeArguments )
-    {
-        final var retValue = from( rawType, typeArguments );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Returns a parameterised type, applying the given type arguments to the
-     *  given raw type.
-     *
-     *  @param  rawType The class name for the new type.
-     *  @param  typeArguments   The type arguments.
-     *  @return The new instance of {@code ParameterizedTypeName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(ClassName, TypeName...)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final ParameterizedTypeNameImpl get( final ClassName rawType, final TypeName... typeArguments )
-    {
-        final var retValue = from( rawType, typeArguments );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Returns a parameterised type equivalent to the given type.
-     *
-     *  @param  type    The other type.
-     *  @param  typeArguments   The type arguments.
-     *  @return The new instance of {@code ParameterizedTypeName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(ParameterizedType)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static ParameterizedTypeName get( final ParameterizedType type, final Map<Type,TypeVariableName> typeArguments  )
-    {
-        final var retValue = from( type, typeArguments );
 
         //---* Done *----------------------------------------------------------
         return retValue;

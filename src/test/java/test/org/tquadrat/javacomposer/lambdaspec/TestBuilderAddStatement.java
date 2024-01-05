@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  Copyright © 2002-2021 by Thomas Thrien.
+ *  Copyright © 2002-2024 by Thomas Thrien.
  *  All Rights Reserved.
  * ============================================================================
  *  Licensed to the public under the agreements of the GNU Lesser General Public
@@ -41,9 +41,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  {@link LambdaSpec.Builder}.
  *
  *  @author Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestBuilderAddStatement.java 1076 2023-10-03 18:36:07Z tquadrat $
+ *  @version $Id: TestBuilderAddStatement.java 1085 2024-01-05 16:23:28Z tquadrat $
  */
-@ClassVersion( sourceVersion = "$Id: TestBuilderAddStatement.java 1076 2023-10-03 18:36:07Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestBuilderAddStatement.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @DisplayName( "TestBuilderAddStatement" )
 public class TestBuilderAddStatement extends TestBaseClass
 {
@@ -51,9 +51,7 @@ public class TestBuilderAddStatement extends TestBaseClass
     ====** Methods **==========================================================
         \*---------*/
     /**
-     *  Tests for implementations of the methods
-     *  {@link LambdaSpec.Builder#addStatement(CodeBlock)}
-     *  and
+     *  Tests for implementation of the method
      *  {@link LambdaSpec.Builder#addStatement(String, Object...)}.
      */
     @Test
@@ -65,23 +63,6 @@ public class TestBuilderAddStatement extends TestBaseClass
         final var candidate = composer.lambdaBuilder();
 
         final Class<? extends Throwable> expectedException = NullArgumentException.class;
-
-        final CodeBlock codeBlock = null;
-        try
-        {
-            candidate.addStatement( codeBlock );
-            fail( () -> format( MSG_ExceptionNotThrown, expectedException.getName() ) );
-        }
-        catch( final AssertionError e ) { throw e; }
-        catch( final Throwable t )
-        {
-            final var isExpectedException = expectedException.isInstance( t );
-            if( !isExpectedException )
-            {
-                t.printStackTrace( out );
-            }
-            assertTrue( isExpectedException, () -> format( MSG_WrongExceptionThrown, expectedException.getName(), t.getClass().getName() ) );
-        }
 
         String format;
         Object [] args;

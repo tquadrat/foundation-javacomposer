@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,6 @@ package org.tquadrat.foundation.javacomposer.internal;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.INTERNAL;
 import static org.apiguardian.api.API.Status.MAINTAINED;
 import static org.apiguardian.api.API.Status.STABLE;
@@ -78,13 +77,13 @@ import org.tquadrat.foundation.lang.Lazy;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
+ *  @version $Id: TypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( "ClassWithTooManyFields" )
-@ClassVersion( sourceVersion = "$Id: TypeNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public sealed class TypeNameImpl implements TypeName
     permits ArrayTypeNameImpl, ClassNameImpl, ParameterizedTypeNameImpl, TypeVariableNameImpl, WildcardTypeNameImpl
@@ -428,7 +427,7 @@ public sealed class TypeNameImpl implements TypeName
                 {
                     final var typeArgumentNames = t.getTypeArguments()
                         .stream()
-                        .map( typeMirror -> get( typeMirror, typeVariables ) )
+                        .map( typeMirror -> from( typeMirror, typeVariables ) )
                         .collect( toList() );
                     //noinspection CastConflictsWithInstanceof
                     retValue = enclosing instanceof ParameterizedTypeName
@@ -536,85 +535,6 @@ public sealed class TypeNameImpl implements TypeName
     }   //  from()
 
     /**
-     *  Returns a type name equivalent to that from the given
-     *  {@link TypeMirror}
-     *  instance.
-     *
-     *  @param  mirror  The given type mirror instance.
-     *  @return The respective type name.
-     *
-     *  @deprecated Use
-     *      {@link #from(TypeMirror)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeNameImpl get( final TypeMirror mirror ) { return from( mirror ); }
-
-    /**
-     *  Returns a type name equivalent to that of the given
-     *  {@link Type}
-     *  instance.
-     *
-     *  @param  type    The type.
-     *  @return The respective type name for the given {@code Type} instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(Type)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeNameImpl get( final Type type ) { return from( type ); }
-
-    /**
-     *  Returns a type name equivalent to that from the given
-     *  {@link TypeMirror}
-     *  instance.
-     *
-     *  @param  mirror  The given type mirror instance.
-     *  @param  typeVariables   The type variables.
-     *
-     *  @return The respective type name.
-     *
-     *  @deprecated Use
-     *      {@link #from(TypeMirror,Map)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeNameImpl get( final TypeMirror mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
-    {
-        final var retValue = from( mirror, typeVariables );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Returns a type name equivalent to that of the given
-     *  {@link Type}
-     *  instance.
-     *
-     *  @param  type    The type.
-     *  @param  typeVariables   The type variables.
-     *  @return The respective type name for the given {@code Type} instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(Type,Map)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeNameImpl get( final Type type, final Map<Type,TypeVariableName> typeVariables )
-    {
-        final var retValue = from( type, typeVariables );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
      *  {@inheritDoc}
      */
     @Override
@@ -696,7 +616,7 @@ public sealed class TypeNameImpl implements TypeName
     {
         requireNonNullArgument( typeVariables, "typeVariables" );
         final var retValue = stream( requireNonNullArgument( types, "types" ) )
-            .map( t -> get( t, typeVariables ) )
+            .map( t -> from( t, typeVariables ) )
             .collect( toList() );
 
         //---* Done *----------------------------------------------------------

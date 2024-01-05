@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 
 import java.lang.reflect.ParameterizedType;
@@ -38,12 +37,12 @@ import org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterizedTypeName.java 1078 2023-10-19 14:39:47Z tquadrat $
+ *  @version $Id: ParameterizedTypeName.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterizedTypeName.java 1078 2023-10-19 14:39:47Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterizedTypeName.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface ParameterizedTypeName extends TypeName
     permits ParameterizedTypeNameImpl
@@ -108,64 +107,6 @@ public sealed interface ParameterizedTypeName extends TypeName
         //---* Done *----------------------------------------------------------
         return retValue;
     }   //  from()
-
-    /**
-     *  Returns a parameterised type, applying the given type arguments to the
-     *  given raw type.
-     *
-     *  @param  rawType The class name for the new type.
-     *  @param  typeArguments   The type arguments.
-     *  @return The new instance of {@code ParameterizedTypeName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(Class, Type...)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static ParameterizedTypeName get( final Class<?> rawType, final Type... typeArguments )
-    {
-        final var retValue = from( rawType, typeArguments );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Returns a parameterised type, applying the given type arguments to the
-     *  given raw type.
-     *
-     *  @param  rawType The class name for the new type.
-     *  @param  typeArguments   The type arguments.
-     *  @return The new instance of {@code ParameterizedTypeName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(ClassName, TypeName...)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static ParameterizedTypeName get( final ClassName rawType, final TypeName... typeArguments )
-    {
-        final var retValue = from( rawType, typeArguments );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Returns a parameterised type equivalent to the given type.
-     *
-     *  @param  type    The other type.
-     *  @return The new instance of {@code ParameterizedTypeName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(ParameterizedType)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static ParameterizedTypeName get( final ParameterizedType type ) { return from( type ); }
 
     /**
      *  Returns a new {@code ParameterizedTypeName} instance for the specified

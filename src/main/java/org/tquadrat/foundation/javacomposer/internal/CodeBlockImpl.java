@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,10 +22,8 @@ package org.tquadrat.foundation.javacomposer.internal;
 import static java.lang.Math.min;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.INTERNAL;
 import static org.apiguardian.api.API.Status.STABLE;
-import static org.tquadrat.foundation.javacomposer.internal.Util.NO_DEBUG_OUTPUT;
 import static org.tquadrat.foundation.javacomposer.internal.Util.NULL_REFERENCE;
 import static org.tquadrat.foundation.javacomposer.internal.Util.createDebugOutput;
 import static org.tquadrat.foundation.lang.Objects.checkState;
@@ -46,7 +44,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
@@ -55,7 +52,6 @@ import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collector;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
@@ -78,12 +74,12 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $
+ *  @version $Id: CodeBlockImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class CodeBlockImpl implements CodeBlock
 {
@@ -99,13 +95,12 @@ public final class CodeBlockImpl implements CodeBlock
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $
+     *  @version $Id: CodeBlockImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @SuppressWarnings( {"OverlyComplexClass"} )
-    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements CodeBlock.Builder
     {
@@ -179,163 +174,6 @@ public final class CodeBlockImpl implements CodeBlock
         }   //  add()
 
         /**
-         *  Adds the given debug output.
-         *
-         *  @param  debugOutput The debug output.
-         *  @return This {@code Builder} instance.
-         *
-         *  @deprecated  Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType"} )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        public final BuilderImpl add( final Optional<DebugOutput> debugOutput )
-        {
-            requireNonNullArgument( debugOutput, "debugOutput" ).ifPresent( v -> m_FormatParts.add( v.asComment() ) );
-
-            //---* Done *----------------------------------------------------------
-            return this;
-        }   //  add()
-
-        /**
-         *  {@inheritDoc}
-         *
-         *  @deprecated  Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Override
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public final BuilderImpl add( final boolean addDebugOutput, final String format, final Object... args )
-        {
-            return add( createDebugOutput( addDebugOutput, true ), format, args );
-        }   //  add()
-
-        /**
-         *  <p>{@summary Adds code with positional or relative arguments.}</p>
-         *  <p>Relative arguments map 1:1 with the placeholders in the format
-         *  string.</p>
-         *  <p>Positional arguments use an index after the placeholder to
-         *  identify which argument index to use. For example, for a literal to
-         *  reference the 3<sup>rd</sup> argument, use {@code "$3L"} (1 based
-         *  index).</p>
-         *  <p>Mixing relative and positional arguments in a call to add is
-         *  invalid and will result in an error.</p>
-         *
-         *  @param  debugOutput The debug output that is added to the generated
-         *      code.
-         *  @param  format  The format; may be empty.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated We do no longer expose the debug output generation.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType", "OverlyComplexMethod", "LocalVariableNamingConvention", "CharacterComparison"} )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public final BuilderImpl add( final Optional<DebugOutput> debugOutput, final String format, final Object... args )
-        {
-            add( debugOutput );
-
-            var hasRelative = false;
-            var hasIndexed = false;
-            var relativeParameterCount = 0;
-
-            final var length = requireNonNullArgument( format, "format" ).length();
-            final var indexedParameterCount = new int [requireNonNullArgument( args, "args" ).length];
-
-            ParseLoop:
-            //noinspection ForLoopWithMissingComponent
-            for( var pos = 0; pos < length; /* Update is inside the loop body */ )
-            {
-                if( format.charAt( pos ) != '$' )
-                {
-                    var nextPos = format.indexOf( '$', pos + 1 );
-                    if( nextPos == -1 ) nextPos = format.length();
-                    m_FormatParts.add( format.substring( pos, nextPos ) );
-                    pos = nextPos;
-                    continue ParseLoop;
-                }
-
-                //---* The update for the for-loop … *-------------------------
-                ++pos ; // '$'.
-
-                /*
-                 * Consume zero or more digits, leaving 'c' as the first
-                 * non-digit char after the '$'.
-                 */
-                final var indexStart = pos;
-                char c;
-                do
-                {
-                    checkState( pos < format.length(), () -> new ValidationException( "dangling format characters in '%s'".formatted( format ) ) );
-                    c = format.charAt( pos++ );
-                }
-                while( c >= '0' && c <= '9' );
-                final var indexEnd = pos - 1;
-
-                //---* If 'c' doesn't take an argument, we're done *-----------
-                if( isNoArgPlaceholder( c ) )
-                {
-                    checkState( indexStart == indexEnd, () -> new ValidationException( "$$, $>, $<, $[, $], $W, and $Z may not have an index" ) );
-                    m_FormatParts.add( "$" + c );
-                    continue ParseLoop;
-                }
-
-                /*
-                 * Find either the indexed argument, or the relative argument
-                 * (0-based).
-                 */
-                final int index;
-                if( indexStart < indexEnd )
-                {
-                    index = Integer.parseInt( format.substring( indexStart, indexEnd ) ) - 1;
-                    hasIndexed = true;
-                    if( args.length > 0 )
-                    {
-                        //---* modulo is needed, checked below anyway *--------
-                        ++indexedParameterCount [index % args.length];
-                    }
-                }
-                else
-                {
-                    index = relativeParameterCount++;
-                    hasRelative = true;
-                }
-
-                checkState( index >= 0 && index < args.length, () -> new ValidationException( "index %d for '%s' not in range (received %s arguments)".formatted( index + 1, format.substring( indexStart - 1, indexEnd + 1 ), args.length ) ) );
-                checkState( !hasIndexed || !hasRelative, () -> new ValidationException( "cannot mix indexed and positional parameters" ) );
-
-                addArgument( format, c, args [index] );
-
-                m_FormatParts.add( "$" + c );
-            }   //  ParseLoop:
-
-            if( hasRelative && (relativeParameterCount < args.length) )
-            {
-                throw new ValidationException( "unused arguments: expected %s, received %s".formatted( relativeParameterCount, args.length ) );
-            }
-            if( hasIndexed )
-            {
-                final Collection<String> unused = IntStream.range( 0, args.length )
-                    .filter( i -> indexedParameterCount[i] == 0 )
-                    .mapToObj( i -> "$" + (i + 1) )
-                    .collect( toList() );
-                final var s = unused.size() == 1 ? "" : "s";
-                if( !unused.isEmpty() )
-                {
-                    throw new ValidationException( "unused argument%s: %s".formatted( s, String.join( ", ", unused ) ) );
-                }
-            }
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  add()
-
-        /**
          *  {@inheritDoc}
          */
         @API( status = INTERNAL, since = "0.2.0" )
@@ -378,105 +216,6 @@ public final class CodeBlockImpl implements CodeBlock
             createDebugOutput( m_Composer.addDebugOutput() )
                 .ifPresent( v -> m_FormatParts.add( v.asComment() ) );
         }   //  addDebug()
-
-        /**
-         *  {@inheritDoc}
-         *
-         *  @deprecated  Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Override
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public final BuilderImpl addNamed( final boolean addDebugOutput, final String format, final Map<String,?> args )
-        {
-            return addNamed( createDebugOutput( addDebugOutput, true ), format, args );
-        }   //  addNamed()
-
-        /**
-         *  <p>{@summary Adds code using named arguments.}</p>
-         *  <p>Named arguments specify their name after the '$' followed by a
-         *  colon {@code ":"} and the corresponding type character. Argument
-         *  names consist of characters in {@code a-z, A-Z, 0-9, and _} and
-         *  must start with a lowercase character.</p>
-         *  <p>For example, to refer to the type
-         *  {@link java.lang.Integer}
-         *  with the argument name {@code clazz} use a format string containing
-         *  {@code $clazz:T} and include the key {@code clazz} with value
-         *  {@code java.lang.Integer.class} in the argument map.</p>
-         *
-         *  @param  debugOutput The debug output that is added to the generated
-         *      code.
-         *  @param  format  The format.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated We do no longer expose the debug output generation.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType", "LocalVariableNamingConvention"} )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public final BuilderImpl addNamed( final Optional<DebugOutput> debugOutput, final String format, final Map<String,?> args )
-        {
-            add( debugOutput );
-
-            for( final var argument : requireNonNullArgument( args, "args" ).keySet() )
-            {
-                checkState( LOWERCASE.matcher( argument ).matches(), () -> new ValidationException( "argument '%s' must start with a lowercase character".formatted( argument ) ) );
-            }
-            if( isNotEmpty( requireNonNullArgument( format, "format" ) ) )
-            {
-                var p = 0;
-                ParseLoop: while( p < format.length() )
-                {
-                    final var nextP = format.indexOf( "$", p );
-                    if( nextP == -1 )
-                    {
-                        m_FormatParts.add( format.substring( p ) );
-                        break ParseLoop;
-                    }
-
-                    if( p != nextP )
-                    {
-                        m_FormatParts.add( format.substring( p, nextP ) );
-                        p = nextP;
-                    }
-
-                    Matcher matcher = null;
-                    final var colon = format.indexOf( ':', p );
-                    if( colon != -1 )
-                    {
-                        final var endIndex = min( colon + 2, format.length() );
-                        matcher = NAMED_ARGUMENT.matcher( format.substring( p, endIndex ) );
-                    }
-                    if( nonNull( matcher ) && matcher.lookingAt() )
-                    {
-                        final var argumentName = matcher.group( "argumentName" );
-                        checkState( args.containsKey( argumentName ), () -> new ValidationException( "Missing named argument for $%s".formatted( argumentName ) ) );
-                        final var formatChar = matcher.group( "typeChar" ).charAt( 0 );
-                        addArgument( format, formatChar, args.get( argumentName ) );
-                        m_FormatParts.add( "$" + formatChar );
-                        p += matcher.regionEnd();
-                    }
-                    else
-                    {
-                        checkState( p < format.length() - 1, () -> new ValidationException( "dangling $ at end" ) );
-                        if( !isNoArgPlaceholder( format.charAt( p + 1 ) ) )
-                        {
-                            throw new ValidationException( "unknown format $%s at %s in '%s'".formatted( format.charAt( p + 1 ), p + 1, format ) );
-                        }
-                        m_FormatParts.add( format.substring( p, p + 2 ) );
-                        p += 2;
-                    }
-                }   //  ParseLoop:
-            }
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  addNamed()
 
         /**
          *  {@inheritDoc}
@@ -545,61 +284,6 @@ public final class CodeBlockImpl implements CodeBlock
         /**
          *  {@inheritDoc}
          */
-        @Override
-        public final BuilderImpl addStatement( final CodeBlock codeBlock )
-        {
-            addStatement( NO_DEBUG_OUTPUT, "$L", requireNonNullArgument( codeBlock, "codeBlock" ) );
-            m_StaticImports.addAll( ((CodeBlockImpl) codeBlock).getStaticImports() );
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  addStatement()
-
-        /**
-         *  {@inheritDoc}
-         *
-         *  @deprecated  Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Override
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public final BuilderImpl addStatement( final boolean addDebugOutput, final String format, final Object... args )
-        {
-            return addStatement( createDebugOutput( addDebugOutput, true ), format, args );
-        }   //  addStatement()
-
-        /**
-         *  <p>{@summary Adds a statement.}</p>
-         *  <p>Do not use this method when the resulting code should be used
-         *  as a field initializer. Use
-         *  {@link #add(String, Object...)}
-         *  instead.</p>
-         *
-         *  @param  debugOutput The debug output that is added to the generated
-         *      code.
-         *  @param  format  The format.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @see org.tquadrat.foundation.javacomposer.FieldSpec.Builder#initializer(CodeBlock)
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated We do no longer expose the debug output generation.
-         */
-        @Deprecated( since ="0.2.0", forRemoval = true )
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType"} )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public final BuilderImpl addStatement( final Optional<DebugOutput> debugOutput, final String format, final Object... args )
-        {
-            return add( debugOutput, "$[" ).add( NO_DEBUG_OUTPUT, format, args ).add( NO_DEBUG_OUTPUT, ";\n$]" );
-        }   //  addStatement()
-
-        /**
-         *  {@inheritDoc}
-         */
         @API( status = STABLE, since = "0.2.0" )
         @Override
         public final BuilderImpl addStatement( final String format, final Object... args )
@@ -640,7 +324,7 @@ public final class CodeBlockImpl implements CodeBlock
                             name,
                             "name",
                             Objects::nonNull,
-                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -886,58 +570,6 @@ public final class CodeBlockImpl implements CodeBlock
 
         /**
          *  {@inheritDoc}
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        @Override
-        public final BuilderImpl beginControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args )
-        {
-            return beginControlFlow( createDebugOutput( addDebugOutput, true ), controlFlow, args );
-        }   //  beginControlFlow()
-
-        /**
-         *  Starts a control flow construct.
-         *
-         *  @param  debugOutput The debug output that is added to the generated
-         *      code.
-         *  @param  controlFlow The control flow construct and its code, such
-         *      as {@code if (foo == 5)}.<br>
-         *      <br>Shouldn't contain braces or newline characters.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType"} )
-        public final BuilderImpl beginControlFlow( final Optional<DebugOutput> debugOutput, final String controlFlow, final Object... args )
-        {
-            if( isNotEmptyOrBlank( requireNonNullArgument( controlFlow, "controlFlow" ) ) )
-            {
-                add( debugOutput, controlFlow, args );
-                if( !controlFlow.endsWith( "\n" ) ) add( " " );
-                add( "{\n" );
-            }
-            else
-            {
-                add( debugOutput, "{\n" );
-            }
-            indent();
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  beginControlFlow()
-
-        /**
-         *  {@inheritDoc}
          */
         @API( status = INTERNAL, since = "0.0.5" )
         @Override
@@ -971,53 +603,6 @@ public final class CodeBlockImpl implements CodeBlock
             addDebug();
             unindent();
             addWithoutDebugInfo( "}\n" );
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  endControlFlow()
-
-        /**
-         *  {@inheritDoc}
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        @Override
-        public final BuilderImpl endControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args )
-        {
-            return endControlFlow( createDebugOutput( addDebugOutput, true ), controlFlow, args );
-        }   //  endControlFlow()
-
-        /**
-         *  <p>{@summary Ends a control flow construct that was previously
-         *  started with a call to
-         *  {@link #beginControlFlow(String, Object...)}
-         *  or
-         *  {@link #beginControlFlow(boolean, String, Object...)}.}</p>
-         *  <p>This form is only used for {@code do/while} control flows.</p>
-         *
-         *  @param  debugOutput The debug output that is added to the generated
-         *      code.
-         *  @param controlFlow  The optional control flow construct and its
-         *      code, such as {@code while(foo == 20)}.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType"} )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public final BuilderImpl endControlFlow( final Optional<DebugOutput> debugOutput, final String controlFlow, final Object... args )
-        {
-            unindent();
-            add( debugOutput, "} " + requireNonNullArgument( controlFlow, "controlFlow" ) + ";\n", args );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -1083,54 +668,6 @@ public final class CodeBlockImpl implements CodeBlock
 
         /**
          *  {@inheritDoc}
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        @Override
-        public final BuilderImpl nextControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args )
-        {
-            return nextControlFlow( createDebugOutput( addDebugOutput, true ), controlFlow, args );
-        }   //  nextControlFlow()
-
-        /**
-         *  Adds another control flow construct to an already existing one.
-         *
-         *  @param  debugOutput The debug output that is added to the generated
-         *      code.
-         *  @param controlFlow  The control flow construct and its code, such
-         *      as {@code else if (foo == 10)}.<br>
-         *      <br>Shouldn't contain braces or newline characters.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "OptionalUsedAsFieldOrParameterType"} )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public final BuilderImpl nextControlFlow( final Optional<DebugOutput> debugOutput, final String controlFlow, final Object... args )
-        {
-            unindent();
-            add( "}" );
-            if( !requireNonNullArgument( controlFlow, "controlFlow" ).startsWith( "\n" ) ) add( " " );
-            add( debugOutput, controlFlow, args );
-            if( !controlFlow.endsWith( "\n" ) ) add(" " );
-            add( "{\n" );
-            indent();
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  nextControlFlow()
-
-        /**
-         *  {@inheritDoc}
          */
         @API( status = INTERNAL, since = "0.0.5" )
         @Override
@@ -1166,12 +703,12 @@ public final class CodeBlockImpl implements CodeBlock
      *  A helper class that supports to join code blocks.
      *
      *  @author Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $
+     *  @version $Id: CodeBlockImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1063 2023-09-26 15:14:16Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     private static final class CodeBlockJoiner
     {
@@ -1349,18 +886,6 @@ public final class CodeBlockImpl implements CodeBlock
     public final List<Object> args() { return List.copyOf( m_Args ); }
 
     /**
-     *  Creates a builder for an instance of {@code CodeBlock}.
-     *
-     *  @return The new builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.6" )
-    public static BuilderImpl builder() { return new BuilderImpl( new JavaComposer() ); }
-
-    /**
      *  {@inheritDoc}
      */
     @Override
@@ -1480,63 +1005,6 @@ public final class CodeBlockImpl implements CodeBlock
     }   //  join()
 
     /**
-     *  <p>{@summary Joins the given code blocks into a single
-     *  {@code CodeBlockImpl} instance, each separated the given
-     *  separator.}</p>
-     *  <p>For example, joining &quot;{@code String s}&quot;,
-     *  &quot;{@code Object o}&quot; and &quot;{@code int i}&quot; using
-     *  &quot;{@code , }&quot; as the separator would produce
-     *  &quot;{@code String s, Object o, int i}&quot;.</p>
-     *
-     *  @param  codeBlocks  The code blocks to join.
-     *  @param  separator   The separator.
-     *  @return The new code block.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final CodeBlockImpl join( final Iterable<CodeBlock> codeBlocks, final String separator )
-    {
-        final var retValue = StreamSupport.stream( codeBlocks.spliterator(), false )
-            .map( codeBlock -> (CodeBlockImpl) codeBlock )
-            .collect( joiningStatic( separator ) );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  join()
-
-    /**
-     *  <p>{@summary Joins the given code blocks into a single
-     *  {@code CodeBlock} instance, each separated the given separator. The
-     *  given prefix will be prepended to the new {@code CodeBloc}, and the
-     *  given suffix will be appended to it.}</p>
-     *  <p>For example, joining &quot;{@code String s}&quot;,
-     *  &quot;{@code Object o}&quot; and &quot;{@code int i}&quot; using
-     *  &quot;{@code , }&quot; as the separator would produce
-     *  &quot;{@code String s, Object o, int i}&quot;.</p>
-     *
-     *  @param  codeBlocks  The code blocks to join.
-     *  @param  separator   The separator.
-     *  @param  prefix  The prefix.
-     *  @param  suffix  The suffix.
-     *  @return The new code block.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static CodeBlockImpl join( final Iterable<CodeBlock> codeBlocks, final String separator, final String prefix, final String suffix  )
-    {
-        final var retValue = StreamSupport.stream( codeBlocks.spliterator(), false )
-            .map( codeBlock -> (CodeBlockImpl) codeBlock )
-            .collect( joiningStatic( separator, prefix, suffix ) );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  join()
-
-    /**
      *  <p>{@summary A
      *  {@link Collector}
      *  implementation that joins {@code CodeBlock} instances together into one
@@ -1599,79 +1067,6 @@ public final class CodeBlockImpl implements CodeBlock
     }   //  joining()
 
     /**
-     *  <p>{@summary A
-     *  {@link Collector}
-     *  implementation that joins {@code CodeBlock} instances together into one
-     *  new code block, separated by the given separator.}</p>
-     *  <p>For example, joining &quot;{@code String s}&quot;,
-     *  &quot;{@code Object o}&quot; and &quot;{@code int i}&quot; using
-     *  &quot;{@code , }&quot; as the separator would produce
-     *  &quot;{@code String s, Object o, int i}&quot;.</p>
-     *
-     *  @param  separator   The separator.
-     *  @return The new collector.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final Collector<CodeBlockImpl,?,CodeBlockImpl> joiningStatic( final String separator )
-    {
-        final Collector<CodeBlockImpl,?,CodeBlockImpl> retValue = Collector.of
-            (
-                () -> new CodeBlockJoiner( separator, new BuilderImpl( new JavaComposer() ) ), CodeBlockJoiner::add, CodeBlockJoiner::merge, CodeBlockJoiner::join
-            );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  joiningStatic()
-
-    /**
-     *  <p>{@summary A
-     *  {@link Collector}
-     *  implementation that joins {@code CodeBlock} instances together into one
-     *  new code block, separated by the given separator.} The given prefix
-     *  will be prepended to the new {@code CodeBloc}, and the given suffix
-     *  will be appended to it.</p>
-     *  <p>For example, joining &quot;{@code String s}&quot;,
-     *  &quot;{@code Object o}&quot; and &quot;{@code int i}&quot; using
-     *  &quot;{@code , }&quot; as the separator, and
-     *  &quot;{@code int func( }&quot; as the prefix and &quot; {@code )}&quot;
-     *  as the suffix respectively would produce
-     *  &quot;{@code int func( String s, Object o, int i )}&quot;.</p>
-     *
-     *  @param  separator   The separator.
-     *  @param  prefix  The prefix.
-     *  @param  suffix  The suffix.
-     *  @return The new collector.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final Collector<CodeBlockImpl,?,CodeBlockImpl> joiningStatic( final String separator, final String prefix, final String suffix )
-    {
-        final var composer = new JavaComposer();
-        final var builder = new BuilderImpl( composer );
-        builder.add( "$N", prefix );
-        final Collector<CodeBlockImpl,?,CodeBlockImpl> retValue = Collector.of
-            (
-                () -> new CodeBlockJoiner( separator, builder ), CodeBlockJoiner::add, CodeBlockJoiner::merge, joiner ->
-                {
-                    builder.add( composer.codeBlockOf( "$N", suffix ) );
-                    return joiner.join();
-                }
-            );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  joiningStatic()
-
-    /**
      *  Composes a stream from the given {@code CodeBlock} instances.
      *
      *  @param  head    The first code block.
@@ -1693,52 +1088,6 @@ public final class CodeBlockImpl implements CodeBlock
         //---* Done *----------------------------------------------------------
         return retValue;
     }   //  makeCodeBlockStream()
-
-    /**
-     *  Creates a new {@code CodeBlock} instance from the given format and
-     *  arguments.
-     *
-     *  @param  format  The format.
-     *  @param  args    The arguments.
-     *  @return The new code block.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.6" )
-    public static final CodeBlockImpl of( final String format, final Object... args )
-    {
-        final var retValue = of( NO_DEBUG_OUTPUT, format, args );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  of()
-
-    /**
-     *  Creates a new {@code CodeBlock} instance from the given format and
-     *  arguments, and adds the given debug output if any.
-     *
-     *  @param  debugOutput The debug output.
-     *  @param  format  The format.
-     *  @param  args    The arguments.
-     *  @return The new code block.
-     *
-     *  @since 0.0.6
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( {"OptionalUsedAsFieldOrParameterType"} )
-    @API( status = DEPRECATED, since = "0.0.6" )
-    public static final CodeBlockImpl of( final Optional<DebugOutput> debugOutput, final String format, final Object... args )
-    {
-        final var retValue = builder().add( requireNonNullArgument( debugOutput, "debugOutput" ), format, args ).build();
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  of()
 
     /**
      *  Creates a new builder that is initialised with the components of this

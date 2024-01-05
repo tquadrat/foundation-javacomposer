@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -70,12 +70,12 @@ import org.tquadrat.foundation.javacomposer.TypeSpec;
  *
  *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org
  *  @thanks Square,Inc.
- *  @version $Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
+ *  @version $Id: RecordSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.2.0" )
 public final class RecordSpecImpl extends TypeSpecImpl
 {
@@ -89,14 +89,14 @@ public final class RecordSpecImpl extends TypeSpecImpl
      *
      *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org
      *  @thanks Square,Inc.
-     *  @version $Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
+     *  @version $Id: RecordSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
+     *  @version $Id: RecordSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = INTERNAL, since = "0.2.0" )
     public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl
     {
@@ -125,7 +125,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
         @Override
         public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), $ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
+            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), _ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();
@@ -175,7 +175,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
                     return spec.hasModifier( PRIVATE ) && !spec.hasModifier( FINAL );
                 }
             };
-            super.addField( requireValidNonNullArgument( fieldSpec, "fieldSpec", validation, $ -> "Invalid modifiers for record field" ) );
+            super.addField( requireValidNonNullArgument( fieldSpec, "fieldSpec", validation, _ -> "Invalid modifiers for record field" ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -219,7 +219,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
         @Override
         public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), $ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
+            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), _ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();

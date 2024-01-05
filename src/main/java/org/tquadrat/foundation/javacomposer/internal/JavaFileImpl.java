@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -71,12 +71,12 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaFileImpl.java 1064 2023-09-26 20:16:12Z tquadrat $
+ *  @version $Id: JavaFileImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1064 2023-09-26 20:16:12Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class JavaFileImpl implements JavaFile
 {
@@ -91,12 +91,12 @@ public final class JavaFileImpl implements JavaFile
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: JavaFileImpl.java 1064 2023-09-26 20:16:12Z tquadrat $
+     *  @version $Id: JavaFileImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1064 2023-09-26 20:16:12Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements JavaFile.Builder
     {
@@ -241,7 +241,7 @@ public final class JavaFileImpl implements JavaFile
                             name,
                             "name",
                             Objects::nonNull,
-                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -273,55 +273,6 @@ public final class JavaFileImpl implements JavaFile
          */
         @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
         public final CodeBlockImpl fileComment() { return m_FileComment.build(); }
-
-        /**
-         *  {@inheritDoc}
-         *
-         *  @deprecated The indentation is determined by the layout only; it
-         *      cannot be overwritten. This implementation of this method does
-         *      nothing.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @Override
-        @API( status = DEPRECATED, since = "0.0.5" )
-        public final BuilderImpl indent( final String indent )
-        {
-            /*
-             * Does nothing
-             */
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  indent()
-
-        /**
-         *  Returns the indentation String.
-         *
-         *  @return The indentation String.
-         *
-         *  @see #indent(String)
-         *
-         *  @deprecated The indentation is determined by the layout only; it
-         *      cannot be overwritten. This makes this method obsolete.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
-        @API( status = DEPRECATED, since = "0.0.5" )
-        public final String indent() { return m_Layout.indent(); }
-
-        /**
-         *  {@inheritDoc}
-         */
-        @SuppressWarnings( {"removal"} )
-        @Override
-        public final BuilderImpl layout( final Layout layout )
-        {
-            m_Layout = requireNonNullArgument( layout, "layout" );
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  layout()
 
         /**
          *  Returns the layout for the output of the
@@ -788,7 +739,7 @@ public final class JavaFileImpl implements JavaFile
     @Override
     public void writeTo( final Path directory ) throws IOException
     {
-        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -> notExists( v ) || isDirectory( v ), $ -> "path %s exists but is not a directory.".formatted( directory ) );
+        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -> notExists( v ) || isDirectory( v ), _ -> "path %s exists but is not a directory.".formatted( directory ) );
         if( !m_PackageName.isEmpty() )
         {
             for( final var packageComponent : m_PackageName.split( "\\." ) )

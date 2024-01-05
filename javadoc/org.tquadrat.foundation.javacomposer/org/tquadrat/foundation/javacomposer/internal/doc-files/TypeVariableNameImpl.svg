@@ -7,7 +7,7 @@
      version='1.1'
      baseProfile='full'
      width='2484.000'
-     height='1416.000'>
+     height='1262.000'>
     <defs>
         <style><![CDATA[
             line
@@ -118,7 +118,7 @@
         </marker>
         <clipPath id='ID000001'>
             <rect class='focusClass'
-                  height='348.000'
+                  height='260.000'
                   width='1558.000'
                   x='0.000'
                   y='0.000'/>
@@ -130,7 +130,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='1558.000'
-                          height='348.000'
+                          height='260.000'
                           class='focusClass'/>
                     <line x1='0.000'
                           y1='17.000'
@@ -183,48 +183,24 @@
                           y='190.000'
                           class='static'>+ from(mirror:javax.lang.model.type.TypeVariable,typeVariables:java.util.Map&lt;javax.lang.model.element.TypeParameterElement,org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl&gt;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
                     <text x='5.000'
-                          y='201.000'
-                          class='static'>+ get(type:java.lang.reflect.TypeVariable&lt;?&gt;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
+                          y='201.000'>+ name():java.lang.String</text>
                     <text x='5.000'
                           y='212.000'
-                          class='static'>+ get(type:java.lang.reflect.TypeVariable&lt;?&gt;,typeVariables:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
-                    <text x='5.000'
-                          y='223.000'
-                          class='static'>+ get(name:java.lang.String):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
-                    <text x='5.000'
-                          y='234.000'
-                          class='static'>+ get(name:java.lang.String,bounds:java.lang.reflect.Type&#x2026;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
-                    <text x='5.000'
-                          y='245.000'
-                          class='static'>+ get(name:java.lang.String,bounds:org.tquadrat.foundation.javacomposer.TypeName&#x2026;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
-                    <text x='5.000'
-                          y='256.000'
-                          class='static'>+ get(element:javax.lang.model.element.TypeParameterElement):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
-                    <text x='5.000'
-                          y='267.000'
-                          class='static'>+ get(mirror:javax.lang.model.type.TypeVariable):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
-                    <text x='5.000'
-                          y='278.000'
-                          class='static'>+ get(mirror:javax.lang.model.type.TypeVariable,typeVariables:java.util.Map&lt;javax.lang.model.element.TypeParameterElement,org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl&gt;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
-                    <text x='5.000'
-                          y='289.000'>+ name():java.lang.String</text>
-                    <text x='5.000'
-                          y='300.000'
                           class='static'>- of(name:java.lang.String,bounds:java.util.Collection&lt;org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
                     <text x='5.000'
-                          y='311.000'>+ withBounds(bounds:java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
+                          y='223.000'>+ withBounds(bounds:java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
                     <text x='5.000'
-                          y='322.000'>+ withBounds(bounds:java.lang.reflect.Type&#x2026;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
+                          y='234.000'>+ withBounds(bounds:java.lang.reflect.Type&#x2026;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
                     <text x='5.000'
-                          y='333.000'>+ withBounds(bounds:org.tquadrat.foundation.javacomposer.TypeName&#x2026;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
+                          y='245.000'>+ withBounds(bounds:org.tquadrat.foundation.javacomposer.TypeName&#x2026;):org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
                     <text x='5.000'
-                          y='344.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
+                          y='256.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl</text>
                 </g>
             </g>
         </symbol>
         <clipPath id='ID000002'>
             <rect class='otherClass'
-                  height='480.000'
+                  height='436.000'
                   width='1498.000'
                   x='0.000'
                   y='0.000'/>
@@ -235,7 +211,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='1498.000'
-                          height='480.000'
+                          height='436.000'
                           class='otherClass'/>
                     <line x1='0.000'
                           y1='17.000'
@@ -309,45 +285,33 @@
                           y='322.000'
                           class='static'>+ from(type:java.lang.reflect.Type,typeVariables:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
                     <text x='5.000'
-                          y='333.000'
-                          class='static'>+ get(mirror:javax.lang.model.type.TypeMirror):org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
+                          y='333.000'>+ hashCode():int</text>
                     <text x='5.000'
-                          y='344.000'
-                          class='static'>+ get(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
+                          y='344.000'>- initialiseCachedString():java.lang.String</text>
                     <text x='5.000'
-                          y='355.000'
-                          class='static'>+ get(mirror:javax.lang.model.type.TypeMirror,typeVariables:java.util.Map&lt;javax.lang.model.element.TypeParameterElement,org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl&gt;):org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
+                          y='355.000'>+ isAnnotated():boolean</text>
                     <text x='5.000'
-                          y='366.000'
-                          class='static'>+ get(type:java.lang.reflect.Type,typeVariables:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
+                          y='366.000'>+ isBoxedPrimitive():boolean</text>
                     <text x='5.000'
-                          y='377.000'>+ hashCode():int</text>
+                          y='377.000'>+ isPrimitive():boolean</text>
                     <text x='5.000'
-                          y='388.000'>- initialiseCachedString():java.lang.String</text>
-                    <text x='5.000'
-                          y='399.000'>+ isAnnotated():boolean</text>
-                    <text x='5.000'
-                          y='410.000'>+ isBoxedPrimitive():boolean</text>
-                    <text x='5.000'
-                          y='421.000'>+ isPrimitive():boolean</text>
-                    <text x='5.000'
-                          y='432.000'
+                          y='388.000'
                           class='static'>+ list(types:java.lang.reflect.Type&#x2026;):java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;</text>
                     <text x='5.000'
-                          y='443.000'
+                          y='399.000'
                           class='static'>+ list(types:java.lang.reflect.Type[],typeVariables:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):java.util.List&lt;org.tquadrat.foundation.javacomposer.internal.TypeNameImpl&gt;</text>
                     <text x='5.000'
-                          y='454.000'>+ toString():java.lang.String</text>
+                          y='410.000'>+ toString():java.lang.String</text>
                     <text x='5.000'
-                          y='465.000'>+ unbox():org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
+                          y='421.000'>+ unbox():org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
                     <text x='5.000'
-                          y='476.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
+                          y='432.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
                 </g>
             </g>
         </symbol>
         <clipPath id='ID000003'>
             <rect class='otherClass'
-                  height='238.000'
+                  height='172.000'
                   width='886.000'
                   x='0.000'
                   y='0.000'/>
@@ -358,7 +322,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='886.000'
-                          height='238.000'
+                          height='172.000'
                           class='otherClass'/>
                     <line x1='0.000'
                           y1='28.000'
@@ -401,33 +365,15 @@
                           class='abstract static'>+ from(mirror:javax.lang.model.type.TypeVariable):org.tquadrat.foundation.javacomposer.TypeVariableName</text>
                     <text x='5.000'
                           y='135.000'
-                          class='abstract static'>+ get(type:java.lang.reflect.TypeVariable&lt;?&gt;):org.tquadrat.foundation.javacomposer.TypeVariableName</text>
-                    <text x='5.000'
-                          y='146.000'
-                          class='abstract static'>+ get(name:java.lang.String):org.tquadrat.foundation.javacomposer.TypeVariableName</text>
-                    <text x='5.000'
-                          y='157.000'
-                          class='abstract static'>+ get(name:java.lang.String,bounds:java.lang.reflect.Type&#x2026;):org.tquadrat.foundation.javacomposer.TypeVariableName</text>
-                    <text x='5.000'
-                          y='168.000'
-                          class='abstract static'>+ get(name:java.lang.String,bounds:org.tquadrat.foundation.javacomposer.TypeName&#x2026;):org.tquadrat.foundation.javacomposer.TypeVariableName</text>
-                    <text x='5.000'
-                          y='179.000'
-                          class='abstract static'>+ get(element:javax.lang.model.element.TypeParameterElement):org.tquadrat.foundation.javacomposer.TypeVariableName</text>
-                    <text x='5.000'
-                          y='190.000'
-                          class='abstract static'>+ get(mirror:javax.lang.model.type.TypeVariable):org.tquadrat.foundation.javacomposer.TypeVariableName</text>
-                    <text x='5.000'
-                          y='201.000'
                           class='abstract'>+ withBounds(bounds:java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;):org.tquadrat.foundation.javacomposer.TypeVariableName</text>
                     <text x='5.000'
-                          y='212.000'
+                          y='146.000'
                           class='abstract'>+ withBounds(bounds:java.lang.reflect.Type&#x2026;):org.tquadrat.foundation.javacomposer.TypeVariableName</text>
                     <text x='5.000'
-                          y='223.000'
+                          y='157.000'
                           class='abstract'>+ withBounds(bounds:org.tquadrat.foundation.javacomposer.TypeName&#x2026;):org.tquadrat.foundation.javacomposer.TypeVariableName</text>
                     <text x='5.000'
-                          y='234.000'
+                          y='168.000'
                           class='abstract'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.TypeName</text>
                 </g>
             </g>
@@ -490,7 +436,7 @@
         </symbol>
         <clipPath id='ID000005'>
             <rect class='otherClass'
-                  height='238.000'
+                  height='216.000'
                   width='838.000'
                   x='0.000'
                   y='0.000'/>
@@ -501,7 +447,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='838.000'
-                          height='238.000'
+                          height='216.000'
                           class='otherClass'/>
                     <line x1='0.000'
                           y1='28.000'
@@ -546,56 +492,50 @@
                           class='abstract static'>+ from(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.TypeName</text>
                     <text x='5.000'
                           y='146.000'
-                          class='abstract static'>+ get(mirror:javax.lang.model.type.TypeMirror):org.tquadrat.foundation.javacomposer.TypeName</text>
-                    <text x='5.000'
-                          y='157.000'
-                          class='abstract static'>+ get(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.TypeName</text>
-                    <text x='5.000'
-                          y='168.000'
                           class='abstract'>+ hashCode():int</text>
                     <text x='5.000'
-                          y='179.000'
+                          y='157.000'
                           class='abstract'>+ isAnnotated():boolean</text>
                     <text x='5.000'
-                          y='190.000'
+                          y='168.000'
                           class='abstract'>+ isBoxedPrimitive():boolean</text>
                     <text x='5.000'
-                          y='201.000'
+                          y='179.000'
                           class='abstract'>+ isPrimitive():boolean</text>
                     <text x='5.000'
-                          y='212.000'
+                          y='190.000'
                           class='abstract'>+ toString():java.lang.String</text>
                     <text x='5.000'
-                          y='223.000'
+                          y='201.000'
                           class='abstract'>+ unbox():org.tquadrat.foundation.javacomposer.TypeName</text>
                     <text x='5.000'
-                          y='234.000'
+                          y='212.000'
                           class='abstract'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.TypeName</text>
                 </g>
             </g>
         </symbol>
         <clipPath id='ID000006'>
             <rect class='otherClass'
-                  height='238.000'
+                  height='216.000'
                   width='838.000'
                   x='0.000'
                   y='0.000'/>
         </clipPath>
     </defs>
     <path class='inheritance'
-          d='M1217.000,943.000 c0.000,-85.000,-443.000,0.000,-443.000,-85.000 v-15'
+          d='M1217.000,877.000 c0.000,-85.000,-443.000,0.000,-443.000,-85.000 v-15'
           marker-end='url(#inheritance)'/>
     <path class='implementation'
-          d='M1267.000,943.000 c0.000,-327.000,749.000,0.000,749.000,-327.000 v-15'
+          d='M1267.000,877.000 c0.000,-349.000,749.000,0.000,749.000,-349.000 v-15'
           marker-end='url(#implementation)'/>
     <path class='inheritance'
-          d='M749.000,363.000 c0.000,-151.000,-128.000,0.000,-128.000,-151.000 v-15'
+          d='M749.000,341.000 c0.000,-129.000,-128.000,0.000,-128.000,-129.000 v-15'
           marker-end='url(#inheritance)'/>
     <path class='implementation'
-          d='M799.000,363.000 c0.000,-85.000,1049.000,0.000,1049.000,-85.000 v-15'
+          d='M799.000,341.000 c0.000,-85.000,1049.000,0.000,1049.000,-85.000 v-15'
           marker-end='url(#implementation)'/>
     <path class='inheritance'
-          d='M2016.000,363.000 c0.000,-85.000,-138.000,0.000,-138.000,-85.000 v-15'
+          d='M2016.000,341.000 c0.000,-85.000,-138.000,0.000,-138.000,-85.000 v-15'
           marker-end='url(#inheritance)'/>
     <use x='499.000'
          y='25.000'
@@ -604,12 +544,12 @@
          y='25.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.TypeName'/>
     <use x='25.000'
-         y='363.000'
+         y='341.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.internal.TypeNameImpl'/>
     <use x='1573.000'
-         y='363.000'
+         y='341.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.TypeVariableName'/>
     <use x='463.000'
-         y='943.000'
+         y='877.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl'/>
 </svg>

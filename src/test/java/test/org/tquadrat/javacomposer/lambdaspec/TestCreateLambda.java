@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  Copyright © 2002-2021 by Thomas Thrien.
+ *  Copyright © 2002-2024 by Thomas Thrien.
  *  All Rights Reserved.
  * ============================================================================
  *  Licensed to the public under the agreements of the GNU Lesser General Public
@@ -37,10 +37,10 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  Building a lambda.
  *
  *  @author Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestCreateLambda.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: TestCreateLambda.java 1085 2024-01-05 16:23:28Z tquadrat $
  */
-@SuppressWarnings( {"MisorderedAssertEqualsArguments", "UseOfObsoleteDateTimeApi"} )
-@ClassVersion( sourceVersion = "$Id: TestCreateLambda.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@SuppressWarnings( "UseOfObsoleteDateTimeApi" )
+@ClassVersion( sourceVersion = "$Id: TestCreateLambda.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @DisplayName( "TestCreateLambda" )
 public class TestCreateLambda extends TestBaseClass
 {
@@ -60,7 +60,7 @@ public class TestCreateLambda extends TestBaseClass
         LambdaSpec.Builder builder;
         LambdaSpec candidate;
 
-        CodeBlock codeBlock;
+        final CodeBlock codeBlock;
 
         //---* No arguments, just a body -> a Supplier *-----------------------
         builder = composer.lambdaBuilder();
@@ -86,21 +86,6 @@ public class TestCreateLambda extends TestBaseClass
         assertNotNull( builder );
         candidate = builder
             .addStatement( "return $S", "Hello World" )
-            .build();
-        expected =
-            """
-            () ->
-            {
-              return "Hello World";
-            }""";
-        actual = candidate.toString();
-        assertEquals( expected, actual );
-
-        codeBlock = composer.codeBlockOf( "return $S", "Hello World" );
-        builder = composer.lambdaBuilder();
-        assertNotNull( builder );
-        candidate = builder
-            .addStatement( codeBlock )
             .build();
         expected =
             """

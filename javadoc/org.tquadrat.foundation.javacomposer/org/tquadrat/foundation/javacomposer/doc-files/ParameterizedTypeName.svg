@@ -7,7 +7,7 @@
      version='1.1'
      baseProfile='full'
      width='2424.000'
-     height='1009.000'>
+     height='921.000'>
     <defs>
         <style><![CDATA[
             line
@@ -118,7 +118,7 @@
         </marker>
         <clipPath id='ID000001'>
             <rect class='focusClass'
-                  height='183.000'
+                  height='150.000'
                   width='1102.000'
                   x='0.000'
                   y='0.000'/>
@@ -130,7 +130,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='1102.000'
-                          height='183.000'
+                          height='150.000'
                           class='focusClass'/>
                     <line x1='0.000'
                           y1='28.000'
@@ -164,34 +164,25 @@
                           class='abstract static'>+ from(type:java.lang.reflect.ParameterizedType):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
                     <text x='5.000'
                           y='102.000'
-                          class='abstract static'>+ get(rawType:java.lang.Class&lt;?&gt;,typeArguments:java.lang.reflect.Type&#x2026;):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
-                    <text x='5.000'
-                          y='113.000'
-                          class='abstract static'>+ get(rawType:org.tquadrat.foundation.javacomposer.ClassName,typeArguments:org.tquadrat.foundation.javacomposer.TypeName&#x2026;):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
-                    <text x='5.000'
-                          y='124.000'
-                          class='abstract static'>+ get(type:java.lang.reflect.ParameterizedType):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
-                    <text x='5.000'
-                          y='135.000'
                           class='abstract'>+ nestedClass(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
                     <text x='5.000'
-                          y='146.000'
+                          y='113.000'
                           class='abstract'>+ nestedClass(name:java.lang.CharSequence,typeArguments:java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
                     <text x='5.000'
-                          y='157.000'
+                          y='124.000'
                           class='abstract'>+ rawType():org.tquadrat.foundation.javacomposer.ClassName</text>
                     <text x='5.000'
-                          y='168.000'
+                          y='135.000'
                           class='abstract'>+ typeArguments():java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;</text>
                     <text x='5.000'
-                          y='179.000'
+                          y='146.000'
                           class='abstract'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.TypeName</text>
                 </g>
             </g>
         </symbol>
         <clipPath id='ID000002'>
             <rect class='otherClass'
-                  height='238.000'
+                  height='205.000'
                   width='2374.000'
                   x='0.000'
                   y='0.000'/>
@@ -202,7 +193,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='2374.000'
-                          height='238.000'
+                          height='205.000'
                           class='otherClass'/>
                     <line x1='0.000'
                           y1='17.000'
@@ -242,30 +233,21 @@
                           y='146.000'
                           class='static'>+ from(type:java.lang.reflect.ParameterizedType,typeArguments:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
                     <text x='5.000'
-                          y='157.000'
-                          class='static'>+ get(rawType:java.lang.Class&lt;?&gt;,typeArguments:java.lang.reflect.Type&#x2026;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                          y='157.000'>+ nestedClass(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
                     <text x='5.000'
-                          y='168.000'
-                          class='static'>+ get(rawType:org.tquadrat.foundation.javacomposer.ClassName,typeArguments:org.tquadrat.foundation.javacomposer.TypeName&#x2026;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                          y='168.000'>+ nestedClass(name:java.lang.CharSequence,typeArguments:java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
                     <text x='5.000'
-                          y='179.000'
-                          class='static'>+ get(type:java.lang.reflect.ParameterizedType,typeArguments:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):org.tquadrat.foundation.javacomposer.ParameterizedTypeName</text>
+                          y='179.000'>+ rawType():org.tquadrat.foundation.javacomposer.internal.ClassNameImpl</text>
                     <text x='5.000'
-                          y='190.000'>+ nestedClass(name:java.lang.CharSequence):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                          y='190.000'>+ typeArguments():java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;</text>
                     <text x='5.000'
-                          y='201.000'>+ nestedClass(name:java.lang.CharSequence,typeArguments:java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;):org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
-                    <text x='5.000'
-                          y='212.000'>+ rawType():org.tquadrat.foundation.javacomposer.internal.ClassNameImpl</text>
-                    <text x='5.000'
-                          y='223.000'>+ typeArguments():java.util.List&lt;org.tquadrat.foundation.javacomposer.TypeName&gt;</text>
-                    <text x='5.000'
-                          y='234.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
+                          y='201.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl</text>
                 </g>
             </g>
         </symbol>
         <clipPath id='ID000003'>
             <rect class='otherClass'
-                  height='238.000'
+                  height='216.000'
                   width='838.000'
                   x='0.000'
                   y='0.000'/>
@@ -276,7 +258,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='838.000'
-                          height='238.000'
+                          height='216.000'
                           class='otherClass'/>
                     <line x1='0.000'
                           y1='28.000'
@@ -321,48 +303,42 @@
                           class='abstract static'>+ from(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.TypeName</text>
                     <text x='5.000'
                           y='146.000'
-                          class='abstract static'>+ get(mirror:javax.lang.model.type.TypeMirror):org.tquadrat.foundation.javacomposer.TypeName</text>
-                    <text x='5.000'
-                          y='157.000'
-                          class='abstract static'>+ get(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.TypeName</text>
-                    <text x='5.000'
-                          y='168.000'
                           class='abstract'>+ hashCode():int</text>
                     <text x='5.000'
-                          y='179.000'
+                          y='157.000'
                           class='abstract'>+ isAnnotated():boolean</text>
                     <text x='5.000'
-                          y='190.000'
+                          y='168.000'
                           class='abstract'>+ isBoxedPrimitive():boolean</text>
                     <text x='5.000'
-                          y='201.000'
+                          y='179.000'
                           class='abstract'>+ isPrimitive():boolean</text>
                     <text x='5.000'
-                          y='212.000'
+                          y='190.000'
                           class='abstract'>+ toString():java.lang.String</text>
                     <text x='5.000'
-                          y='223.000'
+                          y='201.000'
                           class='abstract'>+ unbox():org.tquadrat.foundation.javacomposer.TypeName</text>
                     <text x='5.000'
-                          y='234.000'
+                          y='212.000'
                           class='abstract'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.TypeName</text>
                 </g>
             </g>
         </symbol>
     </defs>
     <path class='implementation'
-          d='M1212.000,646.000 L1212.000,546.000'
+          d='M1212.000,591.000 L1212.000,491.000'
           marker-end='url(#implementation)'/>
     <path class='inheritance'
-          d='M1212.000,363.000 L1212.000,263.000'
+          d='M1212.000,341.000 L1212.000,241.000'
           marker-end='url(#inheritance)'/>
     <use x='793.000'
          y='25.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.TypeName'/>
     <use x='661.000'
-         y='363.000'
+         y='341.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.ParameterizedTypeName'/>
     <use x='25.000'
-         y='646.000'
+         y='591.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.internal.ParameterizedTypeNameImpl'/>
 </svg>

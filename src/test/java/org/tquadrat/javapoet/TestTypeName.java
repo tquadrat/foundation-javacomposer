@@ -47,9 +47,9 @@ import org.tquadrat.foundation.javacomposer.internal.TypeNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestTypeName.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: TestTypeName.java 1085 2024-01-05 16:23:28Z tquadrat $
  */
-@ClassVersion( sourceVersion = "$Id: TestTypeName.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestTypeName.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @SuppressWarnings( {"javadoc", "ClassEscapesDefinedScope"} )
 @DisplayName( "TestTypeName" )
 public class TestTypeName
@@ -99,15 +99,6 @@ public class TestTypeName
         assertEqualsHashCodeAndToString( ArrayTypeName.of( Object.class ), ArrayTypeName.of( Object.class ) );
         assertEqualsHashCodeAndToString( TypeName.from( Object [].class ), ArrayTypeName.of( Object.class ) );
     }   //  equalsAndHashCodeArrayTypeName()
-
-    @SuppressWarnings( "deprecation" )
-    @Test
-    public void equalsAndHashCodeClassName()
-    {
-        assertEqualsHashCodeAndToString( ClassName.from( Object.class ), ClassName.from( Object.class ) );
-        assertEqualsHashCodeAndToString( TypeName.from( Object.class ), ClassName.from( Object.class ) );
-        assertEqualsHashCodeAndToString( ClassName.bestGuess( "java.lang.Object" ), ClassName.from( Object.class ) );
-    }   //  equalsAndHashCodeClassName()
 
     @Test
     public void equalsAndHashCodeParameterizedTypeName()

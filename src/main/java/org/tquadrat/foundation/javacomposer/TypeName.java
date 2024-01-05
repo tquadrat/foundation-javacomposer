@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 
@@ -65,9 +64,9 @@ import org.tquadrat.foundation.javacomposer.internal.TypeNameImpl;
  *  {@link Primitives#VOID}.</p>
  *  <p>In an annotation processor, a type name instance for a type mirror can
  *  be obtained by calling
- *  {@link #get(TypeMirror)}.
+ *  {@link #from(TypeMirror)}.
  *  In reflection code,
- *  {@link #get(Type)}
+ *  {@link #from(Type)}
  *  can be used.</p>
  *
  *  <h2>Defining new types</h2>
@@ -85,12 +84,12 @@ import org.tquadrat.foundation.javacomposer.internal.TypeNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeName.java 1068 2023-09-28 21:42:28Z tquadrat $
+ *  @version $Id: TypeName.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: TypeName.java 1068 2023-09-28 21:42:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeName.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface TypeName
     permits ArrayTypeName, ClassName, ParameterizedTypeName, TypeVariableName, WildcardTypeName, TypeNameImpl
@@ -198,38 +197,6 @@ public sealed interface TypeName
      */
     @API( status = STABLE, since = "0.2.0" )
     public static TypeName from( final Type type ) { return TypeNameImpl.from( type ); }
-
-    /**
-     *  Returns a type name equivalent to that from the given
-     *  {@link TypeMirror}
-     *  instance.
-     *
-     *  @param  mirror  The given type mirror instance.
-     *  @return The respective type name.
-     *
-     *  @deprecated Use
-     *      {@link #from(TypeMirror)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static TypeName get( final TypeMirror mirror ) { return from( mirror ); }
-
-    /**
-     *  Returns a type name equivalent to that of the given
-     *  {@link Type}
-     *  instance.
-     *
-     *  @param  type    The type.
-     *  @return The respective type name for the given {@code Type} instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(Type)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static TypeName get( final Type type ) { return from( type ); }
 
     /**
      *  {@inheritDoc}

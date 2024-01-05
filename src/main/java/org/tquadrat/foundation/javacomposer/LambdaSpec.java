@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2023 by Thomas Thrien.
+ * Copyright © 2002-2024 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  *
@@ -18,7 +18,6 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 
 import javax.lang.model.element.Modifier;
@@ -59,7 +58,6 @@ import org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl;
  *  methods</p>
  *  <ul>
  *      <li>{@link LambdaSpec.Builder#addComment(String, Object...)}</li>
- *      <li>{@link LambdaSpec.Builder#addStatement(CodeBlock)}</li>
  *      <li>{@link LambdaSpec.Builder#addStatement(String, Object...)}</li>
  *      <li>{@link LambdaSpec.Builder#beginControlFlow(String, Object...)}</li>
  *      <li>{@link LambdaSpec.Builder#endControlFlow()}</li>
@@ -72,12 +70,12 @@ import org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl;
  *  second case.</p>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: LambdaSpec.java 1067 2023-09-28 21:09:15Z tquadrat $
+ *  @version $Id: LambdaSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: LambdaSpec.java 1067 2023-09-28 21:09:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: LambdaSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface LambdaSpec
     permits LambdaSpecImpl
@@ -90,13 +88,13 @@ public sealed interface LambdaSpec
      *  {@link LambdaSpec}
      *
      *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: LambdaSpec.java 1067 2023-09-28 21:09:15Z tquadrat $
+     *  @version $Id: LambdaSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: LambdaSpec.java 1067 2023-09-28 21:09:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: LambdaSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits LambdaSpecImpl.BuilderImpl
@@ -190,16 +188,6 @@ public sealed interface LambdaSpec
          *  <p>A call to this method forces the multi-line emit format for the
          *  lambda expression.</p>
          *
-         *  @param  statement   The statement.
-         *  @return This {@code Builder} instance.
-         */
-        public Builder addStatement( final CodeBlock statement );
-
-        /**
-         *  <p>{@summary Adds a statement to the code for the lambda body.}</p>
-         *  <p>A call to this method forces the multi-line emit format for the
-         *  lambda expression.</p>
-         *
          *  @param  format  The format.
          *  @param  args    The arguments.
          *  @return This {@code Builder} instance.
@@ -285,19 +273,6 @@ public sealed interface LambdaSpec
         /*---------*\
     ====** Methods **==========================================================
         \*---------*/
-    /**
-     *  Creates a builder for an instance of {@code LambdaSpec}.
-     *
-     *  @return The new builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#lambdaBuilder()}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder builder() { return LambdaSpecImpl.builder(); }
-
     /**
      *  {@inheritDoc}
      */

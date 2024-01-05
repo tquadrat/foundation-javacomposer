@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  Copyright © 2002-2021 by Thomas Thrien.
+ *  Copyright © 2002-2024 by Thomas Thrien.
  *  All Rights Reserved.
  * ============================================================================
  *  Licensed to the public under the agreements of the GNU Lesser General Public
@@ -33,10 +33,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  {@link org.tquadrat.foundation.javacomposer.JavaComposer}.
  *
  *  @author Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestCreateClassVersionAnnotation.java 937 2021-12-14 21:59:00Z tquadrat $
+ *  @version $Id: TestCreateClassVersionAnnotation.java 1085 2024-01-05 16:23:28Z tquadrat $
  */
-@SuppressWarnings( "MisorderedAssertEqualsArguments" )
-@ClassVersion( sourceVersion = "$Id: TestCreateClassVersionAnnotation.java 937 2021-12-14 21:59:00Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestCreateClassVersionAnnotation.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @DisplayName( "TestCreateClassVersionAnnotation" )
 public class TestCreateClassVersionAnnotation extends TestBaseClass
 {

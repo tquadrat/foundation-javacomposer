@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@
 
 package org.tquadrat.foundation.javacomposer.internal;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.INTERNAL;
 import static org.apiguardian.api.API.Status.STABLE;
 import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.OBJECT;
@@ -29,7 +28,6 @@ import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;
 
 import javax.lang.model.element.TypeParameterElement;
-import javax.lang.model.type.TypeMirror;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Type;
 import java.lang.reflect.WildcardType;
@@ -52,12 +50,12 @@ import org.tquadrat.foundation.javacomposer.WildcardTypeName;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: WildcardTypeNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
+ *  @version $Id: WildcardTypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: WildcardTypeNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: WildcardTypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class WildcardTypeNameImpl extends TypeNameImpl implements WildcardTypeName
 {
@@ -103,7 +101,7 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
             requireValidNonNullArgument( upperBounds,
                 "upperBounds",
                 u -> u.size() ==1,
-                $ -> "unexpected extends bounds: %s".formatted( upperBounds ) ) );
+                _ -> "unexpected extends bounds: %s".formatted( upperBounds ) ) );
         m_LowerBounds = List.copyOf( requireNonNullArgument( lowerBounds, "lowerBounds" ) );
 
         for( final var upperBound : m_UpperBounds )
@@ -141,17 +139,17 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
         final var retValue = requireNonNullArgument( out, "out" );
         if( m_LowerBounds.size() == 1 )
         {
-            retValue.emit( "? super $T", m_LowerBounds.get( 0 ) );
+            retValue.emit( "? super $T", m_LowerBounds.getFirst() );
         }
         else
         {
-            if( m_UpperBounds.get( 0 ).equals( OBJECT ) )
+            if( m_UpperBounds.getFirst().equals( OBJECT ) )
             {
                 retValue.emit( "?" );
             }
             else
             {
-                retValue.emit( "? extends $T", m_UpperBounds.get( 0 ) );
+                retValue.emit( "? extends $T", m_UpperBounds.getFirst() );
             }
         }
 
@@ -246,84 +244,6 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
         //---* Done *----------------------------------------------------------
         return retValue;
     }   //  from()
-
-    /**
-     *  Returns an instance of
-     *  {@link TypeNameImpl}
-     *  for the given type mirror.
-     *
-     *  @param  mirror  The type mirror for a wildcard type.
-     *  @return The respective {@code TypeName} instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(javax.lang.model.type.WildcardType)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeNameImpl get( final javax.lang.model.type.WildcardType mirror ) { return from( mirror ); }
-
-    /**
-     *  Returns an instance of
-     *  {@link TypeNameImpl}
-     *  for the given type mirror, with the given type variables applied to it.
-     *
-     *  @param  mirror  The type mirror for a wildcard type.
-     *  @param  typeVariables   The type variables.
-     *  @return The respective {@code TypeName} instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(TypeMirror, Map)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    static final TypeNameImpl get( final javax.lang.model.type.WildcardType mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
-    {
-        final var retValue = from( mirror, typeVariables );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Returns an instance of
-     *  {@link TypeNameImpl}
-     *  for the given wildcard type.
-     *
-     *  @param  wildcardName    The wildcard type.
-     *  @return The respective {@code TypeName} instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(WildcardType)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeNameImpl get( final WildcardType wildcardName ) { return from( wildcardName ); }
-
-    /**
-     *  Returns an instance of
-     *  {@link TypeNameImpl}
-     *  for the given wildcard type, with the given type variables applied to it.
-     *
-     *  @param  wildcardName    The wildcard type.
-     *  @param  typeVariables   The type variables.
-     *  @return The respective {@code TypeName} instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(WildcardType,Map)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    static final TypeNameImpl get( final WildcardType wildcardName, final Map<Type,TypeVariableName> typeVariables )
-    {
-        final var retValue = from( wildcardName, typeVariables );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
 
     /**
      *  Returns a subtype for the given type.

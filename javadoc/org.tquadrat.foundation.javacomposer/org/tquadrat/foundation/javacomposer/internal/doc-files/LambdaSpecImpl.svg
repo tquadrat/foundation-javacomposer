@@ -7,7 +7,7 @@
      version='1.1'
      baseProfile='full'
      width='768.000'
-     height='616.000'>
+     height='605.000'>
     <defs>
         <style><![CDATA[
             line
@@ -118,7 +118,7 @@
         </marker>
         <clipPath id='ID000001'>
             <rect class='focusClass'
-                  height='194.000'
+                  height='183.000'
                   width='598.000'
                   x='0.000'
                   y='0.000'/>
@@ -130,7 +130,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='598.000'
-                          height='194.000'
+                          height='183.000'
                           class='focusClass'/>
                     <line x1='0.000'
                           y1='17.000'
@@ -159,22 +159,19 @@
                     <text x='5.000'
                           y='102.000'>+ LambdaSpecImpl(builder:org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl.BuilderImpl)</text>
                     <text x='5.000'
-                          y='113.000'
-                          class='static'>+ builder():org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl.BuilderImpl</text>
+                          y='113.000'>+ emit(codeWriter:org.tquadrat.foundation.javacomposer.internal.CodeWriter):void</text>
                     <text x='5.000'
-                          y='124.000'>+ emit(codeWriter:org.tquadrat.foundation.javacomposer.internal.CodeWriter):void</text>
+                          y='124.000'>+ equals(o:java.lang.Object):boolean</text>
                     <text x='5.000'
-                          y='135.000'>+ equals(o:java.lang.Object):boolean</text>
+                          y='135.000'>+ getFactory():org.tquadrat.foundation.javacomposer.JavaComposer</text>
                     <text x='5.000'
-                          y='146.000'>+ getFactory():org.tquadrat.foundation.javacomposer.JavaComposer</text>
+                          y='146.000'>+ hashCode():int</text>
                     <text x='5.000'
-                          y='157.000'>+ hashCode():int</text>
+                          y='157.000'>- initializeCachedString():java.lang.String</text>
                     <text x='5.000'
-                          y='168.000'>- initializeCachedString():java.lang.String</text>
+                          y='168.000'>+ toBuilder():org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl.BuilderImpl</text>
                     <text x='5.000'
-                          y='179.000'>+ toBuilder():org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl.BuilderImpl</text>
-                    <text x='5.000'
-                          y='190.000'>+ toString():java.lang.String</text>
+                          y='179.000'>+ toString():java.lang.String</text>
                 </g>
             </g>
         </symbol>
@@ -236,7 +233,7 @@
         </symbol>
         <clipPath id='ID000003'>
             <rect class='otherClass'
-                  height='106.000'
+                  height='95.000'
                   width='424.000'
                   x='0.000'
                   y='0.000'/>
@@ -247,7 +244,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='424.000'
-                          height='106.000'
+                          height='95.000'
                           class='otherClass'/>
                     <line x1='0.000'
                           y1='28.000'
@@ -269,18 +266,15 @@
                           y='41.000'/>
                     <text x='5.000'
                           y='58.000'
-                          class='abstract static'>+ builder():org.tquadrat.foundation.javacomposer.LambdaSpec.Builder</text>
-                    <text x='5.000'
-                          y='69.000'
                           class='abstract'>+ equals(o:java.lang.Object):boolean</text>
                     <text x='5.000'
-                          y='80.000'
+                          y='69.000'
                           class='abstract'>+ hashCode():int</text>
                     <text x='5.000'
-                          y='91.000'
+                          y='80.000'
                           class='abstract'>+ toBuilder():org.tquadrat.foundation.javacomposer.LambdaSpec.Builder</text>
                     <text x='5.000'
-                          y='102.000'
+                          y='91.000'
                           class='abstract'>+ toString():java.lang.String</text>
                 </g>
             </g>
@@ -290,7 +284,7 @@
           d='M359.000,297.000 c0.000,-85.000,-212.000,0.000,-212.000,-85.000 v-15'
           marker-end='url(#inheritance)'/>
     <path class='implementation'
-          d='M409.000,297.000 c0.000,-151.000,122.000,0.000,122.000,-151.000 v-15'
+          d='M409.000,297.000 c0.000,-162.000,122.000,0.000,122.000,-162.000 v-15'
           marker-end='url(#implementation)'/>
     <use x='25.000'
          y='25.000'

@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  Copyright © 2002-2021 by Thomas Thrien.
+ *  Copyright © 2002-2024 by Thomas Thrien.
  *  All Rights Reserved.
  * ============================================================================
  *  Licensed to the public under the agreements of the GNU Lesser General Public
@@ -35,10 +35,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  {@link JavaComposer}.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: BugHunt_20211220_1.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: BugHunt_20211220_1.java 1085 2024-01-05 16:23:28Z tquadrat $
  */
-@SuppressWarnings( "MisorderedAssertEqualsArguments" )
-@ClassVersion( sourceVersion = "$Id: BugHunt_20211220_1.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: BugHunt_20211220_1.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @DisplayName( "test.org.tquadrat.javacomposer.composer.BugHunt_20211220_1" )
 public class BugHunt_20211220_1 extends TestBaseClass
 {
@@ -52,7 +51,7 @@ public class BugHunt_20211220_1 extends TestBaseClass
      *  {@link JavaComposer#annotationBuilder(Class)}.</p>}
      *  <p>A composer in DEBUG mode will create annotations that does not
      *  compile:</p>
-     *  <code><pre>@org.tquadrat.foundation.annotation.ClassVersion(sourceVersion = { /&#42; [Optional.java:178] &#42;/  /&#42; [BugHunt_20211220_1.java:75] &#42;/ , "$Id: BugHunt_20211220_1.java 943 2021-12-21 01:34:32Z tquadrat $"})</pre></code>
+     *  <pre><code>@org.tquadrat.foundation.annotation.ClassVersion(sourceVersion = { /&#42; [Optional.java:178] &#42;/  /&#42; [BugHunt_20211220_1.java:75] &#42;/ , "$Id: BugHunt_20211220_1.java 1085 2024-01-05 16:23:28Z tquadrat $"})</code></pre>
      *
      *  @throws Exception   Something unexpected went wrong.
      */
@@ -72,13 +71,13 @@ public class BugHunt_20211220_1 extends TestBaseClass
             """;
         assertEquals( expected, actual );
 
-        var builder = candidate.annotationBuilder( ClassVersion.class );
-        builder.addMember( "sourceVersion", "$S", "$Id: BugHunt_20211220_1.java 943 2021-12-21 01:34:32Z tquadrat $" );
+        final var builder = candidate.annotationBuilder( ClassVersion.class );
+        builder.addMember( "sourceVersion", "$S", "$Id: BugHunt_20211220_1.java 1085 2024-01-05 16:23:28Z tquadrat $" );
         actual = builder.build()
             .toString();
         expected =
             """
-            @org.tquadrat.foundation.annotation.ClassVersion(sourceVersion =  /* [BugHunt_20211220_1.java:76] */ "$Id: BugHunt_20211220_1.java 943 2021-12-21 01:34:32Z tquadrat $")\
+            @org.tquadrat.foundation.annotation.ClassVersion(sourceVersion =  /* [BugHunt_20211220_1.java:75] */ "$Id: BugHunt_20211220_1.java 1085 2024-01-05 16:23:28Z tquadrat $")\
             """;
         assertEquals( expected, actual );
     }   //  testAnnotationBuilderWithNullArgument()

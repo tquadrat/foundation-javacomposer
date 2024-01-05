@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 
 import javax.annotation.processing.Filer;
@@ -37,12 +36,12 @@ import org.tquadrat.foundation.javacomposer.internal.JavaFileImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaFile.java 854 2021-01-20 22:44:45Z tquadrat $
+ *  @version $Id: JavaFile.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: JavaFile.java 854 2021-01-20 22:44:45Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaFile.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface JavaFile
     permits JavaFileImpl
@@ -56,13 +55,13 @@ public sealed interface JavaFile
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: JavaFile.java 854 2021-01-20 22:44:45Z tquadrat $
+     *  @version $Id: JavaFile.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: JavaFile.java 854 2021-01-20 22:44:45Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: JavaFile.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits JavaFileImpl.BuilderImpl
@@ -117,33 +116,6 @@ public sealed interface JavaFile
         public JavaFile build();
 
         /**
-         *  Sets the indentation value.
-         *
-         *  @param  indent  The indentation.
-         *  @return This {@code Builder} instance.
-         *
-         *  @deprecated The indentation is determined by the layout only; it
-         *      cannot be overwritten. This implementation of this method does
-         *      nothing.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        public Builder indent( final String indent );
-
-        /**
-         *  Sets the layout for the
-         *  {@link JavaFile}.
-         *
-         *  @param  layout  The layout.
-         *  @return This {@code Builder} instance.
-         *
-         *  @deprecated Got obsolete with the use of
-         *      {@link JavaComposer}
-         *      as the factory.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        public Builder layout( Layout layout );
-
-        /**
          *  <p>{@summary Call this to omit imports for classes from the package
          *  {@code java.lang}, such as
          *  {@link String}
@@ -168,28 +140,6 @@ public sealed interface JavaFile
         /*---------*\
     ====** Methods **==========================================================
         \*---------*/
-    /**
-     *  Creates a builder for a new instance of {@code JavaFile} from the given
-     *  package name and class definition.
-     *
-     *  @param  packageName The package name.
-     *  @param  typeSpec    The class definition.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#javaFileBuilder(CharSequence, TypeSpec)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder builder( final CharSequence packageName, final TypeSpec typeSpec )
-    {
-        final var retValue = JavaFileImpl.builder( packageName, typeSpec );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  builder()
-
     /**
      *  {@inheritDoc}
      */

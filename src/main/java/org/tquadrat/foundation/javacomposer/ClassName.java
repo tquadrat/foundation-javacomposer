@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 
 import javax.lang.model.element.TypeElement;
@@ -37,12 +36,12 @@ import org.tquadrat.foundation.javacomposer.internal.ClassNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ClassName.java 1067 2023-09-28 21:09:15Z tquadrat $
+ *  @version $Id: ClassName.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ClassName.java 1067 2023-09-28 21:09:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ClassName.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface ClassName extends TypeName, Comparable<ClassName>
     permits ClassNameImpl
@@ -59,39 +58,6 @@ public sealed interface ClassName extends TypeName, Comparable<ClassName>
      */
     @Override
     public ClassName annotated( final List<AnnotationSpec> annotations );
-
-    /**
-     *  Returns a new instance for an implementation of {@code ClassName} for
-     *  the given fully-qualified class name string. This method assumes that
-     *  the input is ASCII and follows typical Java style (lowercase package
-     *  names, UpperCamelCase class names) and may produce incorrect results
-     *  or throw
-     *  {@link IllegalArgumentException}
-     *  otherwise. For that reason,
-     *  {@link #get(Class)},
-     *  {@link #get(CharSequence,CharSequence,CharSequence...)},
-     *  and
-     *  {@link #get(TypeElement)}
-     *  should be preferred as they can correctly create {@code ClassName}
-     *  instances without such restrictions.
-     *
-     *  @param  classNameString The fully qualified class name.
-     *  @return The new class name instance.
-     *
-     *  @deprecated Because of the limitations described above, this method is
-     *      seen as inherently unsafe, and therefore it was decided to
-     *      deprecate it.
-     */
-    @SuppressWarnings( {"ClassReferencesSubclass", "DeprecatedIsStillUsed"} )
-    @Deprecated( since = "0.1.0" )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static ClassName bestGuess( final CharSequence classNameString )
-    {
-        final var retValue = ClassNameImpl.bestGuess( classNameString );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  bestGuess()
 
     /**
      *  {@inheritDoc}
@@ -170,64 +136,6 @@ public sealed interface ClassName extends TypeName, Comparable<ClassName>
         // ---* Done *----------------------------------------------------------
         return retValue;
     }   //  from()
-
-    /**
-     *  Creates a new instance for an implementation of {@code ClassName} from
-     *  an instance of
-     *  {@link Class}.
-     *
-     *  @param  sourceClass The instance of {@code java.lang.Class}.
-     *  @return The respective instance of {@code ClassName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(Class)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static ClassName get( final Class<?> sourceClass ) { return from( sourceClass ); }
-
-    /**
-     *  Returns the class name for the given
-     *  {@link TypeElement}
-     *  instance.
-     *
-     *  @param  element The type element instance.
-     *  @return The new class name instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(TypeElement)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static ClassName get( final TypeElement element ) { return from( element ); }
-
-    /**
-     *  Returns a class name created from the given parts.<br>
-     *  <br>For example, calling this method with package name
-     *  {@code "java.util"} and simple names {@code "Map"} and {@code "Entry"}
-     *  yields {@code java.util.Map.Entry}.
-     *
-     *  @param  packageName The package name.
-     *  @param  simpleName  The name of the top-level class.
-     *  @param  simpleNames The names of the nested classes, from outer to
-     *      inner.
-     *  @return The new {@code ClassName} instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(CharSequence, CharSequence, CharSequence...)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static ClassName get( final CharSequence packageName, final CharSequence simpleName, final CharSequence... simpleNames )
-    {
-        final var retValue = from( packageName, simpleName, simpleNames );
-
-        // ---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
 
     /**
      *  {@inheritDoc}

@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,11 +21,9 @@ package org.tquadrat.foundation.javacomposer.internal;
 
 import static java.util.Collections.reverse;
 import static java.util.function.Function.identity;
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.INTERNAL;
 import static org.apiguardian.api.API.Status.STABLE;
 import static org.tquadrat.foundation.lang.CommonConstants.EMPTY_STRING;
-import static org.tquadrat.foundation.lang.Objects.checkState;
 import static org.tquadrat.foundation.lang.Objects.isNull;
 import static org.tquadrat.foundation.lang.Objects.nonNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
@@ -44,7 +42,6 @@ import java.util.Optional;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.ClassName;
 
@@ -54,13 +51,13 @@ import org.tquadrat.foundation.javacomposer.ClassName;
  *  for a fully-qualified class name for top-level and member classes.
  *
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ClassNameImpl.java 1062 2023-09-25 23:11:41Z tquadrat $
+ *  @version $Id: ClassNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "ComparableImplementedButEqualsNotOverridden"} )
-@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 1062 2023-09-25 23:11:41Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ClassNameImpl extends TypeNameImpl implements ClassName
 {
@@ -71,62 +68,75 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *  The class name for
      *  {@link Boolean}.
      */
-    public static final ClassNameImpl BOXED_BOOLEAN = get( Boolean.class );
+    public static final ClassNameImpl BOXED_BOOLEAN;
 
     /**
      *  The class name for
      *  {@link Byte}.
      */
-    public static final ClassNameImpl BOXED_BYTE = get( Byte.class );
+    public static final ClassNameImpl BOXED_BYTE;
 
     /**
      *  The class name for
      *  {@link Character}.
      */
-    public static final ClassNameImpl BOXED_CHAR = get( Character.class );
+    public static final ClassNameImpl BOXED_CHAR;
 
     /**
      *  The class name for
      *  {@link Double}.
      */
-    public static final ClassNameImpl BOXED_DOUBLE = get( Double.class );
+    public static final ClassNameImpl BOXED_DOUBLE;
 
     /**
      *  The class name for
      *  {@link Float}.
      */
-    public static final ClassNameImpl BOXED_FLOAT = get( Float.class );
+    public static final ClassNameImpl BOXED_FLOAT;
 
     /**
      *  The class name for
      *  {@link Integer}.
      */
-    public static final ClassNameImpl BOXED_INT = get( Integer.class );
+    public static final ClassNameImpl BOXED_INT;
 
     /**
      *  The class name for
      *  {@link Long}.
      */
-    public static final ClassNameImpl BOXED_LONG = get( Long.class );
+    public static final ClassNameImpl BOXED_LONG;
 
     /**
      *  The class name for
      *  {@link Short}.
      */
-    public static final ClassNameImpl BOXED_SHORT = get( Short.class );
+    public static final ClassNameImpl BOXED_SHORT;
 
     /**
      *  The class name for
      *  {@link Void}.
      */
-    public static final ClassNameImpl BOXED_VOID = get( Void.class );
+    public static final ClassNameImpl BOXED_VOID;
 
     /**
      *  The class name for
      *  {@link Object}.
      */
-    public static final ClassNameImpl OBJECT = get( Object.class );
+    public static final ClassNameImpl OBJECT;
 
+    static
+    {
+        BOXED_BOOLEAN = from( Boolean.class );
+        BOXED_BYTE = from( Byte.class );
+        BOXED_CHAR = from( Character.class );
+        BOXED_DOUBLE = from( Double.class );
+        BOXED_FLOAT = from( Float.class );
+        BOXED_INT = from( Integer.class );
+        BOXED_LONG = from( Long.class );
+        BOXED_SHORT = from( Short.class );
+        BOXED_VOID = from( Void.class );
+        OBJECT = from( Object.class );
+    }
         /*------------*\
     ====** Attributes **=======================================================
         \*------------*/
@@ -233,56 +243,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
     {
         return new ClassNameImpl( m_PackageName, m_EnclosingClassName, m_SimpleName, concatAnnotations( annotations ) );
     }   //  annotated()
-
-    /**
-     *  Returns a new {@code ClassName} instance for the given fully-qualified
-     *  class name string. This method assumes that the input is ASCII and
-     *  follows typical Java style (lowercase package names, UpperCamelCase
-     *  class names) and may produce incorrect results or throw
-     *  {@link IllegalArgumentException}
-     *  otherwise. For that reason,
-     *  {@link #get(Class)},
-     *  {@link #get(CharSequence,CharSequence,CharSequence...)},
-     *  and
-     *  {@link #get(TypeElement)}
-     *  should be preferred as they can correctly create {@code ClassName}
-     *  instances without such restrictions.
-     *
-     *  @param  className   The fully qualified class name.
-     *  @return The new class name instance.
-     *
-     *  @deprecated Because of the limitations described above, this method is
-     *      seen as inherently unsafe, and therefore it was decided to
-     *      deprecate it.
-     */
-    @Deprecated( since = "0.1.0" )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final ClassNameImpl bestGuess( final CharSequence className )
-    {
-        final var classNameString = requireNotEmptyArgument( className, "className" ).toString().intern();
-        /*
-         * Add the package name, like "java.util.concurrent", or "" for no
-         * package.
-         */
-        var pos = 0;
-        while( pos < classNameString.length() && Character.isLowerCase( classNameString.codePointAt( pos ) ) )
-        {
-            pos = classNameString.indexOf( '.', pos ) + 1;
-            checkState( pos != 0, () -> new ValidationException( "couldn't make a guess for %s".formatted( classNameString ) ) );
-        }
-        final var packageName = pos == 0 ? EMPTY_STRING : classNameString.substring( 0, pos - 1 );
-
-        //---* Add class names like "Map" and "Entry" *------------------------
-        ClassNameImpl retValue = null;
-        for( final var simpleName : classNameString.substring( pos ).split( "\\.", -1 ) )
-        {
-            checkState( !simpleName.isEmpty() && Character.isUpperCase( simpleName.codePointAt( 0 ) ), () -> new ValidationException(  "couldn't make a guess for %s".formatted( classNameString ) ) );
-            retValue = new ClassNameImpl( packageName, retValue, simpleName );
-        }
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  bestGuess()
 
     /**
      *  {@inheritDoc}
@@ -401,9 +361,9 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
     public static final ClassNameImpl from( final Class<?> sourceClass )
     {
         var validatedClass = requireNonNullArgument( sourceClass, "sourceClass" );
-        requireValidArgument( validatedClass, "sourceClass", v -> !v.isPrimitive(), $ -> "primitive types cannot be represented as a ClassName" );
-        requireValidArgument( validatedClass, "sourceClass", v -> !void.class.equals( v ), $ -> "'void' type cannot be represented as a ClassName" );
-        requireValidArgument( validatedClass, "sourceClass", v -> !v.isArray(), $ -> "array types cannot be represented as a ClassName" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !v.isPrimitive(), _ -> "primitive types cannot be represented as a ClassName" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !void.class.equals( v ), _ -> "'void' type cannot be represented as a ClassName" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !v.isArray(), _ -> "array types cannot be represented as a ClassName" );
 
         final ClassNameImpl retValue;
         var anonymousSuffix = EMPTY_STRING;
@@ -428,7 +388,7 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
         }
         else
         {
-            retValue = get( validatedClass.getEnclosingClass() ).nestedClass( name );
+            retValue = from( validatedClass.getEnclosingClass() ).nestedClass( name );
         }
 
         // ---* Done *----------------------------------------------------------
@@ -519,63 +479,6 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
     }   //  from()
 
     /**
-     *  Creates a new {@code ClassName} instance from an instance of
-     *  {@link Class}.
-     *
-     *  @param  sourceClass The instance of {@code java.lang.Class}.
-     *  @return The respective instance of {@code ClassName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(Class)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final ClassNameImpl get( final Class<?> sourceClass ) { return from( sourceClass ); }
-
-    /**
-     *  Returns the class name for the given
-     *  {@link TypeElement}
-     *  instance.
-     *
-     *  @param  element The type element instance.
-     *  @return The new class name instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(TypeElement)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final ClassNameImpl get( final TypeElement element ) { return from( element ); }
-
-    /**
-     *  Returns a class name created from the given parts.<br>
-     *  <br>For example, calling this method with package name
-     *  {@code "java.util"} and simple names {@code "Map"} and {@code "Entry"}
-     *  yields {@code java.util.Map.Entry}.
-     *
-     *  @param  packageName The package name.
-     *  @param  simpleName  The name of the top-level class.
-     *  @param  simpleNames The names of the nested classes, from outer to
-     *      inner.
-     *  @return The new {@code ClassName} instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(CharSequence, CharSequence, CharSequence...)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final ClassNameImpl get( final CharSequence packageName, final CharSequence simpleName, final CharSequence... simpleNames )
-    {
-        final var retValue = from( packageName, simpleName, simpleNames );
-
-        // ---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
      *  {@inheritDoc}
      */
     @Override
@@ -616,7 +519,7 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *  this class is enclosed by another class, this is equivalent to
      *  {@link #enclosingClassName()}.{@link Optional#get()}.{@link #nestedClass(CharSequence) nestedClass(name)}.
      *  Otherwise, it is equivalent to
-     *  {@link #get(CharSequence,CharSequence,CharSequence...) get(packageName(),name)}.
+     *  {@link #from(CharSequence,CharSequence,CharSequence...) get(packageName(),name)}.
      */
     @Override
     public final ClassNameImpl peerClass( final CharSequence name )

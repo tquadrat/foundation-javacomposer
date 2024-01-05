@@ -7,7 +7,7 @@
      version='1.1'
      baseProfile='full'
      width='1086.000'
-     height='693.000'>
+     height='682.000'>
     <defs>
         <style><![CDATA[
             line
@@ -118,8 +118,8 @@
         </marker>
         <clipPath id='ID000001'>
             <rect class='focusClass'
-                  height='161.000'
-                  width='934.000'
+                  height='150.000'
+                  width='412.000'
                   x='0.000'
                   y='0.000'/>
         </clipPath>
@@ -129,56 +129,53 @@
                    clip-path='url(#ID000001)'>
                     <rect x='0.000'
                           y='0.000'
-                          width='934.000'
-                          height='161.000'
+                          width='412.000'
+                          height='150.000'
                           class='focusClass'/>
                     <line x1='0.000'
                           y1='28.000'
-                          x2='934.000'
+                          x2='412.000'
                           y2='28.000'
                           class='separator'/>
-                    <text x='440.600'
+                    <text x='179.600'
                           y='13.000'
                           class='stereotype'>&#xAB;Interface&#xBB;</text>
-                    <text x='443.000'
+                    <text x='182.000'
                           y='24.000'
                           class='abstract'>JavaFile</text>
                     <line x1='0.000'
                           y1='45.000'
-                          x2='934.000'
+                          x2='412.000'
                           y2='45.000'
                           class='separator'/>
                     <text x='5.000'
                           y='41.000'/>
                     <text x='5.000'
                           y='58.000'
-                          class='abstract static'>+ builder(packageName:java.lang.CharSequence,typeSpec:org.tquadrat.foundation.javacomposer.TypeSpec):org.tquadrat.foundation.javacomposer.JavaFile.Builder</text>
-                    <text x='5.000'
-                          y='69.000'
                           class='abstract'>+ equals(o:java.lang.Object):boolean</text>
                     <text x='5.000'
-                          y='80.000'
+                          y='69.000'
                           class='abstract'>+ hashCode():int</text>
                     <text x='5.000'
-                          y='91.000'
+                          y='80.000'
                           class='abstract'>+ toBuilder():org.tquadrat.foundation.javacomposer.JavaFile.Builder</text>
                     <text x='5.000'
-                          y='102.000'
+                          y='91.000'
                           class='abstract'>+ toJavaFileObject():javax.tools.JavaFileObject</text>
                     <text x='5.000'
-                          y='113.000'
+                          y='102.000'
                           class='abstract'>+ toString():java.lang.String</text>
                     <text x='5.000'
-                          y='124.000'
+                          y='113.000'
                           class='abstract'>+ writeTo(out:java.lang.Appendable):void</text>
                     <text x='5.000'
-                          y='135.000'
+                          y='124.000'
                           class='abstract'>+ writeTo(directory:java.io.File):void</text>
                     <text x='5.000'
-                          y='146.000'
+                          y='135.000'
                           class='abstract'>+ writeTo(filer:javax.annotation.processing.Filer):void</text>
                     <text x='5.000'
-                          y='157.000'
+                          y='146.000'
                           class='abstract'>+ writeTo(directory:java.nio.file.Path):void</text>
                 </g>
             </g>
@@ -262,12 +259,12 @@
         </symbol>
     </defs>
     <path class='implementation'
-          d='M543.000,286.000 L543.000,186.000'
+          d='M543.000,275.000 L543.000,175.000'
           marker-end='url(#implementation)'/>
-    <use x='76.000'
+    <use x='337.000'
          y='25.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.JavaFile'/>
     <use x='25.000'
-         y='286.000'
+         y='275.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.internal.JavaFileImpl'/>
 </svg>

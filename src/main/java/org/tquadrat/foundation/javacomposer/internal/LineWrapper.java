@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,12 +42,12 @@ import org.tquadrat.foundation.exception.UnsupportedEnumError;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: LineWrapper.java 1065 2023-09-28 06:16:50Z tquadrat $
+ *  @version $Id: LineWrapper.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: LineWrapper.java 1065 2023-09-28 06:16:50Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: LineWrapper.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class LineWrapper implements Closeable
 {
@@ -61,7 +61,7 @@ public final class LineWrapper implements Closeable
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: LineWrapper.java 1065 2023-09-28 06:16:50Z tquadrat $
+     *  @version $Id: LineWrapper.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
@@ -154,7 +154,7 @@ public final class LineWrapper implements Closeable
     {
         m_Out = requireNonNullArgument( out, "out" );
         m_Indent = requireNonNullArgument( indent, "indent" );
-        m_ColumnLimit = require( columnLimit, v -> "columnLimit is 0 or negative: %d".formatted( columnLimit ), v -> v > 0 );
+        m_ColumnLimit = require( columnLimit, _ -> "columnLimit is 0 or negative: %d".formatted( columnLimit ), v -> v > 0 );
     }   //  LineWrapper()
 
         /*---------*\

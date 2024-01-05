@@ -45,11 +45,11 @@ import org.tquadrat.foundation.annotation.ClassVersion;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: DummyFiler.java 937 2021-12-14 21:59:00Z tquadrat $
+ *  @version $Id: DummyFiler.java 1085 2024-01-05 16:23:28Z tquadrat $
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: DummyFiler.java 937 2021-12-14 21:59:00Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: DummyFiler.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 public final class DummyFiler implements Filer
 {
         /*---------------*\
@@ -62,7 +62,7 @@ public final class DummyFiler implements Filer
      *  {@link DummyFiler}.
      *
      *  @author Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: DummyFiler.java 937 2021-12-14 21:59:00Z tquadrat $
+     *  @version $Id: DummyFiler.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 10
      *
      *  @UMLGraph.link
@@ -142,7 +142,6 @@ public final class DummyFiler implements Filer
      *  @param  fileSystem  The file system.
      *  @param  fsRoot  The file system root.
      */
-    @SuppressWarnings( "resource" )
     public DummyFiler( final FileSystem fileSystem, final Path fsRoot )
     {
         m_Separator = requireNonNullArgument( fileSystem, "fileSystem" ).getSeparator();
@@ -184,6 +183,7 @@ public final class DummyFiler implements Filer
         final var retValue = new Source( path );
 
         //---* Done *----------------------------------------------------------
+        //noinspection ReturnOfInnerClass
         return retValue;
     }   //  createSourceFile()
 

@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -83,13 +83,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
+ *  @version $Id: TypeSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@SuppressWarnings( {"ClassWithTooManyFields", "ClassWithTooManyMethods", "OverlyCoupledClass"} )
-@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
+@SuppressWarnings( {"ClassWithTooManyFields", "OverlyCoupledClass"} )
+@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public abstract sealed class TypeSpecImpl implements TypeSpec
     permits AnnotationTypeSpecImpl, ClassSpecImpl, EnumSpecImpl, InterfaceSpecImpl, RecordSpecImpl
@@ -103,13 +103,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
+     *  @version $Id: TypeSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "OverlyCoupledClass" )
-    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public abstract static sealed class BuilderImpl implements TypeSpec.Builder
         permits AnnotationTypeSpecImpl.BuilderImpl, ClassSpecImpl.BuilderImpl, EnumSpecImpl.BuilderImpl, InterfaceSpecImpl.BuilderImpl, RecordSpecImpl.BuilderImpl
@@ -251,7 +251,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
             m_Kind = requireNonNullArgument( kind, "kind" );
-            m_Name = requireValidNonNullArgument( name, "name", v -> v.isEmpty() || isValidName( v.get() ), $ -> "not a valid name: %s".formatted( name.get() ) );
+            m_Name = requireValidNonNullArgument( name, "name", v -> v.isEmpty() || isValidName( v.get() ), _ -> "not a valid name: %s".formatted( name.get() ) );
 
             m_InitializerBlock = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
             m_Javadoc = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
@@ -320,7 +320,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addEnumConstant( final CharSequence name )
         {
-            return addEnumConstant( name, anonymousClassBuilder( EMPTY_STRING ).build() );
+            return addEnumConstant( name, m_Composer.anonymousClassBuilder( EMPTY_STRING ).build() );
         }   //  addEnumConstant()
 
         /**
@@ -329,7 +329,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addEnumConstant( final CharSequence name, final CodeBlock javaDoc )
         {
-            final var anonymousClass = anonymousClassBuilder( EMPTY_STRING )
+            final var anonymousClass = m_Composer.anonymousClassBuilder( EMPTY_STRING )
                 .addJavadoc( requireNonNullArgument( javaDoc, "javaDoc" ) )
                 .build();
             addEnumConstant( name, anonymousClass );
@@ -344,7 +344,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addEnumConstant( final CharSequence name, final String format, final Object... args )
         {
-            final var anonymousClass = anonymousClassBuilder( EMPTY_STRING )
+            final var anonymousClass = m_Composer.anonymousClassBuilder( EMPTY_STRING )
                 .addJavadoc( format, args )
                 .build();
             addEnumConstant( name, anonymousClass );
@@ -564,7 +564,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
                             name,
                             "name",
                             Objects::nonNull,
-                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -590,7 +590,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addSuperinterface( final Class<?> superinterface )
         {
-            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, $ -> "'%s' is not an interface".formatted( superinterface.getName() ) ) ) );
+            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, _ -> "'%s' is not an interface".formatted( superinterface.getName() ) ) ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -611,7 +611,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addSuperinterface( final TypeElement superinterface )
         {
-            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -> v.getKind() == ElementKind.INTERFACE, $ -> "'%s' is not an interface".formatted( superinterface.getQualifiedName() ) ).asType() ) );
+            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -> v.getKind() == ElementKind.INTERFACE, _ -> "'%s' is not an interface".formatted( superinterface.getQualifiedName() ) ).asType() ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -636,7 +636,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addSuperinterfaces( final Iterable<? extends TypeName> superinterfaces )
         {
-            for( final TypeName superinterface : requireNonNullArgument( superinterfaces, "superinterfaces" ) )
+            for( final var superinterface : requireNonNullArgument( superinterfaces, "superinterfaces" ) )
             {
                 addSuperinterface( superinterface );
             }
@@ -916,7 +916,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         public BuilderImpl superclass( final TypeName superclass )
         {
             checkState( m_Superclass == OBJECT, () -> new IllegalStateException( "superclass already set to %s".formatted( m_Superclass.toString() ) ));
-            m_Superclass = (TypeNameImpl) requireValidNonNullArgument( superclass, "superclass", v -> !v.isPrimitive(), $ -> "superclass may not be a primitive" );
+            m_Superclass = (TypeNameImpl) requireValidNonNullArgument( superclass, "superclass", v -> !v.isPrimitive(), _ -> "superclass may not be a primitive" );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -931,13 +931,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
+     *  @version $Id: TypeSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "NewClassNamingConvention" )
-    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public enum Kind
     {
@@ -1249,85 +1249,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     ====** Methods **==========================================================
         \*---------*/
     /**
-     *  Creates a builder for an annotation (a type with the kind
-     *  {@link TypeSpecImpl.Kind#ANNOTATION}).
-     *
-     *  @param  className   The name of the annotation.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final BuilderImpl annotationBuilder( final ClassName className )
-    {
-        final var retValue = annotationBuilder( requireNonNullArgument( className, "className" ).simpleName() );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  annotationBuilder()
-
-    /**
-     *  Creates a builder for an annotation (a type with the kind
-     *  {@link TypeSpecImpl.Kind#ANNOTATION}).
-     *
-     *  @param  name   The name of the annotation.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final BuilderImpl annotationBuilder( final CharSequence name )
-    {
-        final var retValue = new AnnotationTypeSpecImpl.BuilderImpl( new JavaComposer(), requireNonNullArgument( name, "name" ) );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  annotationBuilder()
-
-    /**
-     *  Creates a builder for an anonymous class.
-     *
-     *  @param  typeArguments   The type arguments.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final BuilderImpl anonymousClassBuilder( final CodeBlock typeArguments )
-    {
-        final var retValue = new ClassSpecImpl.BuilderImpl( new JavaComposer(), (CodeBlockImpl) requireNonNullArgument( typeArguments, "typeArguments" ) );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  anonymousClassBuilder()
-
-    /**
-     *  Creates a builder for an anonymous class.
-     *
-     *  @param  format  The format.
-     *  @param  args    The arguments.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final BuilderImpl anonymousClassBuilder( final String format, final Object... args )
-    {
-        final var composer = new JavaComposer();
-        final var retValue = anonymousClassBuilder( composer.codeBlockBuilder()
-            .add( format, args )
-            .build() );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  anonymousClassBuilder()
-
-    /**
      *  Returns the anonymous type arguments.
      *
      *  @return An instance of
@@ -1336,44 +1257,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      */
     @SuppressWarnings( "PublicMethodNotExposedInInterface" )
     public Optional<CodeBlock> anonymousTypeArguments() { return Optional.empty(); }
-
-    /**
-     *  Creates a builder for a regular class (a type with the kind
-     *  {@link TypeSpecImpl.Kind#CLASS}).
-     *
-     *  @param  className   The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final BuilderImpl classBuilder( final ClassName className )
-    {
-        final var retValue = classBuilder( requireNonNullArgument( className, "className" ).simpleName() );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  classBuilder()
-
-    /**
-     *  Creates a builder for a regular class (a type with the kind
-     *  {@link TypeSpecImpl.Kind#CLASS}).
-     *
-     *  @param  name    The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final BuilderImpl classBuilder( final CharSequence name )
-    {
-        final var retValue = new ClassSpecImpl.BuilderImpl( new JavaComposer(), requireNotEmptyArgument( name, "name" ), null );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  classBuilder()
 
     /**
      *  Compares two instances of
@@ -1488,44 +1371,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *      output target.
      */
     protected abstract void emit4JavaPoet( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException;
-
-    /**
-     *  Creates a builder for an {@code enum} type (a type with the kind
-     *  {@link TypeSpecImpl.Kind#ENUM}).
-     *
-     *  @param  className   The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final BuilderImpl enumBuilder( final ClassName className )
-    {
-        final var retValue = enumBuilder( requireNonNullArgument( className, "className" ).simpleName() );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  enumBuilder()
-
-    /**
-     *  Creates a builder for an {@code enum} type (a type with the kind
-     *  {@link TypeSpecImpl.Kind#ENUM}).
-     *
-     *  @param  name   The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final BuilderImpl enumBuilder( final CharSequence name )
-    {
-        final var retValue = new EnumSpecImpl.BuilderImpl( new JavaComposer(), requireNonNullArgument( name, "name" ) );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  enumBuilder()
 
     /**
      *  {@inheritDoc}
@@ -1682,44 +1527,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      */
     @Override
     public final List<TypeSpec> innerClasses() { return m_TypeSpecs.stream().map( t -> (TypeSpec) t ).collect( toList() ); }
-
-    /**
-     *  Creates a builder for an interface (a type with the kind
-     *  {@link TypeSpecImpl.Kind#INTERFACE}).
-     *
-     *  @param  className   The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final BuilderImpl interfaceBuilder( final ClassName className )
-    {
-        final var retValue = interfaceBuilder( requireNonNullArgument( className, "className" ).simpleName() );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  interfaceBuilder()
-
-    /**
-     *  Creates a builder for an interface (a type with the kind
-     *  {@link TypeSpecImpl.Kind#INTERFACE}).
-     *
-     *  @param  name   The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static BuilderImpl interfaceBuilder( final CharSequence name )
-    {
-        final var retValue = new InterfaceSpecImpl.BuilderImpl( new JavaComposer(), requireNotEmptyArgument( name, "name" ) );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  interfaceBuilder()
 
     /**
      *  Returns the modifiers that are applied to this type spec.

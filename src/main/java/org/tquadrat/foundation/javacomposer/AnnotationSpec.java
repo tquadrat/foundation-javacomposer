@@ -19,11 +19,7 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
-
-import javax.lang.model.element.AnnotationMirror;
-import java.lang.annotation.Annotation;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
@@ -34,12 +30,12 @@ import org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: AnnotationSpec.java 1066 2023-09-28 19:51:53Z tquadrat $
+ *  @version $Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1066 2023-09-28 19:51:53Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface AnnotationSpec
     permits AnnotationSpecImpl
@@ -53,13 +49,13 @@ public sealed interface AnnotationSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: AnnotationSpec.java 1066 2023-09-28 19:51:53Z tquadrat $
+     *  @version $Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1066 2023-09-28 19:51:53Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits AnnotationSpecImpl.BuilderImpl
@@ -79,33 +75,7 @@ public sealed interface AnnotationSpec
          *
          *  @see JavaComposer#codeBlockOf(String, Object...)
          */
-        public default Builder addMember( final CharSequence name, final String format, final Object... args )
-        {
-            return addMember( name, false, format, args );
-        }   //  addMember()
-
-        /**
-         *  Adds a building block.
-         *
-         *  @param  name    The name.
-         *  @param  addDebugOutput  {@code true} if debug output should be
-         *      added to the generated code, {@code false} if not.
-         *  @param  format  The format for the
-         *      {@link CodeBlock}.
-         *  @param  args  The arguments for the
-         *      {@link CodeBlock}.
-         *  @return This {@code Builder} instance.
-         *
-         *  @see CodeBlock#of(String, Object...)
-         *  @since 0.0.6
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( "removal" )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public Builder addMember( final CharSequence name, final boolean addDebugOutput, final String format, final Object... args );
+        public Builder addMember( final CharSequence name, final String format, final Object... args );
 
         /**
          *  Adds a building block.
@@ -147,117 +117,10 @@ public sealed interface AnnotationSpec
     ====** Methods **==========================================================
         \*---------*/
     /**
-     *  Creates a builder for an instance of an implementation for
-     *  {@code AnnotationSpec} from the given
-     *  {@link ClassName}
-     *  instance.
-     *
-     *  @param  type    The class name.
-     *  @return The new builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#annotationBuilder(ClassName)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder builder( final ClassName type )
-    {
-        return AnnotationSpecImpl.builder( type );
-    }   //  builder()
-
-    /**
-     *  Creates a builder for an instance of an implementation for
-     *  {@code AnnotationSpec} from the given
-     *  {@link Class}
-     *  instance.
-     *
-     *  @param  type    The class.
-     *  @return The new builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#annotationBuilder(ClassName)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder builder( final Class<?> type )
-    {
-        return AnnotationSpecImpl.builder( type );
-    }   //  builder()
-
-    /**
      *  {@inheritDoc}
      */
     @Override
     public boolean equals( final Object o );
-
-    /**
-     *  Creates an instance of {@code AnnotationSpec} from the given
-     *  {@link Annotation}
-     *  instance.
-     *
-     *  @param  annotation  The annotation.
-     *  @return The new instance of {@code AnnotationSpec}.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#createAnnotation(Annotation)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static AnnotationSpec get( final Annotation annotation )
-    {
-        return AnnotationSpecImpl.get( annotation );
-    }   //  get()
-
-    /**
-     *  Creates an instance of {@code AnnotationSpec} from the given
-     *  {@link Annotation}
-     *  instance.
-     *
-     *  @param  annotation  The annotation.
-     *  @param  includeDefaultValues    {@code true} to include the
-     *      annotation's default values, {@code false} to ignore them.
-     *  @return The new instance of {@code AnnotationSpec}.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#createAnnotation(Annotation,boolean)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static AnnotationSpec get( final Annotation annotation, final boolean includeDefaultValues )
-    {
-        @SuppressWarnings( "ClassReferencesSubclass" )
-        final var retValue = AnnotationSpecImpl.get( annotation, includeDefaultValues );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Creates an instance of {@code AnnotationSpec} from the given
-     *  {@link AnnotationMirror}
-     *  instance.
-     *
-     *  @param  annotation  The annotation mirror.
-     *  @return The new instance of {@code AnnotationSpec}.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#createAnnotation(AnnotationMirror)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static AnnotationSpec get( final AnnotationMirror annotation )
-    {
-        @SuppressWarnings( "ClassReferencesSubclass" )
-        final var retValue = AnnotationSpecImpl.get( annotation );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
 
     /**
      *  {@inheritDoc}

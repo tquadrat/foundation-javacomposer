@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@
 
 package org.tquadrat.foundation.javacomposer.internal;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.INTERNAL;
 import static org.apiguardian.api.API.Status.STABLE;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
@@ -47,12 +46,12 @@ import org.tquadrat.foundation.javacomposer.TypeVariableName;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ArrayTypeNameImpl.java 1062 2023-09-25 23:11:41Z tquadrat $
+ *  @version $Id: ArrayTypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ArrayTypeNameImpl.java 1062 2023-09-25 23:11:41Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ArrayTypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeName
 {
@@ -227,50 +226,6 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
         //---* Done *----------------------------------------------------------
         return retValue;
     }   //  from()
-
-    /**
-     *  Returns an instance of {@code ArrayTypeNameImpl} for an array type
-     *  that is equivalent to {@code mirror}.
-     *
-     *  @param  mirror  The mirror for the array.
-     *  @param  typeVariables   The type variables.
-     *  @return The new instance of {@code ArrayTypeName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(ArrayType,Map)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final ArrayTypeNameImpl get( final ArrayType mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
-    {
-        final var retValue = from( mirror, typeVariables);
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Returns an instance of {@code ArrayTypeNameImpl} for an array type that
-     *  is equivalent to {@code type}.
-     *
-     *  @param  type    The array type.
-     *  @param  typeVariables   The type variables.
-     *  @return The new instance of {@code ArrayTypeName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(GenericArrayType,Map)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final ArrayTypeNameImpl get( final GenericArrayType type, final Map<Type,TypeVariableName> typeVariables )
-    {
-        final var retValue = from( type, typeVariables );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
 
     /**
      *  Returns the array component type.

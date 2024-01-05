@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 
 import javax.lang.model.element.Element;
@@ -39,12 +38,12 @@ import org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeSpec.java 1068 2023-09-28 21:42:28Z tquadrat $
+ *  @version $Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: TypeSpec.java 1068 2023-09-28 21:42:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface TypeSpec
     permits TypeSpecImpl
@@ -59,13 +58,13 @@ public sealed interface TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpec.java 1068 2023-09-28 21:42:28Z tquadrat $
+     *  @version $Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( {"ClassWithTooManyMethods", "InnerClassOfInterface"} )
-    @ClassVersion( sourceVersion = "$Id: TypeSpec.java 1068 2023-09-28 21:42:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static interface Builder
     {
@@ -543,167 +542,6 @@ public sealed interface TypeSpec
     ====** Methods **==========================================================
         \*---------*/
     /**
-     *  Creates a builder for an annotation.
-     *
-     *  @param  className   The name of the annotation.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#annotationTypeBuilder(ClassName)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder annotationBuilder( final ClassName className )
-    {
-        final var retValue = TypeSpecImpl.annotationBuilder( className );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  annotationBuilder()
-
-    /**
-     *  Creates a builder for an annotation.
-     *
-     *  @param  name   The name of the annotation.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#annotationTypeBuilder(CharSequence)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder annotationBuilder( final CharSequence name )
-    {
-        final var retValue = TypeSpecImpl.annotationBuilder( name );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  annotationBuilder()
-
-    /**
-     *  Creates a builder for an anonymous class.
-     *
-     *  @param  typeArguments   The type arguments.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#anonymousClassBuilder(CodeBlock)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder anonymousClassBuilder( final CodeBlock typeArguments )
-    {
-        final var retValue = TypeSpecImpl.anonymousClassBuilder( typeArguments );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  anonymousClassBuilder()
-
-    /**
-     *  Creates a builder for an anonymous class.
-     *
-     *  @param  format  The format.
-     *  @param  args    The arguments.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#anonymousClassBuilder(String, Object...)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder anonymousClassBuilder( final String format, final Object... args )
-    {
-        final var retValue = TypeSpecImpl.anonymousClassBuilder( format, args );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  anonymousClassBuilder()
-
-    /**
-     *  Creates a builder for a regular class.
-     *
-     *  @param  className   The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#classBuilder(ClassName)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder classBuilder( final ClassName className )
-    {
-        final var retValue = TypeSpecImpl.classBuilder( className );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  classBuilder()
-
-    /**
-     *  Creates a builder for a regular class.
-     *
-     *  @param  name    The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#classBuilder(CharSequence)}.
-     */
-    @SuppressWarnings( {"DeprecatedIsStillUsed", "removal"} )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder classBuilder( final CharSequence name )
-    {
-        final var retValue = TypeSpecImpl.classBuilder( name );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  classBuilder()
-
-    /**
-     *  Creates a builder for an {@code enum} type.
-     *
-     *  @param  className   The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#enumBuilder(ClassName)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder enumBuilder( final ClassName className )
-    {
-        final var retValue = TypeSpecImpl.enumBuilder( className );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  enumBuilder()
-
-    /**
-     *  Creates a builder for an {@code enum} type.
-     *
-     *  @param  name   The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#enumBuilder(CharSequence)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder enumBuilder( final CharSequence name )
-    {
-        final var retValue = TypeSpecImpl.enumBuilder( name );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  enumBuilder()
-
-    /**
      *  {@inheritDoc}
      */
     @Override
@@ -730,46 +568,6 @@ public sealed interface TypeSpec
      *  @return The inner types.
      */
     public List<TypeSpec> innerClasses();
-
-    /**
-     *  Creates a builder for an interface.
-     *
-     *  @param  className   The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#interfaceBuilder(ClassName)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder interfaceBuilder( final ClassName className )
-    {
-        final var retValue = TypeSpecImpl.interfaceBuilder( className );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  interfaceBuilder()
-
-    /**
-     *  Creates a builder for an interface.
-     *
-     *  @param  name   The name of the class.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#interfaceBuilder(CharSequence)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder interfaceBuilder( final CharSequence name )
-    {
-        final var retValue = TypeSpecImpl.interfaceBuilder( name );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  interfaceBuilder()
 
     /**
      *  Returns the name of the class, interface or enum represented by this

@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,12 +36,12 @@ import org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderI
  *  Annotation value visitor adding members to the given builder instance.
  *
  *  @author Square, Inc.
- *  @version $Id: AnnotationValueVisitor.java 1062 2023-09-25 23:11:41Z tquadrat $
+ *  @version $Id: AnnotationValueVisitor.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
  *  @UMLGraph.link
  *  @since 0.0.5
  */
-@ClassVersion( sourceVersion = "$Id: AnnotationValueVisitor.java 1062 2023-09-25 23:11:41Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: AnnotationValueVisitor.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public class AnnotationValueVisitor extends SimpleAnnotationValueVisitor14<BuilderImpl, String>
 {
@@ -125,7 +125,7 @@ public class AnnotationValueVisitor extends SimpleAnnotationValueVisitor14<Build
     @Override
     public final BuilderImpl visitArray( final List<? extends AnnotationValue> values, final String name )
     {
-        for( final AnnotationValue value : values )
+        for( final var value : values )
         {
             value.accept( this, name );
         }

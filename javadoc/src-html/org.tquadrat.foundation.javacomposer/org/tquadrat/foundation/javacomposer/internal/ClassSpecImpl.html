@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2023 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2024 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -89,12 +89,12 @@
 <span class="source-line-no">076</span><span id="line-76"> *</span>
 <span class="source-line-no">077</span><span id="line-77"> *  @author Square,Inc.</span>
 <span class="source-line-no">078</span><span id="line-78"> *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">079</span><span id="line-79"> *  @version $Id: ClassSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $</span>
+<span class="source-line-no">079</span><span id="line-79"> *  @version $Id: ClassSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
 <span class="source-line-no">080</span><span id="line-80"> *  @since 0.2.0</span>
 <span class="source-line-no">081</span><span id="line-81"> *</span>
 <span class="source-line-no">082</span><span id="line-82"> *  @UMLGraph.link</span>
 <span class="source-line-no">083</span><span id="line-83"> */</span>
-<span class="source-line-no">084</span><span id="line-84">@ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $" )</span>
+<span class="source-line-no">084</span><span id="line-84">@ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
 <span class="source-line-no">085</span><span id="line-85">@API( status = INTERNAL, since = "0.2.0" )</span>
 <span class="source-line-no">086</span><span id="line-86">public final class ClassSpecImpl extends TypeSpecImpl</span>
 <span class="source-line-no">087</span><span id="line-87">{</span>
@@ -108,12 +108,12 @@
 <span class="source-line-no">095</span><span id="line-95">     *</span>
 <span class="source-line-no">096</span><span id="line-96">     *  @author Square,Inc.</span>
 <span class="source-line-no">097</span><span id="line-97">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">098</span><span id="line-98">     *  @version $Id: ClassSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $</span>
+<span class="source-line-no">098</span><span id="line-98">     *  @version $Id: ClassSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
 <span class="source-line-no">099</span><span id="line-99">     *  @since 0.2.0</span>
 <span class="source-line-no">100</span><span id="line-100">     *</span>
 <span class="source-line-no">101</span><span id="line-101">     *  @UMLGraph.link</span>
 <span class="source-line-no">102</span><span id="line-102">     */</span>
-<span class="source-line-no">103</span><span id="line-103">    @ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1062 2023-09-25 23:11:41Z tquadrat $" )</span>
+<span class="source-line-no">103</span><span id="line-103">    @ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
 <span class="source-line-no">104</span><span id="line-104">    @API( status = INTERNAL, since = "0.2.0" )</span>
 <span class="source-line-no">105</span><span id="line-105">    public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl</span>
 <span class="source-line-no">106</span><span id="line-106">    {</span>
@@ -181,7 +181,7 @@
 <span class="source-line-no">168</span><span id="line-168">        @Override</span>
 <span class="source-line-no">169</span><span id="line-169">        public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )</span>
 <span class="source-line-no">170</span><span id="line-170">        {</span>
-<span class="source-line-no">171</span><span id="line-171">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), $ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
+<span class="source-line-no">171</span><span id="line-171">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), _ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
 <span class="source-line-no">172</span><span id="line-172">            addField( fieldSpecImpl );</span>
 <span class="source-line-no">173</span><span id="line-173"></span>
 <span class="source-line-no">174</span><span id="line-174">            final var fieldName = fieldSpecImpl.name();</span>
@@ -252,7 +252,7 @@
 <span class="source-line-no">239</span><span id="line-239">        @Override</span>
 <span class="source-line-no">240</span><span id="line-240">        public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )</span>
 <span class="source-line-no">241</span><span id="line-241">        {</span>
-<span class="source-line-no">242</span><span id="line-242">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), $ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
+<span class="source-line-no">242</span><span id="line-242">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), _ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
 <span class="source-line-no">243</span><span id="line-243">            addField( fieldSpecImpl );</span>
 <span class="source-line-no">244</span><span id="line-244"></span>
 <span class="source-line-no">245</span><span id="line-245">            final var fieldName = fieldSpecImpl.name();</span>
@@ -440,7 +440,7 @@
 <span class="source-line-no">427</span><span id="line-427">        else if( nonNull( m_AnonymousTypeArguments ) )</span>
 <span class="source-line-no">428</span><span id="line-428">        {</span>
 <span class="source-line-no">429</span><span id="line-429">            //---* Emit an anonymous type that is not an enum constant *-------</span>
-<span class="source-line-no">430</span><span id="line-430">            final var supertype = getSuperInterfaces().isEmpty() ? getSuperClass() : getSuperInterfaces().get( 0 );</span>
+<span class="source-line-no">430</span><span id="line-430">            final var supertype = getSuperInterfaces().isEmpty() ? getSuperClass() : getSuperInterfaces().getFirst();</span>
 <span class="source-line-no">431</span><span id="line-431"></span>
 <span class="source-line-no">432</span><span id="line-432">            codeWriter.emit( "new $T( ", supertype );</span>
 <span class="source-line-no">433</span><span id="line-433">            codeWriter.emit( m_AnonymousTypeArguments );</span>
@@ -728,7 +728,7 @@
 <span class="source-line-no">715</span><span id="line-715">        else if( nonNull( m_AnonymousTypeArguments ) )</span>
 <span class="source-line-no">716</span><span id="line-716">        {</span>
 <span class="source-line-no">717</span><span id="line-717">            //---* Emit an anonymous type that is not an enum constant *-------</span>
-<span class="source-line-no">718</span><span id="line-718">            final var supertype = getSuperInterfaces().isEmpty() ? getSuperClass() : getSuperInterfaces().get( 0 );</span>
+<span class="source-line-no">718</span><span id="line-718">            final var supertype = getSuperInterfaces().isEmpty() ? getSuperClass() : getSuperInterfaces().getFirst();</span>
 <span class="source-line-no">719</span><span id="line-719"></span>
 <span class="source-line-no">720</span><span id="line-720">            codeWriter.emit( "new $T(", supertype );</span>
 <span class="source-line-no">721</span><span id="line-721">            codeWriter.emit( m_AnonymousTypeArguments );</span>

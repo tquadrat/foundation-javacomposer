@@ -697,24 +697,6 @@ public final class TestTypeSpec extends TestBaseClass
     }
 
     @Test
-    @Deprecated
-    public void codeBlockAddStatementOfCodeBlockToString() throws Exception
-    {
-        skipThreadTest();
-
-        final var composer = new JavaComposer();
-
-        final var contents = composer.codeBlockOf( "$T $N = $S.substring(0, 3)", String.class, "s", "taco" );
-        final var statement = composer.codeBlockBuilder()
-            .addStatement( contents )
-            .build();
-        assertThat( statement.toString() ).isEqualTo(
-            """
-             java.lang.String s = "taco".substring(0, 3);
-             """ );
-    }
-
-    @Test
     public void codeBlocks() throws Exception
     {
         skipThreadTest();

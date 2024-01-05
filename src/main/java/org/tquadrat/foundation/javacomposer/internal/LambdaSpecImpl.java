@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2023 by Thomas Thrien.
+ * Copyright © 2002-2024 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  *
@@ -51,12 +51,12 @@ import org.tquadrat.foundation.lang.Lazy;
  *  {@link LambdaSpec}.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: LambdaSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
+ *  @version $Id: LambdaSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class LambdaSpecImpl implements LambdaSpec
 {
@@ -68,12 +68,12 @@ public final class LambdaSpecImpl implements LambdaSpec
      *  {@link org.tquadrat.foundation.javacomposer.LambdaSpec.Builder}.
      *
      *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: LambdaSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
+     *  @version $Id: LambdaSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements Builder
     {
@@ -224,7 +224,7 @@ public final class LambdaSpecImpl implements LambdaSpec
         @Override
         public final BuilderImpl addParameters( final Iterable<? extends ParameterSpec> parameterSpecs )
         {
-            for( final ParameterSpec parameterSpec : requireNonNullArgument( parameterSpecs, "parameterSpecs" ) )
+            for( final var parameterSpec : requireNonNullArgument( parameterSpecs, "parameterSpecs" ) )
             {
                 m_Parameters.add( (ParameterSpecImpl) parameterSpec );
             }
@@ -232,20 +232,6 @@ public final class LambdaSpecImpl implements LambdaSpec
             //---* Done *------------------------------------------------------
             return this;
         }   //  addParameters()
-
-        /**
-         *  {@inheritDoc}
-         */
-        @Override
-        public final BuilderImpl addStatement( final CodeBlock statement )
-        {
-            m_Code.addStatement( requireNonNullArgument( statement, "statement" ) );
-            m_Lines += 2;
-            if( m_Composer.addDebugOutput() ) ++m_Lines;
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  addStatement()
 
         /**
          *  {@inheritDoc}
@@ -424,17 +410,6 @@ public final class LambdaSpecImpl implements LambdaSpec
     ====** Methods **==========================================================
         \*---------*/
     /**
-     *  Creates a builder for an instance of {@code LambdaSpecImpl}.
-     *
-     *  @return The new builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static BuilderImpl builder() { return new BuilderImpl( new JavaComposer() ); }
-
-    /**
      *  Emits this lambda to the given code writer.
      *
      *  @param  codeWriter  The code writer.
@@ -451,7 +426,7 @@ public final class LambdaSpecImpl implements LambdaSpec
         }
         else if( m_Parameters.size() == 1 )
         {
-            final var parameter = m_Parameters.get( 0 );
+            final var parameter = m_Parameters.getFirst();
             final var name = parameter.name();
             final var type = parameter.type();
 
@@ -470,12 +445,12 @@ public final class LambdaSpecImpl implements LambdaSpec
             final Object [] args;
             if( m_InferTypes )
             {
-                format = m_Parameters.stream().map( p -> "$L" ).collect( joining(",", "(", ")" ) );
+                format = m_Parameters.stream().map( _ -> "$L" ).collect( joining(",", "(", ")" ) );
                 args = m_Parameters.stream().map( ParameterSpecImpl::name ).toArray();
             }
             else
             {
-                format = m_Parameters.stream().map( p -> "$T $L" ).collect( joining(", ", "(", ")" ) );
+                format = m_Parameters.stream().map( _ -> "$T $L" ).collect( joining(", ", "(", ")" ) );
                 args = m_Parameters.stream().flatMap( p -> Stream.of( p.type(), p.name() ) ).toArray();
             }
             codeWriter.emit( format, args );

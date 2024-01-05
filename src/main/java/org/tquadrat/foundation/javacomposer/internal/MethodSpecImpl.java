@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,6 +54,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.SequencedCollection;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.TreeSet;
@@ -80,13 +81,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: MethodSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
+ *  @version $Id: MethodSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields"} )
-@ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class MethodSpecImpl implements MethodSpec
 {
@@ -99,12 +100,12 @@ public final class MethodSpecImpl implements MethodSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: MethodSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
+     *  @version $Id: MethodSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements MethodSpec.Builder
     {
@@ -201,7 +202,7 @@ public final class MethodSpecImpl implements MethodSpec
         public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final CharSequence name )
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
-            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -> v.equals( CONSTRUCTOR ) || isValidName( v ), $ -> "not a valid name: %s".formatted( name ) ).toString().intern();
+            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -> v.equals( CONSTRUCTOR ) || isValidName( v ), _ -> "not a valid name: %s".formatted( name ) ).toString().intern();
             m_ReturnType = name.equals( CONSTRUCTOR ) ? null : VOID_PRIMITIVE;
 
             m_Code = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
@@ -253,7 +254,7 @@ public final class MethodSpecImpl implements MethodSpec
         @Override
         public final BuilderImpl addAnnotations( final Iterable<? extends AnnotationSpec> annotationSpecs )
         {
-            for( final AnnotationSpec annotationSpec : requireNonNullArgument( annotationSpecs, "annotationSpecs" ) )
+            for( final var annotationSpec : requireNonNullArgument( annotationSpecs, "annotationSpecs" ) )
             {
                 m_Annotations.add( (AnnotationSpecImpl) annotationSpec );
             }
@@ -281,21 +282,6 @@ public final class MethodSpecImpl implements MethodSpec
         public final BuilderImpl addCode( final String format, final Object... args )
         {
             m_Code.add( format, args );
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  addCode()
-
-        /**
-         *  {@inheritDoc}
-         */
-        @SuppressWarnings( {"removal"} )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @Override
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public final BuilderImpl addCode( final boolean addDebugOutput, final String format, final Object... args )
-        {
-            m_Code.add( createDebugOutput( addDebugOutput, true ), format, args );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -340,7 +326,7 @@ public final class MethodSpecImpl implements MethodSpec
         @Override
         public final BuilderImpl addExceptions( final Iterable<? extends TypeName> exceptions )
         {
-            for( final TypeName exception : requireNonNullArgument( exceptions, "exceptions" ) )
+            for( final var exception : requireNonNullArgument( exceptions, "exceptions" ) )
             {
                 m_Exceptions.add( (TypeNameImpl) exception );
             }
@@ -415,24 +401,6 @@ public final class MethodSpecImpl implements MethodSpec
 
         /**
          *  {@inheritDoc}
-         *
-         *  @deprecated  Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Override
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public final BuilderImpl addNamedCode( final boolean addDebugOutput, final String format, final Map<String,?> args )
-        {
-            m_Code.addNamed( createDebugOutput( addDebugOutput, true ), format, args );
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  addNamedCode()
-
-        /**
-         *  {@inheritDoc}
          */
         @Override
         public final BuilderImpl addParameter( final ParameterSpec parameterSpec )
@@ -472,7 +440,7 @@ public final class MethodSpecImpl implements MethodSpec
         @Override
         public final BuilderImpl addParameters( final Iterable<? extends ParameterSpec> parameterSpecs )
         {
-            for( final ParameterSpec parameterSpec : requireNonNullArgument( parameterSpecs, "parameterSpecs" ) )
+            for( final var parameterSpec : requireNonNullArgument( parameterSpecs, "parameterSpecs" ) )
             {
                 m_Parameters.add( (ParameterSpecImpl) parameterSpec );
             }
@@ -485,39 +453,9 @@ public final class MethodSpecImpl implements MethodSpec
          *  {@inheritDoc}
          */
         @Override
-        public final BuilderImpl addStatement( final CodeBlock statement )
-        {
-            m_Code.addStatement( requireNonNullArgument( statement, "statement" ) );
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  addStatement()
-
-        /**
-         *  {@inheritDoc}
-         */
-        @Override
         public final BuilderImpl addStatement( final String format, final Object... args )
         {
             m_Code.addStatement( format, args );
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  addStatement()
-
-        /**
-         *  {@inheritDoc}
-         *
-         *  @deprecated  Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Override
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public final BuilderImpl addStatement( final boolean addDebugOutput, final String format, final Object... args )
-        {
-            m_Code.addStatement( createDebugOutput( addDebugOutput, true ), format, args );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -551,7 +489,7 @@ public final class MethodSpecImpl implements MethodSpec
                             name,
                             "name",
                             Objects::nonNull,
-                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -605,24 +543,6 @@ public final class MethodSpecImpl implements MethodSpec
         public final BuilderImpl beginControlFlow( final String controlFlow, final Object... args )
         {
             m_Code.beginControlFlow( controlFlow, args );
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  beginControlFlow()
-
-        /**
-         *  {@inheritDoc}
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        @Override
-        public final BuilderImpl beginControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args )
-        {
-            m_Code.beginControlFlow( createDebugOutput( addDebugOutput, true ), controlFlow, args );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -705,24 +625,6 @@ public final class MethodSpecImpl implements MethodSpec
         }   //  endControlFlow()
 
         /**
-         *  {@inheritDoc}
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        @Override
-        public final BuilderImpl endControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args )
-        {
-            m_Code.endControlFlow( createDebugOutput( addDebugOutput, true ), controlFlow, args );
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  endControlFlow()
-
-        /**
          *  Returns <i>a reference to</i> the declared exceptions.
          *
          *  @return The exceptions.
@@ -740,24 +642,6 @@ public final class MethodSpecImpl implements MethodSpec
         public final BuilderImpl nextControlFlow( final String controlFlow, final Object... args )
         {
             m_Code.nextControlFlow( controlFlow, args );
-
-            //---* Done *------------------------------------------------------
-            return this;
-        }   //  nextControlFlow()
-
-        /**
-         *  {@inheritDoc}
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @SuppressWarnings( {"removal"} )
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        @Override
-        public final BuilderImpl nextControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args )
-        {
-            m_Code.nextControlFlow( createDebugOutput( addDebugOutput, true ), controlFlow, args );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -974,25 +858,6 @@ public final class MethodSpecImpl implements MethodSpec
         /*---------*\
     ====** Methods **==========================================================
         \*---------*/
-    /**
-     *  Creates a builder that builds an instance of {@code MethodSpec} for a
-     *  constructor.
-     *
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final BuilderImpl constructorBuilder()
-    {
-        final var retValue = new BuilderImpl( new JavaComposer(), CONSTRUCTOR );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  constructorBuilder()
-
     /**
      *  Returns the default value of this method.
      *
@@ -1341,9 +1206,9 @@ public final class MethodSpecImpl implements MethodSpec
      *      an array type, {@code false} if not.
      */
     @SuppressWarnings( "BooleanMethodNameMustStartWithQuestion" )
-    private static final boolean lastParameterIsArray( final List<ParameterSpecImpl> parameters )
+    private static final boolean lastParameterIsArray( final SequencedCollection<ParameterSpecImpl> parameters )
     {
-        final var retValue = !parameters.isEmpty() && TypeName.asArray( (parameters.get( parameters.size() - 1 ).type() ) ).isPresent();
+        final var retValue = !parameters.isEmpty() && TypeName.asArray( (parameters.getLast().type() ) ).isPresent();
 
         //---* Done *----------------------------------------------------------
         return retValue;

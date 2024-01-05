@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  Copyright © 2002-2021 by Thomas Thrien.
+ *  Copyright © 2002-2024 by Thomas Thrien.
  *  All Rights Reserved.
  * ============================================================================
  *  Licensed to the public under the agreements of the GNU Lesser General Public
@@ -24,8 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -35,7 +33,6 @@ import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.javacomposer.ClassName;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
-import org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl;
 
 /**
  *  The tests for the class
@@ -44,10 +41,10 @@ import org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestCodeBlock.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: TestCodeBlock.java 1085 2024-01-05 16:23:28Z tquadrat $
  */
-@ClassVersion( sourceVersion = "$Id: TestCodeBlock.java 943 2021-12-21 01:34:32Z tquadrat $" )
-@SuppressWarnings( {"javadoc", "ClassWithTooManyMethods"} )
+@ClassVersion( sourceVersion = "$Id: TestCodeBlock.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@SuppressWarnings( {"ClassWithTooManyMethods"} )
 @DisplayName( "org.tquadrat.javapoet.TestCodeBlock" )
 public final class TestCodeBlock
 {
@@ -113,7 +110,7 @@ public final class TestCodeBlock
         }
     }
 
-    @SuppressWarnings( "static-method" )
+    @SuppressWarnings( {"static-method", "NonBooleanMethodNameMayNotStartWithQuestion"} )
     @Test
     public void equalsAndHashCode()
     {
@@ -316,43 +313,6 @@ public final class TestCodeBlock
              """ );
     }
 
-    @SuppressWarnings( {"static-method", "removal"} )
-    @Test
-    public void joinDeprecated()
-    {
-        final Collection<CodeBlock> codeBlocks = new ArrayList<>();
-        codeBlocks.add( CodeBlock.of( "$S", "hello" ) );
-        codeBlocks.add( CodeBlock.of( "$T", ClassName.get( "world", "World" ) ) );
-        codeBlocks.add( CodeBlock.of( "need tacos" ) );
-
-        final var joined = CodeBlock.join( codeBlocks, " || " );
-        assertThat( joined.toString() ).isEqualTo( "\"hello\" || world.World || need tacos" );
-    }
-
-    @SuppressWarnings( {"static-method", "removal"} )
-    @Test
-    public void joining()
-    {
-        final Collection<CodeBlockImpl> codeBlocks = new ArrayList<>();
-        codeBlocks.add( CodeBlockImpl.of( "$S", "hello" ) );
-        codeBlocks.add( CodeBlockImpl.of( "$T", ClassName.get( "world", "World" ) ) );
-        codeBlocks.add( CodeBlockImpl.of( "need tacos" ) );
-
-        final CodeBlock joined = codeBlocks.stream().collect( CodeBlockImpl.joiningStatic( " || " ) );
-        assertThat( joined.toString() ).isEqualTo( "\"hello\" || world.World || need tacos" );
-    }
-
-    @SuppressWarnings( {"static-method", "removal"} )
-    @Test
-    public void joiningSingleDeprecated()
-    {
-        final Collection<CodeBlockImpl> codeBlocks = new ArrayList<>();
-        codeBlocks.add( CodeBlockImpl.of( "$S", "hello" ) );
-
-        final CodeBlock joined = codeBlocks.stream().collect( CodeBlockImpl.joiningStatic( " || " ) );
-        assertThat( joined.toString() ).isEqualTo( "\"hello\"" );
-    }
-
     @SuppressWarnings( "static-method" )
     @Test
     public void joiningSingle()
@@ -363,19 +323,6 @@ public final class TestCodeBlock
         final var joined = codeBlock.join( " || " );
         assertThat( joined.toString() ).isEqualTo( "\"hello\"" );
     }   //  joiningSingle()
-
-    @SuppressWarnings( {"static-method", "removal"} )
-    @Test
-    public void joiningWithPrefixAndSuffixDeprecated()
-    {
-        final Collection<CodeBlockImpl> codeBlocks = new ArrayList<>();
-        codeBlocks.add( CodeBlockImpl.of( "$S", "hello" ) );
-        codeBlocks.add( CodeBlockImpl.of( "$T", ClassName.get( "world", "World" ) ) );
-        codeBlocks.add( CodeBlockImpl.of( "need tacos" ) );
-
-        final CodeBlock joined = codeBlocks.stream().collect( CodeBlockImpl.joiningStatic( " || ", "start {", "} end" ) );
-        assertThat( joined.toString() ).isEqualTo( "start {\"hello\" || world.World || need tacos} end" );
-    }
 
     @SuppressWarnings( "static-method" )
     @Test

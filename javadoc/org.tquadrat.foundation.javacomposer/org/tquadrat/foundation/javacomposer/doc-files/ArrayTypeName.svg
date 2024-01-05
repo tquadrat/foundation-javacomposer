@@ -7,7 +7,7 @@
      version='1.1'
      baseProfile='full'
      width='1572.000'
-     height='954.000'>
+     height='888.000'>
     <defs>
         <style><![CDATA[
             line
@@ -118,7 +118,7 @@
         </marker>
         <clipPath id='ID000001'>
             <rect class='focusClass'
-                  height='150.000'
+                  height='128.000'
                   width='868.000'
                   x='0.000'
                   y='0.000'/>
@@ -130,7 +130,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='868.000'
-                          height='150.000'
+                          height='128.000'
                           class='focusClass'/>
                     <line x1='0.000'
                           y1='28.000'
@@ -164,25 +164,19 @@
                           class='abstract static'>+ from(type:java.lang.reflect.GenericArrayType):org.tquadrat.foundation.javacomposer.ArrayTypeName</text>
                     <text x='5.000'
                           y='102.000'
-                          class='abstract static'>+ get(mirror:javax.lang.model.type.ArrayType):org.tquadrat.foundation.javacomposer.ArrayTypeName</text>
-                    <text x='5.000'
-                          y='113.000'
-                          class='abstract static'>+ get(type:java.lang.reflect.GenericArrayType):org.tquadrat.foundation.javacomposer.ArrayTypeName</text>
-                    <text x='5.000'
-                          y='124.000'
                           class='abstract static'>+ of(componentType:org.tquadrat.foundation.javacomposer.TypeName):org.tquadrat.foundation.javacomposer.ArrayTypeName</text>
                     <text x='5.000'
-                          y='135.000'
+                          y='113.000'
                           class='abstract static'>+ of(componentType:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.ArrayTypeName</text>
                     <text x='5.000'
-                          y='146.000'
+                          y='124.000'
                           class='abstract'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.TypeName</text>
                 </g>
             </g>
         </symbol>
         <clipPath id='ID000002'>
             <rect class='otherClass'
-                  height='216.000'
+                  height='194.000'
                   width='1522.000'
                   x='0.000'
                   y='0.000'/>
@@ -193,7 +187,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='1522.000'
-                          height='216.000'
+                          height='194.000'
                           class='otherClass'/>
                     <line x1='0.000'
                           y1='17.000'
@@ -232,27 +226,21 @@
                           y='146.000'
                           class='static'>+ from(type:java.lang.reflect.GenericArrayType,typeVariables:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):org.tquadrat.foundation.javacomposer.internal.ArrayTypeNameImpl</text>
                     <text x='5.000'
-                          y='157.000'
-                          class='static'>+ get(mirror:javax.lang.model.type.ArrayType,typeVariables:java.util.Map&lt;javax.lang.model.element.TypeParameterElement,org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl&gt;):org.tquadrat.foundation.javacomposer.internal.ArrayTypeNameImpl</text>
+                          y='157.000'>+ getComponentType():org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
                     <text x='5.000'
                           y='168.000'
-                          class='static'>+ get(type:java.lang.reflect.GenericArrayType,typeVariables:java.util.Map&lt;java.lang.reflect.Type,org.tquadrat.foundation.javacomposer.TypeVariableName&gt;):org.tquadrat.foundation.javacomposer.internal.ArrayTypeNameImpl</text>
-                    <text x='5.000'
-                          y='179.000'>+ getComponentType():org.tquadrat.foundation.javacomposer.internal.TypeNameImpl</text>
-                    <text x='5.000'
-                          y='190.000'
                           class='static'>+ of(componentType:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.internal.ArrayTypeNameImpl</text>
                     <text x='5.000'
-                          y='201.000'
+                          y='179.000'
                           class='static'>+ of(componentType:org.tquadrat.foundation.javacomposer.TypeName):org.tquadrat.foundation.javacomposer.internal.ArrayTypeNameImpl</text>
                     <text x='5.000'
-                          y='212.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.ArrayTypeNameImpl</text>
+                          y='190.000'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.internal.ArrayTypeNameImpl</text>
                 </g>
             </g>
         </symbol>
         <clipPath id='ID000003'>
             <rect class='otherClass'
-                  height='238.000'
+                  height='216.000'
                   width='838.000'
                   x='0.000'
                   y='0.000'/>
@@ -263,7 +251,7 @@
                     <rect x='0.000'
                           y='0.000'
                           width='838.000'
-                          height='238.000'
+                          height='216.000'
                           class='otherClass'/>
                     <line x1='0.000'
                           y1='28.000'
@@ -308,48 +296,42 @@
                           class='abstract static'>+ from(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.TypeName</text>
                     <text x='5.000'
                           y='146.000'
-                          class='abstract static'>+ get(mirror:javax.lang.model.type.TypeMirror):org.tquadrat.foundation.javacomposer.TypeName</text>
-                    <text x='5.000'
-                          y='157.000'
-                          class='abstract static'>+ get(type:java.lang.reflect.Type):org.tquadrat.foundation.javacomposer.TypeName</text>
-                    <text x='5.000'
-                          y='168.000'
                           class='abstract'>+ hashCode():int</text>
                     <text x='5.000'
-                          y='179.000'
+                          y='157.000'
                           class='abstract'>+ isAnnotated():boolean</text>
                     <text x='5.000'
-                          y='190.000'
+                          y='168.000'
                           class='abstract'>+ isBoxedPrimitive():boolean</text>
                     <text x='5.000'
-                          y='201.000'
+                          y='179.000'
                           class='abstract'>+ isPrimitive():boolean</text>
                     <text x='5.000'
-                          y='212.000'
+                          y='190.000'
                           class='abstract'>+ toString():java.lang.String</text>
                     <text x='5.000'
-                          y='223.000'
+                          y='201.000'
                           class='abstract'>+ unbox():org.tquadrat.foundation.javacomposer.TypeName</text>
                     <text x='5.000'
-                          y='234.000'
+                          y='212.000'
                           class='abstract'>+ withoutAnnotations():org.tquadrat.foundation.javacomposer.TypeName</text>
                 </g>
             </g>
         </symbol>
     </defs>
     <path class='implementation'
-          d='M786.000,613.000 L786.000,513.000'
+          d='M786.000,569.000 L786.000,469.000'
           marker-end='url(#implementation)'/>
     <path class='inheritance'
-          d='M786.000,363.000 L786.000,263.000'
+          d='M786.000,341.000 L786.000,241.000'
           marker-end='url(#inheritance)'/>
     <use x='367.000'
          y='25.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.TypeName'/>
     <use x='352.000'
-         y='363.000'
+         y='341.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.ArrayTypeName'/>
     <use x='25.000'
-         y='613.000'
+         y='569.000'
          xlink:href='#org.tquadrat.foundation.javacomposer.internal.ArrayTypeNameImpl'/>
 </svg>

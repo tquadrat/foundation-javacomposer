@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,48 +22,35 @@ package org.tquadrat.foundation.javacomposer.internal;
 import static java.lang.Character.isISOControl;
 import static java.lang.String.format;
 import static java.lang.Thread.currentThread;
-import static java.util.stream.Collectors.toMap;
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.INTERNAL;
-import static org.tquadrat.foundation.lang.Objects.nonNull;
+import static org.tquadrat.foundation.lang.Objects.checkState;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 
 import javax.lang.model.element.Modifier;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.annotation.UtilityClass;
 import org.tquadrat.foundation.exception.PrivateConstructorForStaticClassCalledError;
 import org.tquadrat.foundation.exception.ValidationException;
-import org.tquadrat.foundation.util.JavaUtils;
 
 /**
  *  Several utility functions to be used with JavaComposer.
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: Util.java 1066 2023-09-28 19:51:53Z tquadrat $
+ *  @version $Id: Util.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( "NewClassNamingConvention" )
 @UtilityClass
-@ClassVersion( sourceVersion = "$Id: Util.java 1066 2023-09-28 19:51:53Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: Util.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 public final class Util
 {
         /*-----------*\
@@ -126,98 +113,6 @@ public final class Util
     }   //  characterLiteralWithoutSingleQuotes()
 
     /**
-     *  Checks the given {@code condition} and throws a
-     *  {@link ValidationException}
-     *  if it is {@code false}.
-     *
-     *  @param  condition   The condition to check.
-     *  @param  format  The message format for the exception message.
-     *  @param  args    The arguments for the exception message.
-     *  @throws ValidationException The condition was not met.
-     *
-     *  @deprecated Use
-     *      {@link org.tquadrat.foundation.lang.Objects#checkState(boolean, Supplier)},
-     *      {@link org.tquadrat.foundation.lang.Objects#require(Object, Function, Predicate)},
-     *      {@link org.tquadrat.foundation.lang.Objects#require(Object, Supplier, Predicate)},
-     *      {@link org.tquadrat.foundation.lang.Objects#require(Object, String, Predicate)},
-     *      {@link org.tquadrat.foundation.lang.Objects#require(Object, Predicate)},
-     *      {@link org.tquadrat.foundation.lang.Objects#requireValidArgument(Object, String, Predicate)}
-     *      {@link org.tquadrat.foundation.lang.Objects#requireValidArgument(Object, String, Predicate, java.util.function.UnaryOperator)},
-     *      {@link org.tquadrat.foundation.lang.Objects#requireValidNonNullArgument(Object, String, Predicate)}
-     *      or
-     *      {@link org.tquadrat.foundation.lang.Objects#requireValidNonNullArgument(Object, String, Predicate, java.util.function.UnaryOperator)}
-     *      instead.
-     */
-    @SuppressWarnings( "DeprecatedIsStillUsed" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final void checkArgument( final boolean condition, final String format, final Object... args ) throws ValidationException
-    {
-        if( !condition ) throw new ValidationException( format( format, args ) );
-    }   //  checkArgument()
-
-    /**
-     *  Checks the given {@code condition} and throws a
-     *  {@link IllegalStateException}
-     *  if it is {@code false}.
-     *
-     *  @param  condition   The condition to check.
-     *  @param  format  The message format for the exception message.
-     *  @param  args    The arguments for the exception message.
-     *  @throws IllegalStateException The condition was not met.
-     *
-     *  @deprecated Use
-     *      {@link org.tquadrat.foundation.lang.Objects#checkState(boolean, Supplier)},
-     *      {@link org.tquadrat.foundation.lang.Objects#require(Object, Function, Predicate)},
-     *      {@link org.tquadrat.foundation.lang.Objects#require(Object, Supplier, Predicate)},
-     *      {@link org.tquadrat.foundation.lang.Objects#require(Object, String, Predicate)},
-     *      {@link org.tquadrat.foundation.lang.Objects#require(Object, Predicate)},
-     *      {@link org.tquadrat.foundation.lang.Objects#requireValidArgument(Object, String, Predicate)}
-     *      {@link org.tquadrat.foundation.lang.Objects#requireValidArgument(Object, String, Predicate, java.util.function.UnaryOperator)},
-     *      {@link org.tquadrat.foundation.lang.Objects#requireValidNonNullArgument(Object, String, Predicate)}
-     *      or
-     *      {@link org.tquadrat.foundation.lang.Objects#requireValidNonNullArgument(Object, String, Predicate, java.util.function.UnaryOperator)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final void checkState( final boolean condition, final String format, final Object... args )
-    {
-        if( !condition ) throw new IllegalStateException( format( format, args ) );
-    }   //  checkState()
-
-    /**
-     *  Creates the debug output.
-     *
-     *  @param  addDebugOutput  {@code true} if some debug output should be
-     *      added to the generated code, {@code false} otherwise.
-     *  @param  fromBuilder {@code true} if the call was made from a builder,
-     *      {@code false} otherwise.
-     *  @return An instance of
-     *      {@link Optional}
-     *      that holds the debug output; empty if the parameter
-     *      {@code addDebugOutput} is {@code false}.
-     *
-     *  @see #NO_DEBUG_OUTPUT
-     *
-     *  @deprecated Replaced by
-     *      {@link #createDebugOutput(boolean)}
-     *      because of a reworked debug output pattern.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "BooleanParameter" )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final Optional<DebugOutput> createDebugOutput( final boolean addDebugOutput, final boolean fromBuilder )
-    {
-        //---* Get the caller's caller *---------------------------------------
-        final var depth = fromBuilder ? 4 : 3;
-        final var retValue = addDebugOutput ? Optional.of( new DebugOutput( JavaUtils.findCaller( depth ) ) ) : NO_DEBUG_OUTPUT;
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  createDebugOutput()
-
-    /**
      *  Creates the debug output.
      *
      *  @param  addDebugOutput  {@code true} if some debug output should be
@@ -274,101 +169,6 @@ public final class Util
         //---* Done *----------------------------------------------------------
         return retValue;
     }   //  findCaller()
-
-    /**
-     *  Creates an immutable list from the given collection.
-     *
-     *  @param  <T> The type of the list elements.
-     *  @param  collection  The collection.
-     *  @return The immutable list.
-     *
-     *  @deprecated Use
-     *      {@link List#copyOf(Collection)}
-     *      instead.
-     */
-    @Deprecated( since = "0.1.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final <T> List<T> immutableList( final Collection<T> collection )
-    {
-        final var retValue = List.copyOf( requireNonNullArgument( collection, "collection" ) );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  immutableList()
-
-    /**
-     *  Creates an immutable map from the given map.
-     *
-     *  @param  <K> The type of the map's keys.
-     *  @param  <V> The type of the map's values.
-     *  @param  map The map.
-     *  @return The immutable copy of the input map.
-     *
-     *  @deprecated Use
-     *      {@link Map#copyOf(Map)}
-     *      instead.
-     */
-    @Deprecated( since = "0.1.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final <K,V> Map<K,V> immutableMap( final Map<K,V> map )
-    {
-        final var retValue = Map.copyOf( requireNonNullArgument( map, "map" ) );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  immutableMap()
-
-    /**
-     *  Creates an immutable multimap from the given multimap.
-     *
-     *  @param  <K> The type of the map's keys.
-     *  @param  <V> The type of the map's values.
-     *  @param  multiMap    The multimap.
-     *  @return The immutable copy of the input multimap.
-     *
-     *  @deprecated No replacement!
-     */
-    @Deprecated( since = "0.1.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final <K,V> Map<K,List<V>> immutableMultimap( final Map<? extends K, ? extends List<V>> multiMap )
-    {
-        final BinaryOperator<List<V>> merger = (v1,v2) ->
-        {
-            final Collection<V> collection = new ArrayList<>( v1.size() + v2.size() );
-            collection.addAll( v1 );
-            collection.addAll( v2 );
-            return List.copyOf( collection );
-        };
-
-        final Map<K,List<V>> buffer = requireNonNullArgument( multiMap, "multiMap" ).entrySet().stream()
-            .filter( e -> nonNull( e.getValue() ) && !e.getValue().isEmpty() )
-            .collect( toMap( Entry::getKey, e -> List.copyOf( e.getValue() ), merger, LinkedHashMap::new  ) );
-        final var retValue = Map.copyOf( buffer );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  immutableMultimap()
-
-    /**
-     *  Creates an immutable set from the given collection.
-     *
-     *  @param  <T> The type of the set elements.
-     *  @param  collection  The collection.
-     *  @return The immutable set.
-     *
-     *  @deprecated Use
-     *      {@link Set#copyOf(Collection)}
-     *      instead.
-     */
-    @Deprecated( since = "0.1.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final <T> Set<T> immutableSet( final Collection<T> collection )
-    {
-        final var retValue = Set.copyOf( requireNonNullArgument( collection, "collection" ) );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  immutableSet()
 
     /**
      *  Returns the Java String literal representing {@code value}, including
@@ -444,7 +244,7 @@ public final class Util
         final var count = (int) Arrays.stream( requireNonNullArgument( mutuallyExclusive, "mutuallyExclusive" ) )
             .filter( modifiers::contains )
             .count();
-        checkArgument( count == 1, "modifiers %s must contain one of %s", modifiers, Arrays.toString( mutuallyExclusive ) );
+        checkState( count == 1, () -> new ValidationException( "modifiers %s must contain one of %s".formatted( modifiers, Arrays.toString( mutuallyExclusive ) ) ) );
     }   //  requireExactlyOneOf()
 
     /**

@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,28 +19,24 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 
 import javax.lang.model.element.Modifier;
-import javax.lang.model.element.VariableElement;
-import java.lang.reflect.Type;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.javacomposer.internal.ParameterSpecImpl;
 
 /**
  *  The specification for a generated parameter declaration.
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterSpec.java 1068 2023-09-28 21:42:28Z tquadrat $
+ *  @version $Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1068 2023-09-28 21:42:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public interface ParameterSpec
 {
@@ -53,13 +49,13 @@ public interface ParameterSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: ParameterSpec.java 1068 2023-09-28 21:42:28Z tquadrat $
+     *  @version $Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1068 2023-09-28 21:42:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static interface Builder
     {
@@ -146,80 +142,10 @@ public interface ParameterSpec
     ====** Methods **==========================================================
         \*---------*/
     /**
-     *  Creates a builder for a new
-     *  {@code ParameterSpec}
-     *  instance.
-     *
-     *  @param  type    The type of the new parameter.
-     *  @param  name    The name of the new parameter.
-     *  @param  modifiers   The modifiers for the new parameter.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#parameterBuilder(Type, CharSequence, Modifier...)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder builder( final Type type, final CharSequence name, final Modifier... modifiers )
-    {
-        final var retValue = ParameterSpecImpl.builder( type, name, modifiers );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  builder()
-
-    /**
-     *  Creates a builder for a new
-     *  {@code ParameterSpec}
-     *  instance.
-     *
-     *  @param  type    The type of the new parameter.
-     *  @param  name    The name of the new parameter.
-     *  @param  modifiers   The modifiers for the new parameter.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#parameterBuilder(TypeName, CharSequence, Modifier...)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder builder( final TypeName type, final CharSequence name, final Modifier... modifiers )
-    {
-        final var retValue = ParameterSpecImpl.builder( type, name, modifiers );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  builder()
-
-    /**
      *  {@inheritDoc}
      */
     @Override
     public boolean equals( final Object o );
-
-    /**
-     *  Creates an instance of {@code ParameterSpec} from the given
-     *  {@link VariableElement}
-     *  instance.
-     *
-     *  @param  element The variable element.
-     *  @return The parameter spec.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#createParameter(VariableElement)}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( {"removal","ClassReferencesSubclass"} )
-    public static ParameterSpec get( final VariableElement element )
-    {
-        final var retValue = ParameterSpecImpl.get( element );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
 
     /**
      *  {@inheritDoc}
@@ -244,80 +170,12 @@ public interface ParameterSpec
     public String name();
 
     /**
-     *  Creates a new
-     *  {@code ParameterSpec}
-     *  instance for the given arguments.
-     *
-     *  @param  type    The type of the new parameter.
-     *  @param  name    The name of the new parameter.
-     *  @param  modifiers   The modifiers for the new parameter.
-     *  @return The parameter specification.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#parameterOf(Type, CharSequence, Modifier...)}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( {"removal","ClassReferencesSubclass"} )
-    public static ParameterSpec of( final Type type, final CharSequence name, final Modifier... modifiers )
-    {
-        final var retValue = ParameterSpecImpl.of( type, name, modifiers );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  of()
-
-    /**
-     *  Creates a new
-     *  {@code ParameterSpec}
-     *  instance for the given arguments.
-     *
-     *  @param  type    The type of the new parameter.
-     *  @param  name    The name of the new parameter.
-     *  @param  modifiers   The modifiers for the new parameter.
-     *  @return The parameter specification.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#parameterOf(TypeName, CharSequence, Modifier...)}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    @SuppressWarnings( {"removal","ClassReferencesSubclass"} )
-    public static ParameterSpec of( final TypeName type, final CharSequence name, final Modifier... modifiers )
-    {
-        final var retValue = ParameterSpecImpl.of( type, name, modifiers );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  of()
-
-    /**
      *  Returns a builder that is initialised with the components of this
      *  parameter.
      *
      *  @return The builder.
      */
     public Builder toBuilder();
-
-    /**
-     *  Returns a builder for a parameter with the given type and name, and
-     *  that is initialised with the components of this parameter.
-     *
-     *  @param  type    The type for the new parameter.
-     *  @param  name    The name for the new parameter.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link #toBuilder(TypeName, CharSequence, boolean)}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public default Builder toBuilder( final TypeName type, final CharSequence name )
-    {
-        final var retValue = toBuilder( type, name, true ); // this preserves to original behaviour
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  toBuilder()
 
     /**
      *  Returns a builder for a parameter with the given type and name, and

@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2023 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2024 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -55,12 +55,12 @@
 <span class="source-line-no">042</span><span id="line-42"> *</span>
 <span class="source-line-no">043</span><span id="line-43"> *  @author Square,Inc.</span>
 <span class="source-line-no">044</span><span id="line-44"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">045</span><span id="line-45"> *  @version $Id: LineWrapper.java 1065 2023-09-28 06:16:50Z tquadrat $</span>
+<span class="source-line-no">045</span><span id="line-45"> *  @version $Id: LineWrapper.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
 <span class="source-line-no">046</span><span id="line-46"> *  @since 0.0.5</span>
 <span class="source-line-no">047</span><span id="line-47"> *</span>
 <span class="source-line-no">048</span><span id="line-48"> *  @UMLGraph.link</span>
 <span class="source-line-no">049</span><span id="line-49"> */</span>
-<span class="source-line-no">050</span><span id="line-50">@ClassVersion( sourceVersion = "$Id: LineWrapper.java 1065 2023-09-28 06:16:50Z tquadrat $" )</span>
+<span class="source-line-no">050</span><span id="line-50">@ClassVersion( sourceVersion = "$Id: LineWrapper.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
 <span class="source-line-no">051</span><span id="line-51">@API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">052</span><span id="line-52">public final class LineWrapper implements Closeable</span>
 <span class="source-line-no">053</span><span id="line-53">{</span>
@@ -74,7 +74,7 @@
 <span class="source-line-no">061</span><span id="line-61">     *</span>
 <span class="source-line-no">062</span><span id="line-62">     *  @author Square,Inc.</span>
 <span class="source-line-no">063</span><span id="line-63">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">064</span><span id="line-64">     *  @version $Id: LineWrapper.java 1065 2023-09-28 06:16:50Z tquadrat $</span>
+<span class="source-line-no">064</span><span id="line-64">     *  @version $Id: LineWrapper.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
 <span class="source-line-no">065</span><span id="line-65">     *  @since 0.0.5</span>
 <span class="source-line-no">066</span><span id="line-66">     *</span>
 <span class="source-line-no">067</span><span id="line-67">     *  @UMLGraph.link</span>
@@ -167,7 +167,7 @@
 <span class="source-line-no">154</span><span id="line-154">    {</span>
 <span class="source-line-no">155</span><span id="line-155">        m_Out = requireNonNullArgument( out, "out" );</span>
 <span class="source-line-no">156</span><span id="line-156">        m_Indent = requireNonNullArgument( indent, "indent" );</span>
-<span class="source-line-no">157</span><span id="line-157">        m_ColumnLimit = require( columnLimit, v -&gt; "columnLimit is 0 or negative: %d".formatted( columnLimit ), v -&gt; v &gt; 0 );</span>
+<span class="source-line-no">157</span><span id="line-157">        m_ColumnLimit = require( columnLimit, _ -&gt; "columnLimit is 0 or negative: %d".formatted( columnLimit ), v -&gt; v &gt; 0 );</span>
 <span class="source-line-no">158</span><span id="line-158">    }   //  LineWrapper()</span>
 <span class="source-line-no">159</span><span id="line-159"></span>
 <span class="source-line-no">160</span><span id="line-160">        /*---------*\</span>

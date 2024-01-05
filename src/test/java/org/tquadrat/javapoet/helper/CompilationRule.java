@@ -50,7 +50,7 @@ import org.tquadrat.javapoet.TestTypesEclipse;
 /**
  *  A JUnit4
  *  {@link Rule}
- *  that executes tests such that a instances of
+ *  that executes tests such that an instances of
  *  {@link Elements}
  *  and
  *  {@link Types}
@@ -61,7 +61,7 @@ import org.tquadrat.javapoet.TestTypesEclipse;
  *
  *  @author Gregory Kick
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CompilationRule.java 937 2021-12-14 21:59:00Z tquadrat $
+ *  @version $Id: CompilationRule.java 1085 2024-01-05 16:23:28Z tquadrat $
  */
 public final class CompilationRule implements TestRule
 {

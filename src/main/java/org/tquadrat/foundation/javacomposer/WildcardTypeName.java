@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 
 import java.lang.reflect.Type;
@@ -37,12 +36,12 @@ import org.tquadrat.foundation.javacomposer.internal.WildcardTypeNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: WildcardTypeName.java 943 2021-12-21 01:34:32Z tquadrat $
+ *  @version $Id: WildcardTypeName.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: WildcardTypeName.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: WildcardTypeName.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface WildcardTypeName extends TypeName
     permits WildcardTypeNameImpl
@@ -89,38 +88,6 @@ public sealed interface WildcardTypeName extends TypeName
         //---* Done *----------------------------------------------------------
         return retValue;
     }   //  from()
-
-    /**
-     *  Returns an instance of
-     *  {@link TypeName}
-     *  for the given type mirror.
-     *
-     *  @param  mirror  The type mirror for a wildcard type.
-     *  @return The respective {@code TypeName} instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(javax.lang.model.type.WildcardType)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static TypeName get( final javax.lang.model.type.WildcardType mirror ) { return from( mirror ); }
-
-    /**
-     *  Returns an instance of
-     *  {@link TypeName}
-     *  for the given wildcard type.
-     *
-     *  @param  wildcardName    The wildcard type.
-     *  @return The respective {@code TypeName} instance.
-     *
-     *  @deprecated Use
-     *      {@link #from(WildcardType)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static TypeName get( final WildcardType wildcardName ) { return from( wildcardName ); }
 
     /**
      *  Returns a subtype for the given type.

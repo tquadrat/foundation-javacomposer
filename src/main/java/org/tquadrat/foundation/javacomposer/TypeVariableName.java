@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 
@@ -39,12 +38,12 @@ import org.tquadrat.foundation.javacomposer.internal.TypeVariableNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeVariableName.java 1068 2023-09-28 21:42:28Z tquadrat $
+ *  @version $Id: TypeVariableName.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: TypeVariableName.java 1068 2023-09-28 21:42:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeVariableName.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface TypeVariableName extends TypeName
     permits TypeVariableNameImpl
@@ -155,92 +154,6 @@ public sealed interface TypeVariableName extends TypeName
         //---* Done *----------------------------------------------------------
         return retValue;
     }   //  from()
-
-    /**
-     *  Returns type variable equivalent to the given type.
-     *
-     *  @param  type    The type.
-     *  @return The type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(java.lang.reflect.TypeVariable)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static TypeVariableName get( final java.lang.reflect.TypeVariable<?> type ) { return from( type ); }
-
-    /**
-     *  Returns a new type variable named {@code name} without bounds.
-     *
-     *  @param  name    The name.
-     *  @return The type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(String)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static TypeVariableName get( final String name ) { return from( name ); }
-
-    /**
-     *  Returns a new type variable named {@code name} with {@code bounds}.
-     *
-     *  @param  name    The name.
-     *  @param  bounds  The bounds.
-     *  @return The type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(String,Type...)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static TypeVariableName get( final String name, final Type... bounds ) {return from( name, bounds ); }
-
-    /**
-     *  Returns a new type variable named {@code name} with {@code bounds}.
-     *
-     *  @param  name    The name.
-     *  @param  bounds  The bounds.
-     *  @return The type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(String,TypeName...)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static TypeVariableName get( final String name, final TypeName... bounds ) {return from( name, bounds ); }
-
-    /**
-     *  Returns a type variable name that is equivalent to the given element.
-     *
-     *  @param  element The element.
-     *  @return The new type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(TypeParameterElement)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static TypeVariableName get( final TypeParameterElement element ) { return from( element );}
-
-    /**
-     *  Returns a type variable name that is equivalent to the given mirror.
-     *
-     *  @param  mirror  The mirror.
-     *  @return The new type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(TypeVariable)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static TypeVariableName get( final TypeVariable mirror ) { return from( mirror ); }
 
     /**
      *  Returns a new instance for an implementation of

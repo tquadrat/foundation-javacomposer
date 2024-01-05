@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 
 import javax.lang.model.type.ArrayType;
@@ -39,12 +38,12 @@ import org.tquadrat.foundation.javacomposer.internal.ArrayTypeNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ArrayTypeName.java 1067 2023-09-28 21:09:15Z tquadrat $
+ *  @version $Id: ArrayTypeName.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ArrayTypeName.java 1067 2023-09-28 21:09:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ArrayTypeName.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface ArrayTypeName extends TypeName
     permits ArrayTypeNameImpl
@@ -98,36 +97,6 @@ public sealed interface ArrayTypeName extends TypeName
         //---* Done *----------------------------------------------------------
         return retValue;
     }   //  from()
-
-    /**
-     *  Returns an instance of {@code ArrayTypeName} for an array type that is
-     *  equivalent to {@code mirror}.
-     *
-     *  @param  mirror  The mirror for the array.
-     *  @return The new instance of {@code ArrayTypeName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(ArrayType)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static ArrayTypeName get( final ArrayType mirror ) { return from( mirror ); }
-
-    /**
-     *  Returns an instance of {@code ArrayTypeName} for an array type that is
-     *  equivalent to {@code type}.
-     *
-     *  @param  type    The array type.
-     *  @return The new instance of {@code ArrayTypeName}.
-     *
-     *  @deprecated Use
-     *      {@link #from(GenericArrayType)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static ArrayTypeName get( final GenericArrayType type ) { return from( type ); }
 
     /**
      *  Returns an array type whose elements are all instances of the given

@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2021 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,11 +19,9 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 
 import javax.lang.model.element.Modifier;
-import java.lang.reflect.Type;
 import java.util.Set;
 
 import org.apiguardian.api.API;
@@ -35,12 +33,12 @@ import org.tquadrat.foundation.javacomposer.internal.FieldSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: FieldSpec.java 857 2021-01-23 00:00:26Z tquadrat $
+ *  @version $Id: FieldSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: FieldSpec.java 857 2021-01-23 00:00:26Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: FieldSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface FieldSpec
     permits FieldSpecImpl
@@ -54,13 +52,13 @@ public sealed interface FieldSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: FieldSpec.java 857 2021-01-23 00:00:26Z tquadrat $
+     *  @version $Id: FieldSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: FieldSpec.java 857 2021-01-23 00:00:26Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: FieldSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits FieldSpecImpl.BuilderImpl
@@ -156,75 +154,6 @@ public sealed interface FieldSpec
         /*---------*\
     ====** Methods **==========================================================
         \*---------*/
-    /**
-     *  Creates a builder for an instance of {@code FieldSpec} from the given
-     *  type, name and modifiers.
-     *
-     *  @param  type    The type of the {@code FieldSpec} to build.
-     *  @param  name    The name for the new field.
-     *  @param  modifiers   The modifiers.
-     *  @return The new builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#fieldBuilder(Type, CharSequence, Modifier...)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder builder( final Type type, final CharSequence name, final Modifier... modifiers )
-    {
-        final var retValue = FieldSpecImpl.builder( type, name, modifiers );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  builder()
-
-    /**
-     *  Creates a builder for an instance of {@code FieldSpec} from the given
-     *  type, name and modifiers.
-     *
-     *  @param  type    The type of the {@code FieldSpec} to build.
-     *  @param  name    The name for the new field.
-     *  @param  modifiers   The modifiers.
-     *  @return The new builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#fieldBuilder(TypeName, CharSequence, Modifier...)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder builder( final TypeName type, final CharSequence name, final Modifier... modifiers )
-    {
-        final var retValue = FieldSpecImpl.builder( type, name, modifiers );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  builder()
-
-    /**
-     *  Creates a builder for an instance of {@code FieldSpec} from the given
-     *  type, name and modifiers.
-     *
-     *  @param  type    The type of the {@code FieldSpec} to build.
-     *  @param  name    The name for the new field.
-     *  @param  modifiers   The modifiers.
-     *  @return The new builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#fieldBuilder(TypeSpec, CharSequence, Modifier...)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder builder( final TypeSpec type, final CharSequence name, final Modifier... modifiers )
-    {
-        final var retValue = FieldSpecImpl.builder( type, name, modifiers );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  builder()
-
     /**
      *  {@inheritDoc}
      */

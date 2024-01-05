@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,14 +19,9 @@
 
 package org.tquadrat.foundation.javacomposer;
 
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.STABLE;
 
-import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
-import javax.lang.model.type.DeclaredType;
-import javax.lang.model.util.Types;
-import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Map;
@@ -41,12 +36,12 @@ import org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $
+ *  @version $Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface MethodSpec
     permits MethodSpecImpl
@@ -60,13 +55,13 @@ public sealed interface MethodSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $
+     *  @version $Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( {"ClassWithTooManyMethods", "InnerClassOfInterface"} )
-    @ClassVersion( sourceVersion = "$Id: MethodSpec.java 1067 2023-09-28 21:09:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits MethodSpecImpl.BuilderImpl
@@ -130,24 +125,6 @@ public sealed interface MethodSpec
          *  @return This {@code Builder} instance.
          */
         public Builder addCode( final String format, final Object... args );
-
-        /**
-         *  Adds code for the method.
-         *
-         *  @param  addDebugOutput  {@code true} if debug output should be
-         *      added to the generated code, {@code false} if not.
-         *  @param  format  The format.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public Builder addCode( final boolean addDebugOutput, final String format, final Object... args );
 
         /**
          *  Adds a comment for the method.
@@ -247,33 +224,6 @@ public sealed interface MethodSpec
         public Builder addNamedCode( final String format, final Map<String,?> args );
 
         /**
-         *  <p>{@summary Adds code using named arguments for the method.}</p>
-         *  <p>Named arguments specify their name after the '$' followed by a
-         *  colon {@code ":"} and the corresponding type character. Argument
-         *  names consist of characters in {@code a-z, A-Z, 0-9, and _} and
-         *  must start with a lowercase character.</p>
-         *  <p>For example, to refer to the type
-         *  {@link java.lang.Integer}
-         *  with the argument name {@code clazz} use a format string containing
-         *  {@code $clazz:T} and include the key {@code clazz} with value
-         *  {@code java.lang.Integer.class} in the argument map.</p>
-         *
-         *  @param  addDebugOutput  {@code true} if debug output should be
-         *      added to the generated code, {@code false} if not.
-         *  @param  format  The format.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public Builder addNamedCode( final boolean addDebugOutput, final String format, final Map<String,?> args );
-
-        /**
          *  Adds a parameter for the method.
          *
          *  @note   No debug info is added when a parameter is added.
@@ -321,46 +271,11 @@ public sealed interface MethodSpec
         /**
          *  Adds a statement to the code for the method.
          *
-         *  @param  statement   The statement.
-         *  @return This {@code Builder} instance.
-         *
-         *  @deprecated The code fails when the
-         *      {@link CodeBlock}
-         *      was created with calls to
-         *      {@link CodeBlock.Builder#addStatement(String, Object...)}.
-         *      Use
-         *      {@link MethodSpec.Builder#addCode(CodeBlock)}
-         *      instead.
-         */
-        @Deprecated( since = "0.1.0", forRemoval = false )
-        public Builder addStatement( final CodeBlock statement );
-
-        /**
-         *  Adds a statement to the code for the method.
-         *
          *  @param  format  The format.
          *  @param  args    The arguments.
          *  @return This {@code Builder} instance.
          */
         public Builder addStatement( final String format, final Object... args );
-
-        /**
-         *  Adds a statement to the code for the method.
-         *
-         *  @param  addDebugOutput  {@code true} if debug output should be
-         *      added to the generated code, {@code false} if not.
-         *  @param  format  The format.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public Builder addStatement( final boolean addDebugOutput, final String format, final Object... args );
 
         /**
          *  Adds a static import.
@@ -436,32 +351,6 @@ public sealed interface MethodSpec
         public Builder beginControlFlow( final String controlFlow, final Object... args );
 
         /**
-         *  Adds the beginning of a control flow for the method.
-         *
-         *  @param  addDebugOutput  {@code true} if debug output should be
-         *      added to the generated code, {@code false} if not.
-         *  @param  controlFlow The control flow construct and its code, such
-         *      as &quot;{@code if (foo == 5)}&quot;; it should not contain
-         *      braces or newline characters.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @see #endControlFlow()
-         *  @see #endControlFlow(String, Object...)
-         *  @see #endControlFlow(boolean,String, Object...)
-         *  @see #nextControlFlow(String, Object...)
-         *  @see #nextControlFlow(boolean,String, Object...)
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public Builder beginControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args );
-
-        /**
          *  Creates a new
          *  {@link MethodSpec}
          *  instance from the components that have been added to this builder.
@@ -514,31 +403,6 @@ public sealed interface MethodSpec
         public Builder endControlFlow( final String controlFlow, final Object... args );
 
         /**
-         *  Ends the current control flow for the method; this version is only
-         *  used for {@code do-while} constructs.
-         *
-         *  @param  addDebugOutput  {@code true} if debug output should be
-         *      added to the generated code, {@code false} if not.
-         *  @param  controlFlow The optional control flow construct and its
-         *      code, such as &quot;{@code while(foo == 20)}&quot;; it should
-         *      not contain braces or newline characters.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @see #beginControlFlow(String, Object...)
-         *  @see #beginControlFlow(boolean,String, Object...)
-         *  @see #endControlFlow()
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public Builder endControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args );
-
-        /**
          *  Begins another control flow for the method.
          *
          *  @param  controlFlow The control flow construct and its code, such
@@ -551,30 +415,6 @@ public sealed interface MethodSpec
          *  @see #endControlFlow()
          */
         public Builder nextControlFlow( final String controlFlow, final Object... args );
-
-        /**
-         *  Begins another control flow for the method.
-         *
-         *  @param  addDebugOutput  {@code true} if debug output should be
-         *      added to the generated code, {@code false} if not.
-         *  @param  controlFlow The control flow construct and its code, such
-         *      as &quot;{@code else if (foo == 10)}&quot;; it should not
-         *      contain braces or newline characters.
-         *  @param  args    The arguments.
-         *  @return This {@code Builder} instance.
-         *
-         *  @see #beginControlFlow(String, Object...)
-         *  @see #beginControlFlow(boolean,String, Object...)
-         *  @see #endControlFlow()
-         *
-         *  @since 0.0.6
-         *
-         *  @deprecated Got obsolete with the introduction of
-         *      {@link JavaComposer}.
-         */
-        @Deprecated( since = "0.2.0", forRemoval = true )
-        @API( status = DEPRECATED, since = "0.0.6" )
-        public Builder nextControlFlow( final boolean addDebugOutput, final String controlFlow, final Object... args );
 
         /**
          *  Sets the return type for the method.
@@ -647,20 +487,6 @@ public sealed interface MethodSpec
     ====** Methods **==========================================================
         \*---------*/
     /**
-     *  Creates a builder that builds an instance of {@code MethodSpec} for a
-     *  constructor.
-     *
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#constructorBuilder()}
-     */
-    @SuppressWarnings( {"removal", "StaticMethodOnlyUsedInOneClass"} )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder constructorBuilder() { return MethodSpecImpl.constructorBuilder(); }
-
-    /**
      *  {@inheritDoc}
      */
     @Override
@@ -690,20 +516,6 @@ public sealed interface MethodSpec
     public boolean isConstructor();
 
     /**
-     *  Returns a builder for a regular method.
-     *
-     *  @param  name    The name for the method.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#constructorBuilder()}
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder methodBuilder( final CharSequence name ) { return MethodSpecImpl.methodBuilder( name ); }
-
-    /**
      *  Returns the modifiers of this method.
      *
      *  @return The modifiers.
@@ -716,101 +528,6 @@ public sealed interface MethodSpec
      *  @return The name
      */
     public String name();
-
-    /**
-     *  <p>{@summary Returns a new method spec builder for a method that
-     *  overrides the given method.}</p>
-     *  <p>This new builder will copy visibility modifiers, type parameters,
-     *  return type, name, parameters, and throws declarations. An
-     *  {@link Override}
-     *  annotation will be added.</p>
-     *
-     *  @note In JavaPoet&nbsp;1.2 through 1.7 this method retained annotations
-     *      from the method and parameters of the overridden method. Since
-     *      JavaPoet&nbsp;1.8 and in JavaComposer annotations must be added
-     *      separately.
-     *
-     *  @param  method  The method to override.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#overridingMethodBuilder(ExecutableElement)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder overriding( final ExecutableElement method )
-    {
-        final var retValue = MethodSpecImpl.overriding( method );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  overriding()
-
-    /**
-     *  <p>{@summary Returns a new method spec builder that overrides the given
-     *  method as a member of of the given enclosing class.} This will resolve
-     *  type parameters: for example overriding
-     *  {@link Comparable#compareTo}
-     *  in a type that implements {@code Comparable<Movie>}, the {@code T}
-     *  parameter will be resolved to {@code Movie}.</p>
-     *  <p>This will copy its visibility modifiers, type parameters, return
-     *  type, name, parameters, and throws declarations. An
-     *  {@link Override}
-     *  annotation will be added.</p>
-     *
-     *  @note In JavaPoet&nbsp;1.2 through 1.7 this method retained annotations
-     *      from the method and parameters of the overridden method. Since
-     *      JavaPoet&nbsp;1.8 and in JavaComposer annotations must be added
-     *      separately.
-     *
-     *  @param  method  The method to override.
-     *  @param  enclosing   The enclosing class for the method.
-     *  @param  types   The type variables.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#overridingMethodBuilder(ExecutableElement, DeclaredType, Types)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static Builder overriding( final ExecutableElement method, final DeclaredType enclosing, final Types types )
-    {
-        final var retValue = MethodSpecImpl.overriding( method, enclosing, types );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  overriding()
-
-    /**
-     *  <p>{@summary Returns a new method spec builder for a method that
-     *  overrides the given method.}</p>
-     *  <p>This new builder will copy visibility modifiers, type parameters,
-     *  return type, name, parameters, and throws declarations. An
-     *  {@link Override}
-     *  annotation will be added, but any other annotation will be omitted;
-     *  this is consistent with the behaviour of
-     *  {@link #overriding(ExecutableElement)}
-     *  and
-     *  {@link #overriding(ExecutableElement, DeclaredType, Types)}.</p>
-     *
-     *  @param  method  The method to override.
-     *  @return The builder.
-     *
-     *  @deprecated Replaced by
-     *      {@link JavaComposer#overridingMethodBuilder(Method)}.
-     */
-    @SuppressWarnings( "removal" )
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.8" )
-    public static Builder overriding( final Method method )
-    {
-        final var retValue = MethodSpecImpl.overriding( method );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  overriding()
 
     /**
      *  Returns the parameters for this method.

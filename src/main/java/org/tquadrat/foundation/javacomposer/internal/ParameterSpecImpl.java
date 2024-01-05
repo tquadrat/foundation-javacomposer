@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,22 +19,14 @@
 
 package org.tquadrat.foundation.javacomposer.internal;
 
-import static java.util.Arrays.stream;
 import static java.util.Collections.addAll;
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.INTERNAL;
 import static org.tquadrat.foundation.lang.Objects.hash;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
-import static org.tquadrat.foundation.lang.Objects.requireValidArgument;
 
-import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
-import javax.lang.model.element.VariableElement;
 import java.io.UncheckedIOException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
@@ -52,7 +44,6 @@ import org.tquadrat.foundation.javacomposer.JavaComposer;
 import org.tquadrat.foundation.javacomposer.ParameterSpec;
 import org.tquadrat.foundation.javacomposer.TypeName;
 import org.tquadrat.foundation.lang.Lazy;
-import org.tquadrat.foundation.util.JavaUtils;
 
 /**
  *  The implementation of
@@ -60,12 +51,12 @@ import org.tquadrat.foundation.util.JavaUtils;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
+ *  @version $Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ParameterSpecImpl implements ParameterSpec
 {
@@ -78,12 +69,12 @@ public final class ParameterSpecImpl implements ParameterSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: ParameterSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $
+     *  @version $Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1065 2023-09-28 06:16:50Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements ParameterSpec.Builder
     {
@@ -324,50 +315,6 @@ public final class ParameterSpecImpl implements ParameterSpec
     ====** Methods **==========================================================
         \*---------*/
     /**
-     *  Creates a builder for a new
-     *  {@code ParameterSpecImpl}
-     *  instance.
-     *
-     *  @param  type    The type of the new parameter.
-     *  @param  name    The name of the new parameter.
-     *  @param  modifiers   The modifiers for the new parameter.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final BuilderImpl builder( final Type type, final CharSequence name, final Modifier... modifiers )
-    {
-        return builder( TypeNameImpl.from( requireNonNullArgument( type, "type" ) ), name, modifiers );
-    }   //  builder()
-
-    /**
-     *  Creates a builder for a new
-     *  {@code ParameterSpec}
-     *  instance.
-     *
-     *  @param  type    The type of the new parameter.
-     *  @param  name    The name of the new parameter.
-     *  @param  modifiers   The modifiers for the new parameter.
-     *  @return The builder.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final BuilderImpl builder( final TypeName type, final CharSequence name, final Modifier... modifiers )
-    {
-        final var composer = new JavaComposer();
-        final var retValue = new BuilderImpl( composer, type, requireValidArgument( name, "name", JavaUtils::isValidName, "not a valid name: %s"::formatted ) )
-            .addModifiers( modifiers );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  builder()
-
-    /**
      *  Emits the parameter to the given code writer.
      *
      *  @param  codeWriter  The code writer.
@@ -414,48 +361,6 @@ public final class ParameterSpecImpl implements ParameterSpec
         //---* Done *----------------------------------------------------------
         return retValue;
     }   //  equals()
-
-    /**
-     *  Creates an instance of {@code ParameterSpec} from the given
-     *  {@link VariableElement}
-     *  instance.
-     *
-     *  @param  element The variable element.
-     *  @return The parameter spec.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final ParameterSpecImpl get( final VariableElement element )
-    {
-        final var composer = new JavaComposer();
-        final var retValue = (ParameterSpecImpl) composer.createParameter( element );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Creates an instance of {@code ParameterSpec} from the given
-     *  {@link Parameter}
-     *  instance.
-     *
-     *  @param  parameter The variable element.
-     *  @return The parameter spec.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    public static final ParameterSpecImpl get( final Parameter parameter )
-    {
-        final var composer = new JavaComposer();
-        final var retValue = (ParameterSpecImpl) composer.createParameter( parameter );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
 
     /**
      *  Returns the
@@ -532,95 +437,6 @@ public final class ParameterSpecImpl implements ParameterSpec
      */
     @Override
     public final String name() { return m_Name; }
-
-    /**
-     *  Creates a new
-     *  {@code ParameterSpec}
-     *  instance for the given arguments.
-     *
-     *  @param  type    The type of the new parameter.
-     *  @param  name    The name of the new parameter.
-     *  @param  modifiers   The modifiers for the new parameter.
-     *  @return The parameter specification.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final ParameterSpecImpl of( final Type type, final CharSequence name, final Modifier... modifiers )
-    {
-        return of( TypeNameImpl.from( requireNonNullArgument( type, "type" ) ), name, modifiers );
-    }   //  of()
-
-    /**
-     *  Creates a new
-     *  {@code ParameterSpec}
-     *  instance for the given arguments.
-     *
-     *  @param  type    The type of the new parameter.
-     *  @param  name    The name of the new parameter.
-     *  @param  modifiers   The modifiers for the new parameter.
-     *  @return The parameter specification.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final ParameterSpecImpl of( final TypeName type, final CharSequence name, final Modifier... modifiers )
-    {
-        final var retValue = builder( type, name ).addModifiers( modifiers ).build();
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  of()
-
-    /**
-     *  Retrieves the parameters from the given method.
-     *
-     *  @param  method  The method.
-     *  @return The parameters of the given method; the returned list can be
-     *      empty, but it will not be {@code null}.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "StaticMethodOnlyUsedInOneClass" )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final List<ParameterSpecImpl> parametersOf( final ExecutableElement method )
-    {
-        final var retValue = method.getParameters().stream()
-            .map( ParameterSpecImpl::get )
-            .toList();
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  parametersOf()
-
-    /**
-     *  Retrieves the parameters from the given method.
-     *
-     *  @param  method  The method.
-     *  @return The parameters of the given method; the returned list can be
-     *      empty, but it will not be {@code null}.
-     *
-     *  @deprecated Got obsolete with the introduction of
-     *      {@link JavaComposer}.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @SuppressWarnings( "StaticMethodOnlyUsedInOneClass" )
-    @API( status = DEPRECATED, since = "0.0.8" )
-    public static final List<ParameterSpecImpl> parametersOf( final Method method )
-    {
-        final var retValue = stream( method.getParameters() )
-            .map( ParameterSpecImpl::get )
-            .toList();
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  parametersOf()
 
     /**
      *  {@inheritDoc}

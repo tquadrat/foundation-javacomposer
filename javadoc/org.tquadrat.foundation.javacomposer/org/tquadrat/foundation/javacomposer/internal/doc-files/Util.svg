@@ -6,8 +6,8 @@
      xmlns:xlink="http://www.w3.org/1999/xlink"
      version='1.1'
      baseProfile='full'
-     width='906.000'
-     height='627.000'>
+     width='894.000'
+     height='550.000'>
     <defs>
         <style><![CDATA[
             line
@@ -118,8 +118,8 @@
         </marker>
         <clipPath id='ID000001'>
             <rect class='focusClass'
-                  height='205.000'
-                  width='856.000'
+                  height='128.000'
+                  width='844.000'
                   x='0.000'
                   y='0.000'/>
         </clipPath>
@@ -129,19 +129,19 @@
                    clip-path='url(#ID000001)'>
                     <rect x='0.000'
                           y='0.000'
-                          width='856.000'
-                          height='205.000'
+                          width='844.000'
+                          height='128.000'
                           class='focusClass'/>
                     <line x1='0.000'
                           y1='17.000'
-                          x2='856.000'
+                          x2='844.000'
                           y2='17.000'
                           class='separator'/>
-                    <text x='416.000'
+                    <text x='410.000'
                           y='13.000'>Util</text>
                     <line x1='0.000'
                           y1='45.000'
-                          x2='856.000'
+                          x2='844.000'
                           y2='45.000'
                           class='separator'/>
                     <text y='30.000'
@@ -155,39 +155,18 @@
                           class='static'>+ characterLiteralWithoutSingleQuotes(c:char):java.lang.String</text>
                     <text x='5.000'
                           y='80.000'
-                          class='static'>+ checkArgument(condition:boolean,format:java.lang.String,args:java.lang.Object&#x2026;):void</text>
-                    <text x='5.000'
-                          y='91.000'
-                          class='static'>+ checkState(condition:boolean,format:java.lang.String,args:java.lang.Object&#x2026;):void</text>
-                    <text x='5.000'
-                          y='102.000'
-                          class='static'>+ createDebugOutput(addDebugOutput:boolean,fromBuilder:boolean):java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.DebugOutput&gt;</text>
-                    <text x='5.000'
-                          y='113.000'
                           class='static'>+ createDebugOutput(addDebugOutput:boolean):java.util.Optional&lt;org.tquadrat.foundation.javacomposer.internal.DebugOutput&gt;</text>
                     <text x='5.000'
-                          y='124.000'
+                          y='91.000'
                           class='static'>- findCaller():java.util.Optional&lt;java.lang.StackTraceElement&gt;</text>
                     <text x='5.000'
-                          y='135.000'
-                          class='static'>+ immutableList(collection:java.util.Collection&lt;T&gt;):java.util.List&lt;T&gt;</text>
-                    <text x='5.000'
-                          y='146.000'
-                          class='static'>+ immutableMap(map:java.util.Map&lt;K,V&gt;):java.util.Map&lt;K,V&gt;</text>
-                    <text x='5.000'
-                          y='157.000'
-                          class='static'>+ immutableMultimap(multiMap:java.util.Map&lt;? extends K,? extends java.util.List&lt;V&gt;&gt;):java.util.Map&lt;K,java.util.List&lt;V&gt;&gt;</text>
-                    <text x='5.000'
-                          y='168.000'
-                          class='static'>+ immutableSet(collection:java.util.Collection&lt;T&gt;):java.util.Set&lt;T&gt;</text>
-                    <text x='5.000'
-                          y='179.000'
+                          y='102.000'
                           class='static'>+ stringLiteralWithDoubleQuotes(value:java.lang.String,indent:java.lang.String):java.lang.String</text>
                     <text x='5.000'
-                          y='190.000'
+                          y='113.000'
                           class='static'>+ requireExactlyOneOf(modifiers:java.util.Set&lt;javax.lang.model.element.Modifier&gt;,mutuallyExclusive:javax.lang.model.element.Modifier&#x2026;):void</text>
                     <text x='5.000'
-                          y='201.000'
+                          y='124.000'
                           class='static'>+ union(firstSet:java.util.Set&lt;? extends T&gt;,secondSet:java.util.Set&lt;? extends T&gt;):java.util.Set&lt;T&gt;</text>
                 </g>
             </g>
@@ -250,9 +229,9 @@
         </symbol>
     </defs>
     <path class='inheritance'
-          d='M453.000,297.000 L453.000,197.000'
+          d='M447.000,297.000 L447.000,197.000'
           marker-end='url(#inheritance)'/>
-    <use x='331.000'
+    <use x='325.000'
          y='25.000'
          xlink:href='#java.lang.Object'/>
     <use x='25.000'

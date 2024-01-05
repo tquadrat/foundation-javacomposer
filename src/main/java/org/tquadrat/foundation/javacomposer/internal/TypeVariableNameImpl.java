@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2024 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,6 @@ package org.tquadrat.foundation.javacomposer.internal;
 import static java.util.Arrays.stream;
 import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.toList;
-import static org.apiguardian.api.API.Status.DEPRECATED;
 import static org.apiguardian.api.API.Status.INTERNAL;
 import static org.apiguardian.api.API.Status.STABLE;
 import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.OBJECT;
@@ -31,7 +30,6 @@ import static org.tquadrat.foundation.lang.Objects.isNull;
 import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 
 import javax.lang.model.element.TypeParameterElement;
-import javax.lang.model.type.TypeMirror;
 import javax.lang.model.type.TypeVariable;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Type;
@@ -55,12 +53,12 @@ import org.tquadrat.foundation.javacomposer.TypeVariableName;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeVariableNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $
+ *  @version $Id: TypeVariableNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: TypeVariableNameImpl.java 1066 2023-09-28 19:51:53Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeVariableNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVariableName
 {
@@ -310,7 +308,7 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
             final List<TypeNameImpl> bounds = new ArrayList<>();
             retValue = new TypeVariableNameImpl( element.getSimpleName().toString(), bounds );
             typeVariables.put( element, retValue );
-            for( final TypeMirror typeMirror : element.getBounds() )
+            for( final var typeMirror : element.getBounds() )
             {
                 bounds.add( TypeNameImpl.from( typeMirror, typeVariables ) );
             }
@@ -320,156 +318,6 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
         //---* Done *----------------------------------------------------------
         return retValue;
     }   //  from()
-
-    /**
-     *  Returns type variable equivalent to the given type.
-     *
-     *  @param  type    The type.
-     *  @return The type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(java.lang.reflect.TypeVariable)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeVariableNameImpl get( final java.lang.reflect.TypeVariable<?> type ) { return from( type ); }
-
-    /**
-     *  Returns type variable equivalent to the given type, after applying the
-     *  given type variables
-     *  .
-     *  @param  type    The type.
-     *  @param  typeVariables   The type variables.
-     *  @return The type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(java.lang.reflect.TypeVariable, Map)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeVariableNameImpl get( final java.lang.reflect.TypeVariable<?> type, final Map<Type,TypeVariableName> typeVariables )
-    {
-        final var retValue = from( type, typeVariables );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Returns a new type variable named {@code name} without bounds.
-     *
-     *  @param  name    The name.
-     *  @return The type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(String)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeVariableNameImpl get( final String name ) { return from( name ); }
-
-    /**
-     *  Returns a new type variable named {@code name} with {@code bounds}.
-     *
-     *  @param  name    The name.
-     *  @param  bounds  The bounds.
-     *  @return The type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(String,Type...)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeVariableNameImpl get( final String name, final Type... bounds )
-    {
-        final var retValue = from( name, bounds );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Returns a new type variable named {@code name} with {@code bounds}.
-     *
-     *  @param  name    The name.
-     *  @param  bounds  The bounds.
-     *  @return The type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(String,TypeName...)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeVariableNameImpl get( final String name, final TypeName... bounds )
-    {
-        final var retValue = from( name, bounds );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
-
-    /**
-     *  Returns a type variable name that is equivalent to the given element.
-     *
-     *  @param  element The element.
-     *  @return The new type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(TypeParameterElement)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeVariableNameImpl get( final TypeParameterElement element ) { return from( element ); }
-
-    /**
-     *  Returns a type variable name that is equivalent to the given mirror.
-     *
-     *  @param  mirror  The mirror.
-     *  @return The new type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(TypeVariable)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static TypeVariableNameImpl get( final TypeVariable mirror ) { return from( mirror ); }
-
-    /**
-     *  Makes an instance of {@code TypeVariableName} for the given
-     *  {@link javax.lang.model.type.TypeMirror}.
-     *  This form is used internally to avoid infinite recursion in cases like
-     *  {@code Enum<E extends Enum<E>>}. When such a thing is encountered, a
-     *  {@code TypeVariableName} without bounds is made, and that is added to
-     *  the {@code typeVariables} map before looking up the bounds. Then if
-     *  encountered again while constructing the bounds, this
-     *  {@code TypeVariableName} can be just returned from the map. And, the
-     *  code that put the entry in {@code variables} will make sure that the
-     *  bounds are filled in before returning.
-     *
-     *  @param  mirror  The {@code TypeMirror}.
-     *  @param  typeVariables   The type variables.
-     *  @return The new type variable name.
-     *
-     *  @deprecated Use
-     *      {@link #from(TypeVariable, Map)}
-     *      instead.
-     */
-    @Deprecated( since = "0.2.0", forRemoval = true )
-    @API( status = DEPRECATED, since = "0.0.5" )
-    public static final TypeVariableNameImpl get( final TypeVariable mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
-    {
-        final var retValue = from( mirror, typeVariables );
-
-        //---* Done *----------------------------------------------------------
-        return retValue;
-    }   //  get()
 
     /**
      *  Returns the name of this type variable.

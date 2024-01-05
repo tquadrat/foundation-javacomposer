@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2023 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2024 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -74,12 +74,12 @@
 <span class="source-line-no">061</span><span id="line-61"> *</span>
 <span class="source-line-no">062</span><span id="line-62"> *  @author Square,Inc.</span>
 <span class="source-line-no">063</span><span id="line-63"> *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">064</span><span id="line-64"> *  @version $Id: FieldSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $</span>
+<span class="source-line-no">064</span><span id="line-64"> *  @version $Id: FieldSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
 <span class="source-line-no">065</span><span id="line-65"> *  @since 0.0.5</span>
 <span class="source-line-no">066</span><span id="line-66"> *</span>
 <span class="source-line-no">067</span><span id="line-67"> *  @UMLGraph.link</span>
 <span class="source-line-no">068</span><span id="line-68"> */</span>
-<span class="source-line-no">069</span><span id="line-69">@ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $" )</span>
+<span class="source-line-no">069</span><span id="line-69">@ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
 <span class="source-line-no">070</span><span id="line-70">@API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">071</span><span id="line-71">public final class FieldSpecImpl implements FieldSpec</span>
 <span class="source-line-no">072</span><span id="line-72">{</span>
@@ -92,12 +92,12 @@
 <span class="source-line-no">079</span><span id="line-79">     *</span>
 <span class="source-line-no">080</span><span id="line-80">     *  @author Square,Inc.</span>
 <span class="source-line-no">081</span><span id="line-81">     *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">082</span><span id="line-82">     *  @version $Id: FieldSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $</span>
+<span class="source-line-no">082</span><span id="line-82">     *  @version $Id: FieldSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
 <span class="source-line-no">083</span><span id="line-83">     *  @since 0.0.5</span>
 <span class="source-line-no">084</span><span id="line-84">     *</span>
 <span class="source-line-no">085</span><span id="line-85">     *  @UMLGraph.link</span>
 <span class="source-line-no">086</span><span id="line-86">     */</span>
-<span class="source-line-no">087</span><span id="line-87">    @ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1064 2023-09-26 20:16:12Z tquadrat $" )</span>
+<span class="source-line-no">087</span><span id="line-87">    @ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
 <span class="source-line-no">088</span><span id="line-88">    @API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">089</span><span id="line-89">    public static final class BuilderImpl implements FieldSpec.Builder</span>
 <span class="source-line-no">090</span><span id="line-90">    {</span>
@@ -422,7 +422,7 @@
 <span class="source-line-no">409</span><span id="line-409">    {</span>
 <span class="source-line-no">410</span><span id="line-410">        final var composer = new JavaComposer();</span>
 <span class="source-line-no">411</span><span id="line-411"></span>
-<span class="source-line-no">412</span><span id="line-412">        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, $ -&gt; "not a valid name: %s".formatted( name ) ) )</span>
+<span class="source-line-no">412</span><span id="line-412">        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, _ -&gt; "not a valid name: %s".formatted( name ) ) )</span>
 <span class="source-line-no">413</span><span id="line-413">            .addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );</span>
 <span class="source-line-no">414</span><span id="line-414"></span>
 <span class="source-line-no">415</span><span id="line-415">        //---* Done *----------------------------------------------------------</span>
@@ -484,7 +484,7 @@
 <span class="source-line-no">471</span><span id="line-471">        var retValue = this == o;</span>
 <span class="source-line-no">472</span><span id="line-472">        if( !retValue &amp;&amp; (o instanceof FieldSpecImpl) )</span>
 <span class="source-line-no">473</span><span id="line-473">        {</span>
-<span class="source-line-no">474</span><span id="line-474">            retValue = (getClass() == o.getClass()) &amp;&amp; toString().equals( o.toString() );</span>
+<span class="source-line-no">474</span><span id="line-474">            retValue = toString().equals( o.toString() );</span>
 <span class="source-line-no">475</span><span id="line-475">        }</span>
 <span class="source-line-no">476</span><span id="line-476"></span>
 <span class="source-line-no">477</span><span id="line-477">        //---* Done *----------------------------------------------------------</span>
