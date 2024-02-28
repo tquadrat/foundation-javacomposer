@@ -374,9 +374,9 @@
 <span class="source-line-no">361</span><span id="line-361">    public static final ClassNameImpl from( final Class&lt;?&gt; sourceClass )</span>
 <span class="source-line-no">362</span><span id="line-362">    {</span>
 <span class="source-line-no">363</span><span id="line-363">        var validatedClass = requireNonNullArgument( sourceClass, "sourceClass" );</span>
-<span class="source-line-no">364</span><span id="line-364">        requireValidArgument( validatedClass, "sourceClass", v -&gt; !v.isPrimitive(), _ -&gt; "primitive types cannot be represented as a ClassName" );</span>
-<span class="source-line-no">365</span><span id="line-365">        requireValidArgument( validatedClass, "sourceClass", v -&gt; !void.class.equals( v ), _ -&gt; "'void' type cannot be represented as a ClassName" );</span>
-<span class="source-line-no">366</span><span id="line-366">        requireValidArgument( validatedClass, "sourceClass", v -&gt; !v.isArray(), _ -&gt; "array types cannot be represented as a ClassName" );</span>
+<span class="source-line-no">364</span><span id="line-364">        requireValidArgument( validatedClass, "sourceClass", v -&gt; !v.isPrimitive(), $ -&gt; "primitive types cannot be represented as a ClassName" );</span>
+<span class="source-line-no">365</span><span id="line-365">        requireValidArgument( validatedClass, "sourceClass", v -&gt; !void.class.equals( v ), $ -&gt; "'void' type cannot be represented as a ClassName" );</span>
+<span class="source-line-no">366</span><span id="line-366">        requireValidArgument( validatedClass, "sourceClass", v -&gt; !v.isArray(), $ -&gt; "array types cannot be represented as a ClassName" );</span>
 <span class="source-line-no">367</span><span id="line-367"></span>
 <span class="source-line-no">368</span><span id="line-368">        final ClassNameImpl retValue;</span>
 <span class="source-line-no">369</span><span id="line-369">        var anonymousSuffix = EMPTY_STRING;</span>

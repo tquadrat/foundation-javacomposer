@@ -181,7 +181,7 @@
 <span class="source-line-no">168</span><span id="line-168">        @Override</span>
 <span class="source-line-no">169</span><span id="line-169">        public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )</span>
 <span class="source-line-no">170</span><span id="line-170">        {</span>
-<span class="source-line-no">171</span><span id="line-171">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), _ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
+<span class="source-line-no">171</span><span id="line-171">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), $ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
 <span class="source-line-no">172</span><span id="line-172">            addField( fieldSpecImpl );</span>
 <span class="source-line-no">173</span><span id="line-173"></span>
 <span class="source-line-no">174</span><span id="line-174">            final var fieldName = fieldSpecImpl.name();</span>
@@ -252,7 +252,7 @@
 <span class="source-line-no">239</span><span id="line-239">        @Override</span>
 <span class="source-line-no">240</span><span id="line-240">        public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )</span>
 <span class="source-line-no">241</span><span id="line-241">        {</span>
-<span class="source-line-no">242</span><span id="line-242">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), _ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
+<span class="source-line-no">242</span><span id="line-242">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), $ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
 <span class="source-line-no">243</span><span id="line-243">            addField( fieldSpecImpl );</span>
 <span class="source-line-no">244</span><span id="line-244"></span>
 <span class="source-line-no">245</span><span id="line-245">            final var fieldName = fieldSpecImpl.name();</span>

@@ -361,9 +361,9 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
     public static final ClassNameImpl from( final Class<?> sourceClass )
     {
         var validatedClass = requireNonNullArgument( sourceClass, "sourceClass" );
-        requireValidArgument( validatedClass, "sourceClass", v -> !v.isPrimitive(), _ -> "primitive types cannot be represented as a ClassName" );
-        requireValidArgument( validatedClass, "sourceClass", v -> !void.class.equals( v ), _ -> "'void' type cannot be represented as a ClassName" );
-        requireValidArgument( validatedClass, "sourceClass", v -> !v.isArray(), _ -> "array types cannot be represented as a ClassName" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !v.isPrimitive(), $ -> "primitive types cannot be represented as a ClassName" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !void.class.equals( v ), $ -> "'void' type cannot be represented as a ClassName" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !v.isArray(), $ -> "array types cannot be represented as a ClassName" );
 
         final ClassNameImpl retValue;
         var anonymousSuffix = EMPTY_STRING;

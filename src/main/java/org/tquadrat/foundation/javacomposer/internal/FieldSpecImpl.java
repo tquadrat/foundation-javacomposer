@@ -409,7 +409,7 @@ public final class FieldSpecImpl implements FieldSpec
     {
         final var composer = new JavaComposer();
 
-        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, _ -> "not a valid name: %s".formatted( name ) ) )
+        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, $ -> "not a valid name: %s".formatted( name ) ) )
             .addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );
 
         //---* Done *----------------------------------------------------------

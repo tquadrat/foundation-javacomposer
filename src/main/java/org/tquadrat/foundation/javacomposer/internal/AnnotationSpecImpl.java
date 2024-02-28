@@ -150,11 +150,11 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         @Override
         public final BuilderImpl addMember( final CharSequence name, final CodeBlock codeBlock )
         {
-            final var validatedName = requireValidArgument( name, "name", JavaUtils::isValidName, _ -> "not a valid name: %s".formatted( name ) )
+            final var validatedName = requireValidArgument( name, "name", JavaUtils::isValidName, $ -> "not a valid name: %s".formatted( name ) )
                 .toString()
                 .intern();
             requireNonNullArgument( codeBlock, "codeBlock" );
-            final var values = m_CodeBlocks.computeIfAbsent( validatedName, _ -> new ArrayList<>() );
+            final var values = m_CodeBlocks.computeIfAbsent( validatedName, $ -> new ArrayList<>() );
             values.add( createDebugOutput( m_Composer.addDebugOutput() )
                 .map( output -> ((CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder())
                     .addWithoutDebugInfo( output.asComment() )
@@ -180,7 +180,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UnusedReturnValue", "IfStatementWithTooManyBranches", "ChainOfInstanceofChecks"} )
         public final BuilderImpl addMemberForValue( final String name, final Object value )
         {
-            requireValidArgument( name, "name", JavaUtils::isValidName, _ -> "not a valid name: %s".formatted( name ) );
+            requireValidArgument( name, "name", JavaUtils::isValidName, $ -> "not a valid name: %s".formatted( name ) );
             if( requireNonNullArgument( value, "value" ) instanceof Class<?> )
             {
                 addMember( name, "$T.class", value );

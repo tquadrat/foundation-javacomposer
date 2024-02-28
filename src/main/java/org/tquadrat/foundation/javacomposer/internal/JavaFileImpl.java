@@ -241,7 +241,7 @@ public final class JavaFileImpl implements JavaFile
                             name,
                             "name",
                             Objects::nonNull,
-                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -739,7 +739,7 @@ public final class JavaFileImpl implements JavaFile
     @Override
     public void writeTo( final Path directory ) throws IOException
     {
-        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -> notExists( v ) || isDirectory( v ), _ -> "path %s exists but is not a directory.".formatted( directory ) );
+        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -> notExists( v ) || isDirectory( v ), $ -> "path %s exists but is not a directory.".formatted( directory ) );
         if( !m_PackageName.isEmpty() )
         {
             for( final var packageComponent : m_PackageName.split( "\\." ) )

@@ -168,7 +168,7 @@ public final class ClassSpecImpl extends TypeSpecImpl
         @Override
         public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), _ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
+            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), $ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();
@@ -239,7 +239,7 @@ public final class ClassSpecImpl extends TypeSpecImpl
         @Override
         public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), _ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
+            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), $ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();

@@ -324,7 +324,7 @@ public final class CodeBlockImpl implements CodeBlock
                             name,
                             "name",
                             Objects::nonNull,
-                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );

@@ -1110,7 +1110,7 @@
 <span class="source-line-no">1097</span><span id="line-1097">     */</span>
 <span class="source-line-no">1098</span><span id="line-1098">    public final TypeSpec.Builder createStaticClassBuilder( final CharSequence className )</span>
 <span class="source-line-no">1099</span><span id="line-1099">    {</span>
-<span class="source-line-no">1100</span><span id="line-1100">        requireValidNonNullArgument( className, "className", v -&gt; SourceVersion.isName( requireNotEmptyArgument( v, "className" ) ), _ -&gt; "not a valid name: %s".formatted( className ) );</span>
+<span class="source-line-no">1100</span><span id="line-1100">        requireValidNonNullArgument( className, "className", v -&gt; SourceVersion.isName( requireNotEmptyArgument( v, "className" ) ), $ -&gt; "not a valid name: %s".formatted( className ) );</span>
 <span class="source-line-no">1101</span><span id="line-1101">        final var constructor = constructorBuilder()</span>
 <span class="source-line-no">1102</span><span id="line-1102">            .addModifiers( PRIVATE )</span>
 <span class="source-line-no">1103</span><span id="line-1103">            .addJavadoc(</span>
@@ -1291,7 +1291,7 @@
 <span class="source-line-no">1278</span><span id="line-1278">     */</span>
 <span class="source-line-no">1279</span><span id="line-1279">    public final FieldSpec.Builder fieldBuilder( final TypeName type, final CharSequence name, final Modifier... modifiers )</span>
 <span class="source-line-no">1280</span><span id="line-1280">    {</span>
-<span class="source-line-no">1281</span><span id="line-1281">        final var retValue = new FieldSpecImpl.BuilderImpl( this, (TypeNameImpl) requireNonNullArgument( type, "type" ), require( name, _ -&gt; "not a valid name: %s".formatted( name ), JavaUtils::isValidName ) ).addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );</span>
+<span class="source-line-no">1281</span><span id="line-1281">        final var retValue = new FieldSpecImpl.BuilderImpl( this, (TypeNameImpl) requireNonNullArgument( type, "type" ), require( name, $ -&gt; "not a valid name: %s".formatted( name ), JavaUtils::isValidName ) ).addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );</span>
 <span class="source-line-no">1282</span><span id="line-1282"></span>
 <span class="source-line-no">1283</span><span id="line-1283">        //---* Done *----------------------------------------------------------</span>
 <span class="source-line-no">1284</span><span id="line-1284">        return retValue;</span>

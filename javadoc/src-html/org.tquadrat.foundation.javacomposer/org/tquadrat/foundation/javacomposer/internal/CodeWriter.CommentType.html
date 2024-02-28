@@ -890,7 +890,7 @@
 <span class="source-line-no">877</span><span id="line-877">     */</span>
 <span class="source-line-no">878</span><span id="line-878">    private static final String extractMemberName( final String part )</span>
 <span class="source-line-no">879</span><span id="line-879">    {</span>
-<span class="source-line-no">880</span><span id="line-880">        var retValue = requireValidNonNullArgument( part, "part", v -&gt; Character.isJavaIdentifierStart( v.charAt( 0 ) ), _ -&gt; "not an identifier: %s".formatted( part ) );</span>
+<span class="source-line-no">880</span><span id="line-880">        var retValue = requireValidNonNullArgument( part, "part", v -&gt; Character.isJavaIdentifierStart( v.charAt( 0 ) ), $ -&gt; "not an identifier: %s".formatted( part ) );</span>
 <span class="source-line-no">881</span><span id="line-881">        CheckLoop: for( var i = 1; i &lt;= part.length(); ++i )</span>
 <span class="source-line-no">882</span><span id="line-882">        {</span>
 <span class="source-line-no">883</span><span id="line-883">            if( !SourceVersion.isIdentifier( part.substring( 0, i ) ) )</span>
@@ -1210,7 +1210,7 @@
 <span class="source-line-no">1197</span><span id="line-1197">     */</span>
 <span class="source-line-no">1198</span><span id="line-1198">    public final CodeWriter unindent( final int levels )</span>
 <span class="source-line-no">1199</span><span id="line-1199">    {</span>
-<span class="source-line-no">1200</span><span id="line-1200">        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", _ -&gt; m_IndentLevel - levels &gt;= 0, _ -&gt; "cannot unindent %d from %d".formatted( levels, m_IndentLevel ) );</span>
+<span class="source-line-no">1200</span><span id="line-1200">        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", $ -&gt; m_IndentLevel - levels &gt;= 0, $ -&gt; "cannot unindent %d from %d".formatted( levels, m_IndentLevel ) );</span>
 <span class="source-line-no">1201</span><span id="line-1201"></span>
 <span class="source-line-no">1202</span><span id="line-1202">        //---* Done *----------------------------------------------------------</span>
 <span class="source-line-no">1203</span><span id="line-1203">        return this;</span>

@@ -215,7 +215,7 @@
 <span class="source-line-no">202</span><span id="line-202">        public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final CharSequence name )</span>
 <span class="source-line-no">203</span><span id="line-203">        {</span>
 <span class="source-line-no">204</span><span id="line-204">            m_Composer = requireNonNullArgument( composer, "composer" );</span>
-<span class="source-line-no">205</span><span id="line-205">            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -&gt; v.equals( CONSTRUCTOR ) || isValidName( v ), _ -&gt; "not a valid name: %s".formatted( name ) ).toString().intern();</span>
+<span class="source-line-no">205</span><span id="line-205">            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -&gt; v.equals( CONSTRUCTOR ) || isValidName( v ), $ -&gt; "not a valid name: %s".formatted( name ) ).toString().intern();</span>
 <span class="source-line-no">206</span><span id="line-206">            m_ReturnType = name.equals( CONSTRUCTOR ) ? null : VOID_PRIMITIVE;</span>
 <span class="source-line-no">207</span><span id="line-207"></span>
 <span class="source-line-no">208</span><span id="line-208">            m_Code = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();</span>
@@ -502,7 +502,7 @@
 <span class="source-line-no">489</span><span id="line-489">                            name,</span>
 <span class="source-line-no">490</span><span id="line-490">                            "name",</span>
 <span class="source-line-no">491</span><span id="line-491">                            Objects::nonNull,</span>
-<span class="source-line-no">492</span><span id="line-492">                            _ -&gt; "null entry in names array: %s".formatted( Arrays.toString( names ) )</span>
+<span class="source-line-no">492</span><span id="line-492">                            $ -&gt; "null entry in names array: %s".formatted( Arrays.toString( names ) )</span>
 <span class="source-line-no">493</span><span id="line-493">                        )</span>
 <span class="source-line-no">494</span><span id="line-494">                    )</span>
 <span class="source-line-no">495</span><span id="line-495">                );</span>

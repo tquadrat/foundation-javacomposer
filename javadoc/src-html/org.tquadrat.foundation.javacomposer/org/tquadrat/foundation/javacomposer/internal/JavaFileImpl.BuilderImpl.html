@@ -254,7 +254,7 @@
 <span class="source-line-no">241</span><span id="line-241">                            name,</span>
 <span class="source-line-no">242</span><span id="line-242">                            "name",</span>
 <span class="source-line-no">243</span><span id="line-243">                            Objects::nonNull,</span>
-<span class="source-line-no">244</span><span id="line-244">                            _ -&gt; "null entry in names array: %s".formatted( Arrays.toString( names ) )</span>
+<span class="source-line-no">244</span><span id="line-244">                            $ -&gt; "null entry in names array: %s".formatted( Arrays.toString( names ) )</span>
 <span class="source-line-no">245</span><span id="line-245">                        )</span>
 <span class="source-line-no">246</span><span id="line-246">                    )</span>
 <span class="source-line-no">247</span><span id="line-247">                );</span>
@@ -752,7 +752,7 @@
 <span class="source-line-no">739</span><span id="line-739">    @Override</span>
 <span class="source-line-no">740</span><span id="line-740">    public void writeTo( final Path directory ) throws IOException</span>
 <span class="source-line-no">741</span><span id="line-741">    {</span>
-<span class="source-line-no">742</span><span id="line-742">        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -&gt; notExists( v ) || isDirectory( v ), _ -&gt; "path %s exists but is not a directory.".formatted( directory ) );</span>
+<span class="source-line-no">742</span><span id="line-742">        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -&gt; notExists( v ) || isDirectory( v ), $ -&gt; "path %s exists but is not a directory.".formatted( directory ) );</span>
 <span class="source-line-no">743</span><span id="line-743">        if( !m_PackageName.isEmpty() )</span>
 <span class="source-line-no">744</span><span id="line-744">        {</span>
 <span class="source-line-no">745</span><span id="line-745">            for( final var packageComponent : m_PackageName.split( "\\." ) )</span>

@@ -202,7 +202,7 @@ public final class MethodSpecImpl implements MethodSpec
         public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final CharSequence name )
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
-            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -> v.equals( CONSTRUCTOR ) || isValidName( v ), _ -> "not a valid name: %s".formatted( name ) ).toString().intern();
+            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -> v.equals( CONSTRUCTOR ) || isValidName( v ), $ -> "not a valid name: %s".formatted( name ) ).toString().intern();
             m_ReturnType = name.equals( CONSTRUCTOR ) ? null : VOID_PRIMITIVE;
 
             m_Code = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
@@ -489,7 +489,7 @@ public final class MethodSpecImpl implements MethodSpec
                             name,
                             "name",
                             Objects::nonNull,
-                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );

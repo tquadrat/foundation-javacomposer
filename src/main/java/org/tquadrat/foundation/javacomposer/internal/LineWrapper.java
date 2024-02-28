@@ -154,7 +154,7 @@ public final class LineWrapper implements Closeable
     {
         m_Out = requireNonNullArgument( out, "out" );
         m_Indent = requireNonNullArgument( indent, "indent" );
-        m_ColumnLimit = require( columnLimit, _ -> "columnLimit is 0 or negative: %d".formatted( columnLimit ), v -> v > 0 );
+        m_ColumnLimit = require( columnLimit, $ -> "columnLimit is 0 or negative: %d".formatted( columnLimit ), v -> v > 0 );
     }   //  LineWrapper()
 
         /*---------*\

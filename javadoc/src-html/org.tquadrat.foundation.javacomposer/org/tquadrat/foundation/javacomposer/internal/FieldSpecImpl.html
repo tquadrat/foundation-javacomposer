@@ -422,7 +422,7 @@
 <span class="source-line-no">409</span><span id="line-409">    {</span>
 <span class="source-line-no">410</span><span id="line-410">        final var composer = new JavaComposer();</span>
 <span class="source-line-no">411</span><span id="line-411"></span>
-<span class="source-line-no">412</span><span id="line-412">        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, _ -&gt; "not a valid name: %s".formatted( name ) ) )</span>
+<span class="source-line-no">412</span><span id="line-412">        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, $ -&gt; "not a valid name: %s".formatted( name ) ) )</span>
 <span class="source-line-no">413</span><span id="line-413">            .addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );</span>
 <span class="source-line-no">414</span><span id="line-414"></span>
 <span class="source-line-no">415</span><span id="line-415">        //---* Done *----------------------------------------------------------</span>

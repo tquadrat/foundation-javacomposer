@@ -251,7 +251,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
             m_Kind = requireNonNullArgument( kind, "kind" );
-            m_Name = requireValidNonNullArgument( name, "name", v -> v.isEmpty() || isValidName( v.get() ), _ -> "not a valid name: %s".formatted( name.get() ) );
+            m_Name = requireValidNonNullArgument( name, "name", v -> v.isEmpty() || isValidName( v.get() ), $ -> "not a valid name: %s".formatted( name.get() ) );
 
             m_InitializerBlock = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
             m_Javadoc = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
@@ -564,7 +564,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
                             name,
                             "name",
                             Objects::nonNull,
-                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -590,7 +590,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addSuperinterface( final Class<?> superinterface )
         {
-            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, _ -> "'%s' is not an interface".formatted( superinterface.getName() ) ) ) );
+            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, $ -> "'%s' is not an interface".formatted( superinterface.getName() ) ) ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -611,7 +611,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addSuperinterface( final TypeElement superinterface )
         {
-            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -> v.getKind() == ElementKind.INTERFACE, _ -> "'%s' is not an interface".formatted( superinterface.getQualifiedName() ) ).asType() ) );
+            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -> v.getKind() == ElementKind.INTERFACE, $ -> "'%s' is not an interface".formatted( superinterface.getQualifiedName() ) ).asType() ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -916,7 +916,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         public BuilderImpl superclass( final TypeName superclass )
         {
             checkState( m_Superclass == OBJECT, () -> new IllegalStateException( "superclass already set to %s".formatted( m_Superclass.toString() ) ));
-            m_Superclass = (TypeNameImpl) requireValidNonNullArgument( superclass, "superclass", v -> !v.isPrimitive(), _ -> "superclass may not be a primitive" );
+            m_Superclass = (TypeNameImpl) requireValidNonNullArgument( superclass, "superclass", v -> !v.isPrimitive(), $ -> "superclass may not be a primitive" );
 
             //---* Done *------------------------------------------------------
             return this;

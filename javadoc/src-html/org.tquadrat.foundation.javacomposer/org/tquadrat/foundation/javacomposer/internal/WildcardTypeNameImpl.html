@@ -114,7 +114,7 @@
 <span class="source-line-no">101</span><span id="line-101">            requireValidNonNullArgument( upperBounds,</span>
 <span class="source-line-no">102</span><span id="line-102">                "upperBounds",</span>
 <span class="source-line-no">103</span><span id="line-103">                u -&gt; u.size() ==1,</span>
-<span class="source-line-no">104</span><span id="line-104">                _ -&gt; "unexpected extends bounds: %s".formatted( upperBounds ) ) );</span>
+<span class="source-line-no">104</span><span id="line-104">                $ -&gt; "unexpected extends bounds: %s".formatted( upperBounds ) ) );</span>
 <span class="source-line-no">105</span><span id="line-105">        m_LowerBounds = List.copyOf( requireNonNullArgument( lowerBounds, "lowerBounds" ) );</span>
 <span class="source-line-no">106</span><span id="line-106"></span>
 <span class="source-line-no">107</span><span id="line-107">        for( final var upperBound : m_UpperBounds )</span>

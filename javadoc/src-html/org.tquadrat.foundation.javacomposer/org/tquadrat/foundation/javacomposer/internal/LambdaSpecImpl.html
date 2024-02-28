@@ -458,12 +458,12 @@
 <span class="source-line-no">445</span><span id="line-445">            final Object [] args;</span>
 <span class="source-line-no">446</span><span id="line-446">            if( m_InferTypes )</span>
 <span class="source-line-no">447</span><span id="line-447">            {</span>
-<span class="source-line-no">448</span><span id="line-448">                format = m_Parameters.stream().map( _ -&gt; "$L" ).collect( joining(",", "(", ")" ) );</span>
+<span class="source-line-no">448</span><span id="line-448">                format = m_Parameters.stream().map( $ -&gt; "$L" ).collect( joining(",", "(", ")" ) );</span>
 <span class="source-line-no">449</span><span id="line-449">                args = m_Parameters.stream().map( ParameterSpecImpl::name ).toArray();</span>
 <span class="source-line-no">450</span><span id="line-450">            }</span>
 <span class="source-line-no">451</span><span id="line-451">            else</span>
 <span class="source-line-no">452</span><span id="line-452">            {</span>
-<span class="source-line-no">453</span><span id="line-453">                format = m_Parameters.stream().map( _ -&gt; "$T $L" ).collect( joining(", ", "(", ")" ) );</span>
+<span class="source-line-no">453</span><span id="line-453">                format = m_Parameters.stream().map( $ -&gt; "$T $L" ).collect( joining(", ", "(", ")" ) );</span>
 <span class="source-line-no">454</span><span id="line-454">                args = m_Parameters.stream().flatMap( p -&gt; Stream.of( p.type(), p.name() ) ).toArray();</span>
 <span class="source-line-no">455</span><span id="line-455">            }</span>
 <span class="source-line-no">456</span><span id="line-456">            codeWriter.emit( format, args );</span>

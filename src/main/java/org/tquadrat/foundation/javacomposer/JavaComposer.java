@@ -1097,7 +1097,7 @@ public final class JavaComposer
      */
     public final TypeSpec.Builder createStaticClassBuilder( final CharSequence className )
     {
-        requireValidNonNullArgument( className, "className", v -> SourceVersion.isName( requireNotEmptyArgument( v, "className" ) ), _ -> "not a valid name: %s".formatted( className ) );
+        requireValidNonNullArgument( className, "className", v -> SourceVersion.isName( requireNotEmptyArgument( v, "className" ) ), $ -> "not a valid name: %s".formatted( className ) );
         final var constructor = constructorBuilder()
             .addModifiers( PRIVATE )
             .addJavadoc(
@@ -1278,7 +1278,7 @@ public final class JavaComposer
      */
     public final FieldSpec.Builder fieldBuilder( final TypeName type, final CharSequence name, final Modifier... modifiers )
     {
-        final var retValue = new FieldSpecImpl.BuilderImpl( this, (TypeNameImpl) requireNonNullArgument( type, "type" ), require( name, _ -> "not a valid name: %s".formatted( name ), JavaUtils::isValidName ) ).addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );
+        final var retValue = new FieldSpecImpl.BuilderImpl( this, (TypeNameImpl) requireNonNullArgument( type, "type" ), require( name, $ -> "not a valid name: %s".formatted( name ), JavaUtils::isValidName ) ).addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );
 
         //---* Done *----------------------------------------------------------
         return retValue;

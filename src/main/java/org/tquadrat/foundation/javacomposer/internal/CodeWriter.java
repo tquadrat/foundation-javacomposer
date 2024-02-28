@@ -877,7 +877,7 @@ public final class CodeWriter
      */
     private static final String extractMemberName( final String part )
     {
-        var retValue = requireValidNonNullArgument( part, "part", v -> Character.isJavaIdentifierStart( v.charAt( 0 ) ), _ -> "not an identifier: %s".formatted( part ) );
+        var retValue = requireValidNonNullArgument( part, "part", v -> Character.isJavaIdentifierStart( v.charAt( 0 ) ), $ -> "not an identifier: %s".formatted( part ) );
         CheckLoop: for( var i = 1; i <= part.length(); ++i )
         {
             if( !SourceVersion.isIdentifier( part.substring( 0, i ) ) )
@@ -1197,7 +1197,7 @@ public final class CodeWriter
      */
     public final CodeWriter unindent( final int levels )
     {
-        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", _ -> m_IndentLevel - levels >= 0, _ -> "cannot unindent %d from %d".formatted( levels, m_IndentLevel ) );
+        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", $ -> m_IndentLevel - levels >= 0, $ -> "cannot unindent %d from %d".formatted( levels, m_IndentLevel ) );
 
         //---* Done *----------------------------------------------------------
         return this;

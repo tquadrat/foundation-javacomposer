@@ -445,12 +445,12 @@ public final class LambdaSpecImpl implements LambdaSpec
             final Object [] args;
             if( m_InferTypes )
             {
-                format = m_Parameters.stream().map( _ -> "$L" ).collect( joining(",", "(", ")" ) );
+                format = m_Parameters.stream().map( $ -> "$L" ).collect( joining(",", "(", ")" ) );
                 args = m_Parameters.stream().map( ParameterSpecImpl::name ).toArray();
             }
             else
             {
-                format = m_Parameters.stream().map( _ -> "$T $L" ).collect( joining(", ", "(", ")" ) );
+                format = m_Parameters.stream().map( $ -> "$T $L" ).collect( joining(", ", "(", ")" ) );
                 args = m_Parameters.stream().flatMap( p -> Stream.of( p.type(), p.name() ) ).toArray();
             }
             codeWriter.emit( format, args );

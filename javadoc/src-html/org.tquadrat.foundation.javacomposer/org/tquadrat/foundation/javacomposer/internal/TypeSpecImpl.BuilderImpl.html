@@ -264,7 +264,7 @@
 <span class="source-line-no">251</span><span id="line-251">        {</span>
 <span class="source-line-no">252</span><span id="line-252">            m_Composer = requireNonNullArgument( composer, "composer" );</span>
 <span class="source-line-no">253</span><span id="line-253">            m_Kind = requireNonNullArgument( kind, "kind" );</span>
-<span class="source-line-no">254</span><span id="line-254">            m_Name = requireValidNonNullArgument( name, "name", v -&gt; v.isEmpty() || isValidName( v.get() ), _ -&gt; "not a valid name: %s".formatted( name.get() ) );</span>
+<span class="source-line-no">254</span><span id="line-254">            m_Name = requireValidNonNullArgument( name, "name", v -&gt; v.isEmpty() || isValidName( v.get() ), $ -&gt; "not a valid name: %s".formatted( name.get() ) );</span>
 <span class="source-line-no">255</span><span id="line-255"></span>
 <span class="source-line-no">256</span><span id="line-256">            m_InitializerBlock = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();</span>
 <span class="source-line-no">257</span><span id="line-257">            m_Javadoc = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();</span>
@@ -577,7 +577,7 @@
 <span class="source-line-no">564</span><span id="line-564">                            name,</span>
 <span class="source-line-no">565</span><span id="line-565">                            "name",</span>
 <span class="source-line-no">566</span><span id="line-566">                            Objects::nonNull,</span>
-<span class="source-line-no">567</span><span id="line-567">                            _ -&gt; "null entry in names array: %s".formatted( Arrays.toString( names ) )</span>
+<span class="source-line-no">567</span><span id="line-567">                            $ -&gt; "null entry in names array: %s".formatted( Arrays.toString( names ) )</span>
 <span class="source-line-no">568</span><span id="line-568">                        )</span>
 <span class="source-line-no">569</span><span id="line-569">                    )</span>
 <span class="source-line-no">570</span><span id="line-570">                );</span>
@@ -603,7 +603,7 @@
 <span class="source-line-no">590</span><span id="line-590">        @Override</span>
 <span class="source-line-no">591</span><span id="line-591">        public final BuilderImpl addSuperinterface( final Class&lt;?&gt; superinterface )</span>
 <span class="source-line-no">592</span><span id="line-592">        {</span>
-<span class="source-line-no">593</span><span id="line-593">            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, _ -&gt; "'%s' is not an interface".formatted( superinterface.getName() ) ) ) );</span>
+<span class="source-line-no">593</span><span id="line-593">            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, $ -&gt; "'%s' is not an interface".formatted( superinterface.getName() ) ) ) );</span>
 <span class="source-line-no">594</span><span id="line-594"></span>
 <span class="source-line-no">595</span><span id="line-595">            //---* Done *------------------------------------------------------</span>
 <span class="source-line-no">596</span><span id="line-596">            return this;</span>
@@ -624,7 +624,7 @@
 <span class="source-line-no">611</span><span id="line-611">        @Override</span>
 <span class="source-line-no">612</span><span id="line-612">        public final BuilderImpl addSuperinterface( final TypeElement superinterface )</span>
 <span class="source-line-no">613</span><span id="line-613">        {</span>
-<span class="source-line-no">614</span><span id="line-614">            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -&gt; v.getKind() == ElementKind.INTERFACE, _ -&gt; "'%s' is not an interface".formatted( superinterface.getQualifiedName() ) ).asType() ) );</span>
+<span class="source-line-no">614</span><span id="line-614">            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -&gt; v.getKind() == ElementKind.INTERFACE, $ -&gt; "'%s' is not an interface".formatted( superinterface.getQualifiedName() ) ).asType() ) );</span>
 <span class="source-line-no">615</span><span id="line-615"></span>
 <span class="source-line-no">616</span><span id="line-616">            //---* Done *------------------------------------------------------</span>
 <span class="source-line-no">617</span><span id="line-617">            return this;</span>
@@ -929,7 +929,7 @@
 <span class="source-line-no">916</span><span id="line-916">        public BuilderImpl superclass( final TypeName superclass )</span>
 <span class="source-line-no">917</span><span id="line-917">        {</span>
 <span class="source-line-no">918</span><span id="line-918">            checkState( m_Superclass == OBJECT, () -&gt; new IllegalStateException( "superclass already set to %s".formatted( m_Superclass.toString() ) ));</span>
-<span class="source-line-no">919</span><span id="line-919">            m_Superclass = (TypeNameImpl) requireValidNonNullArgument( superclass, "superclass", v -&gt; !v.isPrimitive(), _ -&gt; "superclass may not be a primitive" );</span>
+<span class="source-line-no">919</span><span id="line-919">            m_Superclass = (TypeNameImpl) requireValidNonNullArgument( superclass, "superclass", v -&gt; !v.isPrimitive(), $ -&gt; "superclass may not be a primitive" );</span>
 <span class="source-line-no">920</span><span id="line-920"></span>
 <span class="source-line-no">921</span><span id="line-921">            //---* Done *------------------------------------------------------</span>
 <span class="source-line-no">922</span><span id="line-922">            return this;</span>

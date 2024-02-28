@@ -167,7 +167,7 @@
 <span class="source-line-no">154</span><span id="line-154">    {</span>
 <span class="source-line-no">155</span><span id="line-155">        m_Out = requireNonNullArgument( out, "out" );</span>
 <span class="source-line-no">156</span><span id="line-156">        m_Indent = requireNonNullArgument( indent, "indent" );</span>
-<span class="source-line-no">157</span><span id="line-157">        m_ColumnLimit = require( columnLimit, _ -&gt; "columnLimit is 0 or negative: %d".formatted( columnLimit ), v -&gt; v &gt; 0 );</span>
+<span class="source-line-no">157</span><span id="line-157">        m_ColumnLimit = require( columnLimit, $ -&gt; "columnLimit is 0 or negative: %d".formatted( columnLimit ), v -&gt; v &gt; 0 );</span>
 <span class="source-line-no">158</span><span id="line-158">    }   //  LineWrapper()</span>
 <span class="source-line-no">159</span><span id="line-159"></span>
 <span class="source-line-no">160</span><span id="line-160">        /*---------*\</span>
