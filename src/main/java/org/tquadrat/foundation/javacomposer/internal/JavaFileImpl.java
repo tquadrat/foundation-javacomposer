@@ -71,12 +71,12 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaFileImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: JavaFileImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class JavaFileImpl implements JavaFile
 {
@@ -91,12 +91,12 @@ public final class JavaFileImpl implements JavaFile
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: JavaFileImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: JavaFileImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements JavaFile.Builder
     {

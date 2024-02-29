@@ -51,12 +51,12 @@ import org.tquadrat.foundation.lang.Lazy;
  *  {@link LambdaSpec}.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: LambdaSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: LambdaSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class LambdaSpecImpl implements LambdaSpec
 {
@@ -68,12 +68,12 @@ public final class LambdaSpecImpl implements LambdaSpec
      *  {@link org.tquadrat.foundation.javacomposer.LambdaSpec.Builder}.
      *
      *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: LambdaSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: LambdaSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements Builder
     {

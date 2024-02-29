@@ -99,13 +99,13 @@ import org.tquadrat.foundation.util.JavaUtils;
  *  thread-safe without any synchronisation.</p>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaComposer.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: JavaComposer.java 1105 2024-02-28 12:58:46Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"OverlyCoupledClass", "ClassWithTooManyMethods", "OverlyComplexClass", "ClassWithTooManyFields"} )
-@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1105 2024-02-28 12:58:46Z tquadrat $" )
 @API( status = STABLE, since = "0.2.0" )
 public final class JavaComposer
 {

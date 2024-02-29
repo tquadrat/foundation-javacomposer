@@ -76,12 +76,12 @@ import org.tquadrat.foundation.javacomposer.TypeSpec;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ClassSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: ClassSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
 @API( status = INTERNAL, since = "0.2.0" )
 public final class ClassSpecImpl extends TypeSpecImpl
 {
@@ -95,12 +95,12 @@ public final class ClassSpecImpl extends TypeSpecImpl
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: ClassSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: ClassSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
     @API( status = INTERNAL, since = "0.2.0" )
     public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl
     {

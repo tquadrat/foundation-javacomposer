@@ -51,13 +51,13 @@ import org.tquadrat.foundation.javacomposer.ClassName;
  *  for a fully-qualified class name for top-level and member classes.
  *
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ClassNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: ClassNameImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "ComparableImplementedButEqualsNotOverridden"} )
-@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ClassNameImpl extends TypeNameImpl implements ClassName
 {
