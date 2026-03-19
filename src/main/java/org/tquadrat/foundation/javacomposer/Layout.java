@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  Copyright © 2002-2021 by Thomas Thrien.
+ *  Copyright © 2002-2025 by Thomas Thrien.
  *  All Rights Reserved.
  * ============================================================================
  *  Licensed to the public under the agreements of the GNU Lesser General Public
@@ -29,12 +29,12 @@ import org.tquadrat.foundation.javacomposer.internal.LayoutWriter;
  *  {@link JavaFile}.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: Layout.java 855 2021-01-21 20:22:52Z tquadrat $
+ *  @version $Id: Layout.java 1151 2025-10-01 21:32:15Z tquadrat $
  *
  *  @UMLGraph.link
  *  @since 0.0.5
  */
-@ClassVersion( sourceVersion = "$Id: Layout.java 855 2021-01-21 20:22:52Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: Layout.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public enum Layout implements LayoutWriter
 {
@@ -44,7 +44,7 @@ public enum Layout implements LayoutWriter
     /**
      *  <p>{@summary The layout as used for the Foundation library.}</p>
      *  <p>The layout of the generated Java file does not follow that of
-     *  the Foundation library source completely as this would require to much
+     *  the Foundation library source completely as this would require too much
      *  effort to implement. Additionally, the code that is provided for the
      *  method bodies will not be parsed, so variations in the layout here will
      *  not be corrected.</p>

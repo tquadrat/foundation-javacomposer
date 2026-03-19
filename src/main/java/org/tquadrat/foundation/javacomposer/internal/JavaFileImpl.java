@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -71,12 +71,12 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaFileImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+ *  @version $Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class JavaFileImpl implements JavaFile
 {
@@ -91,12 +91,12 @@ public final class JavaFileImpl implements JavaFile
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: JavaFileImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+     *  @version $Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements JavaFile.Builder
     {
@@ -241,7 +241,7 @@ public final class JavaFileImpl implements JavaFile
                             name,
                             "name",
                             Objects::nonNull,
-                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -739,7 +739,7 @@ public final class JavaFileImpl implements JavaFile
     @Override
     public void writeTo( final Path directory ) throws IOException
     {
-        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -> notExists( v ) || isDirectory( v ), $ -> "path %s exists but is not a directory.".formatted( directory ) );
+        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -> notExists( v ) || isDirectory( v ), _ -> "path %s exists but is not a directory.".formatted( directory ) );
         if( !m_PackageName.isEmpty() )
         {
             for( final var packageComponent : m_PackageName.split( "\\." ) )

@@ -78,7 +78,6 @@ import org.tquadrat.foundation.javacomposer.internal.AnnotationValueVisitor;
 import org.tquadrat.foundation.javacomposer.internal.ClassNameImpl;
 import org.tquadrat.foundation.javacomposer.internal.ClassSpecImpl;
 import org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl;
-import org.tquadrat.foundation.javacomposer.internal.CodeProcessorImpl;
 import org.tquadrat.foundation.javacomposer.internal.EnumSpecImpl;
 import org.tquadrat.foundation.javacomposer.internal.FieldSpecImpl;
 import org.tquadrat.foundation.javacomposer.internal.InterfaceSpecImpl;
@@ -99,13 +98,13 @@ import org.tquadrat.foundation.util.JavaUtils;
  *  thread-safe without any synchronisation.</p>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaComposer.java 1105 2024-02-28 12:58:46Z tquadrat $
+ *  @version $Id: JavaComposer.java 1150 2025-09-29 09:14:54Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
-@SuppressWarnings( {"OverlyCoupledClass", "ClassWithTooManyMethods", "OverlyComplexClass", "ClassWithTooManyFields"} )
-@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+@SuppressWarnings( {"OverlyCoupledClass", "ClassWithTooManyMethods", "OverlyComplexClass"} )
+@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1150 2025-09-29 09:14:54Z tquadrat $" )
 @API( status = STABLE, since = "0.2.0" )
 public final class JavaComposer
 {
@@ -153,10 +152,10 @@ public final class JavaComposer
     @SuppressWarnings( "FieldNamingConvention" )
     private final Lazy<AnnotationSpec> m_Annotation_UtilityClass;
 
-    /**
-     *  The code processor associated with this composer instance.
-     */
-    private final CodeProcessor m_CodeProcessor;
+//    /**
+//     *  The code processor associated with this composer instance.
+//     */
+//    private final CodeProcessor m_CodeProcessor;
 
     /**
      *  The Javadoc comment for an overriding method.
@@ -341,9 +340,8 @@ public final class JavaComposer
         };
         m_Method_ToString = Lazy.use( methodSpecSupplier );
 
-        //---* The code processor *--------------------------------------------
-        //noinspection ThisEscapedInObjectConstruction
-        m_CodeProcessor = new CodeProcessorImpl( this );
+//        //---* The code processor *--------------------------------------------
+//        m_CodeProcessor = new CodeProcessorImpl( this );
     }   //  JavaComposer()
 
         /*---------*\
@@ -1097,7 +1095,7 @@ public final class JavaComposer
      */
     public final TypeSpec.Builder createStaticClassBuilder( final CharSequence className )
     {
-        requireValidNonNullArgument( className, "className", v -> SourceVersion.isName( requireNotEmptyArgument( v, "className" ) ), $ -> "not a valid name: %s".formatted( className ) );
+        requireValidNonNullArgument( className, "className", v -> SourceVersion.isName( requireNotEmptyArgument( v, "className" ) ), _ -> "not a valid name: %s".formatted( className ) );
         final var constructor = constructorBuilder()
             .addModifiers( PRIVATE )
             .addJavadoc(
@@ -1278,7 +1276,7 @@ public final class JavaComposer
      */
     public final FieldSpec.Builder fieldBuilder( final TypeName type, final CharSequence name, final Modifier... modifiers )
     {
-        final var retValue = new FieldSpecImpl.BuilderImpl( this, (TypeNameImpl) requireNonNullArgument( type, "type" ), require( name, $ -> "not a valid name: %s".formatted( name ), JavaUtils::isValidName ) ).addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );
+        final var retValue = new FieldSpecImpl.BuilderImpl( this, (TypeNameImpl) requireNonNullArgument( type, "type" ), require( name, _ -> "not a valid name: %s".formatted( name ), JavaUtils::isValidName ) ).addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );
 
         //---* Done *----------------------------------------------------------
         return retValue;
@@ -1303,12 +1301,12 @@ public final class JavaComposer
         return retValue;
     }   //  fieldBuilder()
 
-    /**
-     *  Provides access to the code processor for this composer instance.
-     *
-     *  @return The code processor.
-     */
-    public final CodeProcessor getCodeProcessor() { return m_CodeProcessor; }
+//    /**
+//     *  Provides access to the code processor for this composer instance.
+//     *
+//     *  @return The code processor.
+//     */
+//    public final CodeProcessor getCodeProcessor() { return m_CodeProcessor; }
 
     /**
      *  Returns the layout that is used to format the output.

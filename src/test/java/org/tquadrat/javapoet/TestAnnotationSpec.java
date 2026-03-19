@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  Copyright © 2002-2021 by Thomas Thrien.
+ *  Copyright © 2002-2026 by Thomas Thrien.
  *  All Rights Reserved.
  * ============================================================================
  *  Licensed to the public under the agreements of the GNU Lesser General Public
@@ -17,15 +17,6 @@
 
 package org.tquadrat.javapoet;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.lang.annotation.Annotation;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -38,6 +29,15 @@ import org.tquadrat.foundation.javacomposer.JavaComposer;
 import org.tquadrat.foundation.javacomposer.TypeSpec;
 import org.tquadrat.javapoet.helper.CompilationRule;
 
+import java.lang.annotation.Annotation;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 /**
  *  The tests for the class
  *  {@link AnnotationSpec}
@@ -45,10 +45,10 @@ import org.tquadrat.javapoet.helper.CompilationRule;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestAnnotationSpec.java 937 2021-12-14 21:59:00Z tquadrat $
+ *  @version $Id: TestAnnotationSpec.java 1158 2026-03-14 16:23:29Z tquadrat $
  */
-@ClassVersion( sourceVersion = "$Id: TestAnnotationSpec.java 937 2021-12-14 21:59:00Z tquadrat $" )
-@SuppressWarnings( {"javadoc", "MisorderedAssertEqualsArguments"} )
+@ClassVersion( sourceVersion = "$Id: TestAnnotationSpec.java 1158 2026-03-14 16:23:29Z tquadrat $" )
+@SuppressWarnings( {"javadoc"} )
 @RunWith( JUnit4.class )
 @DisplayName( "TestAnnotationSpec" )
 public final class TestAnnotationSpec
@@ -186,20 +186,20 @@ public final class TestAnnotationSpec
 
         final var name = IsAnnotated.class.getCanonicalName();
         final var element = m_Compilation.getElements().getTypeElement( name );
-        final var annotation = composer.createAnnotation( element.getAnnotationMirrors().get( 0 ) );
+        final var annotation = composer.createAnnotation( element.getAnnotationMirrors().getFirst() );
 
         final var taco = composer.classBuilder( "Taco" ).addAnnotation( annotation ).build();
         final var expected =
             """
             package com.squareup.tacos;
 
-            import com.squareup.javapoet.AnnotationSpecTest;
             import java.lang.Double;
             import java.lang.Float;
             import java.lang.Override;
-
-            @AnnotationSpecTest.HasDefaultsAnnotation(
-                o = AnnotationSpecTest.Breakfast.PANCAKES,
+            import org.tquadrat.javapoet.TestAnnotationSpec;
+            
+            @TestAnnotationSpec.HasDefaultsAnnotation(
+                o = TestAnnotationSpec.Breakfast.PANCAKES,
                 p = 1701,
                 f = 11.1,
                 m = {
@@ -208,8 +208,8 @@ public final class TestAnnotationSpec
                     1
                 },
                 l = Override.class,
-                j = @AnnotationSpecTest.AnnotationA,
-                q = @AnnotationSpecTest.AnnotationC("bar"),
+                j = @TestAnnotationSpec.AnnotationA,
+                q = @TestAnnotationSpec.AnnotationC("bar"),
                 r = {
                     Float.class,
                     Double.class
@@ -229,7 +229,7 @@ public final class TestAnnotationSpec
 
         final var name = IsAnnotated.class.getCanonicalName();
         final var element = m_Compilation.getElements().getTypeElement( name );
-        final var annotation = composer.createAnnotation( element.getAnnotationMirrors().get( 0 ) );
+        final var annotation = composer.createAnnotation( element.getAnnotationMirrors().getFirst() );
         final var typeBuilder = composer.classBuilder( IsAnnotated.class.getSimpleName() );
         typeBuilder.addAnnotation( annotation );
         final var file = composer.javaFileBuilder( "com.squareup.javapoet", typeBuilder.build() )
@@ -241,9 +241,10 @@ public final class TestAnnotationSpec
             import java.lang.Double;
             import java.lang.Float;
             import java.lang.Override;
-
-            @AnnotationSpecTest.HasDefaultsAnnotation(
-                o = AnnotationSpecTest.Breakfast.PANCAKES,
+            import org.tquadrat.javapoet.TestAnnotationSpec;
+            
+            @TestAnnotationSpec.HasDefaultsAnnotation(
+                o = TestAnnotationSpec.Breakfast.PANCAKES,
                 p = 1701,
                 f = 11.1,
                 m = {
@@ -252,8 +253,8 @@ public final class TestAnnotationSpec
                     1
                 },
                 l = Override.class,
-                j = @AnnotationSpecTest.AnnotationA,
-                q = @AnnotationSpecTest.AnnotationC("bar"),
+                j = @TestAnnotationSpec.AnnotationA,
+                q = @TestAnnotationSpec.AnnotationC("bar"),
                 r = {
                     Float.class,
                     Double.class
@@ -272,9 +273,9 @@ public final class TestAnnotationSpec
 
         final var builder = composer.annotationBuilder( HasDefaultsAnnotation.class );
         builder.addMember( "n", "$L", "{}" );
-        assertThat( builder.build().toString() ).isEqualTo( "@TestAnnotationSpec.HasDefaultsAnnotation(" + "n = {}" + ")" );
+        assertThat( builder.build().toString() ).isEqualTo( "@org.tquadrat.javapoet.TestAnnotationSpec.HasDefaultsAnnotation(" + "n = {}" + ")" );
         builder.addMember( "m", "$L", "{}" );
-        assertThat( builder.build().toString() ).isEqualTo( "@TestAnnotationSpec.HasDefaultsAnnotation(" + "n = {}, m = {}" + ")" );
+        assertThat( builder.build().toString() ).isEqualTo( "@org.tquadrat.javapoet.TestAnnotationSpec.HasDefaultsAnnotation(" + "n = {}, m = {}" + ")" );
     }
 
     @SuppressWarnings( "static-method" )
@@ -287,28 +288,42 @@ public final class TestAnnotationSpec
         builder.addMember( "n", "$T.$L", Breakfast.class, Breakfast.PANCAKES.name() );
         assertThat( builder.build().toString() ).isEqualTo(
             """
-            @TestAnnotationSpec.HasDefaultsAnnotation\
+            @org.tquadrat.javapoet.TestAnnotationSpec.HasDefaultsAnnotation\
             (\
-            n = TestAnnotationSpec.Breakfast.PANCAKES\
+            n = org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.PANCAKES\
             )""" );
 
         // builder = AnnotationSpec.builder(HasDefaultsAnnotation.class);
         builder.addMember( "n", "$T.$L", Breakfast.class, Breakfast.WAFFLES.name() );
         builder.addMember( "n", "$T.$L", Breakfast.class, Breakfast.PANCAKES.name() );
-        assertThat( builder.build().toString() ).isEqualTo( "@TestAnnotationSpec.HasDefaultsAnnotation(n = {TestAnnotationSpec.Breakfast.PANCAKES, TestAnnotationSpec.Breakfast.WAFFLES, TestAnnotationSpec.Breakfast.PANCAKES})" );
+        assertThat( builder.build().toString() ).isEqualTo(
+            """
+            @org.tquadrat.javapoet.TestAnnotationSpec.HasDefaultsAnnotation\
+            (\
+            n = {org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.PANCAKES, \
+            org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.WAFFLES, \
+            org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.PANCAKES}\
+            )""" );
 
         builder = builder.build().toBuilder(); // idempotent
-        assertThat( builder.build().toString() ).isEqualTo( "@TestAnnotationSpec.HasDefaultsAnnotation(n = {TestAnnotationSpec.Breakfast.PANCAKES, TestAnnotationSpec.Breakfast.WAFFLES, TestAnnotationSpec.Breakfast.PANCAKES})" );
+        assertThat( builder.build().toString() ).isEqualTo(
+            """
+            @org.tquadrat.javapoet.TestAnnotationSpec.HasDefaultsAnnotation\
+            (\
+            n = {org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.PANCAKES, \
+            org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.WAFFLES, \
+            org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.PANCAKES}\
+            )""" );
 
         builder.addMember( "n", "$T.$L", Breakfast.class, Breakfast.WAFFLES.name() );
         assertThat( builder.build().toString() ).isEqualTo(
             """
-            @TestAnnotationSpec.HasDefaultsAnnotation\
+            @org.tquadrat.javapoet.TestAnnotationSpec.HasDefaultsAnnotation\
             (\
-            n = {TestAnnotationSpec.Breakfast.PANCAKES, \
-            TestAnnotationSpec.Breakfast.WAFFLES, \
-            TestAnnotationSpec.Breakfast.PANCAKES, \
-            TestAnnotationSpec.Breakfast.WAFFLES}\
+            n = {org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.PANCAKES, \
+            org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.WAFFLES, \
+            org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.PANCAKES, \
+            org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.WAFFLES}\
             )""" );
     }
 
@@ -321,20 +336,20 @@ public final class TestAnnotationSpec
         final var element = m_Compilation.getElements()
             .getTypeElement( name );
         final var builder = composer.createAnnotation( element.getAnnotationMirrors()
-            .get( 0 ) )
+            .getFirst() )
             .toBuilder();
         builder.addMember( "m", "$L", 123 );
         assertThat( builder.build().toString() ).isEqualTo(
             """
-             @TestAnnotationSpec.HasDefaultsAnnotation\
+             @org.tquadrat.javapoet.TestAnnotationSpec.HasDefaultsAnnotation\
              (\
-             o = com.squareup.javapoet.AnnotationSpecTest.Breakfast.PANCAKES, \
+             o = org.tquadrat.javapoet.TestAnnotationSpec.Breakfast.PANCAKES, \
              p = 1701, \
              f = 11.1, \
              m = {9, 8, 1, 123}, \
              l = java.lang.Override.class, \
-             j = @com.squareup.javapoet.AnnotationSpecTest.AnnotationA, \
-             q = @com.squareup.javapoet.AnnotationSpecTest.AnnotationC("bar"), \
+             j = @org.tquadrat.javapoet.TestAnnotationSpec.AnnotationA, \
+             q = @org.tquadrat.javapoet.TestAnnotationSpec.AnnotationC("bar"), \
              r = {java.lang.Float.class, java.lang.Double.class}\
              )""" );
     }
@@ -357,7 +372,7 @@ public final class TestAnnotationSpec
             import java.lang.Double;
             import java.lang.Float;
             import java.lang.Override;
-            import TestAnnotationSpec;
+            import org.tquadrat.javapoet.TestAnnotationSpec;
 
             @TestAnnotationSpec.HasDefaultsAnnotation(
                 f = 11.1,
@@ -397,7 +412,7 @@ public final class TestAnnotationSpec
             import java.lang.Double;
             import java.lang.Float;
             import java.lang.Override;
-            import TestAnnotationSpec;
+            import org.tquadrat.javapoet.TestAnnotationSpec;
 
             @TestAnnotationSpec.HasDefaultsAnnotation(
                 a = 5,

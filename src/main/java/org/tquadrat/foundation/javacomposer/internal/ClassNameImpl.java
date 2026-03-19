@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,13 +51,13 @@ import org.tquadrat.foundation.javacomposer.ClassName;
  *  for a fully-qualified class name for top-level and member classes.
  *
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ClassNameImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+ *  @version $Id: ClassNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "ComparableImplementedButEqualsNotOverridden"} )
-@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ClassNameImpl extends TypeNameImpl implements ClassName
 {
@@ -361,9 +361,9 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
     public static final ClassNameImpl from( final Class<?> sourceClass )
     {
         var validatedClass = requireNonNullArgument( sourceClass, "sourceClass" );
-        requireValidArgument( validatedClass, "sourceClass", v -> !v.isPrimitive(), $ -> "primitive types cannot be represented as a ClassName" );
-        requireValidArgument( validatedClass, "sourceClass", v -> !void.class.equals( v ), $ -> "'void' type cannot be represented as a ClassName" );
-        requireValidArgument( validatedClass, "sourceClass", v -> !v.isArray(), $ -> "array types cannot be represented as a ClassName" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !v.isPrimitive(), _ -> "primitive types cannot be represented as a ClassName" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !void.class.equals( v ), _ -> "'void' type cannot be represented as a ClassName" );
+        requireValidArgument( validatedClass, "sourceClass", v -> !v.isArray(), _ -> "array types cannot be represented as a ClassName" );
 
         final ClassNameImpl retValue;
         var anonymousSuffix = EMPTY_STRING;

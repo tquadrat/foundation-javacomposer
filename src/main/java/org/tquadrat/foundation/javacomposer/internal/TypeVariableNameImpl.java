@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -53,12 +53,12 @@ import org.tquadrat.foundation.javacomposer.TypeVariableName;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeVariableNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: TypeVariableNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: TypeVariableNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeVariableNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVariableName
 {
@@ -184,7 +184,7 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
             typeVariablesCopy.put( type, retValue );
             for( final var bound : type.getBounds() )
             {
-                bounds.add( TypeNameImpl.from( bound, Map.copyOf( typeVariablesCopy ) ) );
+                bounds.add( from( bound, Map.copyOf( typeVariablesCopy ) ) );
             }
             bounds.remove( OBJECT );
         }
@@ -255,7 +255,7 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
         final var boundsMirrors = element.getBounds();
 
         final var boundsTypeNames = boundsMirrors.stream()
-            .map( typeMirror -> TypeNameImpl.from( typeMirror, Map.of() ) )
+            .map( typeMirror -> from( typeMirror, Map.of() ) )
             .toList();
         final var retValue = of( name, boundsTypeNames );
 
@@ -310,7 +310,7 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
             typeVariables.put( element, retValue );
             for( final var typeMirror : element.getBounds() )
             {
-                bounds.add( TypeNameImpl.from( typeMirror, typeVariables ) );
+                bounds.add( from( typeMirror, typeVariables ) );
             }
             bounds.remove( OBJECT );
         }
@@ -376,7 +376,7 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
     public final TypeVariableNameImpl withBounds( final Type... bounds )
     {
         final var newBounds = new ArrayList<>( m_Bounds );
-        newBounds.addAll( TypeNameImpl.list( requireNonNullArgument( bounds, "bounds" ) ) );
+        newBounds.addAll( list( requireNonNullArgument( bounds, "bounds" ) ) );
         final var retValue = new TypeVariableNameImpl( m_Name, List.copyOf( newBounds ), annotations() );
 
         //---* Done *----------------------------------------------------------

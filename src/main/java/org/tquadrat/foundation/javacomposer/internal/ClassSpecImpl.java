@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -76,12 +76,12 @@ import org.tquadrat.foundation.javacomposer.TypeSpec;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ClassSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+ *  @version $Id: ClassSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.2.0" )
 public final class ClassSpecImpl extends TypeSpecImpl
 {
@@ -95,12 +95,12 @@ public final class ClassSpecImpl extends TypeSpecImpl
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: ClassSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+     *  @version $Id: ClassSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
     @API( status = INTERNAL, since = "0.2.0" )
     public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl
     {
@@ -168,7 +168,7 @@ public final class ClassSpecImpl extends TypeSpecImpl
         @Override
         public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), $ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
+            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), _ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();
@@ -239,7 +239,7 @@ public final class ClassSpecImpl extends TypeSpecImpl
         @Override
         public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), $ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
+            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), _ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();

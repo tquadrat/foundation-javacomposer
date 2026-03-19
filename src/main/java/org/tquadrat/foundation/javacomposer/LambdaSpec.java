@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2024 by Thomas Thrien.
+ * Copyright © 2002-2025 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  *
@@ -41,7 +41,7 @@ import org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl;
  *  <p>Basically, a lambda expression has two different formats, one without
  *  curly braces</p>
  *  <pre><code>  a -&gt; modify( a )</code></pre>
- *  <p>and the other with with curly braces, requiring a return statement:</p>
+ *  <p>and the other with curly braces, requiring a return statement:</p>
  *  <pre><code>  a -&gt;
  *  {
  *      modify( a );
@@ -70,12 +70,12 @@ import org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl;
  *  second case.</p>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: LambdaSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: LambdaSpec.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: LambdaSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: LambdaSpec.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface LambdaSpec
     permits LambdaSpecImpl
@@ -88,13 +88,13 @@ public sealed interface LambdaSpec
      *  {@link LambdaSpec}
      *
      *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: LambdaSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: LambdaSpec.java 1151 2025-10-01 21:32:15Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: LambdaSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: LambdaSpec.java 1151 2025-10-01 21:32:15Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits LambdaSpecImpl.BuilderImpl

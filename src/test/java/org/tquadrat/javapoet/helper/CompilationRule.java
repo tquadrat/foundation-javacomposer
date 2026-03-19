@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  Copyright © 2002-2021 by Thomas Thrien.
+ *  Copyright © 2002-2026 by Thomas Thrien.
  *  All Rights Reserved.
  * ============================================================================
  *  Licensed to the public under the agreements of the GNU Lesser General Public
@@ -17,8 +17,8 @@
 
 package org.tquadrat.javapoet.helper;
 
-import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.base.Preconditions.checkState;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.tquadrat.foundation.lang.Objects.isNull;
 import static org.tquadrat.foundation.lang.Objects.nonNull;
@@ -61,15 +61,17 @@ import org.tquadrat.javapoet.TestTypesEclipse;
  *
  *  @author Gregory Kick
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CompilationRule.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: CompilationRule.java 1160 2026-03-16 21:00:15Z tquadrat $
  */
 public final class CompilationRule implements TestRule
 {
         /*------------*\
     ====** Attributes **=======================================================
         \*------------*/
+    @SuppressWarnings( "FieldAccessedSynchronizedAndUnsynchronized" )
     private Elements m_Elements;
 
+    @SuppressWarnings( "FieldAccessedSynchronizedAndUnsynchronized" )
     private Types m_Types;
 
         /*--------------*\
@@ -84,7 +86,7 @@ public final class CompilationRule implements TestRule
         /*---------*\
     ====** Methods **==========================================================
         \*---------*/
-    @SuppressWarnings( {"resource", "MethodOnlyUsedFromInnerClass"} )
+    @SuppressWarnings( {"MethodOnlyUsedFromInnerClass", "BooleanMethodNameMustStartWithQuestion"} )
     private static final boolean compile( final Iterable<? extends Processor> processors )
     {
         final JavaCompiler compiler = new EclipseCompiler();

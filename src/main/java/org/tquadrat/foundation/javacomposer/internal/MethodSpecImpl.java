@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -81,13 +81,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: MethodSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+ *  @version $Id: MethodSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields"} )
-@ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class MethodSpecImpl implements MethodSpec
 {
@@ -100,12 +100,12 @@ public final class MethodSpecImpl implements MethodSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: MethodSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+     *  @version $Id: MethodSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements MethodSpec.Builder
     {
@@ -202,7 +202,7 @@ public final class MethodSpecImpl implements MethodSpec
         public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final CharSequence name )
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
-            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -> v.equals( CONSTRUCTOR ) || isValidName( v ), $ -> "not a valid name: %s".formatted( name ) ).toString().intern();
+            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -> v.equals( CONSTRUCTOR ) || isValidName( v ), _ -> "not a valid name: %s".formatted( name ) ).toString().intern();
             m_ReturnType = name.equals( CONSTRUCTOR ) ? null : VOID_PRIMITIVE;
 
             m_Code = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
@@ -489,7 +489,7 @@ public final class MethodSpecImpl implements MethodSpec
                             name,
                             "name",
                             Objects::nonNull,
-                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );

@@ -17,14 +17,18 @@
 
 package org.tquadrat.javapoet;
 
-import static com.google.common.collect.Iterables.getOnlyElement;
-import static com.google.common.truth.Truth.assertThat;
-import static javax.lang.model.util.ElementFilter.methodsIn;
-import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeFalse;
-import static org.junit.Assume.assumeTrue;
-import static org.tquadrat.foundation.lang.Objects.isNull;
-import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.tquadrat.foundation.annotation.ClassVersion;
+import org.tquadrat.foundation.exception.NullArgumentException;
+import org.tquadrat.foundation.javacomposer.ClassName;
+import org.tquadrat.foundation.javacomposer.JavaComposer;
+import org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl;
+import org.tquadrat.javapoet.helper.CompilationRule;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
@@ -41,20 +45,16 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.NullArgumentException;
-import org.tquadrat.foundation.javacomposer.ClassName;
-import org.tquadrat.foundation.javacomposer.JavaComposer;
-import org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl;
-import org.tquadrat.javapoet.helper.CompilationRule;
+import static com.google.common.collect.Iterables.getOnlyElement;
+import static com.google.common.truth.Truth.assertThat;
+import static javax.lang.model.util.ElementFilter.methodsIn;
+import static org.junit.Assert.fail;
+import static org.junit.Assume.assumeFalse;
+import static org.junit.Assume.assumeTrue;
+import static org.tquadrat.foundation.lang.Objects.isNull;
+import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 
-@ClassVersion( sourceVersion = "$Id: TestMethodSpec.java 943 2021-12-21 01:34:32Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestMethodSpec.java 1158 2026-03-14 16:23:29Z tquadrat $" )
 @SuppressWarnings( {"static-method", "javadoc"} )
 @DisplayName( "TestMethodSpec" )
 @RunWith( JUnit4.class )
@@ -348,8 +348,8 @@ public final class TestMethodSpec
             """
             @java.lang.Override
             protected <T extends java.lang.Runnable & java.io.Closeable> java.lang.Runnable everything(
-                java.lang.String arg0, java.util.List<? extends T> arg1) throws java.io.IOException,
-                java.lang.SecurityException {
+                @org.tquadrat.javapoet.TestMethodSpec.Nullable java.lang.String arg0,
+                java.util.List<? extends T> arg1) throws java.io.IOException, java.lang.SecurityException {
             }
             """ );
     }
@@ -399,7 +399,7 @@ public final class TestMethodSpec
         }
         catch( final IllegalArgumentException expected )
         {
-            assertThat( expected ).hasMessageThat().isEqualTo( "Cannot override method on final class com.squareup.javapoet.MethodSpecTest.FinalClass" );
+            assertThat( expected ).hasMessageThat().isEqualTo( "Cannot override method on final class 'org.tquadrat.javapoet.TestMethodSpec.FinalClass'" );
         }
     }
 
@@ -438,7 +438,7 @@ public final class TestMethodSpec
         }
         catch( final IllegalArgumentException expected )
         {
-            assertThat( expected ).hasMessageThat().isEqualTo( "cannot override method with modifiers: [final]" );
+            assertThat( expected ).hasMessageThat().isEqualTo( "Cannot override method with modifier 'FINAL'" );
         }
         try
         {
@@ -447,7 +447,7 @@ public final class TestMethodSpec
         }
         catch( final IllegalArgumentException expected )
         {
-            assertThat( expected ).hasMessageThat().isEqualTo( "cannot override method with modifiers: [private]" );
+            assertThat( expected ).hasMessageThat().isEqualTo( "Cannot override method with modifier 'PRIVATE'" );
         }
         try
         {
@@ -456,7 +456,7 @@ public final class TestMethodSpec
         }
         catch( final IllegalArgumentException expected )
         {
-            assertThat( expected ).hasMessageThat().isEqualTo( "cannot override method with modifiers: [static]" );
+            assertThat( expected ).hasMessageThat().isEqualTo( "Cannot override method with modifier 'STATIC'" );
         }
     }
 

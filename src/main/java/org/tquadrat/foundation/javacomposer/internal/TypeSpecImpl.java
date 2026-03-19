@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -83,13 +83,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+ *  @version $Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "OverlyCoupledClass"} )
-@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public abstract sealed class TypeSpecImpl implements TypeSpec
     permits AnnotationTypeSpecImpl, ClassSpecImpl, EnumSpecImpl, InterfaceSpecImpl, RecordSpecImpl
@@ -103,13 +103,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+     *  @version $Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "OverlyCoupledClass" )
-    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public abstract static sealed class BuilderImpl implements TypeSpec.Builder
         permits AnnotationTypeSpecImpl.BuilderImpl, ClassSpecImpl.BuilderImpl, EnumSpecImpl.BuilderImpl, InterfaceSpecImpl.BuilderImpl, RecordSpecImpl.BuilderImpl
@@ -251,7 +251,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
             m_Kind = requireNonNullArgument( kind, "kind" );
-            m_Name = requireValidNonNullArgument( name, "name", v -> v.isEmpty() || isValidName( v.get() ), $ -> "not a valid name: %s".formatted( name.get() ) );
+            m_Name = requireValidNonNullArgument( name, "name", v -> v.isEmpty() || isValidName( v.get() ), _ -> "not a valid name: %s".formatted( name.get() ) );
 
             m_InitializerBlock = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
             m_Javadoc = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
@@ -564,7 +564,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
                             name,
                             "name",
                             Objects::nonNull,
-                            $ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -590,7 +590,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addSuperinterface( final Class<?> superinterface )
         {
-            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, $ -> "'%s' is not an interface".formatted( superinterface.getName() ) ) ) );
+            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, _ -> "'%s' is not an interface".formatted( superinterface.getName() ) ) ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -611,7 +611,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addSuperinterface( final TypeElement superinterface )
         {
-            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -> v.getKind() == ElementKind.INTERFACE, $ -> "'%s' is not an interface".formatted( superinterface.getQualifiedName() ) ).asType() ) );
+            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -> v.getKind() == ElementKind.INTERFACE, _ -> "'%s' is not an interface".formatted( superinterface.getQualifiedName() ) ).asType() ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -916,7 +916,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         public BuilderImpl superclass( final TypeName superclass )
         {
             checkState( m_Superclass == OBJECT, () -> new IllegalStateException( "superclass already set to %s".formatted( m_Superclass.toString() ) ));
-            m_Superclass = (TypeNameImpl) requireValidNonNullArgument( superclass, "superclass", v -> !v.isPrimitive(), $ -> "superclass may not be a primitive" );
+            m_Superclass = (TypeNameImpl) requireValidNonNullArgument( superclass, "superclass", v -> !v.isPrimitive(), _ -> "superclass may not be a primitive" );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -931,13 +931,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+     *  @version $Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "NewClassNamingConvention" )
-    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public enum Kind
     {

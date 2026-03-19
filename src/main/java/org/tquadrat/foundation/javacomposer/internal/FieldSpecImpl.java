@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -61,12 +61,12 @@ import org.tquadrat.foundation.util.JavaUtils;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: FieldSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+ *  @version $Id: FieldSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class FieldSpecImpl implements FieldSpec
 {
@@ -79,12 +79,12 @@ public final class FieldSpecImpl implements FieldSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: FieldSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+     *  @version $Id: FieldSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements FieldSpec.Builder
     {
@@ -409,7 +409,7 @@ public final class FieldSpecImpl implements FieldSpec
     {
         final var composer = new JavaComposer();
 
-        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, $ -> "not a valid name: %s".formatted( name ) ) )
+        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, _ -> "not a valid name: %s".formatted( name ) ) )
             .addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );
 
         //---* Done *----------------------------------------------------------

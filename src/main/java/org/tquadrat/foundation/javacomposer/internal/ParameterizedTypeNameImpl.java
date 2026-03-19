@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,12 +51,12 @@ import org.tquadrat.foundation.javacomposer.TypeVariableName;
  *  for parameterised types.
  *
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterizedTypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: ParameterizedTypeNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterizedTypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterizedTypeNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ParameterizedTypeNameImpl extends TypeNameImpl implements ParameterizedTypeName
 {
@@ -236,7 +236,7 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
     {
         final var rawType = (ClassNameImpl) ClassName.from( (Class<?>) type.getRawType() );
         final var ownerType = (type.getOwnerType() instanceof ParameterizedType) && !Modifier.isStatic( ((Class<?>) type.getRawType()).getModifiers() ) ? (ParameterizedType) type.getOwnerType() : null;
-        final var typeArgumentList = TypeNameImpl.list( type.getActualTypeArguments(), typeArguments );
+        final var typeArgumentList = list( type.getActualTypeArguments(), typeArguments );
         final var retValue = nonNull( ownerType )
             ? from( ownerType, typeArguments ).nestedClass( rawType.simpleName(), typeArgumentList.stream().map( t -> (TypeName) t ).collect( toList() ) )
             : new ParameterizedTypeNameImpl( null, rawType, typeArgumentList );

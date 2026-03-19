@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  Copyright © 2002-2021 by Thomas Thrien.
+ *  Copyright © 2002-2026 by Thomas Thrien.
  *  All Rights Reserved.
  * ============================================================================
  *  Licensed to the public under the agreements of the GNU Lesser General Public
@@ -17,15 +17,6 @@
 
 package org.tquadrat.javapoet;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.when;
-import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.OBJECT;
-
-import javax.lang.model.element.TypeElement;
-import java.util.Map;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -36,6 +27,15 @@ import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.javacomposer.ClassName;
 import org.tquadrat.javapoet.helper.CompilationRule;
 
+import javax.lang.model.element.TypeElement;
+import java.util.Map;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.when;
+import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.OBJECT;
+
 /**
  *  The tests for the class
  *  {@link ClassName}
@@ -43,10 +43,10 @@ import org.tquadrat.javapoet.helper.CompilationRule;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestClassName.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: TestClassName.java 1158 2026-03-14 16:23:29Z tquadrat $
  */
-@ClassVersion( sourceVersion = "$Id: TestClassName.java 1085 2024-01-05 16:23:28Z tquadrat $" )
-@SuppressWarnings( {"javadoc", "MisorderedAssertEqualsArguments", "InnerClassTooDeeplyNested"} )
+@ClassVersion( sourceVersion = "$Id: TestClassName.java 1158 2026-03-14 16:23:29Z tquadrat $" )
+@SuppressWarnings( {"javadoc", "InnerClassTooDeeplyNested"} )
 @RunWith( JUnit4.class )
 @DisplayName( "TestClassName" )
 public final class TestClassName
@@ -91,11 +91,11 @@ public final class TestClassName
         assertThat( ClassName.from( Object.class ).toString() ).isEqualTo( "java.lang.Object" );
 
         var actual = ClassName.from( OuterClass.InnerClass.class ).toString();
-        var expected = "TestClassName.OuterClass.InnerClass";
+        var expected = "org.tquadrat.javapoet.TestClassName.OuterClass.InnerClass";
         assertEquals( expected, actual );
 
         actual = (ClassName.from( new Object(){/**/}.getClass() )).toString();
-        expected = "TestClassName$1";
+        expected = "org.tquadrat.javapoet.TestClassName$1";
         assertEquals( expected, actual );
 
         actual = (ClassName.from( new Object()
@@ -103,15 +103,15 @@ public final class TestClassName
             final Object m_Inner = new Object()
             {/**/};
         }.m_Inner.getClass() )).toString();
-        expected = "TestClassName$2$1";
+        expected = "org.tquadrat.javapoet.TestClassName$2$1";
         assertEquals( expected, actual );
 
         actual = (ClassName.from( $Outer.class )).toString();
-        expected = "TestClassName.$Outer";
+        expected = "org.tquadrat.javapoet.TestClassName.$Outer";
         assertEquals( expected, actual );
 
         actual = (ClassName.from( $Outer.$Inner.class )).toString();
-        expected = "TestClassName.$Outer.$Inner";
+        expected = "org.tquadrat.javapoet.TestClassName.$Outer.$Inner";
         assertEquals( expected, actual );
     }
 
@@ -122,9 +122,9 @@ public final class TestClassName
         final var object = elements.getTypeElement( Object.class.getCanonicalName() );
         assertThat( ClassName.from( object ).toString() ).isEqualTo( "java.lang.Object" );
         final var outer = elements.getTypeElement( $Outer.class.getCanonicalName() );
-        assertThat( ClassName.from( outer ).toString() ).isEqualTo( "com.squareup.javapoet.ClassNameTest.$Outer" );
+        assertThat( ClassName.from( outer ).toString() ).isEqualTo( "org.tquadrat.javapoet.TestClassName.$Outer" );
         final var inner = elements.getTypeElement( $Outer.$Inner.class.getCanonicalName() );
-        assertThat( ClassName.from( inner ).toString() ).isEqualTo( "com.squareup.javapoet.ClassNameTest.$Outer.$Inner" );
+        assertThat( ClassName.from( inner ).toString() ).isEqualTo( "org.tquadrat.javapoet.TestClassName.$Outer.$Inner" );
     }   //  classNameFromTypeElement()
 
     /**
@@ -140,9 +140,9 @@ public final class TestClassName
         final var object = elements.getTypeElement( Object.class.getCanonicalName() );
         assertThat( ClassName.from( preventGetKind( object ) ).toString() ).isEqualTo( "java.lang.Object" );
         final var outer = elements.getTypeElement( $Outer.class.getCanonicalName() );
-        assertThat( ClassName.from( preventGetKind( outer ) ).toString() ).isEqualTo( "com.squareup.javapoet.ClassNameTest.$Outer" );
+        assertThat( ClassName.from( preventGetKind( outer ) ).toString() ).isEqualTo( "org.tquadrat.javapoet.TestClassName.$Outer" );
         final var inner = elements.getTypeElement( $Outer.$Inner.class.getCanonicalName() );
-        assertThat( ClassName.from( preventGetKind( inner ) ).toString() ).isEqualTo( "com.squareup.javapoet.ClassNameTest.$Outer.$Inner" );
+        assertThat( ClassName.from( preventGetKind( inner ) ).toString() ).isEqualTo( "org.tquadrat.javapoet.TestClassName.$Outer.$Inner" );
     }   //  classNameFromTypeElementDoesntUseGetKind()
 
     @SuppressWarnings( "static-method" )

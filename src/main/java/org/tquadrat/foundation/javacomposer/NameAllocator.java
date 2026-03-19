@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,12 +37,13 @@ import java.util.Set;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
+import org.tquadrat.foundation.annotation.NotRecord;
 import org.tquadrat.foundation.exception.ValidationException;
 
 /**
  *  <p>{@summary Assigns Java identifier names to avoid collisions, 'abuse' of
  *  keywords, and invalid characters.} To use it, first create an instance of
- *  this class and allocate all of the names that are needed. Typically this is
+ *  this class and allocate all the names that are needed. Typically, this is
  *  a mix of user-supplied names and constants:</p>
  *  <pre><code>  NameAllocator nameAllocator = new NameAllocator();
  *  for( final var property : properties )
@@ -51,7 +52,7 @@ import org.tquadrat.foundation.exception.ValidationException;
  *  }
  *  nameAllocator.newName( "sb", "string builder" );</code></pre>
  *  <p>Pass a unique tag object to each allocation. The tag scopes the name,
- *  and can be used to look up the allocated name later. Typically the tag is
+ *  and can be used to look up the allocated name later. Typically, the tag is
  *  the object that is being named. In the above example we use
  *  {@code property} for the user-supplied property names, and
  *  {@code "string builder"} for our constant string builder.</p>
@@ -90,13 +91,14 @@ import org.tquadrat.foundation.exception.ValidationException;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: NameAllocator.java 1067 2023-09-28 21:09:15Z tquadrat $
+ *  @version $Id: NameAllocator.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: NameAllocator.java 1067 2023-09-28 21:09:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: NameAllocator.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
+@NotRecord
 public final class NameAllocator implements Cloneable
 {
         /*------------*\

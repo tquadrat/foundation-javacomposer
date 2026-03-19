@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,12 +51,12 @@ import org.tquadrat.foundation.util.JavaUtils;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: AnnotationSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+ *  @version $Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class AnnotationSpecImpl implements AnnotationSpec
 {
@@ -72,12 +72,12 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: AnnotationSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+     *  @version $Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements AnnotationSpec.Builder
     {
@@ -150,11 +150,11 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         @Override
         public final BuilderImpl addMember( final CharSequence name, final CodeBlock codeBlock )
         {
-            final var validatedName = requireValidArgument( name, "name", JavaUtils::isValidName, $ -> "not a valid name: %s".formatted( name ) )
+            final var validatedName = requireValidArgument( name, "name", JavaUtils::isValidName, _ -> "not a valid name: %s".formatted( name ) )
                 .toString()
                 .intern();
             requireNonNullArgument( codeBlock, "codeBlock" );
-            final var values = m_CodeBlocks.computeIfAbsent( validatedName, $ -> new ArrayList<>() );
+            final var values = m_CodeBlocks.computeIfAbsent( validatedName, _ -> new ArrayList<>() );
             values.add( createDebugOutput( m_Composer.addDebugOutput() )
                 .map( output -> ((CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder())
                     .addWithoutDebugInfo( output.asComment() )
@@ -180,7 +180,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UnusedReturnValue", "IfStatementWithTooManyBranches", "ChainOfInstanceofChecks"} )
         public final BuilderImpl addMemberForValue( final String name, final Object value )
         {
-            requireValidArgument( name, "name", JavaUtils::isValidName, $ -> "not a valid name: %s".formatted( name ) );
+            requireValidArgument( name, "name", JavaUtils::isValidName, _ -> "not a valid name: %s".formatted( name ) );
             if( requireNonNullArgument( value, "value" ) instanceof Class<?> )
             {
                 addMember( name, "$T.class", value );

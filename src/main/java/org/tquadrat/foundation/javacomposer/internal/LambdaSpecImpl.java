@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2024 by Thomas Thrien.
+ * Copyright © 2002-2025 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  *
@@ -51,12 +51,12 @@ import org.tquadrat.foundation.lang.Lazy;
  *  {@link LambdaSpec}.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: LambdaSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+ *  @version $Id: LambdaSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class LambdaSpecImpl implements LambdaSpec
 {
@@ -68,12 +68,12 @@ public final class LambdaSpecImpl implements LambdaSpec
      *  {@link org.tquadrat.foundation.javacomposer.LambdaSpec.Builder}.
      *
      *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: LambdaSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+     *  @version $Id: LambdaSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements Builder
     {
@@ -445,12 +445,12 @@ public final class LambdaSpecImpl implements LambdaSpec
             final Object [] args;
             if( m_InferTypes )
             {
-                format = m_Parameters.stream().map( $ -> "$L" ).collect( joining(",", "(", ")" ) );
+                format = m_Parameters.stream().map( _ -> "$L" ).collect( joining(",", "(", ")" ) );
                 args = m_Parameters.stream().map( ParameterSpecImpl::name ).toArray();
             }
             else
             {
-                format = m_Parameters.stream().map( $ -> "$T $L" ).collect( joining(", ", "(", ")" ) );
+                format = m_Parameters.stream().map( _ -> "$T $L" ).collect( joining(", ", "(", ")" ) );
                 args = m_Parameters.stream().flatMap( p -> Stream.of( p.type(), p.name() ) ).toArray();
             }
             codeWriter.emit( format, args );

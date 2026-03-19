@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,12 +46,12 @@ import org.tquadrat.foundation.javacomposer.TypeVariableName;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ArrayTypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: ArrayTypeNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ArrayTypeNameImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ArrayTypeNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeName
 {
@@ -204,7 +204,7 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
     @API( status = STABLE, since = "0.2.0" )
     public static final ArrayTypeNameImpl from( final ArrayType mirror, final Map<TypeParameterElement,TypeVariableNameImpl> typeVariables )
     {
-        final var retValue = new ArrayTypeNameImpl( TypeNameImpl.from( requireNonNullArgument( mirror, "mirror" ).getComponentType(), typeVariables ) );
+        final var retValue = new ArrayTypeNameImpl( from( requireNonNullArgument( mirror, "mirror" ).getComponentType(), typeVariables ) );
 
         //---* Done *----------------------------------------------------------
         return retValue;
@@ -221,7 +221,7 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
     @API( status = STABLE, since = "0.2.0" )
     public static final ArrayTypeNameImpl from( final GenericArrayType type, final Map<Type,TypeVariableName> typeVariables )
     {
-        final var retValue = of( TypeNameImpl.from( requireNonNullArgument( type, "type" ).getGenericComponentType(), typeVariables ) );
+        final var retValue = of( from( requireNonNullArgument( type, "type" ).getGenericComponentType(), typeVariables ) );
 
         //---* Done *----------------------------------------------------------
         return retValue;
@@ -244,7 +244,7 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
      */
     public static ArrayTypeNameImpl of( final Type componentType )
     {
-        return of( TypeNameImpl.from( requireNonNullArgument( componentType, "componentType" ) ) );
+        return of( from( requireNonNullArgument( componentType, "componentType" ) ) );
     }   //  of()
 
     /**

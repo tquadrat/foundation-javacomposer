@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2025 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,12 +50,12 @@ import org.tquadrat.foundation.javacomposer.WildcardTypeName;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: WildcardTypeNameImpl.java 1105 2024-02-28 12:58:46Z tquadrat $
+ *  @version $Id: WildcardTypeNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: WildcardTypeNameImpl.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: WildcardTypeNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class WildcardTypeNameImpl extends TypeNameImpl implements WildcardTypeName
 {
@@ -101,7 +101,7 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
             requireValidNonNullArgument( upperBounds,
                 "upperBounds",
                 u -> u.size() ==1,
-                $ -> "unexpected extends bounds: %s".formatted( upperBounds ) ) );
+                _ -> "unexpected extends bounds: %s".formatted( upperBounds ) ) );
         m_LowerBounds = List.copyOf( requireNonNullArgument( lowerBounds, "lowerBounds" ) );
 
         for( final var upperBound : m_UpperBounds )
@@ -198,12 +198,12 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
             }
             else
             {
-                retValue = supertypeOf( TypeNameImpl.from( superBound, typeVariables ) );
+                retValue = supertypeOf( from( superBound, typeVariables ) );
             }
         }
         else
         {
-            retValue = subtypeOf( TypeNameImpl.from( extendsBound, typeVariables ) );
+            retValue = subtypeOf( from( extendsBound, typeVariables ) );
         }
 
         //---* Done *----------------------------------------------------------
@@ -253,7 +253,7 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
      */
     public static final WildcardTypeNameImpl subtypeOf( final Type type )
     {
-        final var retValue = subtypeOf( TypeNameImpl.from( type ) );
+        final var retValue = subtypeOf( from( type ) );
 
         //---* Done *----------------------------------------------------------
         return retValue;
