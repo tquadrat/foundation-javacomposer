@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  Copyright © 2002-2024 by Thomas Thrien.
+ *  Copyright © 2002-2026 by Thomas Thrien.
  *  All Rights Reserved.
  * ============================================================================
  *  Licensed to the public under the agreements of the GNU Lesser General Public
@@ -151,11 +151,6 @@ public final class JavaComposer
      */
     @SuppressWarnings( "FieldNamingConvention" )
     private final Lazy<AnnotationSpec> m_Annotation_UtilityClass;
-
-//    /**
-//     *  The code processor associated with this composer instance.
-//     */
-//    private final CodeProcessor m_CodeProcessor;
 
     /**
      *  The Javadoc comment for an overriding method.
@@ -339,9 +334,6 @@ public final class JavaComposer
             return retValue;
         };
         m_Method_ToString = Lazy.use( methodSpecSupplier );
-
-//        //---* The code processor *--------------------------------------------
-//        m_CodeProcessor = new CodeProcessorImpl( this );
     }   //  JavaComposer()
 
         /*---------*\
@@ -930,9 +922,9 @@ public final class JavaComposer
 
     /**
      *  Returns a code block with a comment for overriding methods:
-     *  <pre><code>  &#47;**
+     *  <div class="source-container"><pre>&#47;**
      *   * {&#64;inheritDoc}
-     *   *&#47;</code></pre>
+     *   *&#47;</pre></div>
      *
      *  @return The comment.
      */
@@ -1301,13 +1293,6 @@ public final class JavaComposer
         return retValue;
     }   //  fieldBuilder()
 
-//    /**
-//     *  Provides access to the code processor for this composer instance.
-//     *
-//     *  @return The code processor.
-//     */
-//    public final CodeProcessor getCodeProcessor() { return m_CodeProcessor; }
-
     /**
      *  Returns the layout that is used to format the output.
      *
@@ -1440,6 +1425,7 @@ public final class JavaComposer
         final var enclosingClass = requireNonNullArgument( method, "method" ).getEnclosingElement();
         if( enclosingClass.getModifiers().contains( FINAL ) )
         {
+            //noinspection UnnecessaryToStringCall
             throw new IllegalArgumentException( format( MSG_CannotOverrideFinalClass, enclosingClass.toString() ) );
         }
 
@@ -1660,7 +1646,7 @@ public final class JavaComposer
     }   //  parameterOf()
 
     /**
-     *  Retrieves th    e parameters from the given method.
+     *  Retrieves the parameters from the given method.
      *
      *  @param  method  The method.
      *  @return The parameters of the given method; the returned list can be

@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2023 by Thomas Thrien.
+ * Copyright © 2002-2026 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  * Licensed to the public under the agreements of the GNU Lesser General Public
@@ -40,7 +40,7 @@
  *  metadata.</p>
  *  <h2>Example</h2>
  *  <p>Here's a (boring) HelloWorld class:</p>
- *  <div class="source-container"><pre>  package com.example.helloworld;
+ *  <div class="source-container"><pre>package com.example.helloworld;
  *
  *  public final class HelloWorld {
  *      public static void main(String[] args) {
@@ -48,7 +48,7 @@
  *      }
  *  }</pre></div>
  *  <p>And this is the (exciting) code to generate it with JavaComposer:</p>
- *  <div class="source-container"><pre>  MethodSpec main = MethodSpec.methodBuilder( "main" )
+ *  <div class="source-container"><pre>MethodSpec main = MethodSpec.methodBuilder( "main" )
  *      .addModifiers( Modifier.PUBLIC, Modifier.STATIC )
  *      .returns( void.class )
  *      .addParameter( String[].class, "args" )
@@ -101,7 +101,7 @@
  *  <p>But the body of methods and constructors is not modelled. There's no
  *  expression class, no statement class or syntax tree nodes. Instead,
  *  JavaComposer uses strings for code blocks:</p>
- *  <div class="source-container"><pre>  MethodSpec main = MethodSpec.methodBuilder( "main" )
+ *  <div class="source-container"><pre>MethodSpec main = MethodSpec.methodBuilder( "main" )
  *      .addCode(
  *          """
  *          int total = 0;
@@ -111,7 +111,7 @@
  *          """ )
  *      .build();</pre></div>
  *  <p>Which generates this:</p>
- *  <div class="source-container"><pre>  void main() {
+ *  <div class="source-container"><pre>void main() {
  *      int total = 0;
  *      for (int i = 0; i &lt; 10; i++) {
  *          total += i;
@@ -126,7 +126,7 @@
  *  {@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder#endControlFlow() endControlFlow()}
  *  which are used together for braces, newlines, and indentation. The output
  *  from the code below is the same as above:</p>
- *  <div class="source-container"><pre>  MethodSpec main = MethodSpec.methodBuilder( "main" )
+ *  <div class="source-container"><pre>MethodSpec main = MethodSpec.methodBuilder( "main" )
  *      .addStatement( "int total = 0" )
  *      .beginControlFlow( "for (int i = 0; i &lt; 10; i++)" )
  *      .addStatement( "total += i" )
@@ -135,7 +135,7 @@
  *  <p>This example is lame because the generated code is constant! Suppose
  *  instead of just adding 0 to 10, we want to make the operation and range
  *  configurable. Here's a method that generates a method:</p>
- *  <div class="source-container"><pre>  private MethodSpec computeRange( String name, int from, int to, String op )
+ *  <div class="source-container"><pre>private MethodSpec computeRange( String name, int from, int to, String op )
  *  {
  *      var retValue = MethodSpec.methodBuilder( name )
  *          .returns( int.class )
@@ -151,7 +151,7 @@
  *  }   //  computeRange()</pre></div>
  *  <p>And here's what we get when we call
  *  <code>computeRange( "multiply10to20", 10, 20, "*" )</code>:</p>
- *  <div class="source-container"><pre>  int multiply10to20() {
+ *  <div class="source-container"><pre>int multiply10to20() {
  *      int result = 1;
  *      for (int i = 10; i &lt; 20; i++) {
  *          result = result * i;
@@ -170,7 +170,7 @@
  *  works just like
  *  {@link java.util.Formatter}'s
  *  <code>%s</code>:</p>
- *  <div class="source-container"><pre>  private MethodSpec computeRange( String name, int from, int to, String op )
+ *  <div class="source-container"><pre>private MethodSpec computeRange( String name, int from, int to, String op )
  *  {
  *      var retValue = MethodSpec.methodBuilder( name )
  *          .returns( int.class )
@@ -193,7 +193,7 @@
  *  <code>$S</code> to emit a string, complete with wrapping quotation marks
  *  and escaping. Here's a program that emits three methods, each of which
  *  returns its own name:</p>
- *  <div class="source-container"><pre>  public static void main( String[] args ) throws Exception
+ *  <div class="source-container"><pre>public static void main( String[] args ) throws Exception
  *  {
  *      TypeSpec helloWorld = TypeSpec.classBuilder( "HelloWorld" )
  *          .addModifiers( Modifier.PUBLIC, Modifier.FINAL )
@@ -220,7 +220,7 @@
  *      return retValue;
  *  }   //  whatsMyName()</pre></div>
  *  <p>In this case, using <code>$S</code> gives us quotation marks:</p>
- *  <div class="source-container"><pre>  public final class HelloWorld {
+ *  <div class="source-container"><pre>public final class HelloWorld {
  *      String slimShady() {
  *          return "slimShady";
  *      }
@@ -239,7 +239,7 @@
  *  understand. And JavaComposer is on board. It has rich built-in support for
  *  types, including automatic generation of import statements. Just use
  *  <code>$T</code> to reference types:</p>
- *  <div class="source-container"><pre>  MethodSpec today = MethodSpec.methodBuilder( "today" )
+ *  <div class="source-container"><pre>MethodSpec today = MethodSpec.methodBuilder( "today" )
  *      .returns( Date.class )
  *      .addStatement( "return new $T()", Date.class )
  *      .build();
@@ -256,7 +256,7 @@
  *  javaFile.writeTo( System.out );</pre></div>
  *  <p>That generates the following <code>*.java</code> file, complete with the
  *  necessary import:</p>
- *  <div class="source-container"><pre>  package com.example.helloworld;
+ *  <div class="source-container"><pre>package com.example.helloworld;
  *
  *  import java.util.Date;
  *
@@ -269,14 +269,14 @@
  *  just-so-happens to be available when we're generating code. This doesn't
  *  need to be the case. Here's a similar example, but this one references a
  *  class that doesn't exist (yet):</p>
- *  <div class="source-container"><pre>  ClassName hoverboard = ClassName.get( "com.mattel", "Hoverboard" );
+ *  <div class="source-container"><pre>ClassName hoverboard = ClassName.get( "com.mattel", "Hoverboard" );
  *
  *  MethodSpec today = MethodSpec.methodBuilder( "tomorrow" )
  *      .returns( hoverboard )
  *      .addStatement( "return new $T()", hoverboard )
  *      .build();</pre></div>
  *  <p>And that not-yet-existent class is imported as well:</p>
- *  <div class="source-container"><pre>  package com.example.helloworld;
+ *  <div class="source-container"><pre>package com.example.helloworld;
  *
  *  import com.mattel.Hoverboard;
  *
@@ -290,7 +290,7 @@
  *  class. Declared types are just the beginning of Java's rich type system: we
  *  also have arrays, parameterised types, wildcard types, and type variables.
  *  JavaComposer has classes for building each of these:</p>
- *  <div class="source-container"><pre>  ClassName hoverboard = ClassName.get( "com.mattel", "Hoverboard" );
+ *  <div class="source-container"><pre>ClassName hoverboard = ClassName.get( "com.mattel", "Hoverboard" );
  *  ClassName list = ClassName.get( "java.util", "List" );
  *  ClassName arrayList = ClassName.get( "java.util", "ArrayList" );
  *  TypeName listOfHoverboards = ParameterizedTypeName.get( list, hoverboard );
@@ -305,7 +305,7 @@
  *      .build();</pre></div>
  *  <p>JavaComposer will decompose each type and import its components where
  *  possible:</p>
- *  <div class="source-container"><pre>  package com.example.helloworld;
+ *  <div class="source-container"><pre>package com.example.helloworld;
  *
  *  import com.mattel.Hoverboard;
  *  import java.util.ArrayList;
@@ -325,7 +325,7 @@
  *  <p>JavaComposer also supports <code>import static</code>. It does it via
  *  explicitly collecting type member names. Let's enhance the previous example
  *  with some static sugar:</p>
- *  <div class="source-container"><pre>  &hellip;
+ *  <div class="source-container"><pre>&hellip;
  *
  *  ClassName namedBoards = ClassName.get( "com.mattel", "Hoverboard", "Boards" );
  *
@@ -352,7 +352,7 @@
  *  <p>JavaComposer will first add your import static block to the file as
  *  configured, match and mangle all calls accordingly and also import all
  *  other types as needed:</p>
- *  <div class="source-container"><pre>  package com.example.helloworld;
+ *  <div class="source-container"><pre>package com.example.helloworld;
  *
  *  import static com.mattel.Hoverboard.Boards.*;
  *  import static com.mattel.Hoverboard.createNimbus;
@@ -377,20 +377,20 @@
  *  <p>Generated code is often self-referential. Use <code>$N</code> to refer
  *  to another generated declaration by its name. Here's a method that calls
  *  another:</p>
- *  <div class="source-container"><pre>  public String byteToHex(int b) {
- *  char[] result = new char[2];
- *  result[0] = hexDigit((b &gt;&gt;&gt; 4) &amp; 0xf);
- *  result[1] = hexDigit(b &amp; 0xf);
- *  return new String(result);
+ *  <div class="source-container"><pre>public String byteToHex(int b) {
+ *      char[] result = new char[2];
+ *      result[0] = hexDigit((b &gt;&gt;&gt; 4) &amp; 0xf);
+ *      result[1] = hexDigit(b &amp; 0xf);
+ *      return new String(result);
  *  }
  *
  *  public char hexDigit(int i) {
- *  return (char) (i &lt; 10 ? i + '0' : i - 10 + 'a');
+ *      return (char) (i &lt; 10 ? i + '0' : i - 10 + 'a');
  *  }</pre></div>
  *  <p>When generating the code above, we pass the <code>hexDigit()</code>
  *  method as an argument to the <code>byteToHex()</code> method using
  *  <code>$N</code>:</p>
- *  <div class="source-container"><pre>  MethodSpec hexDigit = MethodSpec.methodBuilder( "hexDigit" )
+ *  <div class="source-container"><pre>MethodSpec hexDigit = MethodSpec.methodBuilder( "hexDigit" )
  *      .addParameter( int.class, "i" )
  *      .returns( char.class )
  *      .addStatement( "return (char) (i &lt; 10 ? i + '0' : i - 10 + 'a')" )
@@ -413,12 +413,12 @@
  *  <h3>Relative Arguments</h3>
  *  <p>Pass an argument value for each placeholder in the format string to
  *  {@link org.tquadrat.foundation.javacomposer.CodeBlock.Builder#add(String,Object[]) CodeBlock.add()}.</p>
- *  <div class="source-container"><pre>  CodeBlock.builder().add( "I ate $L $L", 3, "tacos" );</pre></div>
+ *  <div class="source-container"><pre>CodeBlock.builder().add( "I ate $L $L", 3, "tacos" );</pre></div>
  *
  *  <h3>Positional Arguments</h3>
  *  <p>Place an integer index (1-based) before the placeholder in the format
  *  string to specify which argument to use.</p>
- *  <div class="sourceContainer"><pre>  CodeBlock.builder().add( "I ate $2L $1L", "tacos", 3 );</pre></div>
+ *  <div class="sourceContainer"><pre>CodeBlock.builder().add( "I ate $2L $1L", "tacos", 3 );</pre></div>
  *
  *  <h3>Named Arguments</h3>
  *  <p>Use the syntax</p>
@@ -428,7 +428,7 @@
  *  with a map containing all argument keys in the format string. Argument
  *  names use characters in a-z, A-Z, 0-9, and _, and must start with a
  *  lowercase character.</p>
- *  <div class="source-container"><pre>  Map&lt;String,Object&gt; map = Map.of( "food", "tacos", "count", 3 );
+ *  <div class="source-container"><pre>Map&lt;String,Object&gt; map = Map.of( "food", "tacos", "count", 3 );
  *  CodeBlock.builder().addNamed( "I ate $count:L $food:L", map );</pre></div>
  *
  *  <h2>Methods</h2>
@@ -436,7 +436,7 @@
  *  {@link javax.lang.model.element.Modifier#ABSTRACT Modifier.ABSTRACT}
  *  to get a method without any body. This is only legal if the enclosing class
  *  is either abstract or an interface.
- *  <div class="source-container"><pre>  MethodSpec flux = MethodSpec.methodBuilder( "flux" )
+ *  <div class="source-container"><pre>MethodSpec flux = MethodSpec.methodBuilder( "flux" )
  *      .addModifiers( Modifier.ABSTRACT, Modifier.PROTECTED )
  *      .build();
  *
@@ -462,7 +462,7 @@
  *  <h2>Constructors</h2>
  *  <p><code><i>MethodSpec</i></code> is a slight misnomer; it can also be used
  *  for constructors:</p>
- *  <div class="source-container"><pre>  MethodSpec flux = MethodSpec.constructorBuilder()
+ *  <div class="source-container"><pre>MethodSpec flux = MethodSpec.constructorBuilder()
  *      .addModifiers( Modifier.PUBLIC )
  *      .addParameter( String.class, "greeting" )
  *      .addStatement( "this.$N = $N", "greeting", "greeting" )
@@ -474,7 +474,7 @@
  *      .addMethod( flux )
  *      .build();</pre></div>
  *  <p>Which generates this:</p>
- *  <div class="source-container"><pre>  public class HelloWorld {
+ *  <div class="source-container"><pre>public class HelloWorld {
  *      private final String greeting;
  *
  *      public HelloWorld(String greeting) {
@@ -493,7 +493,7 @@
  *  convenience
  *  {@link org.tquadrat.foundation.javacomposer.MethodSpec.Builder#addParameter(org.tquadrat.foundation.javacomposer.TypeName,java.lang.String,javax.lang.model.element.Modifier[]) addParameter()}
  *  API:</p>
- *  <div class="source-container"><pre>  ParameterSpec android = composer.parameterBuilder( String.class, "android" )
+ *  <div class="source-container"><pre>ParameterSpec android = composer.parameterBuilder( String.class, "android" )
  *      .addModifiers( Modifier.FINAL )
  *      .build();
  *
@@ -503,7 +503,7 @@
  *      .build();</pre></div>
  *  <p>Though the code above to generate {@code android} and {@code robot}
  *  parameters is different, the output is the same:</p>
- *  <div class="source-container"><pre>  void welcomeOverlords(final String android, final String robot) {
+ *  <div class="source-container"><pre>void welcomeOverlords(final String android, final String robot) {
  *  }</pre></div>
  *  <p>The extended Builder form is mandatory when the parameter has
  *  annotations (such as <code>@Nullable</code>).</p>
@@ -511,7 +511,7 @@
  *  <h2>Fields</h2>
  *  <p>Like parameters, fields can be created either with builders or by using
  *  convenient helper methods:</p>
- *  <div class="source-container"><pre>  FieldSpec android = FieldSpec.builder( String.class, "android" )
+ *  <div class="source-container"><pre>FieldSpec android = FieldSpec.builder( String.class, "android" )
  *      .addModifiers( Modifier.PRIVATE, Modifier.FINAL )
  *      .build();
  *
@@ -521,7 +521,7 @@
  *      .addField( String.class, "robot", Modifier.PRIVATE, Modifier.FINAL )
  *      .build();</pre></div>
  *  <p>Which generates:</p>
- *  <div class="source-container"><pre>  public class HelloWorld {
+ *  <div class="source-container"><pre>public class HelloWorld {
  *      private final String android;
  *
  *      private final String robot;
@@ -529,12 +529,12 @@
  *  <p>The extended Builder form is necessary when a field has Javadoc
  *  comments, annotations, or a field initializer. Field initializers use the
  *  same <code>String.format()</code>-like syntax as the code blocks above:</p>
- *  <div class="source-container"><pre>  FieldSpec android = FieldSpec.builder( String.class, "android" )
+ *  <div class="source-container"><pre>FieldSpec android = FieldSpec.builder( String.class, "android" )
  *      .addModifiers( Modifier.PRIVATE, Modifier.FINAL )
  *      .initializer( "$S + $L", "Lollipop v.", 5.0d )
  *      .build();</pre></div>
  *  <p>Which generates:</p>
- *  <div class="source-container"><pre>  private final String android = "Lollipop v." + 5.0;</pre></div>
+ *  <div class="source-container"><pre>private final String android = "Lollipop v." + 5.0;</pre></div>
  *  <p>The method
  *  {@link org.tquadrat.foundation.javacomposer.TypeSpec.Builder#addProperty(org.tquadrat.foundation.javacomposer.FieldSpec,boolean) TypeSpec.addProperty()}
  *  can be used to add getter and setter together with the field:</p>
@@ -547,7 +547,7 @@
  *      .addProperty( android, false )
  *      .build();</pre></div>
  *  <p>Which generates:</p>
- *  <div class="source-container"><pre>  public class HelloWorld {
+ *  <div class="source-container"><pre>public class HelloWorld {
  *      private String android;
  *
  *      public final String getAndroid() {
@@ -564,7 +564,7 @@
  *  must always be <code>public abstract</code> and interface fields must
  *  always be <code>public static final</code>. These modifiers are necessary
  *  when defining the interface:</p>
- *  <div class="source-container"><pre>  TypeSpec helloWorld = TypeSpec.interfaceBuilder( "HelloWorld" )
+ *  <div class="source-container"><pre>TypeSpec helloWorld = TypeSpec.interfaceBuilder( "HelloWorld" )
  *      .addModifiers( Modifier.PUBLIC )
  *      .addField( FieldSpec.builder( String.class, "ONLY_THING_THAT_IS_CONSTANT" )
  *          .addModifiers( Modifier.PUBLIC, Modifier.STATIC, Modifier.FINAL )
@@ -577,7 +577,7 @@
  *  <p>But these modifiers are omitted when the code is generated. These are
  *  the defaults so we don't need to include them for <code>javac</code>'s
  *  benefit!</p>
- *  <div class="source-container"><pre>  public interface HelloWorld {
+ *  <div class="source-container"><pre>public interface HelloWorld {
  *      String ONLY_THING_THAT_IS_CONSTANT = "change";
  *
  *      void beep();
@@ -589,14 +589,14 @@
  *  to create the <code>enum</code> type, and
  *  {@link org.tquadrat.foundation.javacomposer.TypeSpec.Builder#addEnumConstant(java.lang.CharSequence) addEnumConstant()}
  *  for each value:</p>
- *  <div class="source-container"><pre>  TypeSpec helloWorld = composer.enumBuilder( "Roshambo" )
+ *  <div class="source-container"><pre>TypeSpec helloWorld = composer.enumBuilder( "Roshambo" )
  *      .addModifiers( Modifier.PUBLIC )
  *      .addEnumConstant( "ROCK" )
  *      .addEnumConstant( "SCISSORS" )
  *      .addEnumConstant( "PAPER" )
  *      .build();</pre></div>
  *  <p>To generate this:</p>
- *  <div class="source-container"><pre>  public enum Roshambo {
+ *  <div class="source-container"><pre>public enum Roshambo {
  *      ROCK,
  *
  *      SCISSORS,
@@ -606,7 +606,7 @@
  *  <p>Fancy enums are supported, where the <code>enum</code> values override
  *  methods or call a superclass constructor. Here's a comprehensive
  *  example:</p>
- *  <div class="source-container"><pre>  TypeSpec helloWorld = composer.enumBuilder( "Roshambo" )
+ *  <div class="source-container"><pre>TypeSpec helloWorld = composer.enumBuilder( "Roshambo" )
  *      .addModifiers( Modifier.PUBLIC )
  *      .addEnumConstant( "ROCK", composer.anonymousClassBuilder( "$S", "fist" )
  *          .addMethod( composer.methodBuilder( "toString" )
@@ -627,7 +627,7 @@
  *          .build() )
  *      .build();</pre></div>
  *  <p>Which generates this:</p>
- *  <div class="sourceContainer"><pre>  public enum Roshambo {
+ *  <div class="sourceContainer"><pre>public enum Roshambo {
  *      ROCK("fist") {
  *          &#64;Override
  *          public String toString() {
@@ -651,7 +651,7 @@
  *  {@link org.tquadrat.foundation.javacomposer.JavaComposer#anonymousClassBuilder(java.lang.String,java.lang.Object[]) TypeSpec.anonymousClassBuilder()}
  *  to create an anonymous inner class. This can also be used in code blocks.
  *  They are values that can be referenced with <code>$L</code>:</p>
- *  <div class="source-container"><pre>  TypeSpec comparator = composer.anonymousClassBuilder( "" )
+ *  <div class="source-container"><pre>TypeSpec comparator = composer.anonymousClassBuilder( "" )
  *      .addSuperinterface( ParameterizedTypeName.get( Comparator.class, String.class ) )
  *      .addMethod( composer.methodBuilder( "compare" )
  *          .addAnnotation( Override.class )#
@@ -671,7 +671,7 @@
  *      .build();</pre></div>
  *  <p>This generates a method that contains a class that contains a
  *  method:</p>
- *  <div class="source-container"><pre>  void sortByLength(List&lt;String&gt; strings) {
+ *  <div class="source-container"><pre>void sortByLength(List&lt;String&gt; strings) {
  *      Collections.sort(strings, new Comparator&lt;String&gt;() {
  *          &#64;Override
  *          public int compare(String a, String b) {
@@ -688,7 +688,7 @@
  *
  *  <h2>Annotations</h2>
  *  <p>Simple annotations are easy:</p>
- *  <div class="source-container"><pre>  MethodSpec toString = composer.methodBuilder( "toString" )
+ *  <div class="source-container"><pre>MethodSpec toString = composer.methodBuilder( "toString" )
  *      .addAnnotation( Override.class )
  *      .returns( String.class )
  *      .addModifiers( Modifier.PUBLIC )
@@ -696,14 +696,14 @@
  *      .build();</pre></div>
  *  <p>Which generates this method with an <code>&#64;Override</code>
  *  annotation:</p>
- *  <div class="source-container"><pre>  &#64;Override
+ *  <div class="source-container"><pre>&#64;Override
  *  public String toString() {
  *      return "Hoverboard";
  *  }</pre></div>
  *  <p>Use
  *  {@link org.tquadrat.foundation.javacomposer.JavaComposer#annotationBuilder(java.lang.Class) JavaComposer.annotationBuilder()}
  *  to set properties on annotations:</p>
- *  <div class="source-container"><pre>  MethodSpec logRecord = composer.methodBuilder( "recordEvent" )
+ *  <div class="source-container"><pre>MethodSpec logRecord = composer.methodBuilder( "recordEvent" )
  *      .addModifiers( Modifier.PUBLIC, Modifier.ABSTRACT )
  *      .addAnnotation( composer.annotationBuilder( Headers.class )
  *          .addMember( "accept", "$S", "application/json; charset=utf-8" )
@@ -714,7 +714,7 @@
  *      .build();</pre></div>
  *  <p>Which generates this annotation with <code>accept</code> and
  *  <code>userAgent</code> properties:</p>
- *  <div class="source-container"><pre>  &#64;Headers(
+ *  <div class="source-container"><pre>&#64;Headers(
  *      accept = "application/json; charset=utf-8",
  *      userAgent = "Square Cash"
  *  )
@@ -750,7 +750,7 @@
  *  <h2>Javadoc</h2>
  *  <p>Fields, methods and types can be documented with Javadoc (in fact, they
  *  should be documented, even for generated code):</p>
- *  <div class="source-container"><pre>  MethodSpec dismiss = composer.methodBuilder( "dismiss" )
+ *  <div class="source-container"><pre>MethodSpec dismiss = composer.methodBuilder( "dismiss" )
  *      .addJavadoc( """
  *                   Hides {&#64;code message} from the caller's history. Other
  *                   participants in the conversation will continue to see the
@@ -765,7 +765,7 @@
  *      .addParameter( Message.class, "message" )
  *      .build();</pre></div>
  *  <p>Which generates this:</p>
- *  <div class="source-container"><pre>  &#47;**
+ *  <div class="source-container"><pre>&#47;**
  *   * Hides {&#64;code message} from the caller's history. Other
  *   * participants in the conversation will continue to see the
  *   * message in their own history unless they also delete it.
@@ -780,7 +780,7 @@
  *   <p>{@link org.tquadrat.foundation.javacomposer.LambdaSpec} provides a
  *   basic API for the generation of lambda expressions.</p>
  *   <p>The code</p>
- *   <div class="source-container"><pre>  ParameterSpec parameter = ParameterSpec.of( VOID, "s" );
+ *   <div class="source-container"><pre>ParameterSpec parameter = ParameterSpec.of( VOID, "s" );
  *   LambdaSpec lambda = LambdaSpec.builder()
  *      .addParameter( parameter )
  *      .addCode( "upperCase( $N )" , parameter )
@@ -788,7 +788,7 @@
  *
  *      CodeBlock codeBlock = CodeBlock.of( "$T&lt;$T&gt; function = $L;", UnaryOperator.class, String.class, candidate );</pre></div>
  *  <p>generates</p>
- *  <div class="source-container"><pre>  java.util.function.UnaryOperator&lt;java.lang.String&gt; function = s -&gt; upperCase( s );</pre></div>.
+ *  <div class="source-container"><pre>java.util.function.UnaryOperator&lt;java.lang.String&gt; function = s -&gt; upperCase( s );</pre></div>.
  *  <h2>Layout</h2>
  *  <p>You may have noticed that the layout for the samples of
  *  <i>generating</i> code looks different from that of <i>generated</i> code:
