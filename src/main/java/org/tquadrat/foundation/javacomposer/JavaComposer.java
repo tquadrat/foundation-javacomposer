@@ -17,6 +17,54 @@
 
 package org.tquadrat.foundation.javacomposer;
 
+import org.apiguardian.api.API;
+import org.tquadrat.foundation.annotation.ClassVersion;
+import org.tquadrat.foundation.annotation.UtilityClass;
+import org.tquadrat.foundation.exception.PrivateConstructorForStaticClassCalledError;
+import org.tquadrat.foundation.exception.ValidationException;
+import org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl;
+import org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderImpl;
+import org.tquadrat.foundation.javacomposer.internal.AnnotationTypeSpecImpl;
+import org.tquadrat.foundation.javacomposer.internal.AnnotationValueVisitor;
+import org.tquadrat.foundation.javacomposer.internal.ClassNameImpl;
+import org.tquadrat.foundation.javacomposer.internal.ClassSpecImpl;
+import org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl;
+import org.tquadrat.foundation.javacomposer.internal.EnumSpecImpl;
+import org.tquadrat.foundation.javacomposer.internal.FieldSpecImpl;
+import org.tquadrat.foundation.javacomposer.internal.InterfaceSpecImpl;
+import org.tquadrat.foundation.javacomposer.internal.JavaFileImpl;
+import org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl;
+import org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl;
+import org.tquadrat.foundation.javacomposer.internal.ParameterSpecImpl;
+import org.tquadrat.foundation.javacomposer.internal.RecordSpecImpl;
+import org.tquadrat.foundation.javacomposer.internal.TypeNameImpl;
+import org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl;
+import org.tquadrat.foundation.lang.Lazy;
+import org.tquadrat.foundation.lang.Objects;
+import org.tquadrat.foundation.util.JavaUtils;
+
+import javax.lang.model.SourceVersion;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.ExecutableType;
+import javax.lang.model.type.TypeVariable;
+import javax.lang.model.util.Types;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.lang.reflect.Type;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Supplier;
+
 import static java.lang.String.format;
 import static java.util.Arrays.sort;
 import static java.util.Arrays.stream;
@@ -44,67 +92,19 @@ import static org.tquadrat.foundation.lang.Objects.requireNotEmptyArgument;
 import static org.tquadrat.foundation.lang.Objects.requireValidNonNullArgument;
 import static org.tquadrat.foundation.util.JavaUtils.translateModifiers;
 
-import javax.lang.model.SourceVersion;
-import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.VariableElement;
-import javax.lang.model.type.DeclaredType;
-import javax.lang.model.type.ExecutableType;
-import javax.lang.model.type.TypeVariable;
-import javax.lang.model.util.Types;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Array;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
-
-import org.apiguardian.api.API;
-import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.annotation.UtilityClass;
-import org.tquadrat.foundation.exception.PrivateConstructorForStaticClassCalledError;
-import org.tquadrat.foundation.exception.ValidationException;
-import org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl;
-import org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderImpl;
-import org.tquadrat.foundation.javacomposer.internal.AnnotationTypeSpecImpl;
-import org.tquadrat.foundation.javacomposer.internal.AnnotationValueVisitor;
-import org.tquadrat.foundation.javacomposer.internal.ClassNameImpl;
-import org.tquadrat.foundation.javacomposer.internal.ClassSpecImpl;
-import org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl;
-import org.tquadrat.foundation.javacomposer.internal.EnumSpecImpl;
-import org.tquadrat.foundation.javacomposer.internal.FieldSpecImpl;
-import org.tquadrat.foundation.javacomposer.internal.InterfaceSpecImpl;
-import org.tquadrat.foundation.javacomposer.internal.JavaFileImpl;
-import org.tquadrat.foundation.javacomposer.internal.LambdaSpecImpl;
-import org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl;
-import org.tquadrat.foundation.javacomposer.internal.ParameterSpecImpl;
-import org.tquadrat.foundation.javacomposer.internal.RecordSpecImpl;
-import org.tquadrat.foundation.javacomposer.internal.TypeNameImpl;
-import org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl;
-import org.tquadrat.foundation.lang.Lazy;
-import org.tquadrat.foundation.lang.Objects;
-import org.tquadrat.foundation.util.JavaUtils;
-
 /**
  *  <p>{@summary The factory for the various JavaComposer artefacts.}</p>
  *  <p>Instances of this class do not maintain a state, therefore they are
  *  thread-safe without any synchronisation.</p>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaComposer.java 1150 2025-09-29 09:14:54Z tquadrat $
+ *  @version $Id: JavaComposer.java 1163 2026-03-20 15:28:33Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"OverlyCoupledClass", "ClassWithTooManyMethods", "OverlyComplexClass"} )
-@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1150 2025-09-29 09:14:54Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1163 2026-03-20 15:28:33Z tquadrat $" )
 @API( status = STABLE, since = "0.2.0" )
 public final class JavaComposer
 {
