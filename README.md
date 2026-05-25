@@ -8,8 +8,8 @@ This library allows the generation of Java source code.
     <dependency>
       <groupId>org.tquadrat.library</groupId>
       <artifactId>org.tquadrat.foundation.javacomposer</artifactId>
-      <version>0.25.4</version>
+      <version>0.25.5</version>
     </dependency>
     ```
 ---  
-Last updated: 2026-05-17T13:12:12.270676249+02:00[Europe/Berlin]
+Last updated: 2026-05-25T22:10:21.756133943+02:00[Europe/Berlin]
