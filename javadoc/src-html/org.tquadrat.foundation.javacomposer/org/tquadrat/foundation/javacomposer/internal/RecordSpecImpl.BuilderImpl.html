@@ -138,7 +138,7 @@
 <span class="source-line-no">125</span><span id="line-125">        @Override</span>
 <span class="source-line-no">126</span><span id="line-126">        public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )</span>
 <span class="source-line-no">127</span><span id="line-127">        {</span>
-<span class="source-line-no">128</span><span id="line-128">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), _ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
+<span class="source-line-no">128</span><span id="line-128">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), (_,v) -&gt; "Field %s needs to be private".formatted( v.name() ) );</span>
 <span class="source-line-no">129</span><span id="line-129">            addField( fieldSpecImpl );</span>
 <span class="source-line-no">130</span><span id="line-130"></span>
 <span class="source-line-no">131</span><span id="line-131">            final var fieldName = fieldSpecImpl.name();</span>
@@ -188,7 +188,7 @@
 <span class="source-line-no">175</span><span id="line-175">                    return spec.hasModifier( PRIVATE ) &amp;&amp; !spec.hasModifier( FINAL );</span>
 <span class="source-line-no">176</span><span id="line-176">                }</span>
 <span class="source-line-no">177</span><span id="line-177">            };</span>
-<span class="source-line-no">178</span><span id="line-178">            super.addField( requireValidNonNullArgument( fieldSpec, "fieldSpec", validation, _ -&gt; "Invalid modifiers for record field" ) );</span>
+<span class="source-line-no">178</span><span id="line-178">            super.addField( requireValidNonNullArgument( fieldSpec, "fieldSpec", validation, (_,_) -&gt; "Invalid modifiers for record field" ) );</span>
 <span class="source-line-no">179</span><span id="line-179"></span>
 <span class="source-line-no">180</span><span id="line-180">            //---* Done *------------------------------------------------------</span>
 <span class="source-line-no">181</span><span id="line-181">            return this;</span>
@@ -232,7 +232,7 @@
 <span class="source-line-no">219</span><span id="line-219">        @Override</span>
 <span class="source-line-no">220</span><span id="line-220">        public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )</span>
 <span class="source-line-no">221</span><span id="line-221">        {</span>
-<span class="source-line-no">222</span><span id="line-222">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), _ -&gt; "Field %s needs to be private".formatted( fieldSpec.name() ) );</span>
+<span class="source-line-no">222</span><span id="line-222">            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -&gt; v.hasModifier( PRIVATE ), (_,v) -&gt; "Field %s needs to be private".formatted( v.name() ) );</span>
 <span class="source-line-no">223</span><span id="line-223">            addField( fieldSpecImpl );</span>
 <span class="source-line-no">224</span><span id="line-224"></span>
 <span class="source-line-no">225</span><span id="line-225">            final var fieldName = fieldSpecImpl.name();</span>

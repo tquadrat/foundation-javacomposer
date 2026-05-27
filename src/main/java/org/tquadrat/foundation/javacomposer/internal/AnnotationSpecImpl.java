@@ -150,7 +150,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         @Override
         public final BuilderImpl addMember( final CharSequence name, final CodeBlock codeBlock )
         {
-            final var validatedName = requireValidArgument( name, "name", JavaUtils::isValidName, _ -> "not a valid name: %s".formatted( name ) )
+            final var validatedName = requireValidArgument( name, "name", JavaUtils::isValidName, (_, v) -> "not a valid name: %s".formatted( v ) )
                 .toString()
                 .intern();
             requireNonNullArgument( codeBlock, "codeBlock" );
@@ -167,11 +167,11 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         }   //  addMember()
 
         /**
-         *  Delegates to
-         *  {@link #addMember(CharSequence,String,Object...)},
+         *  <p>{@summary Delegates to
+         *  {@link #addMember(CharSequence, String, Object...)},
          *  with parameter {@code format} depending on the given {@code value}
-         *  object. Falls back to {@code "$L"} literal format if the class of
-         *  the given {@code value} object is not supported.
+         *  object.} Falls back to {@code "$L"} literal format if the class of
+         *  the given {@code value} object is not supported.</p>
          *
          *  @param  name    The name for the new member.
          *  @param  value   The value for the new member.
@@ -180,7 +180,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         @SuppressWarnings( {"PublicMethodNotExposedInInterface", "UnusedReturnValue", "IfStatementWithTooManyBranches", "ChainOfInstanceofChecks"} )
         public final BuilderImpl addMemberForValue( final String name, final Object value )
         {
-            requireValidArgument( name, "name", JavaUtils::isValidName, _ -> "not a valid name: %s".formatted( name ) );
+            requireValidArgument( name, "name", JavaUtils::isValidName, (_, v) -> "not a valid name: %s".formatted( v ) );
             if( requireNonNullArgument( value, "value" ) instanceof Class<?> )
             {
                 addMember( name, "$T.class", value );
@@ -534,8 +534,8 @@ public final class AnnotationSpecImpl implements AnnotationSpec
     public final int hashCode() { return hash( m_Composer, toString() ); }
 
     /**
-     *  The initializer for
-     *  {@link #m_CachedString}.
+     *  <p>{@summary The initialiser for
+     *  {@link #m_CachedString}.}</p>
      *
      *  @return The return value for
      *      {@link #toString()}.

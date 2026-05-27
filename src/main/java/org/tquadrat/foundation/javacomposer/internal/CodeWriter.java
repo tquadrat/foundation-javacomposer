@@ -646,9 +646,9 @@ public final class CodeWriter
     /**
      *  Emits the given
      *  {@link CodeBlockImpl}
-     *  instance as a JavaDoc comment to the output target.
+     *  instance as a Javadoc comment to the output target.
      *
-     *  @param  codeBlock   The code block with the JavaDoc comment.
+     *  @param  codeBlock   The code block with the Javadoc comment.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
@@ -877,7 +877,7 @@ public final class CodeWriter
      */
     private static final String extractMemberName( final String part )
     {
-        var retValue = requireValidNonNullArgument( part, "part", v -> Character.isJavaIdentifierStart( v.charAt( 0 ) ), $ -> "not an identifier: %s".formatted( part ) );
+        var retValue = requireValidNonNullArgument( part, "part", v -> Character.isJavaIdentifierStart( v.charAt( 0 ) ), (_,v) -> "not an identifier: %s".formatted( v ) );
         CheckLoop: for( var i = 1; i <= part.length(); ++i )
         {
             if( !SourceVersion.isIdentifier( part.substring( 0, i ) ) )
@@ -1197,7 +1197,7 @@ public final class CodeWriter
      */
     public final CodeWriter unindent( final int levels )
     {
-        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", $ -> m_IndentLevel - levels >= 0, $ -> "cannot unindent %d from %d".formatted( levels, m_IndentLevel ) );
+        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", v -> m_IndentLevel - v >= 0, (_,v) -> "cannot unindent %d from %d".formatted( v, m_IndentLevel ) );
 
         //---* Done *----------------------------------------------------------
         return this;

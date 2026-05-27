@@ -659,9 +659,9 @@
 <span class="source-line-no">646</span><span id="line-646">    /**</span>
 <span class="source-line-no">647</span><span id="line-647">     *  Emits the given</span>
 <span class="source-line-no">648</span><span id="line-648">     *  {@link CodeBlockImpl}</span>
-<span class="source-line-no">649</span><span id="line-649">     *  instance as a JavaDoc comment to the output target.</span>
+<span class="source-line-no">649</span><span id="line-649">     *  instance as a Javadoc comment to the output target.</span>
 <span class="source-line-no">650</span><span id="line-650">     *</span>
-<span class="source-line-no">651</span><span id="line-651">     *  @param  codeBlock   The code block with the JavaDoc comment.</span>
+<span class="source-line-no">651</span><span id="line-651">     *  @param  codeBlock   The code block with the Javadoc comment.</span>
 <span class="source-line-no">652</span><span id="line-652">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
 <span class="source-line-no">653</span><span id="line-653">     *      output target.</span>
 <span class="source-line-no">654</span><span id="line-654">     */</span>
@@ -890,7 +890,7 @@
 <span class="source-line-no">877</span><span id="line-877">     */</span>
 <span class="source-line-no">878</span><span id="line-878">    private static final String extractMemberName( final String part )</span>
 <span class="source-line-no">879</span><span id="line-879">    {</span>
-<span class="source-line-no">880</span><span id="line-880">        var retValue = requireValidNonNullArgument( part, "part", v -&gt; Character.isJavaIdentifierStart( v.charAt( 0 ) ), $ -&gt; "not an identifier: %s".formatted( part ) );</span>
+<span class="source-line-no">880</span><span id="line-880">        var retValue = requireValidNonNullArgument( part, "part", v -&gt; Character.isJavaIdentifierStart( v.charAt( 0 ) ), (_,v) -&gt; "not an identifier: %s".formatted( v ) );</span>
 <span class="source-line-no">881</span><span id="line-881">        CheckLoop: for( var i = 1; i &lt;= part.length(); ++i )</span>
 <span class="source-line-no">882</span><span id="line-882">        {</span>
 <span class="source-line-no">883</span><span id="line-883">            if( !SourceVersion.isIdentifier( part.substring( 0, i ) ) )</span>
@@ -1210,7 +1210,7 @@
 <span class="source-line-no">1197</span><span id="line-1197">     */</span>
 <span class="source-line-no">1198</span><span id="line-1198">    public final CodeWriter unindent( final int levels )</span>
 <span class="source-line-no">1199</span><span id="line-1199">    {</span>
-<span class="source-line-no">1200</span><span id="line-1200">        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", $ -&gt; m_IndentLevel - levels &gt;= 0, $ -&gt; "cannot unindent %d from %d".formatted( levels, m_IndentLevel ) );</span>
+<span class="source-line-no">1200</span><span id="line-1200">        m_IndentLevel -= requireValidIntegerArgument( levels, "levels", v -&gt; m_IndentLevel - v &gt;= 0, (_,v) -&gt; "cannot unindent %d from %d".formatted( v, m_IndentLevel ) );</span>
 <span class="source-line-no">1201</span><span id="line-1201"></span>
 <span class="source-line-no">1202</span><span id="line-1202">        //---* Done *----------------------------------------------------------</span>
 <span class="source-line-no">1203</span><span id="line-1203">        return this;</span>

@@ -103,7 +103,7 @@ public final class FieldSpecImpl implements FieldSpec
         private final JavaComposer m_Composer;
 
         /**
-         *  The initializer for the field.
+         *  The initialiser for the field.
          */
         @SuppressWarnings( "UseOfConcreteClass" )
         private CodeBlockImpl m_Initializer = null;
@@ -245,7 +245,7 @@ public final class FieldSpecImpl implements FieldSpec
         public final FieldSpecImpl build() { return new FieldSpecImpl( this ); }
 
         /**
-         *  Sets the initializer for the field.
+         *  Sets the initialiser for the field.
          *
          *  @param  codeBlock   The code that initialises the field.
          *  @return This {@code Builder} instance.
@@ -253,7 +253,7 @@ public final class FieldSpecImpl implements FieldSpec
         @Override
         public final BuilderImpl initializer( final CodeBlock codeBlock )
         {
-            checkState( isNull( m_Initializer ), () -> new IllegalStateException( "initializer was already set" ) );
+            checkState( isNull( m_Initializer ), () -> new IllegalStateException( "initialiser was already set" ) );
             var codeBlockImpl = (CodeBlockImpl) requireNonNullArgument( codeBlock, "codeBlock" );
             if( m_Composer.addDebugOutput() )
             {
@@ -270,7 +270,7 @@ public final class FieldSpecImpl implements FieldSpec
         }   //  initializer()
 
         /**
-         *  Sets the initializer for the field.
+         *  Sets the initialiser for the field.
          *
          *  @param  format  The format.
          *  @param  args    The arguments.
@@ -306,7 +306,7 @@ public final class FieldSpecImpl implements FieldSpec
     private final Lazy<String> m_CachedString;
 
     /**
-     *  The initializer for the field.
+     *  The initialiser for the field.
      */
     @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_Initializer;
@@ -409,7 +409,7 @@ public final class FieldSpecImpl implements FieldSpec
     {
         final var composer = new JavaComposer();
 
-        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, _ -> "not a valid name: %s".formatted( name ) ) )
+        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, (_,v) -> "not a valid name: %s".formatted( v ) ) )
             .addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );
 
         //---* Done *----------------------------------------------------------
@@ -515,9 +515,9 @@ public final class FieldSpecImpl implements FieldSpec
     public final int hashCode() { return hash( m_Composer, toString() ); }
 
     /**
-     *  Checks whether the field has an initializer.
+     *  Checks whether the field has an initialiser.
      *
-     *  @return {@code true} if the field has an initializer, {@code false}
+     *  @return {@code true} if the field has an initialiser, {@code false}
      *      otherwise.
      */
     @SuppressWarnings( "PublicMethodNotExposedInInterface" )
@@ -530,7 +530,7 @@ public final class FieldSpecImpl implements FieldSpec
     public final boolean hasModifier( final Modifier modifier ) { return m_Modifiers.contains( modifier ); }
 
     /**
-     *  The initializer for
+     *  The initialiser for
      *  {@link #m_CachedString}.
      *
      *  @return The return value for

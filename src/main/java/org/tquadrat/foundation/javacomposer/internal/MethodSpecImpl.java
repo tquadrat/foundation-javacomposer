@@ -202,7 +202,7 @@ public final class MethodSpecImpl implements MethodSpec
         public BuilderImpl( @SuppressWarnings( "UseOfConcreteClass" ) final JavaComposer composer, final CharSequence name )
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
-            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -> v.equals( CONSTRUCTOR ) || isValidName( v ), _ -> "not a valid name: %s".formatted( name ) ).toString().intern();
+            m_Name = requireValidArgument( requireNotEmptyArgument( name, "name" ), "name", v -> v.equals( CONSTRUCTOR ) || isValidName( v ), (_,v) -> "not a valid name: %s".formatted( v ) ).toString().intern();
             m_ReturnType = name.equals( CONSTRUCTOR ) ? null : VOID_PRIMITIVE;
 
             m_Code = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
@@ -479,7 +479,8 @@ public final class MethodSpecImpl implements MethodSpec
         public final MethodSpecImpl.BuilderImpl addStaticImport( final ClassName className, final String... names )
         {
             final var canonicalName = requireNonNullArgument( className, "className" ).canonicalName();
-            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, "%s array is empty"::formatted ) )
+            //noinspection StandardVariableNames
+            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, (n,_) -> "%s array is empty".formatted( n ) ) )
             {
                 m_StaticImports.add(
                     format(
@@ -489,7 +490,7 @@ public final class MethodSpecImpl implements MethodSpec
                             name,
                             "name",
                             Objects::nonNull,
-                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            (_,_) -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -648,7 +649,7 @@ public final class MethodSpecImpl implements MethodSpec
         }   //  nextControlFlow()
 
         /**
-         *  Returns <i>a reference to</i>the parameters.
+         *  Returns <i>a reference to</i> the parameters.
          *
          *  @return The parameters.
          */
@@ -1168,7 +1169,7 @@ public final class MethodSpecImpl implements MethodSpec
     public final boolean hasModifier( final Modifier modifier ) { return m_Modifiers.contains( requireNonNullArgument( modifier, "modifier" ) ); }
 
     /**
-     *  The initializer for
+     *  The initialiser for
      *  {@link #m_CachedString}.
      *
      *  @return The return value for

@@ -231,7 +231,8 @@ public final class JavaFileImpl implements JavaFile
         public final BuilderImpl addStaticImport( final ClassName className, final String... names )
         {
             final var canonicalName = requireNonNullArgument( className, "className" ).canonicalName();
-            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, "%s array is empty"::formatted ) )
+            //noinspection StandardVariableNames
+            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, (n,_) -> "%s array is empty".formatted( n ) ) )
             {
                 m_StaticImports.add(
                     format(
@@ -241,7 +242,7 @@ public final class JavaFileImpl implements JavaFile
                             name,
                             "name",
                             Objects::nonNull,
-                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            (_,_) -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -552,7 +553,7 @@ public final class JavaFileImpl implements JavaFile
     public final int hashCode() { return toString().hashCode(); }
 
     /**
-     *  The initializer for
+     *  The initialiser for
      *  {@link #m_CachedString}.
      *
      *  @return The return value for
@@ -739,7 +740,7 @@ public final class JavaFileImpl implements JavaFile
     @Override
     public void writeTo( final Path directory ) throws IOException
     {
-        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -> notExists( v ) || isDirectory( v ), _ -> "path %s exists but is not a directory.".formatted( directory ) );
+        var outputDirectory = requireValidNonNullArgument( directory, "directory", v -> notExists( v ) || isDirectory( v ), (_,v) -> "path %s exists but is not a directory.".formatted( v ) );
         if( !m_PackageName.isEmpty() )
         {
             for( final var packageComponent : m_PackageName.split( "\\." ) )

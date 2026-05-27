@@ -125,7 +125,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
         @Override
         public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), _ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
+            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), (_,v) -> "Field %s needs to be private".formatted( v.name() ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();
@@ -175,7 +175,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
                     return spec.hasModifier( PRIVATE ) && !spec.hasModifier( FINAL );
                 }
             };
-            super.addField( requireValidNonNullArgument( fieldSpec, "fieldSpec", validation, _ -> "Invalid modifiers for record field" ) );
+            super.addField( requireValidNonNullArgument( fieldSpec, "fieldSpec", validation, (_,_) -> "Invalid modifiers for record field" ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -219,7 +219,7 @@ public final class RecordSpecImpl extends TypeSpecImpl
         @Override
         public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), _ -> "Field %s needs to be private".formatted( fieldSpec.name() ) );
+            final var fieldSpecImpl = (FieldSpecImpl) requireValidNonNullArgument( fieldSpec, "fieldSpec", v -> v.hasModifier( PRIVATE ), (_,v) -> "Field %s needs to be private".formatted( v.name() ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();

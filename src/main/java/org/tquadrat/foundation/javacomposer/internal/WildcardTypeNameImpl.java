@@ -101,7 +101,7 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
             requireValidNonNullArgument( upperBounds,
                 "upperBounds",
                 u -> u.size() ==1,
-                _ -> "unexpected extends bounds: %s".formatted( upperBounds ) ) );
+                (_,v) -> "unexpected extends bounds: %s".formatted( v ) ) );
         m_LowerBounds = List.copyOf( requireNonNullArgument( lowerBounds, "lowerBounds" ) );
 
         for( final var upperBound : m_UpperBounds )

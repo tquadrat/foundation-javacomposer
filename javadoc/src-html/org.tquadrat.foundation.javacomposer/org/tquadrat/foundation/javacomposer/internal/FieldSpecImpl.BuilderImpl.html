@@ -116,7 +116,7 @@
 <span class="source-line-no">103</span><span id="line-103">        private final JavaComposer m_Composer;</span>
 <span class="source-line-no">104</span><span id="line-104"></span>
 <span class="source-line-no">105</span><span id="line-105">        /**</span>
-<span class="source-line-no">106</span><span id="line-106">         *  The initializer for the field.</span>
+<span class="source-line-no">106</span><span id="line-106">         *  The initialiser for the field.</span>
 <span class="source-line-no">107</span><span id="line-107">         */</span>
 <span class="source-line-no">108</span><span id="line-108">        @SuppressWarnings( "UseOfConcreteClass" )</span>
 <span class="source-line-no">109</span><span id="line-109">        private CodeBlockImpl m_Initializer = null;</span>
@@ -258,7 +258,7 @@
 <span class="source-line-no">245</span><span id="line-245">        public final FieldSpecImpl build() { return new FieldSpecImpl( this ); }</span>
 <span class="source-line-no">246</span><span id="line-246"></span>
 <span class="source-line-no">247</span><span id="line-247">        /**</span>
-<span class="source-line-no">248</span><span id="line-248">         *  Sets the initializer for the field.</span>
+<span class="source-line-no">248</span><span id="line-248">         *  Sets the initialiser for the field.</span>
 <span class="source-line-no">249</span><span id="line-249">         *</span>
 <span class="source-line-no">250</span><span id="line-250">         *  @param  codeBlock   The code that initialises the field.</span>
 <span class="source-line-no">251</span><span id="line-251">         *  @return This {@code Builder} instance.</span>
@@ -266,7 +266,7 @@
 <span class="source-line-no">253</span><span id="line-253">        @Override</span>
 <span class="source-line-no">254</span><span id="line-254">        public final BuilderImpl initializer( final CodeBlock codeBlock )</span>
 <span class="source-line-no">255</span><span id="line-255">        {</span>
-<span class="source-line-no">256</span><span id="line-256">            checkState( isNull( m_Initializer ), () -&gt; new IllegalStateException( "initializer was already set" ) );</span>
+<span class="source-line-no">256</span><span id="line-256">            checkState( isNull( m_Initializer ), () -&gt; new IllegalStateException( "initialiser was already set" ) );</span>
 <span class="source-line-no">257</span><span id="line-257">            var codeBlockImpl = (CodeBlockImpl) requireNonNullArgument( codeBlock, "codeBlock" );</span>
 <span class="source-line-no">258</span><span id="line-258">            if( m_Composer.addDebugOutput() )</span>
 <span class="source-line-no">259</span><span id="line-259">            {</span>
@@ -283,7 +283,7 @@
 <span class="source-line-no">270</span><span id="line-270">        }   //  initializer()</span>
 <span class="source-line-no">271</span><span id="line-271"></span>
 <span class="source-line-no">272</span><span id="line-272">        /**</span>
-<span class="source-line-no">273</span><span id="line-273">         *  Sets the initializer for the field.</span>
+<span class="source-line-no">273</span><span id="line-273">         *  Sets the initialiser for the field.</span>
 <span class="source-line-no">274</span><span id="line-274">         *</span>
 <span class="source-line-no">275</span><span id="line-275">         *  @param  format  The format.</span>
 <span class="source-line-no">276</span><span id="line-276">         *  @param  args    The arguments.</span>
@@ -319,7 +319,7 @@
 <span class="source-line-no">306</span><span id="line-306">    private final Lazy&lt;String&gt; m_CachedString;</span>
 <span class="source-line-no">307</span><span id="line-307"></span>
 <span class="source-line-no">308</span><span id="line-308">    /**</span>
-<span class="source-line-no">309</span><span id="line-309">     *  The initializer for the field.</span>
+<span class="source-line-no">309</span><span id="line-309">     *  The initialiser for the field.</span>
 <span class="source-line-no">310</span><span id="line-310">     */</span>
 <span class="source-line-no">311</span><span id="line-311">    @SuppressWarnings( "UseOfConcreteClass" )</span>
 <span class="source-line-no">312</span><span id="line-312">    private final CodeBlockImpl m_Initializer;</span>
@@ -422,7 +422,7 @@
 <span class="source-line-no">409</span><span id="line-409">    {</span>
 <span class="source-line-no">410</span><span id="line-410">        final var composer = new JavaComposer();</span>
 <span class="source-line-no">411</span><span id="line-411"></span>
-<span class="source-line-no">412</span><span id="line-412">        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, _ -&gt; "not a valid name: %s".formatted( name ) ) )</span>
+<span class="source-line-no">412</span><span id="line-412">        final var retValue = new BuilderImpl( composer, (TypeNameImpl) requireNonNullArgument( type, "type" ), requireValidArgument( name, "name", JavaUtils::isValidName, (_,v) -&gt; "not a valid name: %s".formatted( v ) ) )</span>
 <span class="source-line-no">413</span><span id="line-413">            .addModifiers( requireNonNullArgument( modifiers, "modifiers" ) );</span>
 <span class="source-line-no">414</span><span id="line-414"></span>
 <span class="source-line-no">415</span><span id="line-415">        //---* Done *----------------------------------------------------------</span>
@@ -528,9 +528,9 @@
 <span class="source-line-no">515</span><span id="line-515">    public final int hashCode() { return hash( m_Composer, toString() ); }</span>
 <span class="source-line-no">516</span><span id="line-516"></span>
 <span class="source-line-no">517</span><span id="line-517">    /**</span>
-<span class="source-line-no">518</span><span id="line-518">     *  Checks whether the field has an initializer.</span>
+<span class="source-line-no">518</span><span id="line-518">     *  Checks whether the field has an initialiser.</span>
 <span class="source-line-no">519</span><span id="line-519">     *</span>
-<span class="source-line-no">520</span><span id="line-520">     *  @return {@code true} if the field has an initializer, {@code false}</span>
+<span class="source-line-no">520</span><span id="line-520">     *  @return {@code true} if the field has an initialiser, {@code false}</span>
 <span class="source-line-no">521</span><span id="line-521">     *      otherwise.</span>
 <span class="source-line-no">522</span><span id="line-522">     */</span>
 <span class="source-line-no">523</span><span id="line-523">    @SuppressWarnings( "PublicMethodNotExposedInInterface" )</span>
@@ -543,7 +543,7 @@
 <span class="source-line-no">530</span><span id="line-530">    public final boolean hasModifier( final Modifier modifier ) { return m_Modifiers.contains( modifier ); }</span>
 <span class="source-line-no">531</span><span id="line-531"></span>
 <span class="source-line-no">532</span><span id="line-532">    /**</span>
-<span class="source-line-no">533</span><span id="line-533">     *  The initializer for</span>
+<span class="source-line-no">533</span><span id="line-533">     *  The initialiser for</span>
 <span class="source-line-no">534</span><span id="line-534">     *  {@link #m_CachedString}.</span>
 <span class="source-line-no">535</span><span id="line-535">     *</span>
 <span class="source-line-no">536</span><span id="line-536">     *  @return The return value for</span>

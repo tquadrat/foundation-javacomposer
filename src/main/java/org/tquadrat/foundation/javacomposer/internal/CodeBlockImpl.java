@@ -314,7 +314,8 @@ public final class CodeBlockImpl implements CodeBlock
         public final BuilderImpl addStaticImport( final ClassName className, final String... names )
         {
             final var canonicalName = requireNonNullArgument( className, "className" ).canonicalName();
-            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, "%s array is empty"::formatted ) )
+            //noinspection StandardVariableNames
+            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, (n,_) -> "%s array is empty".formatted( n ) ) )
             {
                 m_StaticImports.add(
                     format(
@@ -324,7 +325,7 @@ public final class CodeBlockImpl implements CodeBlock
                             name,
                             "name",
                             Objects::nonNull,
-                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            (_,_) -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -934,7 +935,7 @@ public final class CodeBlockImpl implements CodeBlock
     public final int hashCode() { return toString().hashCode(); }
 
     /**
-     *  The initializer for
+     *  The initialiser for
      *  {@link #m_CachedString}.
      *
      *  @return The return value for

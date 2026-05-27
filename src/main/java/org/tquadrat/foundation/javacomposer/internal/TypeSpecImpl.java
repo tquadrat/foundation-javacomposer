@@ -134,7 +134,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         private final Collection<FieldSpecImpl> m_FieldSpecs = new ArrayList<>();
 
         /**
-         *  The initializer block.
+         *  The initialiser block.
          */
         @SuppressWarnings( "UseOfConcreteClass" )
         private final CodeBlockImpl.BuilderImpl m_InitializerBlock;
@@ -251,7 +251,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         {
             m_Composer = requireNonNullArgument( composer, "composer" );
             m_Kind = requireNonNullArgument( kind, "kind" );
-            m_Name = requireValidNonNullArgument( name, "name", v -> v.isEmpty() || isValidName( v.get() ), _ -> "not a valid name: %s".formatted( name.get() ) );
+            m_Name = requireValidNonNullArgument( name, "name", v -> v.isEmpty() || isValidName( v.get() ), (_,v) -> "not a valid name: %s".formatted( v.get() ) );
 
             m_InitializerBlock = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
             m_Javadoc = (CodeBlockImpl.BuilderImpl) m_Composer.codeBlockBuilder();
@@ -554,7 +554,8 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         public final BuilderImpl addStaticImport( final ClassName className, final String... names )
         {
             final var canonicalName = requireNonNullArgument( className, "className" ).canonicalName();
-            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, "%s array is empty"::formatted ) )
+            //noinspection StandardVariableNames
+            for( final var name : requireValidNonNullArgument( names, "names", v -> v.length > 0, (n,_) -> "%s array is empty".formatted( n ) ) )
             {
                 m_StaticImports.add(
                     format(
@@ -564,7 +565,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
                             name,
                             "name",
                             Objects::nonNull,
-                            _ -> "null entry in names array: %s".formatted( Arrays.toString( names ) )
+                            (_,_) -> "null entry in 'names' array: %s".formatted( Arrays.toString( names ) )
                         )
                     )
                 );
@@ -590,7 +591,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addSuperinterface( final Class<?> superinterface )
         {
-            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, _ -> "'%s' is not an interface".formatted( superinterface.getName() ) ) ) );
+            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", Class::isInterface, (_,v) -> "'%s' is not an interface".formatted( v.getName() ) ) ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -611,7 +612,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         @Override
         public final BuilderImpl addSuperinterface( final TypeElement superinterface )
         {
-            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -> v.getKind() == ElementKind.INTERFACE, _ -> "'%s' is not an interface".formatted( superinterface.getQualifiedName() ) ).asType() ) );
+            addSuperinterface( TypeName.from( requireValidNonNullArgument( superinterface, "superinterface", v -> v.getKind() == ElementKind.INTERFACE, (_,v) -> "'%s' is not an interface".formatted( v.getQualifiedName() ) ).asType() ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -785,7 +786,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         protected Map<String,ClassSpecImpl> getEnumConstants() { return Map.of(); }
 
         /**
-         *  Returns the factory for the JavaComposer artifacts.
+         *  Returns the factory for the JavaComposer artefacts.
          *
          *  @return The factory.
          */
@@ -802,7 +803,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         /**
          *  Provides access to the
          *  {@linkplain CodeBlockImpl.BuilderImpl builder}
-         *  for the initializer block of the new type.
+         *  for the initialiser block of the new type.
          *
          *  @return The builder reference.
          */
@@ -845,7 +846,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         /**
          *  Provides access to the
          *  {@linkplain CodeBlockImpl.BuilderImpl builder}
-         *  for the static initializer block of the new type.
+         *  for the static initialiser block of the new type.
          *
          *  @return The builder reference.
          */
@@ -916,7 +917,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         public BuilderImpl superclass( final TypeName superclass )
         {
             checkState( m_Superclass == OBJECT, () -> new IllegalStateException( "superclass already set to %s".formatted( m_Superclass.toString() ) ));
-            m_Superclass = (TypeNameImpl) requireValidNonNullArgument( superclass, "superclass", v -> !v.isPrimitive(), _ -> "superclass may not be a primitive" );
+            m_Superclass = (TypeNameImpl) requireValidNonNullArgument( superclass, "superclass", v -> !v.isPrimitive(), (_,v) -> "superclass may not be a primitive: %s".formatted( v.toString() ) );
 
             //---* Done *------------------------------------------------------
             return this;
@@ -1096,7 +1097,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     private final List<FieldSpecImpl> m_FieldSpecs;
 
     /**
-     *  The initializer block for this type.
+     *  The initialiser block for this type.
      */
     @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_InitializerBlock;
@@ -1134,7 +1135,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     private final List<Element> m_OriginatingElements;
 
     /**
-     *  The static initializer block for this type.
+     *  The static initialiser block for this type.
      */
     @SuppressWarnings( "UseOfConcreteClass" )
     private final CodeBlockImpl m_StaticBlock;
@@ -1384,6 +1385,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The annotations.
      */
+    @SuppressWarnings( "AssignmentOrReturnOfFieldWithMutableType" )
     protected final Collection<AnnotationSpecImpl> getAnnotations() { return m_Annotations; }
 
     /**
@@ -1408,12 +1410,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The fields.
      */
+    @SuppressWarnings( "AssignmentOrReturnOfFieldWithMutableType" )
     protected final Collection<FieldSpecImpl> getFieldSpecs() { return m_FieldSpecs; }
 
     /**
-     *  Returns the initializer block for this type.
+     *  Returns the initialiser block for this type.
      *
-     *  @return The initializer block.
+     *  @return The initialiser block.
      */
     protected final CodeBlockImpl getInitializerBlock() { return m_InitializerBlock; }
 
@@ -1429,6 +1432,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The methods.
      */
+    @SuppressWarnings( "AssignmentOrReturnOfFieldWithMutableType" )
     protected final Collection<MethodSpecImpl> getMethodSpecs() { return m_MethodSpecs; }
 
     /**
@@ -1459,6 +1463,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The superinterfaces.
      */
+    @SuppressWarnings( "AssignmentOrReturnOfFieldWithMutableType" )
     protected final List<? extends TypeNameImpl> getSuperInterfaces() { return m_SuperInterfaces; }
 
     /**
@@ -1475,7 +1480,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The type variables.
      */
-    @SuppressWarnings( "PublicMethodNotExposedInInterface" )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "AssignmentOrReturnOfFieldWithMutableType"} )
     public final List<TypeVariableNameImpl> getTypeVariables() { return m_TypeVariables; }
 
     /**
@@ -1498,7 +1503,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     }   //  hasModifier()
 
     /**
-     *  The initializer for
+     *  The initialiser for
      *  {@link #m_CachedString}.
      *
      *  @return The return value for
@@ -1545,6 +1550,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     /**
      *  {@inheritDoc}
      */
+    @SuppressWarnings( "AssignmentOrReturnOfFieldWithMutableType" )
     @Override
     public final List<Element> originatingElements() { return m_OriginatingElements; }
 
@@ -1565,7 +1571,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The inner types.
      */
-    @SuppressWarnings( "PublicMethodNotExposedInInterface" )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "AssignmentOrReturnOfFieldWithMutableType"} )
     public final List<TypeSpecImpl> typeSpecs() { return m_TypeSpecs; }
 }
 //  class TypeSpecImpl
