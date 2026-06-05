@@ -81,13 +81,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: MethodSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: MethodSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields"} )
-@ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class MethodSpecImpl implements MethodSpec
 {
@@ -100,12 +100,12 @@ public final class MethodSpecImpl implements MethodSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: MethodSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+     *  @version $Id: MethodSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: MethodSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements MethodSpec.Builder
     {
@@ -1203,8 +1203,8 @@ public final class MethodSpecImpl implements MethodSpec
      *  Checks whether the last entry of the given parameter list is an array.
      *
      *  @param  parameters  The parameter list.
-     *  @return {@code true} if the last entry of the given parameter list is
-     *      an array type, {@code false} if not.
+     *  @return {@true} if the last entry of the given parameter list is
+     *      an array type, {@false} if not.
      */
     @SuppressWarnings( "BooleanMethodNameMustStartWithQuestion" )
     private static final boolean lastParameterIsArray( final SequencedCollection<ParameterSpecImpl> parameters )

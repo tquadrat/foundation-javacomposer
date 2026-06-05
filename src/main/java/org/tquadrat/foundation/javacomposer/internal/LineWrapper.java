@@ -42,12 +42,12 @@ import org.tquadrat.foundation.exception.UnsupportedEnumError;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: LineWrapper.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: LineWrapper.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: LineWrapper.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: LineWrapper.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class LineWrapper implements Closeable
 {
@@ -61,7 +61,7 @@ public final class LineWrapper implements Closeable
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: LineWrapper.java 1151 2025-10-01 21:32:15Z tquadrat $
+     *  @version $Id: LineWrapper.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
@@ -129,7 +129,7 @@ public final class LineWrapper implements Closeable
     private int m_IndentLevel = -1;
 
     /**
-     * {@code null} if we have no buffering; otherwise the type to pass to the
+     * {@null} if we have no buffering; otherwise the type to pass to the
      * next call to
      * {@link #flush}.
      */

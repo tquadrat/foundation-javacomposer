@@ -36,12 +36,12 @@ import org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: MethodSpec.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: MethodSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface MethodSpec
     permits MethodSpecImpl
@@ -55,13 +55,13 @@ public sealed interface MethodSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: MethodSpec.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( {"ClassWithTooManyMethods", "InnerClassOfInterface"} )
-    @ClassVersion( sourceVersion = "$Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: MethodSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits MethodSpecImpl.BuilderImpl
@@ -456,7 +456,7 @@ public sealed interface MethodSpec
 
         /**
          *  Sets the flag that indicates whether a parameter (the last one) is
-         *  a {@code varargs} parameter to {@code true}.
+         *  a {@code varargs} parameter to {@true}.
          *
          *  @return This {@code Builder} instance.
          */
@@ -466,8 +466,8 @@ public sealed interface MethodSpec
          *  Sets the flag that indicates whether a parameter (the last one) is
          *  a {@code varargs} parameter.
          *
-         *  @param  varargs {@code true} if the last parameter is a
-         *      {@code varargs} parameter, {@code false} if not.
+         *  @param  varargs {@true} if the last parameter is a
+         *      {@code varargs} parameter, {@false} if not.
          *  @return This {@code Builder} instance.
          */
         public Builder varargs( final boolean varargs );
@@ -502,15 +502,15 @@ public sealed interface MethodSpec
      *  Checks whether the method has the given modifier.
      *
      *  @param  modifier    The modifier.
-     *  @return {@code true} if the given modifier has been applied to this
-     *      method, {@code false} otherwise.
+     *  @return {@true} if the given modifier has been applied to this
+     *      method, {@false} otherwise.
      */
     public boolean hasModifier( final Modifier modifier );
 
     /**
      *  Checks whether this method is a constructor.
      *
-     *  @return {@code true} if the method is a constructor, {@code false} if
+     *  @return {@true} if the method is a constructor, {@false} if
      *      it is a regular method.
      */
     public boolean isConstructor();
@@ -546,7 +546,7 @@ public sealed interface MethodSpec
     /**
      *  Return the return type for this method.
      *
-     *  @return The return type; will never be {@code null}, not even for a
+     *  @return The return type; will never be {@null}, not even for a
      *      constructor.
      */
     public TypeName returnType();
@@ -570,8 +570,8 @@ public sealed interface MethodSpec
      *  {@link Modifier#ABSTRACT ABSTRACT},
      *  too.</p>
      *
-     *  @param  omitCode    {@code true} if the body code should not be copied,
-     *      {@code false} otherwise; in the latter case, the result is the same
+     *  @param  omitCode    {@true} if the body code should not be copied,
+     *      {@false} otherwise; in the latter case, the result is the same
      *      as for
      *      {@link #toBuilder()}.
      *  @return The builder.

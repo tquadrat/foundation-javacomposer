@@ -38,12 +38,12 @@ import org.tquadrat.foundation.javacomposer.internal.TypeSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: TypeSpec.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface TypeSpec
     permits TypeSpecImpl
@@ -58,13 +58,13 @@ public sealed interface TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: TypeSpec.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( {"ClassWithTooManyMethods", "InnerClassOfInterface"} )
-    @ClassVersion( sourceVersion = "$Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static interface Builder
     {
@@ -162,8 +162,8 @@ public sealed interface TypeSpec
          *      manually, too.
          *
          *  @param  fieldSpec   The field definition.
-         *  @param  readOnly    {@code true} if no mutator should be created
-         *      even for a non-final field, {@code false} if a mutator has to
+         *  @param  readOnly    {@true} if no mutator should be created
+         *      even for a non-final field, {@false} if a mutator has to
          *      be created for a non-final field. Will ignored if the field is
          *      final.
          *  @return This {@code Builder} instance.
@@ -328,8 +328,8 @@ public sealed interface TypeSpec
          *      manually, too.
          *
          *  @param  fieldSpec   The field definition.
-         *  @param  readOnly    {@code true} if no setter should be created
-         *      even for a non-final field, {@code false} if a setter has to be
+         *  @param  readOnly    {@true} if no setter should be created
+         *      even for a non-final field, {@false} if a setter has to be
          *      created for a non-final field. Will ignored if the field is
          *      final.
          *  @return This {@code Builder} instance.
@@ -557,8 +557,8 @@ public sealed interface TypeSpec
      *  Checks whether the given modifier was applied to this type.
      *
      *  @param  modifier    The modifier.
-     *  @return {@code true} if the given modifier has been applied to this
-     *      type, {@code false} otherwise.
+     *  @return {@true} if the given modifier has been applied to this
+     *      type, {@false} otherwise.
      */
     public boolean hasModifier( final Modifier modifier );
 

@@ -43,12 +43,12 @@
 <span class="source-line-no">030</span><span id="line-30"> *</span>
 <span class="source-line-no">031</span><span id="line-31"> *  @author Square,Inc.</span>
 <span class="source-line-no">032</span><span id="line-32"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">033</span><span id="line-33"> *  @version $Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">033</span><span id="line-33"> *  @version $Id: AnnotationSpec.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">034</span><span id="line-34"> *  @since 0.0.5</span>
 <span class="source-line-no">035</span><span id="line-35"> *</span>
 <span class="source-line-no">036</span><span id="line-36"> *  @UMLGraph.link</span>
 <span class="source-line-no">037</span><span id="line-37"> */</span>
-<span class="source-line-no">038</span><span id="line-38">@ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">038</span><span id="line-38">@ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">039</span><span id="line-39">@API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">040</span><span id="line-40">public sealed interface AnnotationSpec</span>
 <span class="source-line-no">041</span><span id="line-41">    permits AnnotationSpecImpl</span>
@@ -62,13 +62,13 @@
 <span class="source-line-no">049</span><span id="line-49">     *</span>
 <span class="source-line-no">050</span><span id="line-50">     *  @author Square,Inc.</span>
 <span class="source-line-no">051</span><span id="line-51">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">052</span><span id="line-52">     *  @version $Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">052</span><span id="line-52">     *  @version $Id: AnnotationSpec.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">053</span><span id="line-53">     *  @since 0.0.5</span>
 <span class="source-line-no">054</span><span id="line-54">     *</span>
 <span class="source-line-no">055</span><span id="line-55">     *  @UMLGraph.link</span>
 <span class="source-line-no">056</span><span id="line-56">     */</span>
 <span class="source-line-no">057</span><span id="line-57">    @SuppressWarnings( "InnerClassOfInterface" )</span>
-<span class="source-line-no">058</span><span id="line-58">    @ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">058</span><span id="line-58">    @ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">059</span><span id="line-59">    @API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">060</span><span id="line-60">    public static sealed interface Builder</span>
 <span class="source-line-no">061</span><span id="line-61">        permits AnnotationSpecImpl.BuilderImpl</span>
@@ -118,8 +118,8 @@
 <span class="source-line-no">105</span><span id="line-105">         *      nullable = false</span>
 <span class="source-line-no">106</span><span id="line-106">         *  )&lt;/code&gt;&lt;/pre&gt;</span>
 <span class="source-line-no">107</span><span id="line-107">         *</span>
-<span class="source-line-no">108</span><span id="line-108">         *  @param  flag    {@code true} for the forced inline presentation,</span>
-<span class="source-line-no">109</span><span id="line-109">         *      {@code false} for the multi-line presentation.</span>
+<span class="source-line-no">108</span><span id="line-108">         *  @param  flag    {@true} for the forced inline presentation,</span>
+<span class="source-line-no">109</span><span id="line-109">         *      {@false} for the multi-line presentation.</span>
 <span class="source-line-no">110</span><span id="line-110">         *  @return This {@code Builder} instance.</span>
 <span class="source-line-no">111</span><span id="line-111">         */</span>
 <span class="source-line-no">112</span><span id="line-112">        public Builder forceInline( boolean flag );</span>

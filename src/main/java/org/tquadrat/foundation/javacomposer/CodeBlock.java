@@ -76,12 +76,12 @@ import org.tquadrat.foundation.javacomposer.internal.CodeBlockImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CodeBlock.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: CodeBlock.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: CodeBlock.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: CodeBlock.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface CodeBlock
     permits CodeBlockImpl
@@ -95,13 +95,13 @@ public sealed interface CodeBlock
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeBlock.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: CodeBlock.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: CodeBlock.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeBlock.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static interface Builder
     {
@@ -263,8 +263,8 @@ public sealed interface CodeBlock
         /**
          *  Checks whether the code block to build would be empty.
          *
-         *  @return {@code true} if the code block would be empty,
-         *      {@code false} otherwise.
+         *  @return {@true} if the code block would be empty,
+         *      {@false} otherwise.
          */
         public boolean isEmpty();
 
@@ -306,7 +306,7 @@ public sealed interface CodeBlock
     /**
      *  Checks whether this code block is empty.
      *
-     *  @return {@code true} if the code block is empty, {@code false}
+     *  @return {@true} if the code block is empty, {@false}
      *      otherwise.
      */
     public boolean isEmpty();

@@ -51,12 +51,12 @@ import org.tquadrat.foundation.lang.Lazy;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: ParameterSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ParameterSpecImpl implements ParameterSpec
 {
@@ -69,12 +69,12 @@ public final class ParameterSpecImpl implements ParameterSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: ParameterSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements ParameterSpec.Builder
     {
@@ -318,8 +318,8 @@ public final class ParameterSpecImpl implements ParameterSpec
      *  Emits the parameter to the given code writer.
      *
      *  @param  codeWriter  The code writer.
-     *  @param  varargs {@code true} if this parameter is a {@code vararg}
-     *      parameter, {@code false} if it is a regular parameter.
+     *  @param  varargs {@true} if this parameter is a {@code vararg}
+     *      parameter, {@false} if it is a regular parameter.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */

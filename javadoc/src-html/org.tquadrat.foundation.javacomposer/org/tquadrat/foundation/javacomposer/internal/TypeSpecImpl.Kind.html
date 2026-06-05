@@ -96,13 +96,13 @@
 <span class="source-line-no">083</span><span id="line-83"> *</span>
 <span class="source-line-no">084</span><span id="line-84"> *  @author Square,Inc.</span>
 <span class="source-line-no">085</span><span id="line-85"> *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">086</span><span id="line-86"> *  @version $Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $</span>
+<span class="source-line-no">086</span><span id="line-86"> *  @version $Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">087</span><span id="line-87"> *  @since 0.0.5</span>
 <span class="source-line-no">088</span><span id="line-88"> *</span>
 <span class="source-line-no">089</span><span id="line-89"> *  @UMLGraph.link</span>
 <span class="source-line-no">090</span><span id="line-90"> */</span>
 <span class="source-line-no">091</span><span id="line-91">@SuppressWarnings( {"ClassWithTooManyFields", "OverlyCoupledClass"} )</span>
-<span class="source-line-no">092</span><span id="line-92">@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )</span>
+<span class="source-line-no">092</span><span id="line-92">@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">093</span><span id="line-93">@API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">094</span><span id="line-94">public abstract sealed class TypeSpecImpl implements TypeSpec</span>
 <span class="source-line-no">095</span><span id="line-95">    permits AnnotationTypeSpecImpl, ClassSpecImpl, EnumSpecImpl, InterfaceSpecImpl, RecordSpecImpl</span>
@@ -116,13 +116,13 @@
 <span class="source-line-no">103</span><span id="line-103">     *</span>
 <span class="source-line-no">104</span><span id="line-104">     *  @author Square,Inc.</span>
 <span class="source-line-no">105</span><span id="line-105">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">106</span><span id="line-106">     *  @version $Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $</span>
+<span class="source-line-no">106</span><span id="line-106">     *  @version $Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">107</span><span id="line-107">     *  @since 0.0.5</span>
 <span class="source-line-no">108</span><span id="line-108">     *</span>
 <span class="source-line-no">109</span><span id="line-109">     *  @UMLGraph.link</span>
 <span class="source-line-no">110</span><span id="line-110">     */</span>
 <span class="source-line-no">111</span><span id="line-111">    @SuppressWarnings( "OverlyCoupledClass" )</span>
-<span class="source-line-no">112</span><span id="line-112">    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )</span>
+<span class="source-line-no">112</span><span id="line-112">    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">113</span><span id="line-113">    @API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">114</span><span id="line-114">    public abstract static sealed class BuilderImpl implements TypeSpec.Builder</span>
 <span class="source-line-no">115</span><span id="line-115">        permits AnnotationTypeSpecImpl.BuilderImpl, ClassSpecImpl.BuilderImpl, EnumSpecImpl.BuilderImpl, InterfaceSpecImpl.BuilderImpl, RecordSpecImpl.BuilderImpl</span>
@@ -907,8 +907,8 @@
 <span class="source-line-no">894</span><span id="line-894">        /**</span>
 <span class="source-line-no">895</span><span id="line-895">         *  Returns a flag whether this class is an anonymous class or not.</span>
 <span class="source-line-no">896</span><span id="line-896">         *</span>
-<span class="source-line-no">897</span><span id="line-897">         *  @return {@code true} if the class is an anonymous class,</span>
-<span class="source-line-no">898</span><span id="line-898">         *      {@code false} if it is named.</span>
+<span class="source-line-no">897</span><span id="line-897">         *  @return {@true} if the class is an anonymous class,</span>
+<span class="source-line-no">898</span><span id="line-898">         *      {@false} if it is named.</span>
 <span class="source-line-no">899</span><span id="line-899">         */</span>
 <span class="source-line-no">900</span><span id="line-900">        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "BooleanMethodIsAlwaysInverted"} )</span>
 <span class="source-line-no">901</span><span id="line-901">        @MountPoint</span>
@@ -945,13 +945,13 @@
 <span class="source-line-no">932</span><span id="line-932">     *</span>
 <span class="source-line-no">933</span><span id="line-933">     *  @author Square,Inc.</span>
 <span class="source-line-no">934</span><span id="line-934">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">935</span><span id="line-935">     *  @version $Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $</span>
+<span class="source-line-no">935</span><span id="line-935">     *  @version $Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">936</span><span id="line-936">     *  @since 0.0.5</span>
 <span class="source-line-no">937</span><span id="line-937">     *</span>
 <span class="source-line-no">938</span><span id="line-938">     *  @UMLGraph.link</span>
 <span class="source-line-no">939</span><span id="line-939">     */</span>
 <span class="source-line-no">940</span><span id="line-940">    @SuppressWarnings( "NewClassNamingConvention" )</span>
-<span class="source-line-no">941</span><span id="line-941">    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )</span>
+<span class="source-line-no">941</span><span id="line-941">    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">942</span><span id="line-942">    @API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">943</span><span id="line-943">    public enum Kind</span>
 <span class="source-line-no">944</span><span id="line-944">    {</span>
@@ -1327,7 +1327,7 @@
 <span class="source-line-no">1314</span><span id="line-1314">     *  Emit the type to the given code writer.</span>
 <span class="source-line-no">1315</span><span id="line-1315">     *</span>
 <span class="source-line-no">1316</span><span id="line-1316">     *  @param  codeWriter  The target code writer.</span>
-<span class="source-line-no">1317</span><span id="line-1317">     *  @param  enumName    The name of the enum; will be {@code null} if not</span>
+<span class="source-line-no">1317</span><span id="line-1317">     *  @param  enumName    The name of the enum; will be {@null} if not</span>
 <span class="source-line-no">1318</span><span id="line-1318">     *      called to emit an enum constant.</span>
 <span class="source-line-no">1319</span><span id="line-1319">     *  @param  implicitModifiers   The implicit modifiers.</span>
 <span class="source-line-no">1320</span><span id="line-1320">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
@@ -1367,7 +1367,7 @@
 <span class="source-line-no">1354</span><span id="line-1354">     *  by the Foundation library code.</span>
 <span class="source-line-no">1355</span><span id="line-1355">     *</span>
 <span class="source-line-no">1356</span><span id="line-1356">     *  @param  codeWriter  The target code writer.</span>
-<span class="source-line-no">1357</span><span id="line-1357">     *  @param  enumName    The name of the enum; can be {@code null}.</span>
+<span class="source-line-no">1357</span><span id="line-1357">     *  @param  enumName    The name of the enum; can be {@null}.</span>
 <span class="source-line-no">1358</span><span id="line-1358">     *  @param  implicitModifiers   The implicit modifiers.</span>
 <span class="source-line-no">1359</span><span id="line-1359">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
 <span class="source-line-no">1360</span><span id="line-1360">     *      output target.</span>
@@ -1379,7 +1379,7 @@
 <span class="source-line-no">1366</span><span id="line-1366">     *  by the original JavaPoet code.</span>
 <span class="source-line-no">1367</span><span id="line-1367">     *</span>
 <span class="source-line-no">1368</span><span id="line-1368">     *  @param  codeWriter  The target code writer.</span>
-<span class="source-line-no">1369</span><span id="line-1369">     *  @param  enumName    The name of the enum; can be {@code null}.</span>
+<span class="source-line-no">1369</span><span id="line-1369">     *  @param  enumName    The name of the enum; can be {@null}.</span>
 <span class="source-line-no">1370</span><span id="line-1370">     *  @param  implicitModifiers   The implicit modifiers.</span>
 <span class="source-line-no">1371</span><span id="line-1371">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
 <span class="source-line-no">1372</span><span id="line-1372">     *      output target.</span>
@@ -1483,7 +1483,7 @@
 <span class="source-line-no">1470</span><span id="line-1470">     *  Returns the suppressable warnings that were set for this type.</span>
 <span class="source-line-no">1471</span><span id="line-1471">     *</span>
 <span class="source-line-no">1472</span><span id="line-1472">     *  @return The warnings; the collection can be empty, but not</span>
-<span class="source-line-no">1473</span><span id="line-1473">     *      {@code null}.</span>
+<span class="source-line-no">1473</span><span id="line-1473">     *      {@null}.</span>
 <span class="source-line-no">1474</span><span id="line-1474">     */</span>
 <span class="source-line-no">1475</span><span id="line-1475">    @SuppressWarnings( "PublicMethodNotExposedInInterface" )</span>
 <span class="source-line-no">1476</span><span id="line-1476">    public final Collection&lt;SuppressableWarnings&gt; getSuppressableWarnings() { return EnumSet.copyOf( m_SuppressableWarnings ); }</span>

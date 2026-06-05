@@ -68,13 +68,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CodeWriter.java 1105 2024-02-28 12:58:46Z tquadrat $
+ *  @version $Id: CodeWriter.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "ClassWithTooManyMethods", "OverlyComplexClass"} )
-@ClassVersion( sourceVersion = "$Id: CodeWriter.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: CodeWriter.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class CodeWriter
 {
@@ -85,12 +85,12 @@ public final class CodeWriter
      *  The comment types.
      *
      *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeWriter.java 1105 2024-02-28 12:58:46Z tquadrat $
+     *  @version $Id: CodeWriter.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: CodeWriter.java 1105 2024-02-28 12:58:46Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeWriter.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     private static enum CommentType
     {
@@ -584,8 +584,8 @@ public final class CodeWriter
      *  Emits the given annotations to the output target.
      *
      *  @param  annotations The annotations.
-     *  @param  inline  {@code true} if the annotations should be placed on the
-     *      same line as the annotated element, {@code false} otherwise.
+     *  @param  inline  {@true} if the annotations should be placed on the
+     *      same line as the annotated element, {@false} otherwise.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
@@ -786,7 +786,7 @@ public final class CodeWriter
      *
      *  @param  canonical   The canonical name of the class to import.
      *  @param  part    The part to emit.
-     *  @return {@code true} if something was emitted, {@code false} otherwise.
+     *  @return {@true} if something was emitted, {@false} otherwise.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */

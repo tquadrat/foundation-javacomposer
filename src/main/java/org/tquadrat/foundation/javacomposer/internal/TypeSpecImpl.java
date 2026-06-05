@@ -83,13 +83,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "OverlyCoupledClass"} )
-@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public abstract sealed class TypeSpecImpl implements TypeSpec
     permits AnnotationTypeSpecImpl, ClassSpecImpl, EnumSpecImpl, InterfaceSpecImpl, RecordSpecImpl
@@ -103,13 +103,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+     *  @version $Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "OverlyCoupledClass" )
-    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public abstract static sealed class BuilderImpl implements TypeSpec.Builder
         permits AnnotationTypeSpecImpl.BuilderImpl, ClassSpecImpl.BuilderImpl, EnumSpecImpl.BuilderImpl, InterfaceSpecImpl.BuilderImpl, RecordSpecImpl.BuilderImpl
@@ -894,8 +894,8 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         /**
          *  Returns a flag whether this class is an anonymous class or not.
          *
-         *  @return {@code true} if the class is an anonymous class,
-         *      {@code false} if it is named.
+         *  @return {@true} if the class is an anonymous class,
+         *      {@false} if it is named.
          */
         @SuppressWarnings( {"PublicMethodNotExposedInInterface", "BooleanMethodIsAlwaysInverted"} )
         @MountPoint
@@ -932,13 +932,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+     *  @version $Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "NewClassNamingConvention" )
-    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public enum Kind
     {
@@ -1314,7 +1314,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  Emit the type to the given code writer.
      *
      *  @param  codeWriter  The target code writer.
-     *  @param  enumName    The name of the enum; will be {@code null} if not
+     *  @param  enumName    The name of the enum; will be {@null} if not
      *      called to emit an enum constant.
      *  @param  implicitModifiers   The implicit modifiers.
      *  @throws UncheckedIOException A problem occurred when writing to the
@@ -1354,7 +1354,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  by the Foundation library code.
      *
      *  @param  codeWriter  The target code writer.
-     *  @param  enumName    The name of the enum; can be {@code null}.
+     *  @param  enumName    The name of the enum; can be {@null}.
      *  @param  implicitModifiers   The implicit modifiers.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
@@ -1366,7 +1366,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  by the original JavaPoet code.
      *
      *  @param  codeWriter  The target code writer.
-     *  @param  enumName    The name of the enum; can be {@code null}.
+     *  @param  enumName    The name of the enum; can be {@null}.
      *  @param  implicitModifiers   The implicit modifiers.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
@@ -1470,7 +1470,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  Returns the suppressable warnings that were set for this type.
      *
      *  @return The warnings; the collection can be empty, but not
-     *      {@code null}.
+     *      {@null}.
      */
     @SuppressWarnings( "PublicMethodNotExposedInInterface" )
     public final Collection<SuppressableWarnings> getSuppressableWarnings() { return EnumSet.copyOf( m_SuppressableWarnings ); }

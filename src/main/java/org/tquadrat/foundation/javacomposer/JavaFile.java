@@ -36,12 +36,12 @@ import org.tquadrat.foundation.javacomposer.internal.JavaFileImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaFile.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: JavaFile.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: JavaFile.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaFile.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface JavaFile
     permits JavaFileImpl
@@ -55,13 +55,13 @@ public sealed interface JavaFile
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: JavaFile.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: JavaFile.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: JavaFile.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: JavaFile.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits JavaFileImpl.BuilderImpl
@@ -128,8 +128,8 @@ public sealed interface JavaFile
          *  {@code com.example} that references {@code java.lang.String} will
          *  get {@code com.example.String} instead.</p>
          *
-         *  @param  flag    {@code true} means that the imports for classes
-         *      from the package {@code java.lang} are skipped, {@code false}
+         *  @param  flag    {@true} means that the imports for classes
+         *      from the package {@code java.lang} are skipped, {@false}
          *      means that the imports are added explicitly.
          *  @return This {@code Builder} instance.
          */

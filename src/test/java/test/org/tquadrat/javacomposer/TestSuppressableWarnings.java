@@ -38,9 +38,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  {@link SuppressableWarnings}.
  *
  *  @author Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestSuppressableWarnings.java 1076 2023-10-03 18:36:07Z tquadrat $
+ *  @version $Id: TestSuppressableWarnings.java 1258 2026-06-04 18:33:06Z tquadrat $
  */
-@ClassVersion( sourceVersion = "$Id: TestSuppressableWarnings.java 1076 2023-10-03 18:36:07Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestSuppressableWarnings.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 public class TestSuppressableWarnings extends TestBaseClass
 {
         /*---------*\
@@ -69,7 +69,7 @@ public class TestSuppressableWarnings extends TestBaseClass
     /**
      *  Calls
      *  {@link SuppressableWarnings#createSuppressWarningsAnnotation(SuppressableWarnings...)}
-     *  with {@code null}.
+     *  with {@null}.
      */
     @Test
     final void testCreateSuppressWarningsAnnotationWithNullArgument()

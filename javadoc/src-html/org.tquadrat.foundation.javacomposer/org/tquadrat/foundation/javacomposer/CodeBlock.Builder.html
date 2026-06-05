@@ -89,12 +89,12 @@
 <span class="source-line-no">076</span><span id="line-76"> *</span>
 <span class="source-line-no">077</span><span id="line-77"> *  @author Square,Inc.</span>
 <span class="source-line-no">078</span><span id="line-78"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">079</span><span id="line-79"> *  @version $Id: CodeBlock.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">079</span><span id="line-79"> *  @version $Id: CodeBlock.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">080</span><span id="line-80"> *  @since 0.0.5</span>
 <span class="source-line-no">081</span><span id="line-81"> *</span>
 <span class="source-line-no">082</span><span id="line-82"> *  @UMLGraph.link</span>
 <span class="source-line-no">083</span><span id="line-83"> */</span>
-<span class="source-line-no">084</span><span id="line-84">@ClassVersion( sourceVersion = "$Id: CodeBlock.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">084</span><span id="line-84">@ClassVersion( sourceVersion = "$Id: CodeBlock.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">085</span><span id="line-85">@API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">086</span><span id="line-86">public sealed interface CodeBlock</span>
 <span class="source-line-no">087</span><span id="line-87">    permits CodeBlockImpl</span>
@@ -108,13 +108,13 @@
 <span class="source-line-no">095</span><span id="line-95">     *</span>
 <span class="source-line-no">096</span><span id="line-96">     *  @author Square,Inc.</span>
 <span class="source-line-no">097</span><span id="line-97">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">098</span><span id="line-98">     *  @version $Id: CodeBlock.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">098</span><span id="line-98">     *  @version $Id: CodeBlock.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">099</span><span id="line-99">     *  @since 0.0.5</span>
 <span class="source-line-no">100</span><span id="line-100">     *</span>
 <span class="source-line-no">101</span><span id="line-101">     *  @UMLGraph.link</span>
 <span class="source-line-no">102</span><span id="line-102">     */</span>
 <span class="source-line-no">103</span><span id="line-103">    @SuppressWarnings( "InnerClassOfInterface" )</span>
-<span class="source-line-no">104</span><span id="line-104">    @ClassVersion( sourceVersion = "$Id: CodeBlock.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">104</span><span id="line-104">    @ClassVersion( sourceVersion = "$Id: CodeBlock.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">105</span><span id="line-105">    @API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">106</span><span id="line-106">    public static interface Builder</span>
 <span class="source-line-no">107</span><span id="line-107">    {</span>
@@ -276,8 +276,8 @@
 <span class="source-line-no">263</span><span id="line-263">        /**</span>
 <span class="source-line-no">264</span><span id="line-264">         *  Checks whether the code block to build would be empty.</span>
 <span class="source-line-no">265</span><span id="line-265">         *</span>
-<span class="source-line-no">266</span><span id="line-266">         *  @return {@code true} if the code block would be empty,</span>
-<span class="source-line-no">267</span><span id="line-267">         *      {@code false} otherwise.</span>
+<span class="source-line-no">266</span><span id="line-266">         *  @return {@true} if the code block would be empty,</span>
+<span class="source-line-no">267</span><span id="line-267">         *      {@false} otherwise.</span>
 <span class="source-line-no">268</span><span id="line-268">         */</span>
 <span class="source-line-no">269</span><span id="line-269">        public boolean isEmpty();</span>
 <span class="source-line-no">270</span><span id="line-270"></span>
@@ -319,7 +319,7 @@
 <span class="source-line-no">306</span><span id="line-306">    /**</span>
 <span class="source-line-no">307</span><span id="line-307">     *  Checks whether this code block is empty.</span>
 <span class="source-line-no">308</span><span id="line-308">     *</span>
-<span class="source-line-no">309</span><span id="line-309">     *  @return {@code true} if the code block is empty, {@code false}</span>
+<span class="source-line-no">309</span><span id="line-309">     *  @return {@true} if the code block is empty, {@false}</span>
 <span class="source-line-no">310</span><span id="line-310">     *      otherwise.</span>
 <span class="source-line-no">311</span><span id="line-311">     */</span>
 <span class="source-line-no">312</span><span id="line-312">    public boolean isEmpty();</span>

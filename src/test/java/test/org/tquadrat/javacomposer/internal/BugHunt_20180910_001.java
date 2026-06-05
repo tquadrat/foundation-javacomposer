@@ -39,15 +39,15 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *      format );</code></pre> renders to
  *  <pre><code>  cliDefinition = new CLIArgumentDefinition( "cmdLineArg0", 0, "null", "null", "CMD_LINE_ARG0", false, valueHandler, false, "null" );</code></pre>
  *  when {@code usage}, {@code usageKey}, and {@code format} are
- *  {@code null}.<br>
+ *  {@null}.<br>
  *  <br>But the expected result would be
  *  <pre><code>  cliDefinition = new CLIArgumentDefinition( "cmdLineArg0", 0, null, null, "CMD_LINE_ARG0", false, valueHandler, false, null );</code></pre>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: BugHunt_20180910_001.java 937 2021-12-14 21:59:00Z tquadrat $
+ *  @version $Id: BugHunt_20180910_001.java 1258 2026-06-04 18:33:06Z tquadrat $
  */
 @SuppressWarnings( "MisorderedAssertEqualsArguments" )
-@ClassVersion( sourceVersion = "$Id: BugHunt_20180910_001.java 937 2021-12-14 21:59:00Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: BugHunt_20180910_001.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @DisplayName( "test.org.tquadrat.javacomposer.internal.BugHunt_20180910_001" )
 public class BugHunt_20180910_001 extends TestBaseClass
 {
@@ -55,7 +55,7 @@ public class BugHunt_20180910_001 extends TestBaseClass
     ====** Methods **==========================================================
         \*---------*/
     /**
-     *  Test the rendering of {@code null}.
+     *  Test the rendering of {@null}.
      */
     @Test
     final void testNullRendering()

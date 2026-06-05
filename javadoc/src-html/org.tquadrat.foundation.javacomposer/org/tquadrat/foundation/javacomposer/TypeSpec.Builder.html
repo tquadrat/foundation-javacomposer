@@ -51,12 +51,12 @@
 <span class="source-line-no">038</span><span id="line-38"> *</span>
 <span class="source-line-no">039</span><span id="line-39"> *  @author Square,Inc.</span>
 <span class="source-line-no">040</span><span id="line-40"> *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">041</span><span id="line-41"> *  @version $Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">041</span><span id="line-41"> *  @version $Id: TypeSpec.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">042</span><span id="line-42"> *  @since 0.0.5</span>
 <span class="source-line-no">043</span><span id="line-43"> *</span>
 <span class="source-line-no">044</span><span id="line-44"> *  @UMLGraph.link</span>
 <span class="source-line-no">045</span><span id="line-45"> */</span>
-<span class="source-line-no">046</span><span id="line-46">@ClassVersion( sourceVersion = "$Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">046</span><span id="line-46">@ClassVersion( sourceVersion = "$Id: TypeSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">047</span><span id="line-47">@API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">048</span><span id="line-48">public sealed interface TypeSpec</span>
 <span class="source-line-no">049</span><span id="line-49">    permits TypeSpecImpl</span>
@@ -71,13 +71,13 @@
 <span class="source-line-no">058</span><span id="line-58">     *</span>
 <span class="source-line-no">059</span><span id="line-59">     *  @author Square,Inc.</span>
 <span class="source-line-no">060</span><span id="line-60">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">061</span><span id="line-61">     *  @version $Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">061</span><span id="line-61">     *  @version $Id: TypeSpec.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">062</span><span id="line-62">     *  @since 0.0.5</span>
 <span class="source-line-no">063</span><span id="line-63">     *</span>
 <span class="source-line-no">064</span><span id="line-64">     *  @UMLGraph.link</span>
 <span class="source-line-no">065</span><span id="line-65">     */</span>
 <span class="source-line-no">066</span><span id="line-66">    @SuppressWarnings( {"ClassWithTooManyMethods", "InnerClassOfInterface"} )</span>
-<span class="source-line-no">067</span><span id="line-67">    @ClassVersion( sourceVersion = "$Id: TypeSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">067</span><span id="line-67">    @ClassVersion( sourceVersion = "$Id: TypeSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">068</span><span id="line-68">    @API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">069</span><span id="line-69">    public static interface Builder</span>
 <span class="source-line-no">070</span><span id="line-70">    {</span>
@@ -175,8 +175,8 @@
 <span class="source-line-no">162</span><span id="line-162">         *      manually, too.</span>
 <span class="source-line-no">163</span><span id="line-163">         *</span>
 <span class="source-line-no">164</span><span id="line-164">         *  @param  fieldSpec   The field definition.</span>
-<span class="source-line-no">165</span><span id="line-165">         *  @param  readOnly    {@code true} if no mutator should be created</span>
-<span class="source-line-no">166</span><span id="line-166">         *      even for a non-final field, {@code false} if a mutator has to</span>
+<span class="source-line-no">165</span><span id="line-165">         *  @param  readOnly    {@true} if no mutator should be created</span>
+<span class="source-line-no">166</span><span id="line-166">         *      even for a non-final field, {@false} if a mutator has to</span>
 <span class="source-line-no">167</span><span id="line-167">         *      be created for a non-final field. Will ignored if the field is</span>
 <span class="source-line-no">168</span><span id="line-168">         *      final.</span>
 <span class="source-line-no">169</span><span id="line-169">         *  @return This {@code Builder} instance.</span>
@@ -341,8 +341,8 @@
 <span class="source-line-no">328</span><span id="line-328">         *      manually, too.</span>
 <span class="source-line-no">329</span><span id="line-329">         *</span>
 <span class="source-line-no">330</span><span id="line-330">         *  @param  fieldSpec   The field definition.</span>
-<span class="source-line-no">331</span><span id="line-331">         *  @param  readOnly    {@code true} if no setter should be created</span>
-<span class="source-line-no">332</span><span id="line-332">         *      even for a non-final field, {@code false} if a setter has to be</span>
+<span class="source-line-no">331</span><span id="line-331">         *  @param  readOnly    {@true} if no setter should be created</span>
+<span class="source-line-no">332</span><span id="line-332">         *      even for a non-final field, {@false} if a setter has to be</span>
 <span class="source-line-no">333</span><span id="line-333">         *      created for a non-final field. Will ignored if the field is</span>
 <span class="source-line-no">334</span><span id="line-334">         *      final.</span>
 <span class="source-line-no">335</span><span id="line-335">         *  @return This {@code Builder} instance.</span>
@@ -570,8 +570,8 @@
 <span class="source-line-no">557</span><span id="line-557">     *  Checks whether the given modifier was applied to this type.</span>
 <span class="source-line-no">558</span><span id="line-558">     *</span>
 <span class="source-line-no">559</span><span id="line-559">     *  @param  modifier    The modifier.</span>
-<span class="source-line-no">560</span><span id="line-560">     *  @return {@code true} if the given modifier has been applied to this</span>
-<span class="source-line-no">561</span><span id="line-561">     *      type, {@code false} otherwise.</span>
+<span class="source-line-no">560</span><span id="line-560">     *  @return {@true} if the given modifier has been applied to this</span>
+<span class="source-line-no">561</span><span id="line-561">     *      type, {@false} otherwise.</span>
 <span class="source-line-no">562</span><span id="line-562">     */</span>
 <span class="source-line-no">563</span><span id="line-563">    public boolean hasModifier( final Modifier modifier );</span>
 <span class="source-line-no">564</span><span id="line-564"></span>

@@ -76,12 +76,12 @@ import org.tquadrat.foundation.javacomposer.TypeSpec;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ClassSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: ClassSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.2.0" )
 public final class ClassSpecImpl extends TypeSpecImpl
 {
@@ -95,12 +95,12 @@ public final class ClassSpecImpl extends TypeSpecImpl
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: ClassSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+     *  @version $Id: ClassSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.2.0
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: ClassSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.2.0" )
     public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl
     {
@@ -382,7 +382,7 @@ public final class ClassSpecImpl extends TypeSpecImpl
      *  by the Foundation library code.
      *
      *  @param  codeWriter  The target code writer.
-     *  @param  enumName    The name of the enum; can be {@code null}.
+     *  @param  enumName    The name of the enum; can be {@null}.
      *  @param  implicitModifiers   The implicit modifiers.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
@@ -674,7 +674,7 @@ public final class ClassSpecImpl extends TypeSpecImpl
      *  by the original JavaPoet code.
      *
      *  @param  codeWriter  The target code writer.
-     *  @param  enumName    The name of the enum; can be {@code null}.
+     *  @param  enumName    The name of the enum; can be {@null}.
      *  @param  implicitModifiers   The implicit modifiers.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.

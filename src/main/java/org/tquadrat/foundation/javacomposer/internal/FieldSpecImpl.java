@@ -61,12 +61,12 @@ import org.tquadrat.foundation.util.JavaUtils;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: FieldSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: FieldSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class FieldSpecImpl implements FieldSpec
 {
@@ -79,12 +79,12 @@ public final class FieldSpecImpl implements FieldSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: FieldSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+     *  @version $Id: FieldSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: FieldSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements FieldSpec.Builder
     {
@@ -517,7 +517,7 @@ public final class FieldSpecImpl implements FieldSpec
     /**
      *  Checks whether the field has an initialiser.
      *
-     *  @return {@code true} if the field has an initialiser, {@code false}
+     *  @return {@true} if the field has an initialiser, {@false}
      *      otherwise.
      */
     @SuppressWarnings( "PublicMethodNotExposedInInterface" )

@@ -64,12 +64,12 @@
 <span class="source-line-no">051</span><span id="line-51"> *</span>
 <span class="source-line-no">052</span><span id="line-52"> *  @author Square,Inc.</span>
 <span class="source-line-no">053</span><span id="line-53"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">054</span><span id="line-54"> *  @version $Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">054</span><span id="line-54"> *  @version $Id: ParameterSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">055</span><span id="line-55"> *  @since 0.0.5</span>
 <span class="source-line-no">056</span><span id="line-56"> *</span>
 <span class="source-line-no">057</span><span id="line-57"> *  @UMLGraph.link</span>
 <span class="source-line-no">058</span><span id="line-58"> */</span>
-<span class="source-line-no">059</span><span id="line-59">@ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">059</span><span id="line-59">@ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">060</span><span id="line-60">@API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">061</span><span id="line-61">public final class ParameterSpecImpl implements ParameterSpec</span>
 <span class="source-line-no">062</span><span id="line-62">{</span>
@@ -82,12 +82,12 @@
 <span class="source-line-no">069</span><span id="line-69">     *</span>
 <span class="source-line-no">070</span><span id="line-70">     *  @author Square,Inc.</span>
 <span class="source-line-no">071</span><span id="line-71">     *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">072</span><span id="line-72">     *  @version $Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">072</span><span id="line-72">     *  @version $Id: ParameterSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">073</span><span id="line-73">     *  @since 0.0.5</span>
 <span class="source-line-no">074</span><span id="line-74">     *</span>
 <span class="source-line-no">075</span><span id="line-75">     *  @UMLGraph.link</span>
 <span class="source-line-no">076</span><span id="line-76">     */</span>
-<span class="source-line-no">077</span><span id="line-77">    @ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">077</span><span id="line-77">    @ClassVersion( sourceVersion = "$Id: ParameterSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">078</span><span id="line-78">    @API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">079</span><span id="line-79">    public static final class BuilderImpl implements ParameterSpec.Builder</span>
 <span class="source-line-no">080</span><span id="line-80">    {</span>
@@ -331,8 +331,8 @@
 <span class="source-line-no">318</span><span id="line-318">     *  Emits the parameter to the given code writer.</span>
 <span class="source-line-no">319</span><span id="line-319">     *</span>
 <span class="source-line-no">320</span><span id="line-320">     *  @param  codeWriter  The code writer.</span>
-<span class="source-line-no">321</span><span id="line-321">     *  @param  varargs {@code true} if this parameter is a {@code vararg}</span>
-<span class="source-line-no">322</span><span id="line-322">     *      parameter, {@code false} if it is a regular parameter.</span>
+<span class="source-line-no">321</span><span id="line-321">     *  @param  varargs {@true} if this parameter is a {@code vararg}</span>
+<span class="source-line-no">322</span><span id="line-322">     *      parameter, {@false} if it is a regular parameter.</span>
 <span class="source-line-no">323</span><span id="line-323">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
 <span class="source-line-no">324</span><span id="line-324">     *      output target.</span>
 <span class="source-line-no">325</span><span id="line-325">     */</span>

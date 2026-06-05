@@ -44,12 +44,12 @@
 <span class="source-line-no">031</span><span id="line-31"> *</span>
 <span class="source-line-no">032</span><span id="line-32"> *  @author Square,Inc.</span>
 <span class="source-line-no">033</span><span id="line-33"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">034</span><span id="line-34"> *  @version $Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">034</span><span id="line-34"> *  @version $Id: ParameterSpec.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">035</span><span id="line-35"> *  @since 0.0.5</span>
 <span class="source-line-no">036</span><span id="line-36"> *</span>
 <span class="source-line-no">037</span><span id="line-37"> *  @UMLGraph.link</span>
 <span class="source-line-no">038</span><span id="line-38"> */</span>
-<span class="source-line-no">039</span><span id="line-39">@ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">039</span><span id="line-39">@ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">040</span><span id="line-40">@API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">041</span><span id="line-41">public interface ParameterSpec</span>
 <span class="source-line-no">042</span><span id="line-42">{</span>
@@ -62,13 +62,13 @@
 <span class="source-line-no">049</span><span id="line-49">     *</span>
 <span class="source-line-no">050</span><span id="line-50">     *  @author Square,Inc.</span>
 <span class="source-line-no">051</span><span id="line-51">     *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">052</span><span id="line-52">     *  @version $Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">052</span><span id="line-52">     *  @version $Id: ParameterSpec.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">053</span><span id="line-53">     *  @since 0.0.5</span>
 <span class="source-line-no">054</span><span id="line-54">     *</span>
 <span class="source-line-no">055</span><span id="line-55">     *  @UMLGraph.link</span>
 <span class="source-line-no">056</span><span id="line-56">     */</span>
 <span class="source-line-no">057</span><span id="line-57">    @SuppressWarnings( "InnerClassOfInterface" )</span>
-<span class="source-line-no">058</span><span id="line-58">    @ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">058</span><span id="line-58">    @ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">059</span><span id="line-59">    @API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">060</span><span id="line-60">    public static interface Builder</span>
 <span class="source-line-no">061</span><span id="line-61">    {</span>
@@ -170,8 +170,8 @@
 <span class="source-line-no">157</span><span id="line-157">     *  Checks whether this parameter has the given modifier.</span>
 <span class="source-line-no">158</span><span id="line-158">     *</span>
 <span class="source-line-no">159</span><span id="line-159">     *  @param  modifier    The modifier.</span>
-<span class="source-line-no">160</span><span id="line-160">     *  @return {@code true} if the parameter has the given modifier,</span>
-<span class="source-line-no">161</span><span id="line-161">     *      {@code false} if not.</span>
+<span class="source-line-no">160</span><span id="line-160">     *  @return {@true} if the parameter has the given modifier,</span>
+<span class="source-line-no">161</span><span id="line-161">     *      {@false} if not.</span>
 <span class="source-line-no">162</span><span id="line-162">     */</span>
 <span class="source-line-no">163</span><span id="line-163">    public boolean hasModifier( final Modifier modifier );</span>
 <span class="source-line-no">164</span><span id="line-164"></span>
@@ -196,8 +196,8 @@
 <span class="source-line-no">183</span><span id="line-183">     *</span>
 <span class="source-line-no">184</span><span id="line-184">     *  @param  type    The type for the new parameter.</span>
 <span class="source-line-no">185</span><span id="line-185">     *  @param  name    The name for the new parameter.</span>
-<span class="source-line-no">186</span><span id="line-186">     *  @param  keepJavadoc {@code true} if an existing Javadoc comment should</span>
-<span class="source-line-no">187</span><span id="line-187">     *      be preserved, {@code false} if it should be dropped.</span>
+<span class="source-line-no">186</span><span id="line-186">     *  @param  keepJavadoc {@true} if an existing Javadoc comment should</span>
+<span class="source-line-no">187</span><span id="line-187">     *      be preserved, {@false} if it should be dropped.</span>
 <span class="source-line-no">188</span><span id="line-188">     *  @return The builder.</span>
 <span class="source-line-no">189</span><span id="line-189">     */</span>
 <span class="source-line-no">190</span><span id="line-190">    public Builder toBuilder( final TypeName type, final CharSequence name, final boolean keepJavadoc );</span>

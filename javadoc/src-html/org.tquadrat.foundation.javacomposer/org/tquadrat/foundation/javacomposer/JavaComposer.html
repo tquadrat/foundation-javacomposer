@@ -111,13 +111,13 @@
 <span class="source-line-no">098</span><span id="line-98"> *  thread-safe without any synchronisation.&lt;/p&gt;</span>
 <span class="source-line-no">099</span><span id="line-99"> *</span>
 <span class="source-line-no">100</span><span id="line-100"> *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">101</span><span id="line-101"> *  @version $Id: JavaComposer.java 1163 2026-03-20 15:28:33Z tquadrat $</span>
+<span class="source-line-no">101</span><span id="line-101"> *  @version $Id: JavaComposer.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">102</span><span id="line-102"> *  @since 0.2.0</span>
 <span class="source-line-no">103</span><span id="line-103"> *</span>
 <span class="source-line-no">104</span><span id="line-104"> *  @UMLGraph.link</span>
 <span class="source-line-no">105</span><span id="line-105"> */</span>
 <span class="source-line-no">106</span><span id="line-106">@SuppressWarnings( {"OverlyCoupledClass", "ClassWithTooManyMethods", "OverlyComplexClass"} )</span>
-<span class="source-line-no">107</span><span id="line-107">@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1163 2026-03-20 15:28:33Z tquadrat $" )</span>
+<span class="source-line-no">107</span><span id="line-107">@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">108</span><span id="line-108">@API( status = STABLE, since = "0.2.0" )</span>
 <span class="source-line-no">109</span><span id="line-109">public final class JavaComposer</span>
 <span class="source-line-no">110</span><span id="line-110">{</span>
@@ -148,7 +148,7 @@
 <span class="source-line-no">135</span><span id="line-135">    ====** Attributes **=======================================================</span>
 <span class="source-line-no">136</span><span id="line-136">        \*------------*/</span>
 <span class="source-line-no">137</span><span id="line-137">    /**</span>
-<span class="source-line-no">138</span><span id="line-138">     *  If set to {@code true}, some debug information will be added to the</span>
+<span class="source-line-no">138</span><span id="line-138">     *  If set to {@true}, some debug information will be added to the</span>
 <span class="source-line-no">139</span><span id="line-139">     *  output.</span>
 <span class="source-line-no">140</span><span id="line-140">     */</span>
 <span class="source-line-no">141</span><span id="line-141">    private final boolean m_AddDebugOutput;</span>
@@ -243,8 +243,8 @@
 <span class="source-line-no">230</span><span id="line-230">     *  {@link Layout#LAYOUT_DEFAULT Layout} and adds some debug information</span>
 <span class="source-line-no">231</span><span id="line-231">     *  to the output.</span>
 <span class="source-line-no">232</span><span id="line-232">     *</span>
-<span class="source-line-no">233</span><span id="line-233">     *  @param  addDebugOutput  {@code true} if debug information should be</span>
-<span class="source-line-no">234</span><span id="line-234">     *      added,  {@code false} if not.</span>
+<span class="source-line-no">233</span><span id="line-233">     *  @param  addDebugOutput  {@true} if debug information should be</span>
+<span class="source-line-no">234</span><span id="line-234">     *      added,  {@false} if not.</span>
 <span class="source-line-no">235</span><span id="line-235">     */</span>
 <span class="source-line-no">236</span><span id="line-236">    public JavaComposer( final boolean addDebugOutput )</span>
 <span class="source-line-no">237</span><span id="line-237">    {</span>
@@ -255,8 +255,8 @@
 <span class="source-line-no">242</span><span id="line-242">     *  Creates a new instance of {@code JavaComposer}.</span>
 <span class="source-line-no">243</span><span id="line-243">     *</span>
 <span class="source-line-no">244</span><span id="line-244">     *  @param  layout  The layout that is used to format the output.</span>
-<span class="source-line-no">245</span><span id="line-245">     *  @param  addDebugOutput  {@code true} if debug information should be</span>
-<span class="source-line-no">246</span><span id="line-246">     *      added,  {@code false} if not.</span>
+<span class="source-line-no">245</span><span id="line-245">     *  @param  addDebugOutput  {@true} if debug information should be</span>
+<span class="source-line-no">246</span><span id="line-246">     *      added,  {@false} if not.</span>
 <span class="source-line-no">247</span><span id="line-247">     */</span>
 <span class="source-line-no">248</span><span id="line-248">    public JavaComposer( final Layout layout, final boolean addDebugOutput )</span>
 <span class="source-line-no">249</span><span id="line-249">    {</span>
@@ -356,8 +356,8 @@
 <span class="source-line-no">343</span><span id="line-343">     *  Returns the flag that controls whether the output should be enhanced</span>
 <span class="source-line-no">344</span><span id="line-344">     *  with some debug information.</span>
 <span class="source-line-no">345</span><span id="line-345">     *</span>
-<span class="source-line-no">346</span><span id="line-346">     *  @return {@code true} if the debug information should be added to the</span>
-<span class="source-line-no">347</span><span id="line-347">     *      output, {@code false} otherwise.</span>
+<span class="source-line-no">346</span><span id="line-346">     *  @return {@true} if the debug information should be added to the</span>
+<span class="source-line-no">347</span><span id="line-347">     *      output, {@false} otherwise.</span>
 <span class="source-line-no">348</span><span id="line-348">     */</span>
 <span class="source-line-no">349</span><span id="line-349">    @SuppressWarnings( "BooleanMethodNameMustStartWithQuestion" )</span>
 <span class="source-line-no">350</span><span id="line-350">    public final boolean addDebugOutput() { return m_AddDebugOutput; }</span>
@@ -587,8 +587,8 @@
 <span class="source-line-no">574</span><span id="line-574">     *  instance.</span>
 <span class="source-line-no">575</span><span id="line-575">     *</span>
 <span class="source-line-no">576</span><span id="line-576">     *  @param  annotation  The annotation.</span>
-<span class="source-line-no">577</span><span id="line-577">     *  @param  includeDefaultValues    {@code true} to include the</span>
-<span class="source-line-no">578</span><span id="line-578">     *      annotation's default values, {@code false} to ignore them.</span>
+<span class="source-line-no">577</span><span id="line-577">     *  @param  includeDefaultValues    {@true} to include the</span>
+<span class="source-line-no">578</span><span id="line-578">     *      annotation's default values, {@false} to ignore them.</span>
 <span class="source-line-no">579</span><span id="line-579">     *  @return The new instance of {@code AnnotationSpec}.</span>
 <span class="source-line-no">580</span><span id="line-580">     */</span>
 <span class="source-line-no">581</span><span id="line-581">    public final AnnotationSpec createAnnotation( final Annotation annotation, final boolean includeDefaultValues )</span>
@@ -693,7 +693,7 @@
 <span class="source-line-no">680</span><span id="line-680">    /**</span>
 <span class="source-line-no">681</span><span id="line-681">     *  Creates the comment for a constant.</span>
 <span class="source-line-no">682</span><span id="line-682">     *</span>
-<span class="source-line-no">683</span><span id="line-683">     *  @param  comment The already existing comment; can be {@code null}.</span>
+<span class="source-line-no">683</span><span id="line-683">     *  @param  comment The already existing comment; can be {@null}.</span>
 <span class="source-line-no">684</span><span id="line-684">     *  @return The comment for the new constant.</span>
 <span class="source-line-no">685</span><span id="line-685">     */</span>
 <span class="source-line-no">686</span><span id="line-686">    private final CodeBlock createComment4Constant( final CodeBlock comment )</span>
@@ -1663,7 +1663,7 @@
 <span class="source-line-no">1650</span><span id="line-1650">     *</span>
 <span class="source-line-no">1651</span><span id="line-1651">     *  @param  method  The method.</span>
 <span class="source-line-no">1652</span><span id="line-1652">     *  @return The parameters of the given method; the returned list can be</span>
-<span class="source-line-no">1653</span><span id="line-1653">     *      empty, but it will not be {@code null}.</span>
+<span class="source-line-no">1653</span><span id="line-1653">     *      empty, but it will not be {@null}.</span>
 <span class="source-line-no">1654</span><span id="line-1654">     */</span>
 <span class="source-line-no">1655</span><span id="line-1655">    public final List&lt;ParameterSpec&gt; parametersOf( final ExecutableElement method )</span>
 <span class="source-line-no">1656</span><span id="line-1656">    {</span>
@@ -1681,7 +1681,7 @@
 <span class="source-line-no">1668</span><span id="line-1668">     *</span>
 <span class="source-line-no">1669</span><span id="line-1669">     *  @param  method  The method.</span>
 <span class="source-line-no">1670</span><span id="line-1670">     *  @return The parameters of the given method; the returned list can be</span>
-<span class="source-line-no">1671</span><span id="line-1671">     *      empty, but it will not be {@code null}.</span>
+<span class="source-line-no">1671</span><span id="line-1671">     *      empty, but it will not be {@null}.</span>
 <span class="source-line-no">1672</span><span id="line-1672">     */</span>
 <span class="source-line-no">1673</span><span id="line-1673">    public final List&lt;ParameterSpec&gt; parametersOf( final Method method )</span>
 <span class="source-line-no">1674</span><span id="line-1674">    {</span>

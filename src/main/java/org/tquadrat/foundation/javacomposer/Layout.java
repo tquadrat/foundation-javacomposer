@@ -29,12 +29,12 @@ import org.tquadrat.foundation.javacomposer.internal.LayoutWriter;
  *  {@link JavaFile}.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: Layout.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: Layout.java 1258 2026-06-04 18:33:06Z tquadrat $
  *
  *  @UMLGraph.link
  *  @since 0.0.5
  */
-@ClassVersion( sourceVersion = "$Id: Layout.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: Layout.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public enum Layout implements LayoutWriter
 {
@@ -113,8 +113,8 @@ public enum Layout implements LayoutWriter
     /**
      *  Creates a new instance for {@code Layout}.
      *
-     *  @param  useTab  {@code true} if the tabulator should be used for the
-     *      indentation, {@code false} if blanks should be used.
+     *  @param  useTab  {@true} if the tabulator should be used for the
+     *      indentation, {@false} if blanks should be used.
      *  @param  tabSize The tabulator size.
      */
     private Layout( final boolean useTab, final int tabSize )

@@ -46,12 +46,12 @@ import org.tquadrat.foundation.javacomposer.TypeVariableName;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ArrayTypeNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: ArrayTypeNameImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ArrayTypeNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ArrayTypeNameImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeName
 {
@@ -118,9 +118,9 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
      *  {@link CodeWriter}.
      *
      *  @param  out The code writer.
-     *  @param  varargs {@code true} if the array should be emitted as varargs
+     *  @param  varargs {@true} if the array should be emitted as varargs
      *      (obviously this affects only arrays used in method signatures),
-     *      {@code false} for the usual representation.
+     *      {@false} for the usual representation.
      *  @return The code writer.
      *  @throws UncheckedIOException Something went wrong when writing to the
      *      output target.
@@ -140,9 +140,9 @@ public final class ArrayTypeNameImpl extends TypeNameImpl implements ArrayTypeNa
      *  Emits the annotations and the brackets for the array.
      *
      *  @param  out The code writer.
-     *  @param  varargs {@code true} if the array should be emitted as varargs
+     *  @param  varargs {@true} if the array should be emitted as varargs
      *      (obviously this affects only arrays used in method signatures),
-     *      {@code false} for the usual representation.
+     *      {@false} for the usual representation.
      *  @return The code writer.
      *  @throws UncheckedIOException Something went wrong when writing to the
      *      output target.

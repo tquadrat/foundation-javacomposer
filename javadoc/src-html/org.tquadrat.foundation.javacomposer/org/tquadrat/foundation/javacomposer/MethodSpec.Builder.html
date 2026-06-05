@@ -49,12 +49,12 @@
 <span class="source-line-no">036</span><span id="line-36"> *</span>
 <span class="source-line-no">037</span><span id="line-37"> *  @author Square,Inc.</span>
 <span class="source-line-no">038</span><span id="line-38"> *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">039</span><span id="line-39"> *  @version $Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">039</span><span id="line-39"> *  @version $Id: MethodSpec.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">040</span><span id="line-40"> *  @since 0.0.5</span>
 <span class="source-line-no">041</span><span id="line-41"> *</span>
 <span class="source-line-no">042</span><span id="line-42"> *  @UMLGraph.link</span>
 <span class="source-line-no">043</span><span id="line-43"> */</span>
-<span class="source-line-no">044</span><span id="line-44">@ClassVersion( sourceVersion = "$Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">044</span><span id="line-44">@ClassVersion( sourceVersion = "$Id: MethodSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">045</span><span id="line-45">@API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">046</span><span id="line-46">public sealed interface MethodSpec</span>
 <span class="source-line-no">047</span><span id="line-47">    permits MethodSpecImpl</span>
@@ -68,13 +68,13 @@
 <span class="source-line-no">055</span><span id="line-55">     *</span>
 <span class="source-line-no">056</span><span id="line-56">     *  @author Square,Inc.</span>
 <span class="source-line-no">057</span><span id="line-57">     *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">058</span><span id="line-58">     *  @version $Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">058</span><span id="line-58">     *  @version $Id: MethodSpec.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">059</span><span id="line-59">     *  @since 0.0.5</span>
 <span class="source-line-no">060</span><span id="line-60">     *</span>
 <span class="source-line-no">061</span><span id="line-61">     *  @UMLGraph.link</span>
 <span class="source-line-no">062</span><span id="line-62">     */</span>
 <span class="source-line-no">063</span><span id="line-63">    @SuppressWarnings( {"ClassWithTooManyMethods", "InnerClassOfInterface"} )</span>
-<span class="source-line-no">064</span><span id="line-64">    @ClassVersion( sourceVersion = "$Id: MethodSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">064</span><span id="line-64">    @ClassVersion( sourceVersion = "$Id: MethodSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">065</span><span id="line-65">    @API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">066</span><span id="line-66">    public static sealed interface Builder</span>
 <span class="source-line-no">067</span><span id="line-67">        permits MethodSpecImpl.BuilderImpl</span>
@@ -469,7 +469,7 @@
 <span class="source-line-no">456</span><span id="line-456"></span>
 <span class="source-line-no">457</span><span id="line-457">        /**</span>
 <span class="source-line-no">458</span><span id="line-458">         *  Sets the flag that indicates whether a parameter (the last one) is</span>
-<span class="source-line-no">459</span><span id="line-459">         *  a {@code varargs} parameter to {@code true}.</span>
+<span class="source-line-no">459</span><span id="line-459">         *  a {@code varargs} parameter to {@true}.</span>
 <span class="source-line-no">460</span><span id="line-460">         *</span>
 <span class="source-line-no">461</span><span id="line-461">         *  @return This {@code Builder} instance.</span>
 <span class="source-line-no">462</span><span id="line-462">         */</span>
@@ -479,8 +479,8 @@
 <span class="source-line-no">466</span><span id="line-466">         *  Sets the flag that indicates whether a parameter (the last one) is</span>
 <span class="source-line-no">467</span><span id="line-467">         *  a {@code varargs} parameter.</span>
 <span class="source-line-no">468</span><span id="line-468">         *</span>
-<span class="source-line-no">469</span><span id="line-469">         *  @param  varargs {@code true} if the last parameter is a</span>
-<span class="source-line-no">470</span><span id="line-470">         *      {@code varargs} parameter, {@code false} if not.</span>
+<span class="source-line-no">469</span><span id="line-469">         *  @param  varargs {@true} if the last parameter is a</span>
+<span class="source-line-no">470</span><span id="line-470">         *      {@code varargs} parameter, {@false} if not.</span>
 <span class="source-line-no">471</span><span id="line-471">         *  @return This {@code Builder} instance.</span>
 <span class="source-line-no">472</span><span id="line-472">         */</span>
 <span class="source-line-no">473</span><span id="line-473">        public Builder varargs( final boolean varargs );</span>
@@ -515,15 +515,15 @@
 <span class="source-line-no">502</span><span id="line-502">     *  Checks whether the method has the given modifier.</span>
 <span class="source-line-no">503</span><span id="line-503">     *</span>
 <span class="source-line-no">504</span><span id="line-504">     *  @param  modifier    The modifier.</span>
-<span class="source-line-no">505</span><span id="line-505">     *  @return {@code true} if the given modifier has been applied to this</span>
-<span class="source-line-no">506</span><span id="line-506">     *      method, {@code false} otherwise.</span>
+<span class="source-line-no">505</span><span id="line-505">     *  @return {@true} if the given modifier has been applied to this</span>
+<span class="source-line-no">506</span><span id="line-506">     *      method, {@false} otherwise.</span>
 <span class="source-line-no">507</span><span id="line-507">     */</span>
 <span class="source-line-no">508</span><span id="line-508">    public boolean hasModifier( final Modifier modifier );</span>
 <span class="source-line-no">509</span><span id="line-509"></span>
 <span class="source-line-no">510</span><span id="line-510">    /**</span>
 <span class="source-line-no">511</span><span id="line-511">     *  Checks whether this method is a constructor.</span>
 <span class="source-line-no">512</span><span id="line-512">     *</span>
-<span class="source-line-no">513</span><span id="line-513">     *  @return {@code true} if the method is a constructor, {@code false} if</span>
+<span class="source-line-no">513</span><span id="line-513">     *  @return {@true} if the method is a constructor, {@false} if</span>
 <span class="source-line-no">514</span><span id="line-514">     *      it is a regular method.</span>
 <span class="source-line-no">515</span><span id="line-515">     */</span>
 <span class="source-line-no">516</span><span id="line-516">    public boolean isConstructor();</span>
@@ -559,7 +559,7 @@
 <span class="source-line-no">546</span><span id="line-546">    /**</span>
 <span class="source-line-no">547</span><span id="line-547">     *  Return the return type for this method.</span>
 <span class="source-line-no">548</span><span id="line-548">     *</span>
-<span class="source-line-no">549</span><span id="line-549">     *  @return The return type; will never be {@code null}, not even for a</span>
+<span class="source-line-no">549</span><span id="line-549">     *  @return The return type; will never be {@null}, not even for a</span>
 <span class="source-line-no">550</span><span id="line-550">     *      constructor.</span>
 <span class="source-line-no">551</span><span id="line-551">     */</span>
 <span class="source-line-no">552</span><span id="line-552">    public TypeName returnType();</span>
@@ -583,8 +583,8 @@
 <span class="source-line-no">570</span><span id="line-570">     *  {@link Modifier#ABSTRACT ABSTRACT},</span>
 <span class="source-line-no">571</span><span id="line-571">     *  too.&lt;/p&gt;</span>
 <span class="source-line-no">572</span><span id="line-572">     *</span>
-<span class="source-line-no">573</span><span id="line-573">     *  @param  omitCode    {@code true} if the body code should not be copied,</span>
-<span class="source-line-no">574</span><span id="line-574">     *      {@code false} otherwise; in the latter case, the result is the same</span>
+<span class="source-line-no">573</span><span id="line-573">     *  @param  omitCode    {@true} if the body code should not be copied,</span>
+<span class="source-line-no">574</span><span id="line-574">     *      {@false} otherwise; in the latter case, the result is the same</span>
 <span class="source-line-no">575</span><span id="line-575">     *      as for</span>
 <span class="source-line-no">576</span><span id="line-576">     *      {@link #toBuilder()}.</span>
 <span class="source-line-no">577</span><span id="line-577">     *  @return The builder.</span>

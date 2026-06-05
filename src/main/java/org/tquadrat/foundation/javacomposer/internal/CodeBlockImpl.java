@@ -74,12 +74,12 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: CodeBlockImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: CodeBlockImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class CodeBlockImpl implements CodeBlock
 {
@@ -95,12 +95,12 @@ public final class CodeBlockImpl implements CodeBlock
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeBlockImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+     *  @version $Id: CodeBlockImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements CodeBlock.Builder
     {
@@ -537,7 +537,7 @@ public final class CodeBlockImpl implements CodeBlock
          *  @return The resulting String, or
          *      {@link Util#NULL_REFERENCE}
          *      if the object is
-         *      {@code null}.
+         *      {@null}.
          */
         private static final Object argToString( final Object o )
         {
@@ -654,8 +654,8 @@ public final class CodeBlockImpl implements CodeBlock
          *  argument.
          *
          *  @param  placeholder The placeholder character.
-         *  @return {@code true} if there is no argument expected,
-         *      {@code false} otherwise.
+         *  @return {@true} if there is no argument expected,
+         *      {@false} otherwise.
          */
         private static final boolean isNoArgPlaceholder( final char placeholder )
         {
@@ -703,12 +703,12 @@ public final class CodeBlockImpl implements CodeBlock
      *  A helper class that supports to join code blocks.
      *
      *  @author Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: CodeBlockImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+     *  @version $Id: CodeBlockImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: CodeBlockImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     private static final class CodeBlockJoiner
     {

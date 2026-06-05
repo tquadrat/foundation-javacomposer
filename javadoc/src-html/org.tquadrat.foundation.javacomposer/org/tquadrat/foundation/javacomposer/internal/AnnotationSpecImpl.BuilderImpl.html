@@ -64,12 +64,12 @@
 <span class="source-line-no">051</span><span id="line-51"> *</span>
 <span class="source-line-no">052</span><span id="line-52"> *  @author Square,Inc.</span>
 <span class="source-line-no">053</span><span id="line-53"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">054</span><span id="line-54"> *  @version $Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $</span>
+<span class="source-line-no">054</span><span id="line-54"> *  @version $Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">055</span><span id="line-55"> *  @since 0.0.5</span>
 <span class="source-line-no">056</span><span id="line-56"> *</span>
 <span class="source-line-no">057</span><span id="line-57"> *  @UMLGraph.link</span>
 <span class="source-line-no">058</span><span id="line-58"> */</span>
-<span class="source-line-no">059</span><span id="line-59">@ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )</span>
+<span class="source-line-no">059</span><span id="line-59">@ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">060</span><span id="line-60">@API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">061</span><span id="line-61">public final class AnnotationSpecImpl implements AnnotationSpec</span>
 <span class="source-line-no">062</span><span id="line-62">{</span>
@@ -85,12 +85,12 @@
 <span class="source-line-no">072</span><span id="line-72">     *</span>
 <span class="source-line-no">073</span><span id="line-73">     *  @author Square,Inc.</span>
 <span class="source-line-no">074</span><span id="line-74">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">075</span><span id="line-75">     *  @version $Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $</span>
+<span class="source-line-no">075</span><span id="line-75">     *  @version $Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">076</span><span id="line-76">     *  @since 0.0.5</span>
 <span class="source-line-no">077</span><span id="line-77">     *</span>
 <span class="source-line-no">078</span><span id="line-78">     *  @UMLGraph.link</span>
 <span class="source-line-no">079</span><span id="line-79">     */</span>
-<span class="source-line-no">080</span><span id="line-80">    @ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )</span>
+<span class="source-line-no">080</span><span id="line-80">    @ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">081</span><span id="line-81">    @API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">082</span><span id="line-82">    public static final class BuilderImpl implements AnnotationSpec.Builder</span>
 <span class="source-line-no">083</span><span id="line-83">    {</span>
@@ -247,7 +247,7 @@
 <span class="source-line-no">234</span><span id="line-234">         *  Returns the flag that indicates whether this annotation is</span>
 <span class="source-line-no">235</span><span id="line-235">         *  presented inline or multiline.</span>
 <span class="source-line-no">236</span><span id="line-236">         *</span>
-<span class="source-line-no">237</span><span id="line-237">         *  @return {@code true} for the inline presentation, {@code false} for</span>
+<span class="source-line-no">237</span><span id="line-237">         *  @return {@true} for the inline presentation, {@false} for</span>
 <span class="source-line-no">238</span><span id="line-238">         *      multi-line.</span>
 <span class="source-line-no">239</span><span id="line-239">         */</span>
 <span class="source-line-no">240</span><span id="line-240">        @SuppressWarnings( {"PublicMethodNotExposedInInterface", "BooleanMethodNameMustStartWithQuestion"} )</span>
@@ -350,8 +350,8 @@
 <span class="source-line-no">337</span><span id="line-337">     *  Emits this annotation to the given code writer.</span>
 <span class="source-line-no">338</span><span id="line-338">     *</span>
 <span class="source-line-no">339</span><span id="line-339">     *  @param  codeWriter  The code writer.</span>
-<span class="source-line-no">340</span><span id="line-340">     *  @param  inline  {@code true} if the annotation should be placed on the</span>
-<span class="source-line-no">341</span><span id="line-341">     *      same line as the annotated element, {@code false} otherwise.</span>
+<span class="source-line-no">340</span><span id="line-340">     *  @param  inline  {@true} if the annotation should be placed on the</span>
+<span class="source-line-no">341</span><span id="line-341">     *      same line as the annotated element, {@false} otherwise.</span>
 <span class="source-line-no">342</span><span id="line-342">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
 <span class="source-line-no">343</span><span id="line-343">     *      output target.</span>
 <span class="source-line-no">344</span><span id="line-344">     */</span>
@@ -372,8 +372,8 @@
 <span class="source-line-no">359</span><span id="line-359">     *  Emits this annotation to the given code writer.</span>
 <span class="source-line-no">360</span><span id="line-360">     *</span>
 <span class="source-line-no">361</span><span id="line-361">     *  @param  codeWriter  The code writer.</span>
-<span class="source-line-no">362</span><span id="line-362">     *  @param  inline  {@code true} if the annotation should be placed on the</span>
-<span class="source-line-no">363</span><span id="line-363">     *      same line as the annotated element, {@code false} otherwise.</span>
+<span class="source-line-no">362</span><span id="line-362">     *  @param  inline  {@true} if the annotation should be placed on the</span>
+<span class="source-line-no">363</span><span id="line-363">     *      same line as the annotated element, {@false} otherwise.</span>
 <span class="source-line-no">364</span><span id="line-364">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
 <span class="source-line-no">365</span><span id="line-365">     *      output target.</span>
 <span class="source-line-no">366</span><span id="line-366">     */</span>
@@ -428,8 +428,8 @@
 <span class="source-line-no">415</span><span id="line-415">     *  JavaPoet layout.</span>
 <span class="source-line-no">416</span><span id="line-416">     *</span>
 <span class="source-line-no">417</span><span id="line-417">     *  @param  codeWriter  The code writer.</span>
-<span class="source-line-no">418</span><span id="line-418">     *  @param  inline  {@code true} if the annotation should be placed on the</span>
-<span class="source-line-no">419</span><span id="line-419">     *      same line as the annotated element, {@code false} otherwise.</span>
+<span class="source-line-no">418</span><span id="line-418">     *  @param  inline  {@true} if the annotation should be placed on the</span>
+<span class="source-line-no">419</span><span id="line-419">     *      same line as the annotated element, {@false} otherwise.</span>
 <span class="source-line-no">420</span><span id="line-420">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
 <span class="source-line-no">421</span><span id="line-421">     *      output target.</span>
 <span class="source-line-no">422</span><span id="line-422">     */</span>

@@ -83,12 +83,12 @@
 <span class="source-line-no">070</span><span id="line-70"> *</span>
 <span class="source-line-no">071</span><span id="line-71"> *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org</span>
 <span class="source-line-no">072</span><span id="line-72"> *  @thanks Square,Inc.</span>
-<span class="source-line-no">073</span><span id="line-73"> *  @version $Id: RecordSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">073</span><span id="line-73"> *  @version $Id: RecordSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">074</span><span id="line-74"> *  @since 0.2.0</span>
 <span class="source-line-no">075</span><span id="line-75"> *</span>
 <span class="source-line-no">076</span><span id="line-76"> *  @UMLGraph.link</span>
 <span class="source-line-no">077</span><span id="line-77"> */</span>
-<span class="source-line-no">078</span><span id="line-78">@ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">078</span><span id="line-78">@ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">079</span><span id="line-79">@API( status = INTERNAL, since = "0.2.0" )</span>
 <span class="source-line-no">080</span><span id="line-80">public final class RecordSpecImpl extends TypeSpecImpl</span>
 <span class="source-line-no">081</span><span id="line-81">{</span>
@@ -102,14 +102,14 @@
 <span class="source-line-no">089</span><span id="line-89">     *</span>
 <span class="source-line-no">090</span><span id="line-90">     *  @extauthor  Thomas Thrien - thomas.thrien@tquadrat.org</span>
 <span class="source-line-no">091</span><span id="line-91">     *  @thanks Square,Inc.</span>
-<span class="source-line-no">092</span><span id="line-92">     *  @version $Id: RecordSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">092</span><span id="line-92">     *  @version $Id: RecordSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">093</span><span id="line-93">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">094</span><span id="line-94">     *  @version $Id: RecordSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">094</span><span id="line-94">     *  @version $Id: RecordSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">095</span><span id="line-95">     *  @since 0.2.0</span>
 <span class="source-line-no">096</span><span id="line-96">     *</span>
 <span class="source-line-no">097</span><span id="line-97">     *  @UMLGraph.link</span>
 <span class="source-line-no">098</span><span id="line-98">     */</span>
-<span class="source-line-no">099</span><span id="line-99">    @ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">099</span><span id="line-99">    @ClassVersion( sourceVersion = "$Id: RecordSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">100</span><span id="line-100">    @API( status = INTERNAL, since = "0.2.0" )</span>
 <span class="source-line-no">101</span><span id="line-101">    public static final class BuilderImpl extends TypeSpecImpl.BuilderImpl</span>
 <span class="source-line-no">102</span><span id="line-102">    {</span>
@@ -328,7 +328,7 @@
 <span class="source-line-no">315</span><span id="line-315">     *  by the Foundation library code.</span>
 <span class="source-line-no">316</span><span id="line-316">     *</span>
 <span class="source-line-no">317</span><span id="line-317">     *  @param  codeWriter  The target code writer.</span>
-<span class="source-line-no">318</span><span id="line-318">     *  @param  enumName    The name of the enum; can be {@code null}.</span>
+<span class="source-line-no">318</span><span id="line-318">     *  @param  enumName    The name of the enum; can be {@null}.</span>
 <span class="source-line-no">319</span><span id="line-319">     *  @param  implicitModifiers   The implicit modifiers.</span>
 <span class="source-line-no">320</span><span id="line-320">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
 <span class="source-line-no">321</span><span id="line-321">     *      output target.</span>
@@ -577,7 +577,7 @@
 <span class="source-line-no">564</span><span id="line-564">     *  by the original JavaPoet code.</span>
 <span class="source-line-no">565</span><span id="line-565">     *</span>
 <span class="source-line-no">566</span><span id="line-566">     *  @param  codeWriter  The target code writer.</span>
-<span class="source-line-no">567</span><span id="line-567">     *  @param  enumName    The name of the enum; can be {@code null}.</span>
+<span class="source-line-no">567</span><span id="line-567">     *  @param  enumName    The name of the enum; can be {@null}.</span>
 <span class="source-line-no">568</span><span id="line-568">     *  @param  implicitModifiers   The implicit modifiers.</span>
 <span class="source-line-no">569</span><span id="line-569">     *  @throws UncheckedIOException A problem occurred when writing to the</span>
 <span class="source-line-no">570</span><span id="line-570">     *      output target.</span>

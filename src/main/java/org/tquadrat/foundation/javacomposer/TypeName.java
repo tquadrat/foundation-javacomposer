@@ -84,12 +84,12 @@ import org.tquadrat.foundation.javacomposer.internal.TypeNameImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeName.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: TypeName.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: TypeName.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeName.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface TypeName
     permits ArrayTypeName, ClassName, ParameterizedTypeName, TypeVariableName, WildcardTypeName, TypeNameImpl
@@ -207,16 +207,16 @@ public sealed interface TypeName
     /**
      *  Checks whether this type name is annotated.
      *
-     *  @return {@code true} if it is annotated, {@code false} otherwise.
+     *  @return {@true} if it is annotated, {@false} otherwise.
      */
     public boolean isAnnotated();
 
     /**
      *  Checks whether this type name represents a box primitive type.
      *
-     *  @return {@code true} if this is a boxed primitive type like
+     *  @return {@true} if this is a boxed primitive type like
      *      {@link Integer}.
-     *      {@code false} for all other types including unboxed primitives and
+     *      {@false} for all other types including unboxed primitives and
      *      {@link java.lang.Void}.
      */
     public boolean isBoxedPrimitive();
@@ -224,8 +224,8 @@ public sealed interface TypeName
     /**
      *  Checks whether this type name represents a primitive type.
      *
-     *  @return {@code true} if this is a primitive type like {@code int}.
-     *      {@code false} for all other types including boxed primitives and
+     *  @return {@true} if this is a primitive type like {@code int}.
+     *      {@false} for all other types including boxed primitives and
      *      {@code void}.
      */
     public boolean isPrimitive();

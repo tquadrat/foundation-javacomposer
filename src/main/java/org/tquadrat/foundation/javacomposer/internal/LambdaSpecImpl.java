@@ -51,12 +51,12 @@ import org.tquadrat.foundation.lang.Lazy;
  *  {@link LambdaSpec}.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: LambdaSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: LambdaSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class LambdaSpecImpl implements LambdaSpec
 {
@@ -68,12 +68,12 @@ public final class LambdaSpecImpl implements LambdaSpec
      *  {@link org.tquadrat.foundation.javacomposer.LambdaSpec.Builder}.
      *
      *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: LambdaSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+     *  @version $Id: LambdaSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: LambdaSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements Builder
     {
@@ -307,8 +307,8 @@ public final class LambdaSpecImpl implements LambdaSpec
          *  Returns the flag that indicates whether the types of the parameters
          *  will be inferred.
          *
-         *  @return {@code true} if the parameter types are inferred,
-         *      {@code false} if they are explicit.
+         *  @return {@true} if the parameter types are inferred,
+         *      {@false} if they are explicit.
          */
         @SuppressWarnings( {"PublicMethodNotExposedInInterface", "BooleanMethodNameMustStartWithQuestion"} )
         public final boolean inferTypes() { return isNull( m_InferTypes ) || m_InferTypes.booleanValue(); }
@@ -316,8 +316,8 @@ public final class LambdaSpecImpl implements LambdaSpec
         /**
          *  Return the flag that indicates the emit format.
          *
-         *  @return {@code true} if the multi-line format with curly braces and
-         *  a return statement is to be emitted, {@code false} if the single
+         *  @return {@true} if the multi-line format with curly braces and
+         *  a return statement is to be emitted, {@false} if the single
          *  line format can be used.
          */
         @SuppressWarnings( "PublicMethodNotExposedInInterface" )
@@ -375,9 +375,9 @@ public final class LambdaSpecImpl implements LambdaSpec
     private final boolean m_InferTypes;
 
     /**
-     *  The flag that indicates the emit format. {@code true} stands for the
+     *  The flag that indicates the emit format. {@true} stands for the
      *  multi-line format with curly braces and a return statement,
-     *  {@code false} for the single line format.
+     *  {@false} for the single line format.
      */
     private final boolean m_IsMultiLine;
 

@@ -30,12 +30,12 @@ import org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: AnnotationSpec.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface AnnotationSpec
     permits AnnotationSpecImpl
@@ -49,13 +49,13 @@ public sealed interface AnnotationSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: AnnotationSpec.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: AnnotationSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits AnnotationSpecImpl.BuilderImpl
@@ -105,8 +105,8 @@ public sealed interface AnnotationSpec
          *      nullable = false
          *  )</code></pre>
          *
-         *  @param  flag    {@code true} for the forced inline presentation,
-         *      {@code false} for the multi-line presentation.
+         *  @param  flag    {@true} for the forced inline presentation,
+         *      {@false} for the multi-line presentation.
          *  @return This {@code Builder} instance.
          */
         public Builder forceInline( boolean flag );

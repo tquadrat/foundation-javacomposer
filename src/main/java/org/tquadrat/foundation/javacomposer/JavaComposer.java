@@ -98,13 +98,13 @@ import org.tquadrat.foundation.util.JavaUtils;
  *  thread-safe without any synchronisation.</p>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaComposer.java 1163 2026-03-20 15:28:33Z tquadrat $
+ *  @version $Id: JavaComposer.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.2.0
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"OverlyCoupledClass", "ClassWithTooManyMethods", "OverlyComplexClass"} )
-@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1163 2026-03-20 15:28:33Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaComposer.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = STABLE, since = "0.2.0" )
 public final class JavaComposer
 {
@@ -135,7 +135,7 @@ public final class JavaComposer
     ====** Attributes **=======================================================
         \*------------*/
     /**
-     *  If set to {@code true}, some debug information will be added to the
+     *  If set to {@true}, some debug information will be added to the
      *  output.
      */
     private final boolean m_AddDebugOutput;
@@ -230,8 +230,8 @@ public final class JavaComposer
      *  {@link Layout#LAYOUT_DEFAULT Layout} and adds some debug information
      *  to the output.
      *
-     *  @param  addDebugOutput  {@code true} if debug information should be
-     *      added,  {@code false} if not.
+     *  @param  addDebugOutput  {@true} if debug information should be
+     *      added,  {@false} if not.
      */
     public JavaComposer( final boolean addDebugOutput )
     {
@@ -242,8 +242,8 @@ public final class JavaComposer
      *  Creates a new instance of {@code JavaComposer}.
      *
      *  @param  layout  The layout that is used to format the output.
-     *  @param  addDebugOutput  {@code true} if debug information should be
-     *      added,  {@code false} if not.
+     *  @param  addDebugOutput  {@true} if debug information should be
+     *      added,  {@false} if not.
      */
     public JavaComposer( final Layout layout, final boolean addDebugOutput )
     {
@@ -343,8 +343,8 @@ public final class JavaComposer
      *  Returns the flag that controls whether the output should be enhanced
      *  with some debug information.
      *
-     *  @return {@code true} if the debug information should be added to the
-     *      output, {@code false} otherwise.
+     *  @return {@true} if the debug information should be added to the
+     *      output, {@false} otherwise.
      */
     @SuppressWarnings( "BooleanMethodNameMustStartWithQuestion" )
     public final boolean addDebugOutput() { return m_AddDebugOutput; }
@@ -574,8 +574,8 @@ public final class JavaComposer
      *  instance.
      *
      *  @param  annotation  The annotation.
-     *  @param  includeDefaultValues    {@code true} to include the
-     *      annotation's default values, {@code false} to ignore them.
+     *  @param  includeDefaultValues    {@true} to include the
+     *      annotation's default values, {@false} to ignore them.
      *  @return The new instance of {@code AnnotationSpec}.
      */
     public final AnnotationSpec createAnnotation( final Annotation annotation, final boolean includeDefaultValues )
@@ -680,7 +680,7 @@ public final class JavaComposer
     /**
      *  Creates the comment for a constant.
      *
-     *  @param  comment The already existing comment; can be {@code null}.
+     *  @param  comment The already existing comment; can be {@null}.
      *  @return The comment for the new constant.
      */
     private final CodeBlock createComment4Constant( final CodeBlock comment )
@@ -1650,7 +1650,7 @@ public final class JavaComposer
      *
      *  @param  method  The method.
      *  @return The parameters of the given method; the returned list can be
-     *      empty, but it will not be {@code null}.
+     *      empty, but it will not be {@null}.
      */
     public final List<ParameterSpec> parametersOf( final ExecutableElement method )
     {
@@ -1668,7 +1668,7 @@ public final class JavaComposer
      *
      *  @param  method  The method.
      *  @return The parameters of the given method; the returned list can be
-     *      empty, but it will not be {@code null}.
+     *      empty, but it will not be {@null}.
      */
     public final List<ParameterSpec> parametersOf( final Method method )
     {

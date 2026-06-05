@@ -51,12 +51,12 @@ import org.tquadrat.foundation.util.JavaUtils;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class AnnotationSpecImpl implements AnnotationSpec
 {
@@ -72,12 +72,12 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+     *  @version $Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements AnnotationSpec.Builder
     {
@@ -234,7 +234,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
          *  Returns the flag that indicates whether this annotation is
          *  presented inline or multiline.
          *
-         *  @return {@code true} for the inline presentation, {@code false} for
+         *  @return {@true} for the inline presentation, {@false} for
          *      multi-line.
          */
         @SuppressWarnings( {"PublicMethodNotExposedInInterface", "BooleanMethodNameMustStartWithQuestion"} )
@@ -337,8 +337,8 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *  Emits this annotation to the given code writer.
      *
      *  @param  codeWriter  The code writer.
-     *  @param  inline  {@code true} if the annotation should be placed on the
-     *      same line as the annotated element, {@code false} otherwise.
+     *  @param  inline  {@true} if the annotation should be placed on the
+     *      same line as the annotated element, {@false} otherwise.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
@@ -359,8 +359,8 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *  Emits this annotation to the given code writer.
      *
      *  @param  codeWriter  The code writer.
-     *  @param  inline  {@code true} if the annotation should be placed on the
-     *      same line as the annotated element, {@code false} otherwise.
+     *  @param  inline  {@true} if the annotation should be placed on the
+     *      same line as the annotated element, {@false} otherwise.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
@@ -415,8 +415,8 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *  JavaPoet layout.
      *
      *  @param  codeWriter  The code writer.
-     *  @param  inline  {@code true} if the annotation should be placed on the
-     *      same line as the annotated element, {@code false} otherwise.
+     *  @param  inline  {@true} if the annotation should be placed on the
+     *      same line as the annotated element, {@false} otherwise.
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */

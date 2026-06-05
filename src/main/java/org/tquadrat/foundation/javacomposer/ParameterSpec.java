@@ -31,12 +31,12 @@ import org.tquadrat.foundation.annotation.ClassVersion;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: ParameterSpec.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public interface ParameterSpec
 {
@@ -49,13 +49,13 @@ public interface ParameterSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: ParameterSpec.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: ParameterSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static interface Builder
     {
@@ -157,8 +157,8 @@ public interface ParameterSpec
      *  Checks whether this parameter has the given modifier.
      *
      *  @param  modifier    The modifier.
-     *  @return {@code true} if the parameter has the given modifier,
-     *      {@code false} if not.
+     *  @return {@true} if the parameter has the given modifier,
+     *      {@false} if not.
      */
     public boolean hasModifier( final Modifier modifier );
 
@@ -183,8 +183,8 @@ public interface ParameterSpec
      *
      *  @param  type    The type for the new parameter.
      *  @param  name    The name for the new parameter.
-     *  @param  keepJavadoc {@code true} if an existing Javadoc comment should
-     *      be preserved, {@code false} if it should be dropped.
+     *  @param  keepJavadoc {@true} if an existing Javadoc comment should
+     *      be preserved, {@false} if it should be dropped.
      *  @return The builder.
      */
     public Builder toBuilder( final TypeName type, final CharSequence name, final boolean keepJavadoc );

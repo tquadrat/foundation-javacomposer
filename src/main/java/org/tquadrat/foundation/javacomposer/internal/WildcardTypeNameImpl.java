@@ -50,12 +50,12 @@ import org.tquadrat.foundation.javacomposer.WildcardTypeName;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: WildcardTypeNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: WildcardTypeNameImpl.java 1255 2026-05-27 19:53:01Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: WildcardTypeNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: WildcardTypeNameImpl.java 1255 2026-05-27 19:53:01Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class WildcardTypeNameImpl extends TypeNameImpl implements WildcardTypeName
 {

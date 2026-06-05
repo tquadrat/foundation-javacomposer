@@ -84,12 +84,12 @@
 <span class="source-line-no">071</span><span id="line-71"> *</span>
 <span class="source-line-no">072</span><span id="line-72"> *  @author Square,Inc.</span>
 <span class="source-line-no">073</span><span id="line-73"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">074</span><span id="line-74"> *  @version $Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $</span>
+<span class="source-line-no">074</span><span id="line-74"> *  @version $Id: JavaFileImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">075</span><span id="line-75"> *  @since 0.0.5</span>
 <span class="source-line-no">076</span><span id="line-76"> *</span>
 <span class="source-line-no">077</span><span id="line-77"> *  @UMLGraph.link</span>
 <span class="source-line-no">078</span><span id="line-78"> */</span>
-<span class="source-line-no">079</span><span id="line-79">@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )</span>
+<span class="source-line-no">079</span><span id="line-79">@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">080</span><span id="line-80">@API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">081</span><span id="line-81">public final class JavaFileImpl implements JavaFile</span>
 <span class="source-line-no">082</span><span id="line-82">{</span>
@@ -104,12 +104,12 @@
 <span class="source-line-no">091</span><span id="line-91">     *</span>
 <span class="source-line-no">092</span><span id="line-92">     *  @author Square,Inc.</span>
 <span class="source-line-no">093</span><span id="line-93">     *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">094</span><span id="line-94">     *  @version $Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $</span>
+<span class="source-line-no">094</span><span id="line-94">     *  @version $Id: JavaFileImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">095</span><span id="line-95">     *  @since 0.0.5</span>
 <span class="source-line-no">096</span><span id="line-96">     *</span>
 <span class="source-line-no">097</span><span id="line-97">     *  @UMLGraph.link</span>
 <span class="source-line-no">098</span><span id="line-98">     */</span>
-<span class="source-line-no">099</span><span id="line-99">    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )</span>
+<span class="source-line-no">099</span><span id="line-99">    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">100</span><span id="line-100">    @API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">101</span><span id="line-101">    public static final class BuilderImpl implements JavaFile.Builder</span>
 <span class="source-line-no">102</span><span id="line-102">    {</span>
@@ -200,9 +200,9 @@
 <span class="source-line-no">187</span><span id="line-187">         *  @param  fileComment The already existing file comments.</span>
 <span class="source-line-no">188</span><span id="line-188">         *  @param  layout  The layout for the output of</span>
 <span class="source-line-no">189</span><span id="line-189">         *      {@link JavaFile}.</span>
-<span class="source-line-no">190</span><span id="line-190">         *  @param  skipJavaLangImports {@code true} means that the imports for</span>
+<span class="source-line-no">190</span><span id="line-190">         *  @param  skipJavaLangImports {@true} means that the imports for</span>
 <span class="source-line-no">191</span><span id="line-191">         *      classes from the package {@code java.lang} are skipped,</span>
-<span class="source-line-no">192</span><span id="line-192">         *      {@code false} means that the imports are added explicitly.</span>
+<span class="source-line-no">192</span><span id="line-192">         *      {@false} means that the imports are added explicitly.</span>
 <span class="source-line-no">193</span><span id="line-193">         */</span>
 <span class="source-line-no">194</span><span id="line-194">        @SuppressWarnings( {"TypeMayBeWeakened", "UseOfConcreteClass", "ConstructorWithTooManyParameters"} )</span>
 <span class="source-line-no">195</span><span id="line-195">        public BuilderImpl( final JavaComposer composer, final CharSequence packageName, final TypeSpecImpl typeSpec, final CodeBlockImpl fileComment, final Layout layout, final boolean skipJavaLangImports )</span>
@@ -321,8 +321,8 @@
 <span class="source-line-no">308</span><span id="line-308">         *  Returns the flag that rules whether imports for classes from the</span>
 <span class="source-line-no">309</span><span id="line-309">         *  package {@code java.lang} will be omitted.</span>
 <span class="source-line-no">310</span><span id="line-310">         *</span>
-<span class="source-line-no">311</span><span id="line-311">         *  @return {@code true} means that the imports for classes from the</span>
-<span class="source-line-no">312</span><span id="line-312">         *      package {@code java.lang} are skipped, {@code false} means that</span>
+<span class="source-line-no">311</span><span id="line-311">         *  @return {@true} means that the imports for classes from the</span>
+<span class="source-line-no">312</span><span id="line-312">         *      package {@code java.lang} are skipped, {@false} means that</span>
 <span class="source-line-no">313</span><span id="line-313">         *      the imports are added explicitly.</span>
 <span class="source-line-no">314</span><span id="line-314">         *</span>
 <span class="source-line-no">315</span><span id="line-315">         *  @see #skipJavaLangImports(boolean)</span>

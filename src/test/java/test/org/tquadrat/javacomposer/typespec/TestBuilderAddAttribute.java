@@ -45,9 +45,9 @@ import org.tquadrat.foundation.testutil.TestBaseClass;
  *  {@link Builder#addAttribute(FieldSpec, boolean)}.
  *
  *  @author Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TestBuilderAddAttribute.java 1076 2023-10-03 18:36:07Z tquadrat $
+ *  @version $Id: TestBuilderAddAttribute.java 1258 2026-06-04 18:33:06Z tquadrat $
  */
-@ClassVersion( sourceVersion = "$Id: TestBuilderAddAttribute.java 1076 2023-10-03 18:36:07Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TestBuilderAddAttribute.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @DisplayName( "TestBuilderAddAttribute" )
 public class TestBuilderAddAttribute extends TestBaseClass
 {
@@ -421,7 +421,7 @@ public class TestBuilderAddAttribute extends TestBaseClass
     /**
      *  Calls
      *  {@link Builder#addAttribute(FieldSpec, boolean)}
-     *  with {@code null}.
+     *  with {@null}.
      */
     @Test
     final void testAddAttributeWithNullArgument()

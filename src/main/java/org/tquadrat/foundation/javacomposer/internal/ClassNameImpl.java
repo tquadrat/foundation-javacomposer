@@ -51,13 +51,13 @@ import org.tquadrat.foundation.javacomposer.ClassName;
  *  for a fully-qualified class name for top-level and member classes.
  *
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: ClassNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: ClassNameImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "ComparableImplementedButEqualsNotOverridden"} )
-@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class ClassNameImpl extends TypeNameImpl implements ClassName
 {
@@ -171,7 +171,7 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *
      *  @param  packageName The name of the package for the new class name.
      *  @param  enclosingClassName  The name of the enclosing class; can be
-     *      {@code null} in case of a top level class.
+     *      {@null} in case of a top level class.
      *  @param  simpleName  The name of the class.
      */
     @SuppressWarnings( "UseOfConcreteClass" )
@@ -199,7 +199,7 @@ public final class ClassNameImpl extends TypeNameImpl implements ClassName
      *
      *  @param  packageName The name of the package for the new class name.
      *  @param  enclosingClassName  The name of the enclosing class; can be
-     *      {@code null} in case of a top level class.
+     *      {@null} in case of a top level class.
      *  @param  simpleName  The name of the class.
      *  @param  annotations The annotations for this class name.
      */

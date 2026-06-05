@@ -64,13 +64,13 @@
 <span class="source-line-no">051</span><span id="line-51"> *  for a fully-qualified class name for top-level and member classes.</span>
 <span class="source-line-no">052</span><span id="line-52"> *</span>
 <span class="source-line-no">053</span><span id="line-53"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">054</span><span id="line-54"> *  @version $Id: ClassNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $</span>
+<span class="source-line-no">054</span><span id="line-54"> *  @version $Id: ClassNameImpl.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">055</span><span id="line-55"> *  @since 0.0.5</span>
 <span class="source-line-no">056</span><span id="line-56"> *</span>
 <span class="source-line-no">057</span><span id="line-57"> *  @UMLGraph.link</span>
 <span class="source-line-no">058</span><span id="line-58"> */</span>
 <span class="source-line-no">059</span><span id="line-59">@SuppressWarnings( {"ClassWithTooManyFields", "ComparableImplementedButEqualsNotOverridden"} )</span>
-<span class="source-line-no">060</span><span id="line-60">@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )</span>
+<span class="source-line-no">060</span><span id="line-60">@ClassVersion( sourceVersion = "$Id: ClassNameImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">061</span><span id="line-61">@API( status = INTERNAL, since = "0.0.5" )</span>
 <span class="source-line-no">062</span><span id="line-62">public final class ClassNameImpl extends TypeNameImpl implements ClassName</span>
 <span class="source-line-no">063</span><span id="line-63">{</span>
@@ -184,7 +184,7 @@
 <span class="source-line-no">171</span><span id="line-171">     *</span>
 <span class="source-line-no">172</span><span id="line-172">     *  @param  packageName The name of the package for the new class name.</span>
 <span class="source-line-no">173</span><span id="line-173">     *  @param  enclosingClassName  The name of the enclosing class; can be</span>
-<span class="source-line-no">174</span><span id="line-174">     *      {@code null} in case of a top level class.</span>
+<span class="source-line-no">174</span><span id="line-174">     *      {@null} in case of a top level class.</span>
 <span class="source-line-no">175</span><span id="line-175">     *  @param  simpleName  The name of the class.</span>
 <span class="source-line-no">176</span><span id="line-176">     */</span>
 <span class="source-line-no">177</span><span id="line-177">    @SuppressWarnings( "UseOfConcreteClass" )</span>
@@ -212,7 +212,7 @@
 <span class="source-line-no">199</span><span id="line-199">     *</span>
 <span class="source-line-no">200</span><span id="line-200">     *  @param  packageName The name of the package for the new class name.</span>
 <span class="source-line-no">201</span><span id="line-201">     *  @param  enclosingClassName  The name of the enclosing class; can be</span>
-<span class="source-line-no">202</span><span id="line-202">     *      {@code null} in case of a top level class.</span>
+<span class="source-line-no">202</span><span id="line-202">     *      {@null} in case of a top level class.</span>
 <span class="source-line-no">203</span><span id="line-203">     *  @param  simpleName  The name of the class.</span>
 <span class="source-line-no">204</span><span id="line-204">     *  @param  annotations The annotations for this class name.</span>
 <span class="source-line-no">205</span><span id="line-205">     */</span>

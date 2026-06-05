@@ -43,21 +43,21 @@ import org.tquadrat.foundation.exception.ValidationException;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: Util.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: Util.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( "NewClassNamingConvention" )
 @UtilityClass
-@ClassVersion( sourceVersion = "$Id: Util.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: Util.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 public final class Util
 {
         /*-----------*\
     ====** Constants **========================================================
         \*-----------*/
     /**
-     *  The placeholder for {@code null} references.
+     *  The placeholder for {@null} references.
      */
     @API( status = INTERNAL, since = "0.0.5" )
     public static final Object NULL_REFERENCE = new Object();
@@ -115,12 +115,12 @@ public final class Util
     /**
      *  Creates the debug output.
      *
-     *  @param  addDebugOutput  {@code true} if some debug output should be
-     *      added to the generated code, {@code false} otherwise.
+     *  @param  addDebugOutput  {@true} if some debug output should be
+     *      added to the generated code, {@false} otherwise.
      *  @return An instance of
      *      {@link Optional}
      *      that holds the debug output; empty if the parameter
-     *      {@code addDebugOutput} is {@code false}.
+     *      {@code addDebugOutput} is {@false}.
      *
      *  @see #NO_DEBUG_OUTPUT
      */

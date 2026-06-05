@@ -31,12 +31,12 @@ import org.tquadrat.foundation.annotation.ClassVersion;
  *  is encountered.
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaComposerException.java 831 2021-01-05 17:25:46Z tquadrat $
+ *  @version $Id: JavaComposerException.java 1258 2026-06-04 18:33:06Z tquadrat $
  *
  *  @UMLGraph.link
  *  @since 0.1.0
  */
-@ClassVersion( sourceVersion = "$Id: JavaComposerException.java 831 2021-01-05 17:25:46Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaComposerException.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = STABLE, since = "0.1.0" )
 public final class JavaComposerException extends RuntimeException
 {
@@ -79,7 +79,7 @@ public final class JavaComposerException extends RuntimeException
      *      {@link #getMessage()}
      *      method.
      *  @param  cause   The cause which is saved for later retrieval by the
-     *      {@link #getCause()} method. A {@code null} value is permitted, and
+     *      {@link #getCause()} method. A {@null} value is permitted, and
      *      indicates that the cause is nonexistent or unknown.
      */
     public JavaComposerException( final String message, final Throwable cause ) { super( message, cause ); }

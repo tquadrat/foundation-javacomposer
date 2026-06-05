@@ -33,12 +33,12 @@ import org.tquadrat.foundation.javacomposer.internal.FieldSpecImpl;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: FieldSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+ *  @version $Id: FieldSpec.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: FieldSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: FieldSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = STABLE, since = "0.0.5" )
 public sealed interface FieldSpec
     permits FieldSpecImpl
@@ -52,13 +52,13 @@ public sealed interface FieldSpec
      *
      *  @author Square,Inc.
      *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: FieldSpec.java 1085 2024-01-05 16:23:28Z tquadrat $
+     *  @version $Id: FieldSpec.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "InnerClassOfInterface" )
-    @ClassVersion( sourceVersion = "$Id: FieldSpec.java 1085 2024-01-05 16:23:28Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: FieldSpec.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = STABLE, since = "0.0.5" )
     public static sealed interface Builder
         permits FieldSpecImpl.BuilderImpl
@@ -170,7 +170,7 @@ public sealed interface FieldSpec
      *  Checks whether the given modifier was applied to this field.
      *
      *  @param  modifier    The modifier.
-     *  @return {@code true} if the given modifier has been applied to this
+     *  @return {@true} if the given modifier has been applied to this
      *      field.
      */
     public boolean hasModifier( final Modifier modifier );

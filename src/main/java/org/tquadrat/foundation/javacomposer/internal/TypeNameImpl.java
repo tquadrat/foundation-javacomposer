@@ -19,15 +19,22 @@
 
 package org.tquadrat.foundation.javacomposer.internal;
 
-import org.apiguardian.api.API;
-import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.UnexpectedExceptionError;
-import org.tquadrat.foundation.javacomposer.AnnotationSpec;
-import org.tquadrat.foundation.javacomposer.JavaComposer;
-import org.tquadrat.foundation.javacomposer.ParameterizedTypeName;
-import org.tquadrat.foundation.javacomposer.TypeName;
-import org.tquadrat.foundation.javacomposer.TypeVariableName;
-import org.tquadrat.foundation.lang.Lazy;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
+import static org.apiguardian.api.API.Status.INTERNAL;
+import static org.apiguardian.api.API.Status.MAINTAINED;
+import static org.apiguardian.api.API.Status.STABLE;
+import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_BOOLEAN;
+import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_BYTE;
+import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_CHAR;
+import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_DOUBLE;
+import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_FLOAT;
+import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_INT;
+import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_LONG;
+import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_SHORT;
+import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_VOID;
+import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.OBJECT;
+import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -54,22 +61,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.toList;
-import static org.apiguardian.api.API.Status.INTERNAL;
-import static org.apiguardian.api.API.Status.MAINTAINED;
-import static org.apiguardian.api.API.Status.STABLE;
-import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_BOOLEAN;
-import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_BYTE;
-import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_CHAR;
-import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_DOUBLE;
-import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_FLOAT;
-import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_INT;
-import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_LONG;
-import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_SHORT;
-import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.BOXED_VOID;
-import static org.tquadrat.foundation.javacomposer.internal.ClassNameImpl.OBJECT;
-import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
+import org.apiguardian.api.API;
+import org.tquadrat.foundation.annotation.ClassVersion;
+import org.tquadrat.foundation.exception.UnexpectedExceptionError;
+import org.tquadrat.foundation.javacomposer.AnnotationSpec;
+import org.tquadrat.foundation.javacomposer.JavaComposer;
+import org.tquadrat.foundation.javacomposer.ParameterizedTypeName;
+import org.tquadrat.foundation.javacomposer.TypeName;
+import org.tquadrat.foundation.javacomposer.TypeVariableName;
+import org.tquadrat.foundation.lang.Lazy;
 
 /**
  *  The implementation of
@@ -78,13 +78,13 @@ import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeNameImpl.java 1158 2026-03-14 16:23:29Z tquadrat $
+ *  @version $Id: TypeNameImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( "ClassWithTooManyFields" )
-@ClassVersion( sourceVersion = "$Id: TypeNameImpl.java 1158 2026-03-14 16:23:29Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeNameImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public sealed class TypeNameImpl implements TypeName
     permits ArrayTypeNameImpl, ClassNameImpl, ParameterizedTypeNameImpl, TypeVariableNameImpl, WildcardTypeNameImpl
@@ -164,7 +164,7 @@ public sealed class TypeNameImpl implements TypeName
     /**
      *  Creates a new {@code TypeNameImpl} instance.
      *
-     *  @param  keyword The name of this type if it is a keyword, {@code null}
+     *  @param  keyword The name of this type if it is a keyword, {@null}
      *      otherwise.
      */
     public TypeNameImpl( final String keyword ) { this( keyword, List.of() ); }
@@ -172,7 +172,7 @@ public sealed class TypeNameImpl implements TypeName
     /**
      *  Creates a new {@code TypeNameImpl} instance.
      *
-     *  @param  keyword The name of this type if it is a keyword, {@code null}
+     *  @param  keyword The name of this type if it is a keyword, {@null}
      *      otherwise.
      *  @param  annotations The annotations for this type name.
      */

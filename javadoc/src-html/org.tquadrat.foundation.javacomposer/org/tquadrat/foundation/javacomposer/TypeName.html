@@ -97,12 +97,12 @@
 <span class="source-line-no">084</span><span id="line-84"> *</span>
 <span class="source-line-no">085</span><span id="line-85"> *  @author Square,Inc.</span>
 <span class="source-line-no">086</span><span id="line-86"> *  @modified Thomas Thrien - thomas.thrien@tquadrat.org</span>
-<span class="source-line-no">087</span><span id="line-87"> *  @version $Id: TypeName.java 1085 2024-01-05 16:23:28Z tquadrat $</span>
+<span class="source-line-no">087</span><span id="line-87"> *  @version $Id: TypeName.java 1258 2026-06-04 18:33:06Z tquadrat $</span>
 <span class="source-line-no">088</span><span id="line-88"> *  @since 0.0.5</span>
 <span class="source-line-no">089</span><span id="line-89"> *</span>
 <span class="source-line-no">090</span><span id="line-90"> *  @UMLGraph.link</span>
 <span class="source-line-no">091</span><span id="line-91"> */</span>
-<span class="source-line-no">092</span><span id="line-92">@ClassVersion( sourceVersion = "$Id: TypeName.java 1085 2024-01-05 16:23:28Z tquadrat $" )</span>
+<span class="source-line-no">092</span><span id="line-92">@ClassVersion( sourceVersion = "$Id: TypeName.java 1258 2026-06-04 18:33:06Z tquadrat $" )</span>
 <span class="source-line-no">093</span><span id="line-93">@API( status = STABLE, since = "0.0.5" )</span>
 <span class="source-line-no">094</span><span id="line-94">public sealed interface TypeName</span>
 <span class="source-line-no">095</span><span id="line-95">    permits ArrayTypeName, ClassName, ParameterizedTypeName, TypeVariableName, WildcardTypeName, TypeNameImpl</span>
@@ -220,16 +220,16 @@
 <span class="source-line-no">207</span><span id="line-207">    /**</span>
 <span class="source-line-no">208</span><span id="line-208">     *  Checks whether this type name is annotated.</span>
 <span class="source-line-no">209</span><span id="line-209">     *</span>
-<span class="source-line-no">210</span><span id="line-210">     *  @return {@code true} if it is annotated, {@code false} otherwise.</span>
+<span class="source-line-no">210</span><span id="line-210">     *  @return {@true} if it is annotated, {@false} otherwise.</span>
 <span class="source-line-no">211</span><span id="line-211">     */</span>
 <span class="source-line-no">212</span><span id="line-212">    public boolean isAnnotated();</span>
 <span class="source-line-no">213</span><span id="line-213"></span>
 <span class="source-line-no">214</span><span id="line-214">    /**</span>
 <span class="source-line-no">215</span><span id="line-215">     *  Checks whether this type name represents a box primitive type.</span>
 <span class="source-line-no">216</span><span id="line-216">     *</span>
-<span class="source-line-no">217</span><span id="line-217">     *  @return {@code true} if this is a boxed primitive type like</span>
+<span class="source-line-no">217</span><span id="line-217">     *  @return {@true} if this is a boxed primitive type like</span>
 <span class="source-line-no">218</span><span id="line-218">     *      {@link Integer}.</span>
-<span class="source-line-no">219</span><span id="line-219">     *      {@code false} for all other types including unboxed primitives and</span>
+<span class="source-line-no">219</span><span id="line-219">     *      {@false} for all other types including unboxed primitives and</span>
 <span class="source-line-no">220</span><span id="line-220">     *      {@link java.lang.Void}.</span>
 <span class="source-line-no">221</span><span id="line-221">     */</span>
 <span class="source-line-no">222</span><span id="line-222">    public boolean isBoxedPrimitive();</span>
@@ -237,8 +237,8 @@
 <span class="source-line-no">224</span><span id="line-224">    /**</span>
 <span class="source-line-no">225</span><span id="line-225">     *  Checks whether this type name represents a primitive type.</span>
 <span class="source-line-no">226</span><span id="line-226">     *</span>
-<span class="source-line-no">227</span><span id="line-227">     *  @return {@code true} if this is a primitive type like {@code int}.</span>
-<span class="source-line-no">228</span><span id="line-228">     *      {@code false} for all other types including boxed primitives and</span>
+<span class="source-line-no">227</span><span id="line-227">     *  @return {@true} if this is a primitive type like {@code int}.</span>
+<span class="source-line-no">228</span><span id="line-228">     *      {@false} for all other types including boxed primitives and</span>
 <span class="source-line-no">229</span><span id="line-229">     *      {@code void}.</span>
 <span class="source-line-no">230</span><span id="line-230">     */</span>
 <span class="source-line-no">231</span><span id="line-231">    public boolean isPrimitive();</span>

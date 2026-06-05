@@ -71,12 +71,12 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+ *  @version $Id: JavaFileImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class JavaFileImpl implements JavaFile
 {
@@ -91,12 +91,12 @@ public final class JavaFileImpl implements JavaFile
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
+     *  @version $Id: JavaFileImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1151 2025-10-01 21:32:15Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: JavaFileImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements JavaFile.Builder
     {
@@ -187,9 +187,9 @@ public final class JavaFileImpl implements JavaFile
          *  @param  fileComment The already existing file comments.
          *  @param  layout  The layout for the output of
          *      {@link JavaFile}.
-         *  @param  skipJavaLangImports {@code true} means that the imports for
+         *  @param  skipJavaLangImports {@true} means that the imports for
          *      classes from the package {@code java.lang} are skipped,
-         *      {@code false} means that the imports are added explicitly.
+         *      {@false} means that the imports are added explicitly.
          */
         @SuppressWarnings( {"TypeMayBeWeakened", "UseOfConcreteClass", "ConstructorWithTooManyParameters"} )
         public BuilderImpl( final JavaComposer composer, final CharSequence packageName, final TypeSpecImpl typeSpec, final CodeBlockImpl fileComment, final Layout layout, final boolean skipJavaLangImports )
@@ -308,8 +308,8 @@ public final class JavaFileImpl implements JavaFile
          *  Returns the flag that rules whether imports for classes from the
          *  package {@code java.lang} will be omitted.
          *
-         *  @return {@code true} means that the imports for classes from the
-         *      package {@code java.lang} are skipped, {@code false} means that
+         *  @return {@true} means that the imports for classes from the
+         *      package {@code java.lang} are skipped, {@false} means that
          *      the imports are added explicitly.
          *
          *  @see #skipJavaLangImports(boolean)
