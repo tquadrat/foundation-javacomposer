@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2025 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2026 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -74,7 +74,7 @@
 <span class="source-line-no">061</span><span id="line-61"></span>
 <span class="source-line-no">062</span><span id="line-62">import org.apiguardian.api.API;</span>
 <span class="source-line-no">063</span><span id="line-63">import org.tquadrat.foundation.annotation.ClassVersion;</span>
-<span class="source-line-no">064</span><span id="line-64">import org.tquadrat.foundation.exception.UnexpectedExceptionError;</span>
+<span class="source-line-no">064</span><span id="line-64">import org.tquadrat.foundation.exception.UnlikelyExceptionError;</span>
 <span class="source-line-no">065</span><span id="line-65">import org.tquadrat.foundation.exception.UnsupportedEnumError;</span>
 <span class="source-line-no">066</span><span id="line-66">import org.tquadrat.foundation.exception.ValidationException;</span>
 <span class="source-line-no">067</span><span id="line-67">import org.tquadrat.foundation.javacomposer.AnnotationSpec;</span>
@@ -206,7 +206,7 @@
 <span class="source-line-no">193</span><span id="line-193">        ====** Constructors **=================================================</span>
 <span class="source-line-no">194</span><span id="line-194">            \*--------------*/</span>
 <span class="source-line-no">195</span><span id="line-195">        /**</span>
-<span class="source-line-no">196</span><span id="line-196">         *  Creates a new {@code BuilderImpl} instance.</span>
+<span class="source-line-no">196</span><span id="line-196">         *  &lt;p&gt;{@summary {@constructor}}&lt;/p&gt;</span>
 <span class="source-line-no">197</span><span id="line-197">         *</span>
 <span class="source-line-no">198</span><span id="line-198">         *  @param  composer    The reference to the factory that created this</span>
 <span class="source-line-no">199</span><span id="line-199">         *      builder instance.</span>
@@ -828,7 +828,7 @@
 <span class="source-line-no">815</span><span id="line-815">    ====** Constructors **=====================================================</span>
 <span class="source-line-no">816</span><span id="line-816">        \*--------------*/</span>
 <span class="source-line-no">817</span><span id="line-817">    /**</span>
-<span class="source-line-no">818</span><span id="line-818">     *  Creates a new {@code MethodSpecImpl} instance.</span>
+<span class="source-line-no">818</span><span id="line-818">     *  &lt;p&gt;{@summary {@constructor}}&lt;/p&gt;</span>
 <span class="source-line-no">819</span><span id="line-819">     *</span>
 <span class="source-line-no">820</span><span id="line-820">     *  @param  builder The builder.</span>
 <span class="source-line-no">821</span><span id="line-821">     */</span>
@@ -1198,7 +1198,7 @@
 <span class="source-line-no">1185</span><span id="line-1185">        }</span>
 <span class="source-line-no">1186</span><span id="line-1186">        catch( final UncheckedIOException e )</span>
 <span class="source-line-no">1187</span><span id="line-1187">        {</span>
-<span class="source-line-no">1188</span><span id="line-1188">            throw new UnexpectedExceptionError( e.getCause() );</span>
+<span class="source-line-no">1188</span><span id="line-1188">            throw new UnlikelyExceptionError( e.getCause() );</span>
 <span class="source-line-no">1189</span><span id="line-1189">        }</span>
 <span class="source-line-no">1190</span><span id="line-1190">        final var retValue = resultBuilder.toString();</span>
 <span class="source-line-no">1191</span><span id="line-1191"></span>
@@ -1213,7 +1213,7 @@
 <span class="source-line-no">1200</span><span id="line-1200">    public final boolean isConstructor() { return m_Name.equals( CONSTRUCTOR ); }</span>
 <span class="source-line-no">1201</span><span id="line-1201"></span>
 <span class="source-line-no">1202</span><span id="line-1202">    /**</span>
-<span class="source-line-no">1203</span><span id="line-1203">     *  Checks whether the last entry of the given parameter list is an array.</span>
+<span class="source-line-no">1203</span><span id="line-1203">     *  &lt;p&gt;{@summary Checks whether the last entry of the given parameter list is an array.}&lt;/p&gt;</span>
 <span class="source-line-no">1204</span><span id="line-1204">     *</span>
 <span class="source-line-no">1205</span><span id="line-1205">     *  @param  parameters  The parameter list.</span>
 <span class="source-line-no">1206</span><span id="line-1206">     *  @return {@true} if the last entry of the given parameter list is</span>

@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2024 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2026 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -49,7 +49,7 @@
 <span class="source-line-no">036</span><span id="line-36"></span>
 <span class="source-line-no">037</span><span id="line-37">import org.apiguardian.api.API;</span>
 <span class="source-line-no">038</span><span id="line-38">import org.tquadrat.foundation.annotation.ClassVersion;</span>
-<span class="source-line-no">039</span><span id="line-39">import org.tquadrat.foundation.exception.UnexpectedExceptionError;</span>
+<span class="source-line-no">039</span><span id="line-39">import org.tquadrat.foundation.exception.UnlikelyExceptionError;</span>
 <span class="source-line-no">040</span><span id="line-40">import org.tquadrat.foundation.javacomposer.AnnotationSpec;</span>
 <span class="source-line-no">041</span><span id="line-41">import org.tquadrat.foundation.javacomposer.ClassName;</span>
 <span class="source-line-no">042</span><span id="line-42">import org.tquadrat.foundation.javacomposer.CodeBlock;</span>
@@ -131,7 +131,7 @@
 <span class="source-line-no">118</span><span id="line-118">        ====** Constructors **=================================================</span>
 <span class="source-line-no">119</span><span id="line-119">            \*--------------*/</span>
 <span class="source-line-no">120</span><span id="line-120">        /**</span>
-<span class="source-line-no">121</span><span id="line-121">         *  Creates a new {@code BuilderImpl} instance.</span>
+<span class="source-line-no">121</span><span id="line-121">         *  &lt;p&gt;{@summary {@constructor}}&lt;/p&gt;</span>
 <span class="source-line-no">122</span><span id="line-122">         *</span>
 <span class="source-line-no">123</span><span id="line-123">         *  @param  composer    The reference to the factory that created this</span>
 <span class="source-line-no">124</span><span id="line-124">         *      builder instance.</span>
@@ -307,7 +307,7 @@
 <span class="source-line-no">294</span><span id="line-294">    ====** Constructors **=====================================================</span>
 <span class="source-line-no">295</span><span id="line-295">        \*--------------*/</span>
 <span class="source-line-no">296</span><span id="line-296">    /**</span>
-<span class="source-line-no">297</span><span id="line-297">     *  Creates a new {@code ParameterSpecImpl} instance.</span>
+<span class="source-line-no">297</span><span id="line-297">     *  &lt;p&gt;{@summary {@constructor}}&lt;/p&gt;</span>
 <span class="source-line-no">298</span><span id="line-298">     *</span>
 <span class="source-line-no">299</span><span id="line-299">     *  @param  builder The builder.</span>
 <span class="source-line-no">300</span><span id="line-300">     */</span>
@@ -404,8 +404,8 @@
 <span class="source-line-no">391</span><span id="line-391">    public final boolean hasModifier( final Modifier modifier ) { return m_Modifiers.contains( requireNonNullArgument( modifier, "modifier" ) ); }</span>
 <span class="source-line-no">392</span><span id="line-392"></span>
 <span class="source-line-no">393</span><span id="line-393">    /**</span>
-<span class="source-line-no">394</span><span id="line-394">     *  The initializer for</span>
-<span class="source-line-no">395</span><span id="line-395">     *  {@link #m_CachedString}.</span>
+<span class="source-line-no">394</span><span id="line-394">     *  &lt;p&gt;{@summary The initialiser for</span>
+<span class="source-line-no">395</span><span id="line-395">     *  {@link #m_CachedString}.}&lt;/p&gt;</span>
 <span class="source-line-no">396</span><span id="line-396">     *</span>
 <span class="source-line-no">397</span><span id="line-397">     *  @return The return value for</span>
 <span class="source-line-no">398</span><span id="line-398">     *      {@link #toString()}.</span>
@@ -420,7 +420,7 @@
 <span class="source-line-no">407</span><span id="line-407">        }</span>
 <span class="source-line-no">408</span><span id="line-408">        catch( final UncheckedIOException e )</span>
 <span class="source-line-no">409</span><span id="line-409">        {</span>
-<span class="source-line-no">410</span><span id="line-410">            throw new UnexpectedExceptionError( e.getCause() );</span>
+<span class="source-line-no">410</span><span id="line-410">            throw new UnlikelyExceptionError( e.getCause() );</span>
 <span class="source-line-no">411</span><span id="line-411">        }</span>
 <span class="source-line-no">412</span><span id="line-412">        final var retValue = resultBuilder.toString();</span>
 <span class="source-line-no">413</span><span id="line-413"></span>
@@ -429,11 +429,11 @@
 <span class="source-line-no">416</span><span id="line-416">    }   //  initializeCachedString()</span>
 <span class="source-line-no">417</span><span id="line-417"></span>
 <span class="source-line-no">418</span><span id="line-418">    /**</span>
-<span class="source-line-no">419</span><span id="line-419">     *  Returns the Javadoc comment for this parameter.</span>
+<span class="source-line-no">419</span><span id="line-419">     *  &lt;p&gt;{@summary Returns the Javadoc comment for this parameter.}&lt;/p&gt;</span>
 <span class="source-line-no">420</span><span id="line-420">     *</span>
 <span class="source-line-no">421</span><span id="line-421">     *  @return An instance of</span>
 <span class="source-line-no">422</span><span id="line-422">     *      {@link Optional}</span>
-<span class="source-line-no">423</span><span id="line-423">     *      that holds the JavaDoc comment.</span>
+<span class="source-line-no">423</span><span id="line-423">     *      that holds the Javadoc comment.</span>
 <span class="source-line-no">424</span><span id="line-424">     */</span>
 <span class="source-line-no">425</span><span id="line-425">    @SuppressWarnings( "PublicMethodNotExposedInInterface" )</span>
 <span class="source-line-no">426</span><span id="line-426">    public final Optional&lt;CodeBlock&gt; javadoc()</span>

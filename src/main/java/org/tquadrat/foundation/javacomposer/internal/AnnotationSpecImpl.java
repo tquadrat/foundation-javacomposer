@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2025 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ import java.util.Map;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.UnexpectedExceptionError;
+import org.tquadrat.foundation.exception.UnlikelyExceptionError;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
@@ -113,7 +113,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         ====** Constructors **=================================================
             \*--------------*/
         /**
-         *  Creates a new {@code BuilderImpl} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -315,7 +315,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
     ====** Constructors **=====================================================
         \*--------------*/
     /**
-     *  Creates a new {@code AnnotationSpecImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  builder The builder for this instance.
      */
@@ -550,7 +550,7 @@ public final class AnnotationSpecImpl implements AnnotationSpec
         }
         catch( final UncheckedIOException e )
         {
-            throw new UnexpectedExceptionError( e.getCause() );
+            throw new UnlikelyExceptionError( e.getCause() );
         }
         final var retValue = resultBuilder.toString();
 

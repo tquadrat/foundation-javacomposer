@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2025 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,7 +55,7 @@ import java.util.stream.Stream;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.UnexpectedExceptionError;
+import org.tquadrat.foundation.exception.UnlikelyExceptionError;
 import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.ClassName;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
@@ -132,7 +132,7 @@ public final class CodeBlockImpl implements CodeBlock
         ====** Constructors **=================================================
             \*--------------*/
         /**
-         *  Creates a new {@code BuilderImpl} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -143,7 +143,7 @@ public final class CodeBlockImpl implements CodeBlock
         }   //  BuilderImpl()
 
         /**
-         *  Creates a new {@code BuilderImpl} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -388,9 +388,11 @@ public final class CodeBlockImpl implements CodeBlock
         {
             var hasRelative = false;
             var hasIndexed = false;
+            @SuppressWarnings( "LocalVariableNamingConvention" )
             var relativeParameterCount = 0;
 
             final var length = requireNonNullArgument( format, "format" ).length();
+            @SuppressWarnings( "LocalVariableNamingConvention" )
             final var indexedParameterCount = new int [requireNonNullArgument( args, "args" ).length];
 
             ParseLoop:
@@ -736,7 +738,7 @@ public final class CodeBlockImpl implements CodeBlock
         ====** Constructors **=================================================
             \*--------------*/
         /**
-         *  Creates a new {@code CodeBlockJoiner} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  delimiter   The separator for the joined code blocks.
          *  @param  builder The builder that is used to deliver the final code
@@ -856,7 +858,7 @@ public final class CodeBlockImpl implements CodeBlock
     ====** Constructors **=====================================================
         \*--------------*/
     /**
-     *  Creates a new {@code CodeBlockImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  builder The builder for this instance.
      */
@@ -935,8 +937,8 @@ public final class CodeBlockImpl implements CodeBlock
     public final int hashCode() { return toString().hashCode(); }
 
     /**
-     *  The initialiser for
-     *  {@link #m_CachedString}.
+     *  <p>{@summary The initialiser for
+     *  {@link #m_CachedString}.}</p>
      *
      *  @return The return value for
      *      {@link #toString()}.
@@ -951,7 +953,7 @@ public final class CodeBlockImpl implements CodeBlock
         }
         catch( final UncheckedIOException e )
         {
-            throw new UnexpectedExceptionError( e.getCause() );
+            throw new UnlikelyExceptionError( e.getCause() );
         }
         final var retValue = resultBuilder.toString();
 

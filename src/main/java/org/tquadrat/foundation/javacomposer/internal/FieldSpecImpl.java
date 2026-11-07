@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2025 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,7 @@ import java.util.Set;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.UnexpectedExceptionError;
+import org.tquadrat.foundation.exception.UnlikelyExceptionError;
 import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.ClassName;
@@ -134,7 +134,7 @@ public final class FieldSpecImpl implements FieldSpec
         ====** Constructors **=================================================
             \*--------------*/
         /**
-         *  Creates a new {@code BuilderImpl} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -342,7 +342,7 @@ public final class FieldSpecImpl implements FieldSpec
     ====** Constructors **=====================================================
         \*--------------*/
     /**
-     *  Creates a new {@code FieldSpecImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  builder The builder.
      */
@@ -530,8 +530,8 @@ public final class FieldSpecImpl implements FieldSpec
     public final boolean hasModifier( final Modifier modifier ) { return m_Modifiers.contains( modifier ); }
 
     /**
-     *  The initialiser for
-     *  {@link #m_CachedString}.
+     *  <p>{@summary The initialiser for
+     *  {@link #m_CachedString}.}</p>
      *
      *  @return The return value for
      *      {@link #toString()}.
@@ -546,7 +546,7 @@ public final class FieldSpecImpl implements FieldSpec
         }
         catch( final UncheckedIOException e )
         {
-            throw new UnexpectedExceptionError( e.getCause() );
+            throw new UnlikelyExceptionError( e.getCause() );
         }
         final var retValue = resultBuilder.toString();
 

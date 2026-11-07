@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright © 2002-2025 by Thomas Thrien.
+ * Copyright © 2002-2026 by Thomas Thrien.
  * All Rights Reserved.
  * ============================================================================
  *
@@ -37,7 +37,7 @@ import java.util.stream.Stream;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.UnexpectedExceptionError;
+import org.tquadrat.foundation.exception.UnlikelyExceptionError;
 import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
@@ -111,7 +111,7 @@ public final class LambdaSpecImpl implements LambdaSpec
         ====** Constructors **=================================================
             \*--------------*/
         /**
-         *  Creates a new {@code BuilderImpl} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -390,7 +390,7 @@ public final class LambdaSpecImpl implements LambdaSpec
     ====** Constructors **=====================================================
         \*--------------*/
     /**
-     *  Creates a new {@code LambdaSpecImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  builder The builder.
      */
@@ -514,8 +514,8 @@ public final class LambdaSpecImpl implements LambdaSpec
     public final int hashCode() { return hash( m_Composer, toString() ); }
 
     /**
-     *  The initializer for
-     *  {@link #m_CachedString}.
+     *  <p>{@summary The initialiser for
+     *  {@link #m_CachedString}.}</p>
      *
      *  @return The return value for
      *      {@link #toString()}.
@@ -530,7 +530,7 @@ public final class LambdaSpecImpl implements LambdaSpec
         }
         catch( final UncheckedIOException e )
         {
-            throw new UnexpectedExceptionError( e.getCause() );
+            throw new UnlikelyExceptionError( e.getCause() );
         }
         final var retValue = resultBuilder.toString();
 

@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2025 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -61,7 +61,7 @@ import java.util.TreeSet;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.UnexpectedExceptionError;
+import org.tquadrat.foundation.exception.UnlikelyExceptionError;
 import org.tquadrat.foundation.exception.UnsupportedEnumError;
 import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
@@ -193,7 +193,7 @@ public final class MethodSpecImpl implements MethodSpec
         ====** Constructors **=================================================
             \*--------------*/
         /**
-         *  Creates a new {@code BuilderImpl} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -815,7 +815,7 @@ public final class MethodSpecImpl implements MethodSpec
     ====** Constructors **=====================================================
         \*--------------*/
     /**
-     *  Creates a new {@code MethodSpecImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  builder The builder.
      */
@@ -1185,7 +1185,7 @@ public final class MethodSpecImpl implements MethodSpec
         }
         catch( final UncheckedIOException e )
         {
-            throw new UnexpectedExceptionError( e.getCause() );
+            throw new UnlikelyExceptionError( e.getCause() );
         }
         final var retValue = resultBuilder.toString();
 
@@ -1200,7 +1200,7 @@ public final class MethodSpecImpl implements MethodSpec
     public final boolean isConstructor() { return m_Name.equals( CONSTRUCTOR ); }
 
     /**
-     *  Checks whether the last entry of the given parameter list is an array.
+     *  <p>{@summary Checks whether the last entry of the given parameter list is an array.}</p>
      *
      *  @param  parameters  The parameter list.
      *  @return {@true} if the last entry of the given parameter list is

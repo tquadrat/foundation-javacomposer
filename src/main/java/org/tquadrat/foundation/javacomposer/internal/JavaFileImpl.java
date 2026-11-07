@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2025 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,7 +55,7 @@ import java.util.TreeSet;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.UnexpectedExceptionError;
+import org.tquadrat.foundation.exception.UnlikelyExceptionError;
 import org.tquadrat.foundation.javacomposer.ClassName;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
 import org.tquadrat.foundation.javacomposer.JavaFile;
@@ -119,6 +119,7 @@ public final class JavaFileImpl implements JavaFile
          *  The layout for the output of
          *  {@link JavaFile}.
          */
+        @SuppressWarnings( "UnusedAssignment" )
         private Layout m_Layout = LAYOUT_DEFAULT;
 
         /**
@@ -150,7 +151,7 @@ public final class JavaFileImpl implements JavaFile
         ====** Constructors **=================================================
             \*--------------*/
         /**
-         *  Creates a new {@code BuilderImpl} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -174,7 +175,7 @@ public final class JavaFileImpl implements JavaFile
         }   //  BuilderImpl()
 
         /**
-         *  Creates a new {@code BuilderImpl} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -409,7 +410,7 @@ public final class JavaFileImpl implements JavaFile
     ====** Constructors **=====================================================
         \*--------------*/
     /**
-     *  Creates a new {@code JavaFileImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  builder The builder that was used to collect the data for the
      *      new instance.
@@ -553,8 +554,8 @@ public final class JavaFileImpl implements JavaFile
     public final int hashCode() { return toString().hashCode(); }
 
     /**
-     *  The initialiser for
-     *  {@link #m_CachedString}.
+     *  <p>{@summary The initialiser for
+     *  {@link #m_CachedString}.}</p>
      *
      *  @return The return value for
      *      {@link #toString()}.
@@ -568,7 +569,7 @@ public final class JavaFileImpl implements JavaFile
         }
         catch( final IOException e )
         {
-            throw new UnexpectedExceptionError( e.getCause() );
+            throw new UnlikelyExceptionError( e.getCause() );
         }
         final var retValue = resultBuilder.toString();
 
@@ -631,6 +632,7 @@ public final class JavaFileImpl implements JavaFile
             /**
              *  {@inheritDoc}
              */
+            @SuppressWarnings( "RedundantThrows" )
             @Override
             public final InputStream openInputStream() throws IOException
             {

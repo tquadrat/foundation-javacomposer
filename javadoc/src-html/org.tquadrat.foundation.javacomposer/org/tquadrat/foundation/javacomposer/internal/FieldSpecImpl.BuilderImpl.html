@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2025 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2026 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -56,7 +56,7 @@
 <span class="source-line-no">043</span><span id="line-43"></span>
 <span class="source-line-no">044</span><span id="line-44">import org.apiguardian.api.API;</span>
 <span class="source-line-no">045</span><span id="line-45">import org.tquadrat.foundation.annotation.ClassVersion;</span>
-<span class="source-line-no">046</span><span id="line-46">import org.tquadrat.foundation.exception.UnexpectedExceptionError;</span>
+<span class="source-line-no">046</span><span id="line-46">import org.tquadrat.foundation.exception.UnlikelyExceptionError;</span>
 <span class="source-line-no">047</span><span id="line-47">import org.tquadrat.foundation.exception.ValidationException;</span>
 <span class="source-line-no">048</span><span id="line-48">import org.tquadrat.foundation.javacomposer.AnnotationSpec;</span>
 <span class="source-line-no">049</span><span id="line-49">import org.tquadrat.foundation.javacomposer.ClassName;</span>
@@ -147,7 +147,7 @@
 <span class="source-line-no">134</span><span id="line-134">        ====** Constructors **=================================================</span>
 <span class="source-line-no">135</span><span id="line-135">            \*--------------*/</span>
 <span class="source-line-no">136</span><span id="line-136">        /**</span>
-<span class="source-line-no">137</span><span id="line-137">         *  Creates a new {@code BuilderImpl} instance.</span>
+<span class="source-line-no">137</span><span id="line-137">         *  &lt;p&gt;{@summary {@constructor}}&lt;/p&gt;</span>
 <span class="source-line-no">138</span><span id="line-138">         *</span>
 <span class="source-line-no">139</span><span id="line-139">         *  @param  composer    The reference to the factory that created this</span>
 <span class="source-line-no">140</span><span id="line-140">         *      builder instance.</span>
@@ -355,7 +355,7 @@
 <span class="source-line-no">342</span><span id="line-342">    ====** Constructors **=====================================================</span>
 <span class="source-line-no">343</span><span id="line-343">        \*--------------*/</span>
 <span class="source-line-no">344</span><span id="line-344">    /**</span>
-<span class="source-line-no">345</span><span id="line-345">     *  Creates a new {@code FieldSpecImpl} instance.</span>
+<span class="source-line-no">345</span><span id="line-345">     *  &lt;p&gt;{@summary {@constructor}}&lt;/p&gt;</span>
 <span class="source-line-no">346</span><span id="line-346">     *</span>
 <span class="source-line-no">347</span><span id="line-347">     *  @param  builder The builder.</span>
 <span class="source-line-no">348</span><span id="line-348">     */</span>
@@ -543,8 +543,8 @@
 <span class="source-line-no">530</span><span id="line-530">    public final boolean hasModifier( final Modifier modifier ) { return m_Modifiers.contains( modifier ); }</span>
 <span class="source-line-no">531</span><span id="line-531"></span>
 <span class="source-line-no">532</span><span id="line-532">    /**</span>
-<span class="source-line-no">533</span><span id="line-533">     *  The initialiser for</span>
-<span class="source-line-no">534</span><span id="line-534">     *  {@link #m_CachedString}.</span>
+<span class="source-line-no">533</span><span id="line-533">     *  &lt;p&gt;{@summary The initialiser for</span>
+<span class="source-line-no">534</span><span id="line-534">     *  {@link #m_CachedString}.}&lt;/p&gt;</span>
 <span class="source-line-no">535</span><span id="line-535">     *</span>
 <span class="source-line-no">536</span><span id="line-536">     *  @return The return value for</span>
 <span class="source-line-no">537</span><span id="line-537">     *      {@link #toString()}.</span>
@@ -559,7 +559,7 @@
 <span class="source-line-no">546</span><span id="line-546">        }</span>
 <span class="source-line-no">547</span><span id="line-547">        catch( final UncheckedIOException e )</span>
 <span class="source-line-no">548</span><span id="line-548">        {</span>
-<span class="source-line-no">549</span><span id="line-549">            throw new UnexpectedExceptionError( e.getCause() );</span>
+<span class="source-line-no">549</span><span id="line-549">            throw new UnlikelyExceptionError( e.getCause() );</span>
 <span class="source-line-no">550</span><span id="line-550">        }</span>
 <span class="source-line-no">551</span><span id="line-551">        final var retValue = resultBuilder.toString();</span>
 <span class="source-line-no">552</span><span id="line-552"></span>

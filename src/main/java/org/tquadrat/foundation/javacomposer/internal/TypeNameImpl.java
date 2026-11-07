@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -63,7 +63,7 @@ import java.util.Optional;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.UnexpectedExceptionError;
+import org.tquadrat.foundation.exception.UnlikelyExceptionError;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
 import org.tquadrat.foundation.javacomposer.ParameterizedTypeName;
@@ -162,7 +162,7 @@ public sealed class TypeNameImpl implements TypeName
     ====** Constructors **=====================================================
         \*--------------*/
     /**
-     *  Creates a new {@code TypeNameImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  keyword The name of this type if it is a keyword, {@null}
      *      otherwise.
@@ -170,7 +170,7 @@ public sealed class TypeNameImpl implements TypeName
     public TypeNameImpl( final String keyword ) { this( keyword, List.of() ); }
 
     /**
-     *  Creates a new {@code TypeNameImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  keyword The name of this type if it is a keyword, {@null}
      *      otherwise.
@@ -181,11 +181,11 @@ public sealed class TypeNameImpl implements TypeName
         m_Keyword = Optional.ofNullable( keyword );
         m_Annotations = List.copyOf( requireNonNullArgument( annotations, "annotations" ) );
 
-        m_CachedString = Lazy.use( this::initialiseCachedString );
+        m_CachedString = Lazy.use( this::initializeCachedString );
     }   //  TypeNameImpl()
 
     /**
-     *  Creates a new {@code TypeNameImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  annotations The annotations for this type name.
      */
@@ -542,13 +542,13 @@ public sealed class TypeNameImpl implements TypeName
     public final int hashCode() { return toString().hashCode(); }
 
     /**
-     *  The initialiser for
-     *  {@link #m_CachedString}.
+     *  <p>{@summary The initialiser for
+     *  {@link #m_CachedString}.}</p>
      *
      *  @return The return value for
      *      {@link #toString()}.
      */
-    private final String initialiseCachedString()
+    private final String initializeCachedString()
     {
         final var resultBuilder = new StringBuilder();
         final var codeWriter = new CodeWriter( new JavaComposer(), resultBuilder );
@@ -558,13 +558,13 @@ public sealed class TypeNameImpl implements TypeName
         }
         catch( final UncheckedIOException e )
         {
-            throw new UnexpectedExceptionError( e.getCause() );
+            throw new UnlikelyExceptionError( e.getCause() );
         }
         final var retValue = resultBuilder.toString();
 
         //---* Done *----------------------------------------------------------
         return retValue;
-    }   //  initialiseCachedString()
+    }   //  initializeCachedString()
 
     /**
      *  {@inheritDoc}

@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ import java.util.Set;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.UnexpectedExceptionError;
+import org.tquadrat.foundation.exception.UnlikelyExceptionError;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.ClassName;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
@@ -118,7 +118,7 @@ public final class ParameterSpecImpl implements ParameterSpec
         ====** Constructors **=================================================
             \*--------------*/
         /**
-         *  Creates a new {@code BuilderImpl} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -294,7 +294,7 @@ public final class ParameterSpecImpl implements ParameterSpec
     ====** Constructors **=====================================================
         \*--------------*/
     /**
-     *  Creates a new {@code ParameterSpecImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  builder The builder.
      */
@@ -391,8 +391,8 @@ public final class ParameterSpecImpl implements ParameterSpec
     public final boolean hasModifier( final Modifier modifier ) { return m_Modifiers.contains( requireNonNullArgument( modifier, "modifier" ) ); }
 
     /**
-     *  The initializer for
-     *  {@link #m_CachedString}.
+     *  <p>{@summary The initialiser for
+     *  {@link #m_CachedString}.}</p>
      *
      *  @return The return value for
      *      {@link #toString()}.
@@ -407,7 +407,7 @@ public final class ParameterSpecImpl implements ParameterSpec
         }
         catch( final UncheckedIOException e )
         {
-            throw new UnexpectedExceptionError( e.getCause() );
+            throw new UnlikelyExceptionError( e.getCause() );
         }
         final var retValue = resultBuilder.toString();
 
@@ -416,11 +416,11 @@ public final class ParameterSpecImpl implements ParameterSpec
     }   //  initializeCachedString()
 
     /**
-     *  Returns the Javadoc comment for this parameter.
+     *  <p>{@summary Returns the Javadoc comment for this parameter.}</p>
      *
      *  @return An instance of
      *      {@link Optional}
-     *      that holds the JavaDoc comment.
+     *      that holds the Javadoc comment.
      */
     @SuppressWarnings( "PublicMethodNotExposedInInterface" )
     public final Optional<CodeBlock> javadoc()

@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2025 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2026 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -49,7 +49,7 @@
 <span class="source-line-no">036</span><span id="line-36"></span>
 <span class="source-line-no">037</span><span id="line-37">import org.apiguardian.api.API;</span>
 <span class="source-line-no">038</span><span id="line-38">import org.tquadrat.foundation.annotation.ClassVersion;</span>
-<span class="source-line-no">039</span><span id="line-39">import org.tquadrat.foundation.exception.UnexpectedExceptionError;</span>
+<span class="source-line-no">039</span><span id="line-39">import org.tquadrat.foundation.exception.UnlikelyExceptionError;</span>
 <span class="source-line-no">040</span><span id="line-40">import org.tquadrat.foundation.javacomposer.AnnotationSpec;</span>
 <span class="source-line-no">041</span><span id="line-41">import org.tquadrat.foundation.javacomposer.CodeBlock;</span>
 <span class="source-line-no">042</span><span id="line-42">import org.tquadrat.foundation.javacomposer.JavaComposer;</span>
@@ -126,7 +126,7 @@
 <span class="source-line-no">113</span><span id="line-113">        ====** Constructors **=================================================</span>
 <span class="source-line-no">114</span><span id="line-114">            \*--------------*/</span>
 <span class="source-line-no">115</span><span id="line-115">        /**</span>
-<span class="source-line-no">116</span><span id="line-116">         *  Creates a new {@code BuilderImpl} instance.</span>
+<span class="source-line-no">116</span><span id="line-116">         *  &lt;p&gt;{@summary {@constructor}}&lt;/p&gt;</span>
 <span class="source-line-no">117</span><span id="line-117">         *</span>
 <span class="source-line-no">118</span><span id="line-118">         *  @param  composer    The reference to the factory that created this</span>
 <span class="source-line-no">119</span><span id="line-119">         *      builder instance.</span>
@@ -328,7 +328,7 @@
 <span class="source-line-no">315</span><span id="line-315">    ====** Constructors **=====================================================</span>
 <span class="source-line-no">316</span><span id="line-316">        \*--------------*/</span>
 <span class="source-line-no">317</span><span id="line-317">    /**</span>
-<span class="source-line-no">318</span><span id="line-318">     *  Creates a new {@code AnnotationSpecImpl} instance.</span>
+<span class="source-line-no">318</span><span id="line-318">     *  &lt;p&gt;{@summary {@constructor}}&lt;/p&gt;</span>
 <span class="source-line-no">319</span><span id="line-319">     *</span>
 <span class="source-line-no">320</span><span id="line-320">     *  @param  builder The builder for this instance.</span>
 <span class="source-line-no">321</span><span id="line-321">     */</span>
@@ -563,7 +563,7 @@
 <span class="source-line-no">550</span><span id="line-550">        }</span>
 <span class="source-line-no">551</span><span id="line-551">        catch( final UncheckedIOException e )</span>
 <span class="source-line-no">552</span><span id="line-552">        {</span>
-<span class="source-line-no">553</span><span id="line-553">            throw new UnexpectedExceptionError( e.getCause() );</span>
+<span class="source-line-no">553</span><span id="line-553">            throw new UnlikelyExceptionError( e.getCause() );</span>
 <span class="source-line-no">554</span><span id="line-554">        }</span>
 <span class="source-line-no">555</span><span id="line-555">        final var retValue = resultBuilder.toString();</span>
 <span class="source-line-no">556</span><span id="line-556"></span>

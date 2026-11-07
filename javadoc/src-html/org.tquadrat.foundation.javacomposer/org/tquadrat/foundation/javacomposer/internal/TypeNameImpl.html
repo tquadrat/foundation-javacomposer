@@ -14,7 +14,7 @@
 <pre><span class="source-line-no">001</span><span id="line-1">/*</span>
 <span class="source-line-no">002</span><span id="line-2"> * ============================================================================</span>
 <span class="source-line-no">003</span><span id="line-3"> * Copyright © 2015 Square, Inc.</span>
-<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2024 by Thomas Thrien.</span>
+<span class="source-line-no">004</span><span id="line-4"> * Copyright for the modifications © 2018-2026 by Thomas Thrien.</span>
 <span class="source-line-no">005</span><span id="line-5"> * ============================================================================</span>
 <span class="source-line-no">006</span><span id="line-6"> *</span>
 <span class="source-line-no">007</span><span id="line-7"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -76,7 +76,7 @@
 <span class="source-line-no">063</span><span id="line-63"></span>
 <span class="source-line-no">064</span><span id="line-64">import org.apiguardian.api.API;</span>
 <span class="source-line-no">065</span><span id="line-65">import org.tquadrat.foundation.annotation.ClassVersion;</span>
-<span class="source-line-no">066</span><span id="line-66">import org.tquadrat.foundation.exception.UnexpectedExceptionError;</span>
+<span class="source-line-no">066</span><span id="line-66">import org.tquadrat.foundation.exception.UnlikelyExceptionError;</span>
 <span class="source-line-no">067</span><span id="line-67">import org.tquadrat.foundation.javacomposer.AnnotationSpec;</span>
 <span class="source-line-no">068</span><span id="line-68">import org.tquadrat.foundation.javacomposer.JavaComposer;</span>
 <span class="source-line-no">069</span><span id="line-69">import org.tquadrat.foundation.javacomposer.ParameterizedTypeName;</span>
@@ -175,7 +175,7 @@
 <span class="source-line-no">162</span><span id="line-162">    ====** Constructors **=====================================================</span>
 <span class="source-line-no">163</span><span id="line-163">        \*--------------*/</span>
 <span class="source-line-no">164</span><span id="line-164">    /**</span>
-<span class="source-line-no">165</span><span id="line-165">     *  Creates a new {@code TypeNameImpl} instance.</span>
+<span class="source-line-no">165</span><span id="line-165">     *  &lt;p&gt;{@summary {@constructor}}&lt;/p&gt;</span>
 <span class="source-line-no">166</span><span id="line-166">     *</span>
 <span class="source-line-no">167</span><span id="line-167">     *  @param  keyword The name of this type if it is a keyword, {@null}</span>
 <span class="source-line-no">168</span><span id="line-168">     *      otherwise.</span>
@@ -183,7 +183,7 @@
 <span class="source-line-no">170</span><span id="line-170">    public TypeNameImpl( final String keyword ) { this( keyword, List.of() ); }</span>
 <span class="source-line-no">171</span><span id="line-171"></span>
 <span class="source-line-no">172</span><span id="line-172">    /**</span>
-<span class="source-line-no">173</span><span id="line-173">     *  Creates a new {@code TypeNameImpl} instance.</span>
+<span class="source-line-no">173</span><span id="line-173">     *  &lt;p&gt;{@summary {@constructor}}&lt;/p&gt;</span>
 <span class="source-line-no">174</span><span id="line-174">     *</span>
 <span class="source-line-no">175</span><span id="line-175">     *  @param  keyword The name of this type if it is a keyword, {@null}</span>
 <span class="source-line-no">176</span><span id="line-176">     *      otherwise.</span>
@@ -194,11 +194,11 @@
 <span class="source-line-no">181</span><span id="line-181">        m_Keyword = Optional.ofNullable( keyword );</span>
 <span class="source-line-no">182</span><span id="line-182">        m_Annotations = List.copyOf( requireNonNullArgument( annotations, "annotations" ) );</span>
 <span class="source-line-no">183</span><span id="line-183"></span>
-<span class="source-line-no">184</span><span id="line-184">        m_CachedString = Lazy.use( this::initialiseCachedString );</span>
+<span class="source-line-no">184</span><span id="line-184">        m_CachedString = Lazy.use( this::initializeCachedString );</span>
 <span class="source-line-no">185</span><span id="line-185">    }   //  TypeNameImpl()</span>
 <span class="source-line-no">186</span><span id="line-186"></span>
 <span class="source-line-no">187</span><span id="line-187">    /**</span>
-<span class="source-line-no">188</span><span id="line-188">     *  Creates a new {@code TypeNameImpl} instance.</span>
+<span class="source-line-no">188</span><span id="line-188">     *  &lt;p&gt;{@summary {@constructor}}&lt;/p&gt;</span>
 <span class="source-line-no">189</span><span id="line-189">     *</span>
 <span class="source-line-no">190</span><span id="line-190">     *  @param  annotations The annotations for this type name.</span>
 <span class="source-line-no">191</span><span id="line-191">     */</span>
@@ -555,13 +555,13 @@
 <span class="source-line-no">542</span><span id="line-542">    public final int hashCode() { return toString().hashCode(); }</span>
 <span class="source-line-no">543</span><span id="line-543"></span>
 <span class="source-line-no">544</span><span id="line-544">    /**</span>
-<span class="source-line-no">545</span><span id="line-545">     *  The initialiser for</span>
-<span class="source-line-no">546</span><span id="line-546">     *  {@link #m_CachedString}.</span>
+<span class="source-line-no">545</span><span id="line-545">     *  &lt;p&gt;{@summary The initialiser for</span>
+<span class="source-line-no">546</span><span id="line-546">     *  {@link #m_CachedString}.}&lt;/p&gt;</span>
 <span class="source-line-no">547</span><span id="line-547">     *</span>
 <span class="source-line-no">548</span><span id="line-548">     *  @return The return value for</span>
 <span class="source-line-no">549</span><span id="line-549">     *      {@link #toString()}.</span>
 <span class="source-line-no">550</span><span id="line-550">     */</span>
-<span class="source-line-no">551</span><span id="line-551">    private final String initialiseCachedString()</span>
+<span class="source-line-no">551</span><span id="line-551">    private final String initializeCachedString()</span>
 <span class="source-line-no">552</span><span id="line-552">    {</span>
 <span class="source-line-no">553</span><span id="line-553">        final var resultBuilder = new StringBuilder();</span>
 <span class="source-line-no">554</span><span id="line-554">        final var codeWriter = new CodeWriter( new JavaComposer(), resultBuilder );</span>
@@ -571,13 +571,13 @@
 <span class="source-line-no">558</span><span id="line-558">        }</span>
 <span class="source-line-no">559</span><span id="line-559">        catch( final UncheckedIOException e )</span>
 <span class="source-line-no">560</span><span id="line-560">        {</span>
-<span class="source-line-no">561</span><span id="line-561">            throw new UnexpectedExceptionError( e.getCause() );</span>
+<span class="source-line-no">561</span><span id="line-561">            throw new UnlikelyExceptionError( e.getCause() );</span>
 <span class="source-line-no">562</span><span id="line-562">        }</span>
 <span class="source-line-no">563</span><span id="line-563">        final var retValue = resultBuilder.toString();</span>
 <span class="source-line-no">564</span><span id="line-564"></span>
 <span class="source-line-no">565</span><span id="line-565">        //---* Done *----------------------------------------------------------</span>
 <span class="source-line-no">566</span><span id="line-566">        return retValue;</span>
-<span class="source-line-no">567</span><span id="line-567">    }   //  initialiseCachedString()</span>
+<span class="source-line-no">567</span><span id="line-567">    }   //  initializeCachedString()</span>
 <span class="source-line-no">568</span><span id="line-568"></span>
 <span class="source-line-no">569</span><span id="line-569">    /**</span>
 <span class="source-line-no">570</span><span id="line-570">     *  {@inheritDoc}</span>

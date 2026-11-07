@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2025 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -61,7 +61,7 @@ import java.util.TreeSet;
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.annotation.MountPoint;
-import org.tquadrat.foundation.exception.UnexpectedExceptionError;
+import org.tquadrat.foundation.exception.UnlikelyExceptionError;
 import org.tquadrat.foundation.exception.UnsupportedEnumError;
 import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
@@ -78,8 +78,8 @@ import org.tquadrat.foundation.lang.Lazy;
 import org.tquadrat.foundation.lang.Objects;
 
 /**
- *  The abstract base class for the implementations of
- *  {@link TypeSpec}.
+ *  <p>{@summary The abstract base class for the implementations of
+ *  {@link TypeSpec}.}</p>
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
@@ -214,7 +214,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         ====** Constructors **=================================================
             \*--------------*/
         /**
-         *  Creates a new {@code BuilderImpl} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -227,7 +227,8 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         }   //  BuilderImpl()
 
         /**
-         *  Creates a new {@code BuilderImpl} instance for an anonymous type.
+         *  <p>{@summary Creates a new {@code BuilderImpl} instance for an
+         *  anonymous type.}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -239,7 +240,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         }   //  BuilderImpl()
 
         /**
-         *  Creates a new {@code BuilderImpl} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  composer    The reference to the factory that created this
          *      builder instance.
@@ -774,7 +775,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *
          *  @return An instance of
          *      {@link Optional}
-         *      that holds the codeblock with the anonymous type arguments.
+         *      that holds the code block with the anonymous type arguments.
          */
         protected Optional<CodeBlockImpl> getAnonymousTypeArguments() { return Optional.empty(); }
 
@@ -956,8 +957,9 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         CLASS( EnumSet.noneOf( Modifier.class ), EnumSet.noneOf( Modifier.class ), EnumSet.noneOf( Modifier.class ), EnumSet.noneOf( Modifier.class ) ),
 
         /**
-         *  The type is an {@code enum}.
+         *  <p>{@summary The type is an {@code enum}.}</p>
          */
+        @SuppressWarnings( "FieldNamingConvention" )
         ENUM( EnumSet.noneOf( Modifier.class ), EnumSet.noneOf( Modifier.class ), EnumSet.noneOf( Modifier.class ), EnumSet.of( STATIC ) ),
 
         /**
@@ -997,7 +999,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         ====** Constructors **=================================================
             \*--------------*/
         /**
-         *  Creates a new {@code Kind} instance.
+         *  <p>{@summary {@constructor}}</p>
          *
          *  @param  implicitFieldModifiers  The implicit field modifiers for a
          *      type of this kind.
@@ -1008,6 +1010,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  @param  asMemberModifiers   The member modifiers for a type of this
          *      kind.
          */
+        @SuppressWarnings( "MethodParameterNamingConvention" )
         private Kind( final Collection<Modifier> implicitFieldModifiers, final Collection<Modifier> implicitMethodModifiers, final Collection<Modifier> implicitTypeModifiers, final Collection<Modifier> asMemberModifiers )
         {
             m_ImplicitFieldModifiers = Set.copyOf( implicitFieldModifiers );
@@ -1175,7 +1178,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     ====** Constructors **=====================================================
         \*--------------*/
     /**
-     *  Creates a new {@code TypeSpecImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  builder The builder for this instance.
      */
@@ -1206,6 +1209,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         m_TypeSpecs.forEach( tspec -> staticImports.addAll( tspec.getStaticImports() ) );
         m_StaticImports = Set.copyOf( staticImports );
 
+        @SuppressWarnings( "LocalVariableNamingConvention" )
         final Collection<Element> originatingElementsMutable = new ArrayList<>( builder.m_OriginatingElements );
         for( final var typeSpec : builder.m_TypeSpecs )
         {
@@ -1219,8 +1223,9 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     }   //  TypeSpecImpl()
 
     /**
-     *  Creates a dummy type spec for type-resolution in CodeWriter only while
-     *  emitting the type declaration but before entering the type body.
+     *  <p>{@summary Creates a dummy type spec for type-resolution in
+     *  {@link CodeWriter} only while
+     *  emitting the type declaration but before entering the type body.}</p>
      *
      *  @param  type    The source type.
      */
@@ -1320,7 +1325,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "LocalVariableNamingConvention"} )
     public final void emit( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         /*
@@ -1476,7 +1481,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     public final Collection<SuppressableWarnings> getSuppressableWarnings() { return EnumSet.copyOf( m_SuppressableWarnings ); }
 
     /**
-     *  Returns the type variables for this type, if any.
+     *  <p>{@summary Returns the type variables for this type, if any.}</p>
      *
      *  @return The type variables.
      */
@@ -1503,8 +1508,8 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     }   //  hasModifier()
 
     /**
-     *  The initialiser for
-     *  {@link #m_CachedString}.
+     *  <p>{@summary The initialiser for
+     *  {@link #m_CachedString}.}</p>
      *
      *  @return The return value for
      *      {@link #toString()}.
@@ -1519,7 +1524,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         }
         catch( final UncheckedIOException e )
         {
-            throw new UnexpectedExceptionError( e.getCause() );
+            throw new UnlikelyExceptionError( e.getCause() );
         }
         final var retValue = resultBuilder.toString();
 
@@ -1534,7 +1539,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     public final List<TypeSpec> innerClasses() { return m_TypeSpecs.stream().map( t -> (TypeSpec) t ).collect( toList() ); }
 
     /**
-     *  Returns the modifiers that are applied to this type spec.
+     *  <p>{@summary Returns the modifiers that are applied to this type spec.}</p>
      *
      *  @return The modifiers.
      */
@@ -1567,7 +1572,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     public final String toString() { return m_CachedString.get(); }
 
     /**
-     *  Returns the inner types for this type.
+     *  <p>{@summary Returns the inner types for this type.}</p>
      *
      *  @return The inner types.
      */
