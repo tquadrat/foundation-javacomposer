@@ -83,13 +83,13 @@ import org.tquadrat.foundation.lang.Objects;
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
+ *  @version $Id: TypeSpecImpl.java 1297 2026-11-07 17:15:43Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
 @SuppressWarnings( {"ClassWithTooManyFields", "OverlyCoupledClass"} )
-@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1297 2026-11-07 17:15:43Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public abstract sealed class TypeSpecImpl implements TypeSpec
     permits AnnotationTypeSpecImpl, ClassSpecImpl, EnumSpecImpl, InterfaceSpecImpl, RecordSpecImpl
@@ -103,13 +103,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
+     *  @version $Id: TypeSpecImpl.java 1297 2026-11-07 17:15:43Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "OverlyCoupledClass" )
-    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1297 2026-11-07 17:15:43Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public abstract static sealed class BuilderImpl implements TypeSpec.Builder
         permits AnnotationTypeSpecImpl.BuilderImpl, ClassSpecImpl.BuilderImpl, EnumSpecImpl.BuilderImpl, InterfaceSpecImpl.BuilderImpl, RecordSpecImpl.BuilderImpl
@@ -933,13 +933,13 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
+     *  @version $Id: TypeSpecImpl.java 1297 2026-11-07 17:15:43Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
     @SuppressWarnings( "NewClassNamingConvention" )
-    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: TypeSpecImpl.java 1297 2026-11-07 17:15:43Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public enum Kind
     {

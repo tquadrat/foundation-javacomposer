@@ -51,12 +51,12 @@ import org.tquadrat.foundation.util.JavaUtils;
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
- *  @version $Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
+ *  @version $Id: AnnotationSpecImpl.java 1297 2026-11-07 17:15:43Z tquadrat $
  *  @since 0.0.5
  *
  *  @UMLGraph.link
  */
-@ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
+@ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1297 2026-11-07 17:15:43Z tquadrat $" )
 @API( status = INTERNAL, since = "0.0.5" )
 public final class AnnotationSpecImpl implements AnnotationSpec
 {
@@ -72,12 +72,12 @@ public final class AnnotationSpecImpl implements AnnotationSpec
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
-     *  @version $Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $
+     *  @version $Id: AnnotationSpecImpl.java 1297 2026-11-07 17:15:43Z tquadrat $
      *  @since 0.0.5
      *
      *  @UMLGraph.link
      */
-    @ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1258 2026-06-04 18:33:06Z tquadrat $" )
+    @ClassVersion( sourceVersion = "$Id: AnnotationSpecImpl.java 1297 2026-11-07 17:15:43Z tquadrat $" )
     @API( status = INTERNAL, since = "0.0.5" )
     public static final class BuilderImpl implements AnnotationSpec.Builder
     {
