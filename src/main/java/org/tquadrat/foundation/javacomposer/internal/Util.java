@@ -36,7 +36,6 @@ import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.annotation.UtilityClass;
 import org.tquadrat.foundation.exception.PrivateConstructorForStaticClassCalledError;
-import org.tquadrat.foundation.exception.ValidationException;
 
 /**
  *  Several utility functions to be used with JavaComposer.
@@ -224,27 +223,28 @@ public final class Util
     }   //  stringLiteralWithDoubleQuotes()
 
     /**
-     *  Checks whether the given
+     *  <p>{@summary Checks whether the given
      *  {@link Set}
      *  of
      *  {@link Modifier}
      *  instances does contain one and only one of the {@code Modifier}
-     *  instances given with the second argument, {@code mutuallyExclusive}.
+     *  instances given with the second argument,
+     *  {@code mutuallyExclusive}.}</p>
      *
      *  @param  modifiers   The set to check.
      *  @param  mutuallyExclusive   A list of values from which one and only
      *      one must be in the {@code modifiers} set.
-     *  @throws ValidationException None or more than one {@code Modifier}
+     *  @throws IllegalArgumentException None or more than one {@code Modifier}
      *      instance was found.
      */
     @API( status = INTERNAL, since = "0.0.5" )
-    public static final void requireExactlyOneOf( final Set<Modifier> modifiers, final Modifier... mutuallyExclusive ) throws ValidationException
+    public static final void requireExactlyOneOf( final Set<Modifier> modifiers, final Modifier... mutuallyExclusive ) throws IllegalArgumentException
     {
         requireNonNullArgument( modifiers, "modifiers" );
         final var count = (int) Arrays.stream( requireNonNullArgument( mutuallyExclusive, "mutuallyExclusive" ) )
             .filter( modifiers::contains )
             .count();
-        checkState( count == 1, () -> new ValidationException( "modifiers %s must contain one of %s".formatted( modifiers, Arrays.toString( mutuallyExclusive ) ) ) );
+        checkState( count == 1, () -> new IllegalArgumentException( "modifiers %s must contain one of %s".formatted( modifiers, Arrays.toString( mutuallyExclusive ) ) ) );
     }   //  requireExactlyOneOf()
 
     /**

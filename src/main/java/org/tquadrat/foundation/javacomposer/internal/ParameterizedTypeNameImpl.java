@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2025 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,7 +38,6 @@ import java.util.Optional;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.ClassName;
 import org.tquadrat.foundation.javacomposer.ParameterizedTypeName;
@@ -46,9 +45,9 @@ import org.tquadrat.foundation.javacomposer.TypeName;
 import org.tquadrat.foundation.javacomposer.TypeVariableName;
 
 /**
- *  The implementation of
+ *  <p>T{@summary he implementation of
  *  {@link TypeNameImpl}
- *  for parameterised types.
+ *  for parameterised types.}</p>
  *
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
  *  @version $Id: ParameterizedTypeNameImpl.java 1151 2025-10-01 21:32:15Z tquadrat $
@@ -111,7 +110,7 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
     }   //  ParameterizedTypeNameImpl()
 
     /**
-     *  Creates a new {@code ParameterizedTypeNameImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  enclosingType   The optional enclosing type for this instance.
      *  @param  rawType The class name for this instance.
@@ -126,10 +125,10 @@ public final class ParameterizedTypeNameImpl extends TypeNameImpl implements Par
         m_EnclosingType = enclosingType;
         m_TypeArguments = List.copyOf( requireNonNullArgument( typeArguments, "typeArguments" ) );
 
-        checkState( !m_TypeArguments.isEmpty() || enclosingType.isPresent(), () -> new ValidationException( "no type arguments: %s".formatted( rawType ) ) );
+        checkState( !m_TypeArguments.isEmpty() || enclosingType.isPresent(), () -> new IllegalArgumentException( "no type arguments: %s".formatted( rawType ) ) );
         for( final var typeArgument : m_TypeArguments )
         {
-            checkState( !typeArgument.isPrimitive() && (typeArgument != VOID_PRIMITIVE), () -> new ValidationException( "invalid type parameter: %s".formatted( typeArgument ) ) );
+            checkState( !typeArgument.isPrimitive() && (typeArgument != VOID_PRIMITIVE), () -> new IllegalArgumentException( "invalid type parameter: %s".formatted( typeArgument ) ) );
         }
     }   //  ParameterizedTypeNameImpl()
 

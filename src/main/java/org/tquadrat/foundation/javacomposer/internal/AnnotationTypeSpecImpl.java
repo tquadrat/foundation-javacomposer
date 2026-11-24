@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2023 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,7 +51,6 @@ import java.util.Set;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
 import org.tquadrat.foundation.javacomposer.FieldSpec;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
@@ -60,9 +59,9 @@ import org.tquadrat.foundation.javacomposer.TypeName;
 import org.tquadrat.foundation.javacomposer.TypeSpec;
 
 /**
- *  The implementation of
+ *  <p>{@summary The implementation of
  *  {@link TypeSpec}
- *  for annotations.
+ *  for annotations.}</p>
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
@@ -79,9 +78,9 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
     ====** Inner Classes **====================================================
         \*---------------*/
     /**
-     *  The implementation of
+     *  <p>{@summary The implementation of
      *  {@link Builder}
-     *  for annotation types.
+     *  for annotation types.}</p>
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
@@ -133,7 +132,7 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
         @Override
         public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            throw new ValidationException( "Attributes are not allowed for annotation %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
+            throw new IllegalArgumentException( "Attributes are not allowed for annotation %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
         }   //  addAttribute()
 
         /**
@@ -146,7 +145,7 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
             final var modifiers = fieldSpecImpl.modifiers();
             requireExactlyOneOf( modifiers, PUBLIC, PRIVATE );
             final Set<Modifier> check = EnumSet.of( STATIC, FINAL );
-            checkState( modifiers.containsAll( check ), () -> new ValidationException( "%s %s.%s requires modifiers %s".formatted( ANNOTATION, getName().orElse( NAME_ANONYMOUS_TYPE ), fieldSpec.name(), check ) ) );
+            checkState( modifiers.containsAll( check ), () -> new IllegalArgumentException( "%s %s.%s requires modifiers %s".formatted( ANNOTATION, getName().orElse( NAME_ANONYMOUS_TYPE ), fieldSpec.name(), check ) ) );
             if( composer().addDebugOutput() )
             {
                 final var builder = fieldSpecImpl.toBuilder();
@@ -209,7 +208,7 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
         @Override
         public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )
         {
-            throw new ValidationException( "Properties are not allowed for annotation %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
+            throw new IllegalArgumentException( "Properties are not allowed for annotation %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
         }   //  addProperty()
 
         /**
@@ -218,7 +217,7 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
         @Override
        public final BuilderImpl addStaticBlock( final CodeBlock block )
         {
-            throw new ValidationException( "Static Blocks are not allowed for annotation %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
+            throw new IllegalArgumentException( "Static Blocks are not allowed for annotation %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) );
         }   //  addStaticBlock()
 
         /**
@@ -229,7 +228,7 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
         {
             for( final var methodSpec : getMethodSpecs() )
             {
-                checkState( methodSpec.hasModifier( ABSTRACT ), () -> new ValidationException( "Methods for Annotation %s have to be abstract: %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpec.name() ) ) );
+                checkState( methodSpec.hasModifier( ABSTRACT ), () -> new IllegalArgumentException( "Methods for Annotation %s have to be abstract: %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpec.name() ) ) );
             }
 
             final var retValue = new AnnotationTypeSpecImpl( this );
@@ -253,7 +252,7 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
     ====** Constructors **=====================================================
         \*--------------*/
     /**
-     *  Creates a new {@code TypeSpecImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  builder The builder for this instance.
      */
@@ -264,8 +263,10 @@ public final class AnnotationTypeSpecImpl extends TypeSpecImpl
     }   //  AnnotationTypeSpecImpl()
 
     /**
-     *  Creates a dummy type spec for type-resolution in CodeWriter only while
-     *  emitting the type declaration but before entering the type body.
+     *  <p>{@summary Creates a dummy type spec for type-resolution in
+     *  {@link CodeWriter}
+     *  only while emitting the type declaration but before entering the type
+     *  body.}</p>
      *
      *  @param  type    The source type.
      */

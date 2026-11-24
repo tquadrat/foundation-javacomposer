@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2025 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,7 +60,6 @@ import java.util.Set;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
 import org.tquadrat.foundation.javacomposer.FieldSpec;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
@@ -70,9 +69,9 @@ import org.tquadrat.foundation.javacomposer.TypeName;
 import org.tquadrat.foundation.javacomposer.TypeSpec;
 
 /**
- *  The implementation of
+ *  <p>{@summary The implementation of
  *  {@link TypeSpec}
- *  for a class.
+ *  for a class.}</p>
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
@@ -282,12 +281,12 @@ public final class ClassSpecImpl extends TypeSpecImpl
 
             for( final var methodSpec : getMethodSpecs() )
             {
-                checkState( isAbstract || !methodSpec.hasModifier( ABSTRACT ), () -> new ValidationException( "non-abstract type %s cannot declare abstract method %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpec.name() ) ) );
+                checkState( isAbstract || !methodSpec.hasModifier( ABSTRACT ), () -> new IllegalArgumentException( "non-abstract type %s cannot declare abstract method %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ), methodSpec.name() ) ) );
             }
 
             final var superclassIsObject = getSuperclass().equals( OBJECT );
             final var interestingSupertypeCount = (superclassIsObject ? 0 : 1) + getSuperinterfaces().size();
-            checkState( getAnonymousTypeArguments().isEmpty() || interestingSupertypeCount <= 1, () -> new ValidationException( "anonymous type has too many supertypes" ) );
+            checkState( getAnonymousTypeArguments().isEmpty() || interestingSupertypeCount <= 1, () -> new IllegalArgumentException( "anonymous type has too many supertypes" ) );
 
             final var retValue = new ClassSpecImpl( this );
 

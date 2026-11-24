@@ -33,7 +33,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.exception.NullArgumentException;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.FieldSpec;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
 import org.tquadrat.foundation.javacomposer.TypeSpec;
@@ -72,7 +71,7 @@ public class TestBuilderAddAttribute extends TestBaseClass
 
         field = composer.fieldBuilder( INT, "m_Field" )
             .build();
-        final Class<? extends Throwable> expectedException = ValidationException.class;
+        final Class<? extends Throwable> expectedException = IllegalArgumentException.class;
         try
         {
             candidate = composer.classBuilder( "CandidateClass" )
@@ -197,7 +196,7 @@ public class TestBuilderAddAttribute extends TestBaseClass
 
         final var composer = new JavaComposer();
 
-        final Class<? extends Throwable> expectedException = ValidationException.class;
+        final Class<? extends Throwable> expectedException = IllegalArgumentException.class;
 
         final var candidate = composer.interfaceBuilder( "CandidateInterface" );
 

@@ -63,7 +63,6 @@ import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.annotation.MountPoint;
 import org.tquadrat.foundation.exception.UnlikelyExceptionError;
 import org.tquadrat.foundation.exception.UnsupportedEnumError;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.ClassName;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
@@ -98,8 +97,8 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     ====** Inner Classes **====================================================
         \*---------------*/
     /**
-     *  The abstract base class for the implementations of
-     *  {@link org.tquadrat.foundation.javacomposer.TypeSpec.Builder}.
+     *  <p>{@summary The abstract base class for the implementations of
+     *  {@link Builder}.}</p>
      *
      *  @author Square,Inc.
      *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
@@ -497,7 +496,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
             checkState( !isAnonymousClass(), () -> new IllegalStateException( "forbidden on anonymous types." ) );
             for( final var modifier : requireNonNullArgument( modifiers, "modifiers" ) )
             {
-                checkState( nonNull( modifier ), () -> new ValidationException( "modifiers contain null" ) );
+                checkState( nonNull( modifier ), () -> new IllegalArgumentException( "modifiers contain null" ) );
                 m_Modifiers.add( modifier );
             }
 
@@ -669,7 +668,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         public final BuilderImpl addType( final TypeSpec typeSpec )
         {
             final var typeSpecImpl = (TypeSpecImpl) requireNonNullArgument( typeSpec, "typeSpec" );
-            checkState( typeSpecImpl.modifiers().containsAll( m_Kind.implicitTypeModifiers() ), () -> new ValidationException( "%s %s.%s requires modifiers %s".formatted( m_Kind, m_Name.orElse( NAME_ANONYMOUS_TYPE ), typeSpecImpl.name().orElse( NAME_ANONYMOUS_TYPE ), m_Kind.implicitTypeModifiers() ) ) );
+            checkState( typeSpecImpl.modifiers().containsAll( m_Kind.implicitTypeModifiers() ), () -> new IllegalArgumentException( "%s %s.%s requires modifiers %s".formatted( m_Kind, m_Name.orElse( NAME_ANONYMOUS_TYPE ), typeSpecImpl.name().orElse( NAME_ANONYMOUS_TYPE ), m_Kind.implicitTypeModifiers() ) ) );
             if( composer().addDebugOutput() )
             {
                 final var builder = typeSpecImpl.toBuilder();
@@ -959,7 +958,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         /**
          *  <p>{@summary The type is an {@code enum}.}</p>
          */
-        @SuppressWarnings( "FieldNamingConvention" )
         ENUM( EnumSet.noneOf( Modifier.class ), EnumSet.noneOf( Modifier.class ), EnumSet.noneOf( Modifier.class ), EnumSet.of( STATIC ) ),
 
         /**
@@ -1010,7 +1008,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
          *  @param  asMemberModifiers   The member modifiers for a type of this
          *      kind.
          */
-        @SuppressWarnings( "MethodParameterNamingConvention" )
         private Kind( final Collection<Modifier> implicitFieldModifiers, final Collection<Modifier> implicitMethodModifiers, final Collection<Modifier> implicitTypeModifiers, final Collection<Modifier> asMemberModifiers )
         {
             m_ImplicitFieldModifiers = Set.copyOf( implicitFieldModifiers );
@@ -1209,7 +1206,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
         m_TypeSpecs.forEach( tspec -> staticImports.addAll( tspec.getStaticImports() ) );
         m_StaticImports = Set.copyOf( staticImports );
 
-        @SuppressWarnings( "LocalVariableNamingConvention" )
         final Collection<Element> originatingElementsMutable = new ArrayList<>( builder.m_OriginatingElements );
         for( final var typeSpec : builder.m_TypeSpecs )
         {
@@ -1325,7 +1321,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *  @throws UncheckedIOException A problem occurred when writing to the
      *      output target.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "LocalVariableNamingConvention"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final void emit( @SuppressWarnings( "UseOfConcreteClass" ) final CodeWriter codeWriter, final String enumName, final Set<Modifier> implicitModifiers ) throws UncheckedIOException
     {
         /*
@@ -1390,7 +1386,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The annotations.
      */
-    @SuppressWarnings( "AssignmentOrReturnOfFieldWithMutableType" )
     protected final Collection<AnnotationSpecImpl> getAnnotations() { return m_Annotations; }
 
     /**
@@ -1415,7 +1410,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The fields.
      */
-    @SuppressWarnings( "AssignmentOrReturnOfFieldWithMutableType" )
     protected final Collection<FieldSpecImpl> getFieldSpecs() { return m_FieldSpecs; }
 
     /**
@@ -1437,7 +1431,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The methods.
      */
-    @SuppressWarnings( "AssignmentOrReturnOfFieldWithMutableType" )
     protected final Collection<MethodSpecImpl> getMethodSpecs() { return m_MethodSpecs; }
 
     /**
@@ -1468,7 +1461,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The superinterfaces.
      */
-    @SuppressWarnings( "AssignmentOrReturnOfFieldWithMutableType" )
     protected final List<? extends TypeNameImpl> getSuperInterfaces() { return m_SuperInterfaces; }
 
     /**
@@ -1485,7 +1477,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The type variables.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "AssignmentOrReturnOfFieldWithMutableType"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final List<TypeVariableNameImpl> getTypeVariables() { return m_TypeVariables; }
 
     /**
@@ -1555,7 +1547,6 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
     /**
      *  {@inheritDoc}
      */
-    @SuppressWarnings( "AssignmentOrReturnOfFieldWithMutableType" )
     @Override
     public final List<Element> originatingElements() { return m_OriginatingElements; }
 
@@ -1576,7 +1567,7 @@ public abstract sealed class TypeSpecImpl implements TypeSpec
      *
      *  @return The inner types.
      */
-    @SuppressWarnings( {"PublicMethodNotExposedInInterface", "AssignmentOrReturnOfFieldWithMutableType"} )
+    @SuppressWarnings( {"PublicMethodNotExposedInInterface"} )
     public final List<TypeSpecImpl> typeSpecs() { return m_TypeSpecs; }
 }
 //  class TypeSpecImpl

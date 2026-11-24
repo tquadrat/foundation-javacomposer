@@ -63,7 +63,6 @@ import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.exception.UnlikelyExceptionError;
 import org.tquadrat.foundation.exception.UnsupportedEnumError;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.ClassName;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
@@ -76,8 +75,8 @@ import org.tquadrat.foundation.lang.Lazy;
 import org.tquadrat.foundation.lang.Objects;
 
 /**
- *  The implementation for
- *  {@link MethodSpec}.
+ *  <p>{@summary The implementation for
+ *  {@link MethodSpec}.}</p>
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
@@ -822,10 +821,10 @@ public final class MethodSpecImpl implements MethodSpec
     @SuppressWarnings( {"AccessingNonPublicFieldOfAnotherObject"} )
     public MethodSpecImpl( @SuppressWarnings( "UseOfConcreteClass" ) final BuilderImpl builder )
     {
-        checkState( !builder.m_Varargs || lastParameterIsArray( builder.m_Parameters ), () -> new ValidationException( "last parameter of varargs method %s must be an array".formatted( builder.m_Name ) ) );
+        checkState( !builder.m_Varargs || lastParameterIsArray( builder.m_Parameters ), () -> new IllegalArgumentException( "last parameter of varargs method %s must be an array".formatted( builder.m_Name ) ) );
 
         final var code = builder.m_Code.build();
-        checkState( code.isEmpty() || !builder.m_Modifiers.contains( ABSTRACT ), () -> new ValidationException( "abstract method %s cannot have code".formatted( builder.m_Name ) ) );
+        checkState( code.isEmpty() || !builder.m_Modifiers.contains( ABSTRACT ), () -> new IllegalArgumentException( "abstract method %s cannot have code".formatted( builder.m_Name ) ) );
 
         m_Composer = builder.m_Composer;
         m_Name = builder.m_Name;

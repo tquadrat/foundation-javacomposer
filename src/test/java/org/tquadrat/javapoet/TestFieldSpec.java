@@ -63,7 +63,7 @@ public class TestFieldSpec
         }
         catch( final NullArgumentException expected )
         {
-            assertThat( expected.getMessage() ).isEqualTo( "Argument 'annotationSpecs' must not be null" );
+            assertThat( expected.getMessage() ).isEqualTo( "Argument \"annotationSpecs\" must not be null" );
         }
     }
 }

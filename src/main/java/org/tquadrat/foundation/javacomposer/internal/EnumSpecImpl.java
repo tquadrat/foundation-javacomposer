@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2024 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -58,7 +58,6 @@ import java.util.TreeMap;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.FieldSpec;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
 import org.tquadrat.foundation.javacomposer.MethodSpec;
@@ -67,9 +66,9 @@ import org.tquadrat.foundation.javacomposer.TypeName;
 import org.tquadrat.foundation.javacomposer.TypeSpec;
 
 /**
- *  The implementation of
+ *  <p>{@summary The implementation of
  *  {@link TypeSpec}
- *  for an {@code enum} type.
+ *  for an {@code enum} type.}</p>
  *
  *  @author Square,Inc.
  *  @modified   Thomas Thrien - thomas.thrien@tquadrat.org
@@ -148,7 +147,7 @@ public final class EnumSpecImpl extends TypeSpecImpl
         public final BuilderImpl addAttribute( final FieldSpec fieldSpec, final boolean readOnly )
         {
             final var fieldSpecImpl = (FieldSpecImpl) requireNonNullArgument( fieldSpec, "fieldSpec" );
-            checkState( fieldSpecImpl.hasModifier( PRIVATE ), () -> new ValidationException( "Property %s needs to be private".formatted( fieldSpecImpl.name() ) ) );
+            checkState( fieldSpecImpl.hasModifier( PRIVATE ), () -> new IllegalArgumentException( "Property %s needs to be private".formatted( fieldSpecImpl.name() ) ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();
@@ -188,8 +187,8 @@ public final class EnumSpecImpl extends TypeSpecImpl
         public final BuilderImpl addEnumConstant( final CharSequence name, final TypeSpec typeSpec )
         {
             final var typeSpecImpl = (ClassSpecImpl) requireNonNullArgument( typeSpec, "typeSpec" );
-            checkState( typeSpecImpl.anonymousTypeArguments().isPresent(), () -> new ValidationException( "enum constants must have anonymous type arguments" ) );
-            checkState( isValidName( name ), () -> new ValidationException( "not a valid enum constant: %s".formatted( name ) ) );
+            checkState( typeSpecImpl.anonymousTypeArguments().isPresent(), () -> new IllegalArgumentException( "enum constants must have anonymous type arguments" ) );
+            checkState( isValidName( name ), () -> new IllegalArgumentException( "not a valid enum constant: %s".formatted( name ) ) );
             if( composer().addDebugOutput() )
             {
                 final var builder = typeSpecImpl.toBuilder();
@@ -255,7 +254,7 @@ public final class EnumSpecImpl extends TypeSpecImpl
         public final Builder addProperty( final FieldSpec fieldSpec, final boolean readOnly )
         {
             final var fieldSpecImpl = (FieldSpecImpl) requireNonNullArgument( fieldSpec, "fieldSpec" );
-            checkState( fieldSpecImpl.hasModifier( PRIVATE ), () -> new ValidationException( "Property %s needs to be private".formatted( fieldSpecImpl.name() ) ) );
+            checkState( fieldSpecImpl.hasModifier( PRIVATE ), () -> new IllegalArgumentException( "Property %s needs to be private".formatted( fieldSpecImpl.name() ) ) );
             addField( fieldSpecImpl );
 
             final var fieldName = fieldSpecImpl.name();
@@ -294,7 +293,7 @@ public final class EnumSpecImpl extends TypeSpecImpl
         @Override
         public final EnumSpecImpl build()
         {
-            checkState( !getEnumConstants().isEmpty(), () -> new ValidationException( "at least one enum constant is required for %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) ) );
+            checkState( !getEnumConstants().isEmpty(), () -> new IllegalArgumentException( "at least one enum constant is required for %s".formatted( getName().orElse( NAME_ANONYMOUS_TYPE ) ) ) );
 
             final var retValue = new EnumSpecImpl( this );
 

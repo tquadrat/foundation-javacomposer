@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2025 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,16 +37,15 @@ import java.util.Map;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.TypeName;
 import org.tquadrat.foundation.javacomposer.TypeVariableName;
 import org.tquadrat.foundation.javacomposer.WildcardTypeName;
 
 /**
- *  The implementation of
+ *  <p>{@summary The implementation of
  *  {@link TypeNameImpl}
- *  for wildcard named types.
+ *  for wildcard named types.}</p>
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
@@ -87,7 +86,7 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
     }   //  WildcardTypeNameImpl()
 
     /**
-     *  Creates a new {@code WildcardTypeNameImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  upperBounds The upper bounds.
      *  @param  lowerBounds The lower bounds.
@@ -106,11 +105,11 @@ public final class WildcardTypeNameImpl extends TypeNameImpl implements Wildcard
 
         for( final var upperBound : m_UpperBounds )
         {
-            checkState( !upperBound.isPrimitive() && upperBound != VOID_PRIMITIVE, () -> new ValidationException( "invalid upper bound: %s".formatted( upperBound ) ) );
+            checkState( !upperBound.isPrimitive() && upperBound != VOID_PRIMITIVE, () -> new IllegalArgumentException( "invalid upper bound: %s".formatted( upperBound ) ) );
         }
         for( final var lowerBound : m_LowerBounds )
         {
-            checkState( !lowerBound.isPrimitive() && lowerBound != VOID_PRIMITIVE, () -> new ValidationException( "invalid lower bound: %s".formatted( lowerBound ) ) );
+            checkState( !lowerBound.isPrimitive() && lowerBound != VOID_PRIMITIVE, () -> new IllegalArgumentException( "invalid lower bound: %s".formatted( lowerBound ) ) );
         }
     }   //  WildcardTypeNameImpl()
 

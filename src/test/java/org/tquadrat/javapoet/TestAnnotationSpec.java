@@ -17,6 +17,15 @@
 
 package org.tquadrat.javapoet;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.lang.annotation.Annotation;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -28,15 +37,6 @@ import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
 import org.tquadrat.foundation.javacomposer.TypeSpec;
 import org.tquadrat.javapoet.helper.CompilationRule;
-
-import java.lang.annotation.Annotation;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  *  The tests for the class
@@ -474,7 +474,7 @@ public final class TestAnnotationSpec
         }
         catch( final NullArgumentException e )
         {
-            assertThat( e ).hasMessageThat().isEqualTo( "Argument 'name' must not be null" );
+            assertThat( e ).hasMessageThat().isEqualTo( "Argument \"name\" must not be null" );
         }
     }
 

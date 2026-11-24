@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
 import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.exception.EmptyArgumentException;
 import org.tquadrat.foundation.exception.NullArgumentException;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
 import org.tquadrat.foundation.javacomposer.LambdaSpec;
 import org.tquadrat.foundation.javacomposer.ParameterSpec;
@@ -148,7 +147,7 @@ public class TestBuilderAddParameter extends TestBaseClass
     {
         skipThreadTest();
 
-        final Class<? extends Throwable> expectedException = ValidationException.class;
+        final Class<? extends Throwable> expectedException = IllegalArgumentException.class;
 
         final var composer = new JavaComposer();
 

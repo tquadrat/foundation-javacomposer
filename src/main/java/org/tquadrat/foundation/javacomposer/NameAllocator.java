@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2025 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -193,8 +193,8 @@ public final class NameAllocator implements Cloneable
     }   //  clone()
 
     /**
-     *  Retrieves a name that was previously created with
-     *  {@link #newName(String, Object)}.
+     *  <p>{@summary Retrieves a name that was previously created with
+     *  {@link #newName(String, Object)}.}</p>
      *
      *  @param  tag The identifier for the name.
      *  @return The name.
@@ -203,7 +203,7 @@ public final class NameAllocator implements Cloneable
     public final String get( final Object tag )
     {
         final var retValue = m_TagToName.get( requireNonNullArgument( tag, "tag" ) );
-        if( isNull( retValue ) ) throw new ValidationException( "unknown tag: " + tag );
+        if( isNull( retValue ) ) throw new IllegalArgumentException( "unknown tag: " + tag );
 
         //---* Done *----------------------------------------------------------
         return retValue;
@@ -222,10 +222,10 @@ public final class NameAllocator implements Cloneable
     }   //  newName()
 
     /**
-     *  Returns a new name based on the given suggestion that will not be a
-     *  Java keyword or clash with other names. The returned value can be
+     *  <p>{@summary Returns a new name based on the given suggestion that will not be a
+     *  Java keyword or clash with other names.} The returned value can be
      *  queried multiple times by passing the given tag to
-     *  {@link #get(Object)}.
+     *  {@link #get(Object)}.</p>
      *
      *  @param  suggestion  The suggestion for the new name.
      *  @param  tag The tag for the new name.
@@ -246,7 +246,7 @@ public final class NameAllocator implements Cloneable
         if( nonNull( replaced ) )
         {
             m_TagToName.put( tag, replaced ); // Put things back as they were!
-            throw new ValidationException( "tag '%s' cannot be used for both '%s' and '%s'".formatted( tag, replaced, suggestion ) );
+            throw new IllegalArgumentException( "tag '%s' cannot be used for both '%s' and '%s'".formatted( tag, replaced, suggestion ) );
         }
 
         //---* Done *----------------------------------------------------------

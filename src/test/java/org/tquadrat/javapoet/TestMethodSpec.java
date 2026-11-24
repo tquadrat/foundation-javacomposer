@@ -17,18 +17,14 @@
 
 package org.tquadrat.javapoet;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.NullArgumentException;
-import org.tquadrat.foundation.javacomposer.ClassName;
-import org.tquadrat.foundation.javacomposer.JavaComposer;
-import org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl;
-import org.tquadrat.javapoet.helper.CompilationRule;
+import static com.google.common.collect.Iterables.getOnlyElement;
+import static com.google.common.truth.Truth.assertThat;
+import static javax.lang.model.util.ElementFilter.methodsIn;
+import static org.junit.Assert.fail;
+import static org.junit.Assume.assumeFalse;
+import static org.junit.Assume.assumeTrue;
+import static org.tquadrat.foundation.lang.Objects.isNull;
+import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
@@ -45,14 +41,18 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
 
-import static com.google.common.collect.Iterables.getOnlyElement;
-import static com.google.common.truth.Truth.assertThat;
-import static javax.lang.model.util.ElementFilter.methodsIn;
-import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeFalse;
-import static org.junit.Assume.assumeTrue;
-import static org.tquadrat.foundation.lang.Objects.isNull;
-import static org.tquadrat.foundation.lang.Objects.requireNonNullArgument;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.tquadrat.foundation.annotation.ClassVersion;
+import org.tquadrat.foundation.exception.NullArgumentException;
+import org.tquadrat.foundation.javacomposer.ClassName;
+import org.tquadrat.foundation.javacomposer.JavaComposer;
+import org.tquadrat.foundation.javacomposer.internal.MethodSpecImpl;
+import org.tquadrat.javapoet.helper.CompilationRule;
 
 @ClassVersion( sourceVersion = "$Id: TestMethodSpec.java 1158 2026-03-14 16:23:29Z tquadrat $" )
 @SuppressWarnings( {"static-method", "javadoc"} )
@@ -159,7 +159,7 @@ public final class TestMethodSpec
         }
         catch( final NullArgumentException e )
         {
-            assertThat( e.getMessage() ).isEqualTo( "Argument 'modifiers' must not be null" );
+            assertThat( e.getMessage() ).isEqualTo( "Argument \"modifiers\" must not be null" );
         }
     }
 
@@ -229,7 +229,7 @@ public final class TestMethodSpec
         }
         catch( final IllegalArgumentException expected )
         {
-            assertThat( expected ).hasMessageThat().isEqualTo( "Argument 'annotationSpecs' must not be null" );
+            assertThat( expected ).hasMessageThat().isEqualTo( "Argument \"annotationSpecs\" must not be null" );
         }
     }
 
@@ -245,7 +245,7 @@ public final class TestMethodSpec
         }
         catch( final IllegalArgumentException expected )
         {
-            assertThat( expected ).hasMessageThat().isEqualTo( "Argument 'exceptions' must not be null" );
+            assertThat( expected ).hasMessageThat().isEqualTo( "Argument \"exceptions\" must not be null" );
         }
     }
 
@@ -261,7 +261,7 @@ public final class TestMethodSpec
         }
         catch( final NullArgumentException e )
         {
-            assertThat( e.getMessage() ).isEqualTo( "Argument 'name' must not be null" );
+            assertThat( e.getMessage() ).isEqualTo( "Argument \"name\" must not be null" );
         }
     }
 
@@ -278,7 +278,7 @@ public final class TestMethodSpec
         }
         catch( final IllegalArgumentException expected )
         {
-            assertThat( expected ).hasMessageThat().isEqualTo( "Argument 'parameterSpecs' must not be null" );
+            assertThat( expected ).hasMessageThat().isEqualTo( "Argument \"parameterSpecs\" must not be null" );
         }
     }
 
@@ -295,7 +295,7 @@ public final class TestMethodSpec
         }
         catch( final IllegalArgumentException expected )
         {
-            assertThat( expected ).hasMessageThat().isEqualTo( "Argument 'typeVariables' must not be null" );
+            assertThat( expected ).hasMessageThat().isEqualTo( "Argument \"typeVariables\" must not be null" );
         }
     }
 

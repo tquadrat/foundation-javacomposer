@@ -56,7 +56,6 @@ import java.util.stream.Stream;
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.exception.UnlikelyExceptionError;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.ClassName;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
 import org.tquadrat.foundation.javacomposer.FieldSpec;
@@ -68,9 +67,9 @@ import org.tquadrat.foundation.lang.Lazy;
 import org.tquadrat.foundation.lang.Objects;
 
 /**
- *  The implementation of
+ *  <p>{@summary The implementation of
  *  {@link CodeBlock}
- *  for a fragment of a {@code *.java} file.
+ *  for a fragment of a {@code *.java} file.}</p>
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
@@ -228,7 +227,7 @@ public final class CodeBlockImpl implements CodeBlock
 
             for( final var argument : requireNonNullArgument( args, "args" ).keySet() )
             {
-                checkState( LOWERCASE.matcher( argument ).matches(), () -> new ValidationException( "argument '%s' must start with a lowercase character".formatted( argument ) ) );
+                checkState( LOWERCASE.matcher( argument ).matches(), () -> new IllegalArgumentException( "argument '%s' must start with a lowercase character".formatted( argument ) ) );
             }
             if( isNotEmpty( requireNonNullArgument( format, "format" ) ) )
             {
@@ -258,7 +257,7 @@ public final class CodeBlockImpl implements CodeBlock
                     if( nonNull( matcher ) && matcher.lookingAt() )
                     {
                         final var argumentName = matcher.group( "argumentName" );
-                        checkState( args.containsKey( argumentName ), () -> new ValidationException( "Missing named argument for $%s".formatted( argumentName ) ) );
+                        checkState( args.containsKey( argumentName ), () -> new IllegalArgumentException( "Missing named argument for $%s".formatted( argumentName ) ) );
                         final var formatChar = matcher.group( "typeChar" ).charAt( 0 );
                         addArgument( format, formatChar, args.get( argumentName ) );
                         m_FormatParts.add( "$" + formatChar );
@@ -266,10 +265,10 @@ public final class CodeBlockImpl implements CodeBlock
                     }
                     else
                     {
-                        checkState( currentPos < format.length() - 1, () -> new ValidationException( "dangling $ at end" ) );
+                        checkState( currentPos < format.length() - 1, () -> new IllegalArgumentException( "dangling $ at end" ) );
                         if( !isNoArgPlaceholder( format.charAt( currentPos + 1 ) ) )
                         {
-                            throw new ValidationException( "unknown format $%s at %s in '%s'".formatted( format.charAt( currentPos + 1 ), currentPos + 1, format ) );
+                            throw new IllegalArgumentException( "unknown format $%s at %s in '%s'".formatted( format.charAt( currentPos + 1 ), currentPos + 1, format ) );
                         }
                         m_FormatParts.add( format.substring( currentPos, currentPos + 2 ) );
                         currentPos += 2;
@@ -346,9 +345,9 @@ public final class CodeBlockImpl implements CodeBlock
         }   //  addStaticImport()
 
         /**
-         *  Adds a
+         *  <p>{@summary Adds a
          *  {@link CodeBlock}
-         *  instance without prepending any debug output.
+         *  instance without prepending any debug output.}</p>
          *
          *  @param  codeBlock   The code block.
          *  @return This {@code Builder} instance.
@@ -388,11 +387,9 @@ public final class CodeBlockImpl implements CodeBlock
         {
             var hasRelative = false;
             var hasIndexed = false;
-            @SuppressWarnings( "LocalVariableNamingConvention" )
             var relativeParameterCount = 0;
 
             final var length = requireNonNullArgument( format, "format" ).length();
-            @SuppressWarnings( "LocalVariableNamingConvention" )
             final var indexedParameterCount = new int [requireNonNullArgument( args, "args" ).length];
 
             ParseLoop:
@@ -419,7 +416,7 @@ public final class CodeBlockImpl implements CodeBlock
                 char c;
                 do
                 {
-                    checkState( pos < format.length(), () -> new ValidationException( "dangling format characters in '%s'".formatted( format ) ) );
+                    checkState( pos < format.length(), () -> new IllegalArgumentException( "dangling format characters in '%s'".formatted( format ) ) );
                     c = format.charAt( pos++ );
                 }
                 while( c >= '0' && c <= '9' );
@@ -428,7 +425,7 @@ public final class CodeBlockImpl implements CodeBlock
                 //---* If 'c' doesn't take an argument, we're done *-----------
                 if( isNoArgPlaceholder( c ) )
                 {
-                    checkState( indexStart == indexEnd, () -> new ValidationException( "$$, $>, $<, $[, $], $W, and $Z may not have an index" ) );
+                    checkState( indexStart == indexEnd, () -> new IllegalArgumentException( "$$, $>, $<, $[, $], $W, and $Z may not have an index" ) );
                     m_FormatParts.add( "$" + c );
                     continue ParseLoop;
                 }
@@ -454,8 +451,8 @@ public final class CodeBlockImpl implements CodeBlock
                     hasRelative = true;
                 }
 
-                checkState( index >= 0 && index < args.length, () -> new ValidationException( "index %d for '%s' not in range (received %s arguments)".formatted( index + 1, format.substring( indexStart - 1, indexEnd + 1 ), args.length ) ) );
-                checkState( !hasIndexed || !hasRelative, () -> new ValidationException(  "cannot mix indexed and positional parameters" ) );
+                checkState( index >= 0 && index < args.length, () -> new IllegalArgumentException( "index %d for '%s' not in range (received %s arguments)".formatted( index + 1, format.substring( indexStart - 1, indexEnd + 1 ), args.length ) ) );
+                checkState( !hasIndexed || !hasRelative, () -> new IllegalArgumentException(  "cannot mix indexed and positional parameters" ) );
 
                 addArgument( format, c, args [index] );
 
@@ -464,7 +461,7 @@ public final class CodeBlockImpl implements CodeBlock
 
             if( hasRelative && (relativeParameterCount < args.length) )
             {
-                throw new ValidationException( "unused arguments: expected %s, received %s".formatted( relativeParameterCount, args.length ) );
+                throw new IllegalArgumentException( "unused arguments: expected %s, received %s".formatted( relativeParameterCount, args.length ) );
             }
             if( hasIndexed )
             {
@@ -474,7 +471,7 @@ public final class CodeBlockImpl implements CodeBlock
                     .collect( toList() );
                 if( !unused.isEmpty() )
                 {
-                    throw new ValidationException( "unused argument%s: %s".formatted( unused.size() == 1 ? "" : "s", String.join( ", ", unused ) ) );
+                    throw new IllegalArgumentException( "unused argument%s: %s".formatted( unused.size() == 1 ? "" : "s", String.join( ", ", unused ) ) );
                 }
             }
 
@@ -483,7 +480,7 @@ public final class CodeBlockImpl implements CodeBlock
         }   //  addWithoutDebugInfo()
 
         /**
-         *  Returns the arguments.
+         *  <p>{@summary Returns the arguments.}</p>
          *
          *  @return The arguments.
          */
@@ -491,7 +488,7 @@ public final class CodeBlockImpl implements CodeBlock
         public final List<Object> args() { return List.copyOf( m_Args ); }
 
         /**
-         *  Returns the given object literally.
+         *  <p>{@summary Returns the given object literally.}</p>
          *
          *  @param  o   The object.
          *  @return The literal.

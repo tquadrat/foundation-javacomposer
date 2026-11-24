@@ -38,7 +38,6 @@ import java.util.stream.Stream;
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.exception.UnlikelyExceptionError;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
 import org.tquadrat.foundation.javacomposer.JavaComposer;
 import org.tquadrat.foundation.javacomposer.LambdaSpec;
@@ -47,8 +46,8 @@ import org.tquadrat.foundation.javacomposer.TypeName;
 import org.tquadrat.foundation.lang.Lazy;
 
 /**
- *  The implementation for
- *  {@link LambdaSpec}.
+ *  <p>{@summary The implementation for
+ *  {@link LambdaSpec}.}</p>
  *
  *  @extauthor Thomas Thrien - thomas.thrien@tquadrat.org
  *  @version $Id: LambdaSpecImpl.java 1297 2026-11-07 17:15:43Z tquadrat $
@@ -186,12 +185,12 @@ public final class LambdaSpecImpl implements LambdaSpec
             final var name = parameter.name();
             if( type == VOID_PRIMITIVE )
             {
-                checkState( isNull( m_InferTypes) || m_InferTypes.booleanValue(), () -> new ValidationException( "Not inferring types; type required for %s".formatted( name ) ) );
+                checkState( isNull( m_InferTypes) || m_InferTypes.booleanValue(), () -> new IllegalArgumentException( "Not inferring types; type required for %s".formatted( name ) ) );
                 m_InferTypes = TRUE;
             }
             else
             {
-                checkState( isNull( m_InferTypes ) || !m_InferTypes.booleanValue(), () -> new ValidationException( "Inferring types; no type allowed for %s".formatted( name ) ) );
+                checkState( isNull( m_InferTypes ) || !m_InferTypes.booleanValue(), () -> new IllegalArgumentException( "Inferring types; no type allowed for %s".formatted( name ) ) );
                 m_InferTypes = FALSE;
             }
             m_Parameters.add( parameter );

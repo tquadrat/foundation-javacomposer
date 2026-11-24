@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * Copyright © 2015 Square, Inc.
- * Copyright for the modifications © 2018-2025 by Thomas Thrien.
+ * Copyright for the modifications © 2018-2026 by Thomas Thrien.
  * ============================================================================
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,15 +41,14 @@ import java.util.Map;
 
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.TypeName;
 import org.tquadrat.foundation.javacomposer.TypeVariableName;
 
 /**
- *  The implementation of
+ *  <p>{@summary The implementation of
  *  {@link TypeNameImpl}
- *  for type variable names.
+ *  for type variable names.}</p>
  *
  *  @author Square,Inc.
  *  @modified Thomas Thrien - thomas.thrien@tquadrat.org
@@ -90,7 +89,7 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
     }   //  TypeVariableNameImpl()
 
     /**
-     *  Creates a new {@code TypeVariableNameImpl} instance.
+     *  <p>{@summary {@constructor}}</p>
      *
      *  @param  name    The name.
      *  @param  bounds  The bounds.
@@ -104,7 +103,7 @@ public final class TypeVariableNameImpl extends TypeNameImpl implements TypeVari
 
         for( final var bound : m_Bounds )
         {
-            checkState( !bound.isPrimitive() && bound != VOID_PRIMITIVE, () -> new ValidationException( "invalid bound: %s".formatted( bound ) ) );
+            checkState( !bound.isPrimitive() && bound != VOID_PRIMITIVE, () -> new IllegalArgumentException( "invalid bound: %s".formatted( bound ) ) );
         }
     }   //  TypeVariableNameImpl()
 

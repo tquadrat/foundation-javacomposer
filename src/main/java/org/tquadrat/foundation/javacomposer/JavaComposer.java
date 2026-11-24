@@ -70,7 +70,6 @@ import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.annotation.UtilityClass;
 import org.tquadrat.foundation.exception.PrivateConstructorForStaticClassCalledError;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl;
 import org.tquadrat.foundation.javacomposer.internal.AnnotationSpecImpl.BuilderImpl;
 import org.tquadrat.foundation.javacomposer.internal.AnnotationTypeSpecImpl;
@@ -1257,9 +1256,9 @@ public final class JavaComposer
     }   //  fieldBuilder()
 
     /**
-     *  Creates a builder for an instance of
+     *  <p>{@summary Creates a builder for an instance of
      *  {@link FieldSpec}
-     *  from the given type, name and modifiers.
+     *  from the given type, name and modifiers.}</p>
      *
      *  @param  type    The type of the {@code FieldSpec} to build.
      *  @param  name    The name for the new field.
@@ -1275,9 +1274,9 @@ public final class JavaComposer
     }   //  fieldBuilder()
 
     /**
-     *  Creates a builder for an instance of
+     *  <p>{@summary Creates a builder for an instance of
      *  {@link FieldSpec}
-     *  from the given type, name and modifiers.
+     *  from the given type, name and modifiers.}</p>
      *
      *  @param  type    The type of the {@code FieldSpec} to build.
      *  @param  name    The name for the new field.
@@ -1286,7 +1285,7 @@ public final class JavaComposer
      */
     public final FieldSpec.Builder fieldBuilder( final TypeSpec type, final CharSequence name, final Modifier... modifiers )
     {
-        final var typeName = ClassNameImpl.from( EMPTY_STRING, requireNonNullArgument( type, "type" ).name().orElseThrow( () -> new ValidationException( "Anonymous class cannot be used as type for a field" ) ) );
+        final var typeName = ClassNameImpl.from( EMPTY_STRING, requireNonNullArgument( type, "type" ).name().orElseThrow( () -> new IllegalArgumentException( "Anonymous class cannot be used as type for a field" ) ) );
         final var retValue = fieldBuilder( typeName, name, modifiers );
 
         //---* Done *----------------------------------------------------------

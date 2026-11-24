@@ -44,7 +44,6 @@ import java.util.Set;
 import org.apiguardian.api.API;
 import org.tquadrat.foundation.annotation.ClassVersion;
 import org.tquadrat.foundation.exception.UnlikelyExceptionError;
-import org.tquadrat.foundation.exception.ValidationException;
 import org.tquadrat.foundation.javacomposer.AnnotationSpec;
 import org.tquadrat.foundation.javacomposer.ClassName;
 import org.tquadrat.foundation.javacomposer.CodeBlock;
@@ -417,8 +416,8 @@ public final class FieldSpecImpl implements FieldSpec
     }   //  builder()
 
     /**
-     *  Creates a builder for an instance of {@code FieldSpec} from the given
-     *  type, name and modifiers.
+     *  <p>{@summary Creates a builder for an instance of {@code FieldSpec} from the given
+     *  type, name and modifiers.}</p>
      *
      *  @param  type    The type of the {@code FieldSpec} to build.
      *  @param  name    The name for the new field.
@@ -432,7 +431,7 @@ public final class FieldSpecImpl implements FieldSpec
     @API( status = DEPRECATED, since = "0.0.5" )
     public static BuilderImpl builder( final TypeSpec type, final CharSequence name, final Modifier... modifiers )
     {
-        final var typeName = ClassNameImpl.from( EMPTY_STRING, requireNonNullArgument( type, "type" ).name().orElseThrow( () -> new ValidationException( "Anonymous class cannot be used as type for a field" ) ) );
+        final var typeName = ClassNameImpl.from( EMPTY_STRING, requireNonNullArgument( type, "type" ).name().orElseThrow( () -> new IllegalArgumentException( "Anonymous class cannot be used as type for a field" ) ) );
         final var retValue = builder( typeName, name, modifiers );
 
         //---* Done *----------------------------------------------------------

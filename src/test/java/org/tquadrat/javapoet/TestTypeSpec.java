@@ -2808,7 +2808,7 @@ public final class TestTypeSpec extends TestBaseClass
         }
         catch( final NullArgumentException expected )
         {
-            assertThat( expected.getMessage() ).isEqualTo( "Argument 'superinterfaces' must not be null" );
+            assertThat( expected.getMessage() ).isEqualTo( "Argument \"superinterfaces\" must not be null" );
         }
     }
 
@@ -2828,7 +2828,7 @@ public final class TestTypeSpec extends TestBaseClass
         }
         catch( final NullArgumentException expected )
         {
-            assertThat( expected.getMessage() ).isEqualTo( "Argument 'typeSpecs' must not be null" );
+            assertThat( expected.getMessage() ).isEqualTo( "Argument \"typeSpecs\" must not be null" );
         }
     }
 
@@ -2848,7 +2848,7 @@ public final class TestTypeSpec extends TestBaseClass
         }
         catch( final NullArgumentException expected )
         {
-            assertThat( expected.getMessage() ).isEqualTo( "Argument 'typeVariables' must not be null" );
+            assertThat( expected.getMessage() ).isEqualTo( "Argument \"typeVariables\" must not be null" );
         }
     }
 
