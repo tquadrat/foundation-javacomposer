@@ -12,4 +12,4 @@ This library allows the generation of Java source code.
     </dependency>
     ```
 ---  
-Last updated: 2026-11-24T02:00:32.587049555+01:00[Europe/Berlin]
+Last updated: 2026-11-24T02:14:00.765631381+01:00[Europe/Berlin]
